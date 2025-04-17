@@ -1,6 +1,8 @@
-# Correção Automática de Gabaritos
+# Sobre:
 
-Este projeto tem como objetivo desenvolver uma solução multiplataforma para correção automática de gabaritos de simulados, voltada especialmente para instituições de ensino e preparatórios do PAS/UnB.
+## Visão de produto:
+
+📄 [Visualizar PDF da Visão do Produto](/../assets/template_visao_produto.pdf)
 
 ## ✨ Visão Geral
 
