@@ -2,7 +2,7 @@
 
 ## Visão de produto:
 
-📄 [Visualizar PDF da Visão do Produto](../assets/template_visao_produto.pdf)
+📄 [Visualizar PDF da Visão do Produto](assets/template_visao_produto.pdf)
 
 ## ✨ Visão Geral
 
