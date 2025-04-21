@@ -4,7 +4,7 @@
 
 - **Abordagem de Desenvolvimento de Software**: Híbrido (Ágil com elementos dirigidos por plano).
 
-- **Ciclo de vida**: Híbrido (iterativo e incremental).
+- **Ciclo de vida**: Iterativo e incremental.
 
 - **Processo de Engenharia de Software**: OpenUP.
 

@@ -34,7 +34,8 @@ nav:
     - Cronograma: cronograma.md
     - Interação Cliente-Equipe: interacao-cliente.md
   - Lições Aprendidas: licoes-aprendidas.md
-  - Gravações: gravacoes.md
+  - Ata de reuniões: gravacoes.md
+  - Entregas: entregas.md 
 
 markdown_extensions:
   - pymdownx.highlight
