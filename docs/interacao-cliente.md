@@ -34,6 +34,8 @@
   As reuniões com o cliente ocorrerão **exclusivamente ao final das sprints**, alinhando-se à preferência do stakeholder por acompanhar apenas os fechamentos. 
   O objetivo dessas validações é apresentar o progresso alcançado, receber feedback e realizar ajustes, se necessário. As reuniões acontecerão **preferencialmente às segundas ou sextas-feiras**, e não será exigida a presença de toda a equipe — apenas os membros responsáveis pelas entregas em validação participarão para conduzir a apresentação e esclarecer eventuais dúvidas.
 
+
+
 ---
 
 ## Frequência de Contato com o Cliente
@@ -50,25 +52,33 @@
 
 O processo de validação das funcionalidades do sistema CORRIGGE será dividido em três etapas principais:
 
-1. **Definition of Ready (DoR)**  
-   Antes de iniciar o desenvolvimento de qualquer funcionalidade, será verificado se:
-   - Os requisitos estão bem definidos e alinhados com os objetivos do projeto
-   - Existe documentação adequada, incluindo critérios técnicos e funcionais
-   - Os critérios de aceitação foram estabelecidos e validados pela equipe
 
-2. **Definition of Done (DoD)**  
-   A funcionalidade só será considerada concluída se:
-   - Passar por testes unitários, de integração e validações internas
-   - Atender aos critérios de aceitação previamente definidos
-   - Estar aprovada visual e funcionalmente pela equipe, garantindo qualidade, estabilidade e alinhamento com os objetivos do projeto
+### 1. **Definition of Ready (DoR)**  
+Antes de iniciar o desenvolvimento de qualquer funcionalidade, será verificado:
+
+- Se os requisitos estão bem definidos e alinhados com os objetivos do projeto  
+- Se existe documentação adequada, incluindo critérios técnicos e funcionais  
+- Se os critérios de aceitação foram estabelecidos e validados pela equipe  
 
 
-3. **Teste de Aceitação pelo Cliente**  
-   Após a validação interna de funcionalidades como reconhecimento automático de respostas, identificação da matrícula e exportação de relatórios, o sistema será entregue ao cliente para testes finais.  
-   A validação será feita com base nos critérios definidos durante o planejamento (DoR) e ocorrerá nos fechamentos de sprint, conforme acordado com o stakeholder.
+### 2. **Definition of Done (DoD)**  
+A funcionalidade será considerada concluída quando:
+
+- Passar por testes unitários, de integração e validações internas  
+- Atender aos critérios de aceitação previamente definidos  
+- Estiver aprovada visual e funcionalmente pela equipe  
+- Apresentar qualidade, estabilidade e estar alinhada com os objetivos do projeto  
+
+
+### 3. **Teste de Aceitação pelo Cliente**  
+- Após a validação interna, o sistema será entregue ao cliente para testes finais  
+- A validação será feita com base nos critérios definidos durante o DoR  
+- As validações ocorrerão exclusivamente nos fechamentos de sprint  
+- O formato segue a preferência do stakeholder, que atua como coordenador de tecnologia da empresa parceira
 
 ## Histórico de Versão
 
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
 |------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
-| 19/04/2025 | 1.0    | Criação inicial da documentação                                           | Marcelo Adrian    |                    |
+| 19/04/2025 | 1.0    | Criação inicial da documentação                                           | Marcelo Adrian    | Eduardo Ferreira |
+| 21/04/2025 | 1.1    | Atualização dos processos de validação                                          | Eduardo Ferreira    | Marcelo Adrian |
