@@ -43,6 +43,54 @@ O sistema tem como objetivo otimizar o processo de correção de simulados e ava
 - [Lições Aprendidas](licoes-aprendidas.md) — Aprendizados do projeto
 - [Gravações](gravacoes.md) — Registros de reuniões e apresentações
 
----
+## Equipe
+
+<center>
+<table style="margin-left: auto; margin-right: auto;">
+    <tr>
+        <td align="center">
+            <a href="https://github.com/Marcelo-Adrian">
+                <img style="border-radius: 50%;" src="https://github.com/Marcelo-Adrian.png" width="150px;"/>
+                <h5 class="text-center">Marcelo<br>Adrian</h5>
+            </a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/knz13">
+                <img style="border-radius: 50%;" src="https://github.com/knz13.png" width="150px;"/>
+                <h5 class="text-center">Otavio<br>Maya</h5>
+            </a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/Atyrson">
+                <img style="border-radius: 50%;" src="https://github.com/Atyrson.png" width="150px;"/>
+                <h5 class="text-center">Atyrson<br> </h5>
+            </a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/nateejpg">
+                <img style="border-radius: 50%;" src="https://github.com/nateejpg.png" width="150px;"/>
+                <h5 class="text-center">Nathan<br>Abreu</h5>
+            </a>
+        </td>
+        <td align="center">
+            <a href="https://github.com/pedroslrn">
+                <img style="border-radius: 50%;" src="https://github.com/pedroslrn.png" width="150px;"/>
+                <h5 class="text-center">Pedro<br>Victor</h5>
+            </a>
+        </td>
+         <td align="center">
+            <a href="https://github.com/eduardoferre">
+                <img style="border-radius: 50%;" src="https://github.com/eduardoferre.png" width="150px;"/>
+                <h5 class="text-center">Eduardo<br>Ferreira</h5>
+            </a>
+        </td>
+	<td align="center">
+            <a href="https://github.com/Edzada">
+                <img style="border-radius: 50%;" src="https://github.com/Edzada.png" width="150px;"/>
+                <h5 class="text-center">Esdras<br>de Sousa</h5>
+            </a>
+        </td>
+</table>
+</center>
 
 > Projeto acadêmico — Universidade de Brasília
