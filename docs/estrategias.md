@@ -65,3 +65,9 @@ Em resumo, o **OpenUP** encaixa-se perfeitamente nas necessidades do projeto Cor
 <small>EDUCATIVE.IO. What is a unified process model. Disponível em: <https://www.educative.io/answers/what-is-a-unified-process-model>. Acesso em: 11 nov. 2024.</small>
 
 <small>EDEKI, Charles. Agile Unified Process. Disponível em: <https://interhad.nied.unicamp.br/courses/roberto-pereira/ci163-projeto-de-software-ufpr-1/agenda/auppaper.pdf>. Acesso em: 11 nov. 2024.</small>
+
+## Histórico de Versão
+
+| Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
+|------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
+| 19/04/2025 | 1.0    | Criação inicial da documentação                                           | Marcelo Adrian    |                    |

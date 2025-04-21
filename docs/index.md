@@ -1,6 +1,6 @@
 # Corigge - Visão do Produto e Projeto
 
-## 📄 [Visualizar PDF da Visão do Produto](assets/template_visao_produto.pdf)
+## 📄 [Visualizar PDF da Visão do Produto](assets/visao_produto.pdf)
 
 ## 🧠 Sobre o Projeto
 
@@ -35,7 +35,7 @@ O sistema tem como objetivo otimizar o processo de correção de simulados e ava
 
 ## 📚 Documentação
 
-- [Visão do Produto](visao-produto.md) — Visão geral e objetivos
+- [Visão do Produto](assets/visao_produto.pdf) — Visão geral e objetivos
 - [Cenário Atual](cenario-atual.md) — Contexto e desafios
 - [Solução Proposta](solucao-proposta.md) — Detalhes da solução
 - [Estratégias](estrategias.md) — Estratégias de desenvolvimento

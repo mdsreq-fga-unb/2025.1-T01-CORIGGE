@@ -25,8 +25,6 @@
   - Definição de responsabilidades
 
 
-[← Voltar para a página inicial](index.md) 
-
 ## Histórico de Versão
 
 | Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |

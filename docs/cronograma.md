@@ -21,3 +21,9 @@
   - Unidade 2 → 27/05/2025 (terça-feira)
   - Unidade 3 → 24/06/2025 (terça-feira)
   - Unidade 4 → 15/07/2025 (terça-feira)
+
+## Histórico de Versão
+
+| Data       | Versão | Descrição                                                                 | Autor(es)         | Revisor(es)        |
+|------------|--------|---------------------------------------------------------------------------|-------------------|--------------------|
+| 19/04/2025 | 1.0    | Criação inicial da documentação                                           | Marcelo Adrian    |                    |
