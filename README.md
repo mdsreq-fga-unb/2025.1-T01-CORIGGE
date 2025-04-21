@@ -16,7 +16,7 @@ Este projeto visa desenvolver uma aplicação multiplataforma para realizar corr
 
 ## Como executar o projeto
 
-## Docuementação
+## Documentação
 
 - [Notion](https://www.notion.so/team/1db12b03-3960-81cf-8d13-00422b7d20cb/join)
 
