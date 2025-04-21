@@ -2,23 +2,23 @@
 
 ## Estratégia Priorizada 
 
-- **Abordagem de Desenvolvimento de Software**: Ágil com elementos dirigidos por plano.
+- **Abordagem de Desenvolvimento de Software**: Híbrido (Ágil com elementos dirigidos por plano).
 
 - **Ciclo de vida**: Híbrido (iterativo e incremental).
 
 - **Processo de Engenharia de Software**: OpenUP.
 
-O OpenUP será utilizado, pois é um processo ágil e leve, adequado para projetos de médio porte com necessidades de validação rápida e evoluções constantes.
+A escolha do OpenUP baseia-se em sua leveza, agilidade e adequação para projetos de médio porte que exigem validações constantes e entregas contínuas. Ele favorece equipes enxutas e permite ajustes rápidos conforme o projeto evolui.
 
 As quatro fases do OpenUP serão seguidas:
 
 - **Concepção**: Definição dos objetivos do projeto, levantamento dos requisitos iniciais, entendimento do problema de correção de gabaritos, escolha das tecnologias (Flutter, OpenCV, Typescript, Supabase) e planejamento inicial de prazos e custos.
   
-- **Elaboração**: Refinamento dos requisitos (como detalhamento das funcionalidades de correção, exportação e geração de relatórios), desenvolvimento de protótipos iniciais de reconhecimento de gabaritos, e avaliação dos principais riscos (como o reconhecimento de imagens e integração entre as tecnologias).
+- **Elaboração**: Refinamento dos requisitos (como detalhamento das funcionalidades de correção, exportação e geração de relatórios), desenvolvimento de protótipos iniciais de reconhecimento de gabaritos, e análise dos principais riscos (como o reconhecimento de imagens e integração entre as tecnologias).
 
 - **Construção**: Desenvolvimento iterativo da aplicação desktop, integração contínua entre frontend, backend e sistemas de visão computacional, testes de funcionalidades como reconhecimento automático e geração de relatórios, além de ajustes baseados no feedback interno.
 
-- **Transição**: Testes finais de desempenho e robustez (ex: correção de 100 gabaritos por minuto), implantação para o ambiente de produção, produção de documentação de uso para a equipe comercial e suporte inicial aos clientes externos.
+- **Transição**: Testes finais de desempenho e robustez (ex: correção de 100 gabaritos por minuto), implantação para o ambiente de produção, elaboração de documentação de uso para a equipe comercial e suporte inicial aos clientes externos.
 
 O cronograma de execução do projeto será alinhado às entregas previstas em cada uma dessas fases, respeitando o prazo de 3 meses para conclusão do produto mínimo viável (MVP).
 
@@ -32,25 +32,25 @@ O cronograma de execução do projeto será alinhado às entregas previstas em c
 | **Foco no Processo**        | Estruturado e formal, com controle rigoroso                                               | Flexível e centrado na produtividade da equipe                                              |
 | **Complexidade**            | Elevada, ideal para projetos críticos e de grande porte                                   | Reduzida, ideal para projetos de médio porte que exigem agilidade                          |
 | **Fases**                   | Concepção, Elaboração, Construção, Transição (com ampla documentação)                     | Concepção, Elaboração, Construção, Transição (com entregas enxutas)                        |
-| **Disciplinas**             | Abrange várias disciplinas como Modelagem, Design, Testes, Gerência de Projeto           | Enfoque em Requisitos, Implementação, Testes e Gerência de Projeto                         |
+| **Disciplinas (Áreas de Foco)**             | Abrange várias disciplinas como Modelagem, Design, Testes, Gerência de Projeto           | Enfoque em Requisitos, Implementação, Testes e Gerência de Projeto                         |
 | **Documentação**            | Detalhada e exigida em cada fase                                                          | Essencial apenas para manter a produtividade da equipe                                     |
 | **Iteratividade**           | Iterativo e incremental, com processos mais pesados                                       | Iterativo e incremental, com ciclos curtos e adaptáveis                                    |
 | **Gestão de Riscos**        | Formal e concentrada na fase de Elaboração                                                | Contínua e integrada de forma leve                                                         |
-| **Flexibilidade**           | Menor adaptabilidade a mudanças rápidas                                                   | Alta flexibilidade, facilitando ajustes frequentes                                         |
-| **Colaboração**             | Papéis bem definidos e estrutura hierárquica                                              | Equipes multifuncionais, com papéis flexíveis e foco na colaboração                        |
-| **Recomendado para**        | Projetos grandes, críticos, com alta demanda por rastreabilidade e validações formais    | Projetos médios ou pequenos, com necessidade de agilidade — como no projeto Corigge        |
+| **Adaptação e Flexibilidade**           | Menor adaptabilidade a mudanças rápidas                                                   | Alta flexibilidade, facilitando ajustes frequentes                                         |
+| **Colaboração e Equipe**             | Papéis bem definidos e estrutura hierárquica                                              | Equipes multifuncionais, com papéis flexíveis e foco na colaboração                        |
+| **Recomendado de uso**        | Projetos grandes, críticos, com alta demanda por rastreabilidade e validações formais    | Projetos médios ou pequenos, com necessidade de agilidade — como no projeto Corigge        |
 
 ---
 
 ## Justificativa 
 
-O projeto da nova solução **Corigge** para a Guia do PAS demanda um processo ágil, adaptável e eficiente. O OpenUP se mostra a escolha ideal por:
+O projeto da nova solução **Corigge** para a Guia do PAS, voltado para a correção automática de gabaritos, requer um processo adaptável, leve e eficiente. O OpenUP destaca-se como o mais apropriado por:
 
 - Permitir a adaptação rápida a mudanças no escopo, como ajustes em funcionalidades (ex: novos tipos de gabaritos ou estatísticas).
 - Exigir menos documentação formal, favorecendo o foco em entregas práticas e ágeis, especialmente importante para uma equipe enxuta.
 - Ser mais leve que o UP tradicional, o que reduz a carga de burocracia, otimiza o tempo e diminui o custo do desenvolvimento — aspectos cruciais para um projeto com orçamento de aproximadamente R\$ 1.000,00.
 - Permitir iterações rápidas e entregas frequentes, essenciais para testar rapidamente o reconhecimento de imagens, relatórios e exportações, validando a qualidade da solução antes do lançamento comercial.
-- Promover a colaboração ativa da equipe de desenvolvimento com os stakeholders (Guia do PAS e instituições parceiras), para garantir que o produto atenda às expectativas tanto para uso interno quanto para venda externa.
+- Promover a colaboração ativa com os stakeholders (Guia do PAS e instituições parceiras), garantindo que a solução atenda tanto às necessidades operacionais quanto ao potencial de comercialização.
 
 Em resumo, o **OpenUP** encaixa-se perfeitamente nas necessidades do projeto Corigge: é leve, iterativo, adaptável, reduz riscos e acelera o retorno sobre o investimento.
 
