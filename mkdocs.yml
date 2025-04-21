@@ -1,3 +1,51 @@
-site_name: Corrige
+site_name: Corigge
+site_description: Documentação do projeto Corigge
 theme:
   name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-outline
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+nav:
+  - Início: index.md
+  - Cenário Atual: cenario-atual.md
+  - Documentação do Projeto:
+    - Solução Proposta: solucao-proposta.md
+    - Estratégias: estrategias.md
+    - Cronograma: cronograma.md
+    - Interação Cliente-Equipe: interacao-cliente.md
+  - Lições Aprendidas: licoes-aprendidas.md
+  - Gravações: gravacoes.md
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tabbed
+  - admonition
+  - footnotes
+  - attr_list
+  - md_in_html
