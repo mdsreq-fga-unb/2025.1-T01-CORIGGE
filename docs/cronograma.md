@@ -1,99 +1,30 @@
-# Cronograma e Entregas
 
-## Visão Geral do Cronograma
 
-O projeto está planejado para ser desenvolvido em 3 meses, divididos em 6 sprints de 2 semanas cada. O cronograma foi estruturado considerando as dependências entre as atividades e a priorização das funcionalidades essenciais.
+# 📅 Cronograma e Entregas
 
-## Entregas por Sprint
+## 🛠️ Planejamento de Sprints e Fases do OpenUP
 
-### Sprint 1 (Semana 1-2)
-- [x] Definição da arquitetura do sistema
-- [x] Setup do ambiente de desenvolvimento
-- [x] Configuração do repositório
-- [ ] Protótipo inicial da interface
+| 🏷️ Fase         | 🚀 Sprint      | 📅 Início   | 📅 Fim      | 🎯 Objetivos e Entregas Esperadas                                                                                                                                           |
+| :------------- | :------------ | :--------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Concepção**  | **Sprint 0**  | 22/04/2025 | 28/04/2025 | - Planejamento geral do projeto<br>- Definição do escopo<br>- Organização da documentação inicial<br>- Definição das tecnologias principais                                |
+|                | **Sprint 1**  | 29/04/2025 | 05/05/2025 | - Entrega da Unidade 1<br>- Definição do MVP do Corigge<br>- Definição do DoR e DoD<br>- Redação de User Stories<br>- Declaração de requisitos funcionais e não funcionais |
+| **Elaboração** | **Sprint 2**  | 06/05/2025 | 12/05/2025 | - Capacitação técnica (Flutter, OpenCV, Supabase)<br>- Protótipo no Figma<br>- Definição da Arquitetura<br>- Análise de riscos técnicos                                    |
+| **Construção** | **Sprint 3**  | 13/05/2025 | 19/05/2025 | - Configuração do banco de dados (Supabase)<br>- Ambiente de desenvolvimento inicial                                                                                       |
+|                | **Sprint 4**  | 20/05/2025 | 26/05/2025 | - Implementação da leitura e upload de imagens<br>- Estilização inicial do dashboard<br>- Testes de upload e visualização                                                  |
+|                | **Sprint 5**  | 27/05/2025 | 02/06/2025 | - Implementação do reconhecimento de matrícula e questões<br>- Testes da leitura automática                                                                                |
+|                | **Sprint 6**  | 03/06/2025 | 09/06/2025 | - Entrega da Unidade 2<br>- Implementação da comparação com gabarito<br>- Testes de reconhecimento e comparação                                                            |
+|                | **Sprint 7**  | 10/06/2025 | 16/06/2025 | - Geração de relatórios simples (acertos e erros)<br>- Exportação de dados em .csv                                                                                         |
+|                | **Sprint 8**  | 17/06/2025 | 23/06/2025 | - Exportação de relatórios em .pdf<br>- Validação das exportações                                                                                                          |
+|                | **Sprint 9**  | 24/06/2025 | 30/06/2025 | - Entrega da Unidade 3<br>- Personalização de gabaritos<br>- Testes de gabaritos customizados                                                                              |
+|                | **Sprint 10** | 01/07/2025 | 07/07/2025 | - Melhorias de UI/UX<br>- Ajustes com base no feedback interno                                                                                                             |
+| **Transição**  | **Sprint 11** | 08/07/2025 | 14/07/2025 | - Testes finais de performance (100 gabaritos/min)<br>- Testes de estabilidade e recuperação                                                                               |
+|                | **Sprint 12** | 15/07/2025 | 18/07/2025 | - Hospedagem do backend (Azure)<br>- Walkthrough com o cliente (Guia do PAS)<br>- Encerramento do projeto<br>- Entrega da Unidade 4                                        |
 
-### Sprint 2 (Semana 3-4)
-- [ ] Implementação do módulo de processamento de imagem
-- [ ] Desenvolvimento do algoritmo de identificação de respostas
-- [ ] Testes iniciais com gabaritos reais
-- [ ] Refinamento do protótipo da interface
 
-### Sprint 3 (Semana 5-6)
-- [ ] Desenvolvimento do backend
-- [ ] Implementação do banco de dados
-- [ ] Integração frontend-backend
-- [ ] Testes de integração
+## 📌 Considerações Importantes
 
-### Sprint 4 (Semana 7-8)
-- [ ] Implementação dos relatórios
-- [ ] Desenvolvimento do sistema de exportação
-- [ ] Testes de performance
-- [ ] Documentação técnica
-
-### Sprint 5 (Semana 9-10)
-- [ ] Testes com usuários reais
-- [ ] Correções e ajustes
-- [ ] Melhorias de usabilidade
-- [ ] Documentação do usuário
-
-### Sprint 6 (Semana 11-12)
-- [ ] Testes finais
-- [ ] Correções de bugs
-- [ ] Preparação para deploy
-- [ ] Entrega final
-
-## Marcos do Projeto
-
-1. **Kickoff** - 01/04/2025
-   - Início do projeto
-   - Definição da equipe
-   - Setup inicial
-
-2. **Alpha** - 15/05/2025
-   - Primeira versão funcional
-   - Testes internos
-   - Feedback inicial
-
-3. **Beta** - 01/06/2025
-   - Versão para testes com usuários
-   - Correções e ajustes
-   - Refinamento
-
-4. **Release** - 15/06/2025
-   - Versão final
-   - Documentação completa
-   - Entrega ao cliente
-
-## Riscos e Mitigações
-
-| Risco                     | Impacto | Probabilidade | Mitigação                            |
-| ------------------------- | ------- | ------------- | ------------------------------------ |
-| Atraso no desenvolvimento | Alto    | Média         | Planejamento com margem de segurança |
-| Problemas com CV          | Alto    | Alta          | Prototipagem antecipada              |
-| Mudanças de requisitos    | Médio   | Média         | Metodologia ágil                     |
-| Problemas de integração   | Médio   | Baixa         | Testes contínuos                     |
-
-## Recursos Necessários
-
-### Equipe
-- 1 Tech Lead
-- 2 Desenvolvedores Frontend
-- 2 Desenvolvedores Backend
-- 1 Especialista em CV
-- 1 QA
-
-### Infraestrutura
-- Ambiente de desenvolvimento
-- Servidores de teste
-- Ferramentas de CI/CD
-- Licenças de software
-
-### Orçamento
-- Infraestrutura: R$1.000,00
-- Ferramentas: R$500,00
-- Contingência: R$500,00
-- Total: R$2.000,00
-
----
-
-[← Voltar para a página inicial](index.md) 
+- **Duração das Sprints**: Cada sprint dura aproximadamente 1 semana.
+- **Data de Início**: 22/04/2025.
+- **Data de Término**: 18/07/2025.
+- **Entrega Final**: Entrega da solução completa na Sprint 12, após testes finais e walkthrough com o cliente.
+- **Ajustes**: O cronograma pode ser adaptado em caso de necessidade de replanejamento durante o desenvolvimento.
