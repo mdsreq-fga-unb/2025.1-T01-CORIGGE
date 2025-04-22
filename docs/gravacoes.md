@@ -4,15 +4,17 @@
 
 ## Apresentações
 
-### Reunião com o cliente
+### Reunião de alinhamento com a equipe
 - **Data**: 20/04/2025
 - **Participantes**: 
 - **Link da Gravação**: 
 - **Principais Pontos**:
-  - Apresentação do projeto
-  - Objetivos e escopo
-  - Cronograma inicial
-  - Definição de responsabilidades
+
+### Reunião com o cliente
+- **Data**: 20/04/2025
+- **Participantes**: 
+- **Link da Gravação**: [Youtube](https://youtu.be/AAlX-hS1PKA)
+- **Principais Pontos**:
 
 ### Apresentação Inicial do Projeto
 - **Data**: 21/04/2025
