@@ -12,6 +12,11 @@ Com o crescimento da base de usuários e o aumento no número de clientes B2B bu
 
 A empresa já tentou desenvolver uma solução anteriormente, também chamada Corigge, mas esta primeira versão apresentou diversos problemas técnicos que comprometeram sua utilização efetiva. O sistema anterior, que era uma aplicação web, necessitava de manutenção constante e apresentava várias limitações operacionais: o servidor precisava estar sempre ativo em um computador específico com boa capacidade de processamento, onde um script Python precisava ser executado manualmente para permitir que outros usuários acessassem o sistema. Além disso, o sistema apresentava instabilidades frequentes, com múltiplas ocorrências de crashes tanto no servidor quanto na aplicação, sem mecanismos de auto-recuperação. A necessidade de ajustes manuais de parâmetros pelos usuários finais também se mostrou um obstáculo significativo para a adoção do sistema. A funcionalidade do sistema anterior era limitada apenas à identificação das respostas dos alunos, sem oferecer recursos adicionais como análise de desempenho, geração de relatórios ou personalização de gabaritos.
 
+![Diagrama de Causa e Efeito (Espinha de Peixe)](assets/fish-bone.png)
+
+*Figura: Exemplo de diagrama de Ishikawa (Espinha de Peixe), utilizado para identificar causas potenciais de um problema específico.*
+
+
 ## Desafios do Projeto
 
 Os principais desafios do projeto são:
