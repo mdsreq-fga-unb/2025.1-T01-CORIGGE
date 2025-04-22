@@ -37,13 +37,16 @@ O produto será um aplicativo desktop multiplataforma (Windows, Linux e MacOS) q
 
 ### Gradepen
 - Gratuito mas pouco conhecido
+- Uso extremamente limitado
 - Não oferece estatísticas de desempenho
 - Não oferece personalização dos gabaritos
 
 ### Prova Fácil
-- Custa $0.15 por correção
+- Custa R$0.84 por correção
+- Oferece apenas provas de 20, 50 e 100 questões, sem flexibilidade
 - Não oferece estatísticas de desempenho
 - Não oferece personalização dos gabaritos
+- Apenas questões do tipo C
 
 ## Análise de Viabilidade
 

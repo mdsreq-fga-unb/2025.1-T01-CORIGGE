@@ -21,7 +21,6 @@
   - Unidade 2 → 27/05/2025 (terça-feira)
   - Unidade 3 → 24/06/2025 (terça-feira)
   - Unidade 4 → 15/07/2025 (terça-feira)
-  - Unidade 4 → 15/07/2025 (terça-feira)
 
 ## Histórico de Versão
 
