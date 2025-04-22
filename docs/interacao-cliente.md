@@ -58,17 +58,15 @@ Antes de iniciar o desenvolvimento de qualquer funcionalidade, será verificado 
 - Existe documentação adequada, incluindo critérios técnicos e funcionais;
 - Os critérios de aceitação foram estabelecidos e validados pela equipe.
 
----
 
 ### 2. **Definition of Done (DoD)**
 
 A funcionalidade só será considerada concluída se:
 
-- Passar por testes unitários, de integração e validações internas;
-- Atender aos critérios de aceitação previamente definidos;
+- Passar por testes unitários, de integração e validações internas.
+- Atender aos critérios de aceitação previamente definidos.
 - Estiver aprovada visual e funcionalmente pela equipe, garantindo qualidade, estabilidade e alinhamento com os objetivos do projeto.
 
----
 
 ### 3. **Teste de Aceitação pelo Cliente**
 
