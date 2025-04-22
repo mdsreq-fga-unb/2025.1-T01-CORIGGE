@@ -14,7 +14,7 @@ A empresa já tentou desenvolver uma solução anteriormente, também chamada Co
 
 ![Diagrama de Causa e Efeito (Espinha de Peixe)](assets/fish-bone.png)
 
-*Figura: Exemplo de diagrama de Ishikawa (Espinha de Peixe), utilizado para identificar causas potenciais de um problema específico.*
+*Figura: Diagrama de Ishikawa (Espinha de Peixe)*
 
 
 ## Desafios do Projeto

@@ -1,6 +1,7 @@
 # Corigge - Visão do Produto e Projeto
 
-## 📄 [Visualizar PDF da Visão do Produto](assets/visao_produto.pdf)
+## 📄 <a href="assets/visao_produto.pdf" target="_blank">Visualizar PDF da Visão do Produto</a>
+
 
 ## 🧠 Sobre o Projeto
 
