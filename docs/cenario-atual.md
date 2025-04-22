@@ -20,11 +20,16 @@ A empresa já tentou desenvolver uma solução anteriormente, também chamada Co
 ## Desafios do Projeto
 
 Os principais desafios do projeto são:
-    - A utilização e parametrização de ferramentas de CV (Visão computacional) para a identificação das respostas dos 
-    - A não padronização dos gabaritos preenchidos pelos alunos
-    - A não familiaridade de alguns membros da equipe com as ferramentas a serem utilizadas
-    - A criação de um design amigável, eficiente e intuitivo para a utilização pelos membros da empresa
-    - O empacotamento das ferramentas necessárias para integrar o CV em uma aplicação multiplataforma em flutter
+
+- A utilização e parametrização de ferramentas de CV (Visão computacional) para a identificação das respostas dos gabaritos.
+
+- A não padronização dos gabaritos preenchidos pelos alunos
+
+- A não familiaridade de alguns membros da equipe com as ferramentas a serem utilizadas
+
+- A criação de um design amigável, eficiente e intuitivo para a utilização pelos membros da empresa
+
+- O empacotamento das ferramentas necessárias para integrar o CV em uma aplicação multiplataforma em flutter
 
 ## Segmentação de Clientes
 
