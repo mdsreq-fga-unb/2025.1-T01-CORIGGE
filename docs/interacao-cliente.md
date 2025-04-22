@@ -50,22 +50,30 @@
 
 O processo de validação das funcionalidades do sistema **Corigge** será dividido em três etapas principais:
 
-### 1. **Definition of Ready (DoR)**  
-   Antes de iniciar o desenvolvimento de qualquer funcionalidade, será verificado se:
-   - Os requisitos estão bem definidos e alinhados com os objetivos do projeto
-   - Existe documentação adequada, incluindo critérios técnicos e funcionais
-   - Os critérios de aceitação foram estabelecidos e validados pela equipe
+### 1. **Definition of Ready (DoR)**
 
-### 2. **Definition of Done (DoD)**  
-   A funcionalidade só será considerada concluída se:
-   - Passar por testes unitários, de integração e validações internas
-   - Atender aos critérios de aceitação previamente definidos
-   - Estar aprovada visual e funcionalmente pela equipe, garantindo qualidade, estabilidade e alinhamento com os objetivos do projeto
+Antes de iniciar o desenvolvimento de qualquer funcionalidade, será verificado se:
 
+- Os requisitos estão bem definidos e alinhados com os objetivos do projeto;
+- Existe documentação adequada, incluindo critérios técnicos e funcionais;
+- Os critérios de aceitação foram estabelecidos e validados pela equipe.
+
+---
+
+### 2. **Definition of Done (DoD)**
+
+A funcionalidade só será considerada concluída se:
+
+- Passar por testes unitários, de integração e validações internas;
+- Atender aos critérios de aceitação previamente definidos;
+- Estiver aprovada visual e funcionalmente pela equipe, garantindo qualidade, estabilidade e alinhamento com os objetivos do projeto.
+
+---
 
 ### 3. **Teste de Aceitação pelo Cliente**
-   - Após a validação interna de funcionalidades como reconhecimento automático de respostas, identificação da matrícula e exportação de relatórios, o sistema será entregue ao cliente para testes finais.  
-   - A validação será feita com base nos critérios definidos durante o planejamento (DoR) e ocorrerá nos fechamentos de sprint, conforme acordado com o stakeholder.
+
+- Após a validação interna de funcionalidades como reconhecimento automático de respostas, identificação da matrícula e exportação de relatórios, o sistema será entregue ao cliente para testes finais.
+- A validação será feita com base nos critérios definidos durante o planejamento (**DoR**) e ocorrerá nos fechamentos de sprint, conforme acordado com o stakeholder.
 
 
 ## Histórico de Versão
