@@ -28,6 +28,7 @@ theme:
 nav:
   - Início: index.md
   - Cenário Atual: cenario-atual.md
+  - Requisitos: requisitos.md
   - Documentação do Projeto:
     - Solução Proposta: solucao-proposta.md
     - Estratégias: estrategias.md
