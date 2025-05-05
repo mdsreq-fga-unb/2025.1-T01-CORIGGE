@@ -39,6 +39,7 @@ O sistema tem como objetivo otimizar o processo de correção de simulados e ava
 - [Cenário Atual](cenario-atual.md) — Contexto e desafios
 - [Solução Proposta](solucao-proposta.md) — Detalhes da solução
 - [Estratégias](estrategias.md) — Estratégias de desenvolvimento
+- [Requisitos](requisitos.md) - Requisitos
 - [Cronograma](cronograma.md) — Planejamento e entregas
 - [Lições Aprendidas](licoes-aprendidas.md) — Aprendizados do projeto
 - [Gravações](gravacoes.md) — Registros de reuniões e apresentações
