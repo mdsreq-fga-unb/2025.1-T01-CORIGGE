@@ -1,6 +1,6 @@
-## Requisitos Funcionais
+## Requisitos Funcionais (RF)
 
-| Código | Descrição                                                                                                                                 |
+| Identificador | Descrição                                                                                                                          |
 | ----- | -----------------------------------------------------------------------------------------------------------------------------------------  |
 | RF01   | O sistema deve poder processar imagens de gabaritos preenchidos por alunos.                                                               |
 | RF02   | O sistema deve identificar automaticamente as respostas marcadas pelos alunos nas imagens dos gabaritos.                                  |
@@ -25,3 +25,24 @@
 | RF21   | O sistema deve adicionar créditos à conta do USUÁRIO após a confirmação de um pagamento bem-sucedido via Stripe.                          |
 | RF22   | O sistema deve deduzir créditos da conta do USUÁRIO conforme a utilização dos serviços (ex: processamento de gabaritos).                  |
 | RF23   | O USUÁRIO deve poder visualizar seu saldo de créditos atual na plataforma.                                                                |
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Requisitos Não Funcionais (RNF)
+
+| Identificador | Descrição                                                                                                                                 | Categoria Principal                   |
+| :------------ | :-----------------------------------------------------------------------------------------------------------------------------------------| :------------------------------------ |
+| RNF01         | O sistema deve funcionar como uma aplicação desktop nas plataformas Windows, Linux e MacOS.                                               | Portabilidade                         |
+| RNF02         | A interface do usuário (frontend desktop) deve ser desenvolvida utilizando Flutter.                                                       | Requisitos de Implementação           |
+| RNF03         | O processamento de imagens dos gabaritos deve ser implementado utilizando Python e a biblioteca OpenCV.                                   | Requisitos de Implementação           |
+| RNF04         | O backend da aplicação deve ser desenvolvido utilizando Typescript e o framework Express.js.                                              | Requisitos de Implementação           |
+| RNF05         | O sistema deve utilizar Supabase como plataforma de backend, com PostgreSQL como banco de dados subjacente.                               | Requisitos de Implementação           |
+| RNF06         | A infraestrutura de backend do sistema deve ser hospedada em uma Máquina Virtual Linux na plataforma Microsoft Azure.                     | Requisitos de Implementação           |
+| RNF07         | O sistema deve ser capaz de processar e analisar, no mínimo, 100 gabaritos por minuto.                                                    | Desempenho                            |
+| RNF08         | O sistema deve ser robusto, operando sem necessidade de scripts manuais, sendo tolerante a falhas e com capacidade de auto-recuperação.   | Confiabilidade                        |
+| RNF09         | A interface do usuário deve ser intuitiva e fácil de usar para os diferentes perfis de usuário (ex: alunos, coordenadores).               | Usabilidade                           |  
+| RNF10         | O custo operacional da solução de correção deve ser inferior a R$ 1,00 por aluno processado.                                              | Restrição Operacional                 |
+| RNF11         | A arquitetura do sistema deve permitir o aumento no volume de processamento de gabaritos sem necessidade de reestruturação fundamental.   | Escalabilidade                        |
+| RNF12         | O sistema deve ser projetado para permitir a adição ágil de novas funcionalidades no futuro com baixo acoplamento.                        | Manutenibilidade / Extensibilidade    |  
+| RNF13         | O sistema deve garantir a segurança e a confidencialidade dos dados dos alunos (matrículas, desempenho) e dos gabaritos/provas.           | Segurança                             |
+
