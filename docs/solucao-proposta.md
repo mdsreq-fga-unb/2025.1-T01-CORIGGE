@@ -4,6 +4,20 @@
 
 O objetivo principal do produto é otimizar o processo de correção de gabaritos da Guia do PAS, reduzindo o tempo de processamento de 1 mês para menos de 24 horas, diminuindo o custo por correção de R$5,00 para menos de R$1,00, e aumentando a precisão da identificação das respostas para mais de 99%. Além disso, o sistema deve permitir a análise automática do desempenho individual e coletivo dos alunos, gerando relatórios detalhados que incluem estatísticas por questão, comparações entre turmas e identificação de padrões de erro. O produto também visa expandir a base de clientes da empresa, permitindo a oferta do serviço de correção para outras instituições de ensino, com meta de atingir pelo menos 10 novas escolas parceiras no primeiro ano de operação. Por fim, o sistema deve resolver os problemas técnicos encontrados na versão anterior, como instabilidades, necessidade de manutenção constante e limitações operacionais, oferecendo uma solução robusta e multiplataforma que não dependa de servidores dedicados.
 
+### Objetivos Específicos
+
+1. Realizar 100 correções de gabaritos por minuto
+
+- Alcançar uma capacidade de processamento de, no mínimo, 100 gabaritos por minuto. Este objetivo tem como objetivo garantir agilidade na entrega dos resultados mesmo para grandes volumes de provas, como em simulados de larga escala ou para múltiplas instituições.
+
+2. Automatizar a correção de gabaritos
+
+- Eliminar a necessidade de intervenção manual no processo de correção de gabaritos, utilizando tecnologia de Visão Computacional (CV) para identificar as respostas dos alunos diretamente das imagens dos gabaritos preenchidos, associando-as automaticamente aos respectivos alunos (via identificação de matrícula) e comparando-as com o gabarito oficial.
+
+3. Prover informações de desempenho dos alunos
+
+- Gerar relatórios analíticos detalhados sobre o desempenho dos alunos, tanto individualmente (nota, acertos, erros, posição na turma, nota média da turma) quanto coletivamente (estatísticas por questão, comparação entre turmas). Essas informações devem ser acessíveis para gestores/coordenadores e, potencialmente, para os próprios alunos.
+
 ## Características da Solução
 
 O produto será um aplicativo desktop multiplataforma (Windows, Linux e MacOS) que deve ser capaz de:
