@@ -1,30 +1,30 @@
 ## Requisitos Funcionais (RF)
 
-| Identificador | Nome                               | Descrição                                                                                                                                 |
-| :------------ | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------        |
-| RF01          | Processar Imagens de Gabaritos     | O sistema deve poder processar imagens de gabaritos preenchidos por alunos.                                                               |
-| RF02          | Identificar Respostas Marcadas     | O sistema deve identificar automaticamente as respostas marcadas pelos alunos nas imagens dos gabaritos.                                  |
-| RF03          | Identificar Matrícula do Aluno     | O sistema deve identificar automaticamente a matrícula do aluno presente na imagem do gabarito.                                           |
-| RF04          | Enviar Gabarito Correto            | O USUÁRIO deve poder enviar (upload) um arquivo .csv contendo o gabarito correto para cada questão da prova.                              |
-| RF05          | Comparar Respostas com Gabarito    | O sistema deve comparar as respostas identificadas no gabarito do aluno com o gabarito correto fornecido.                                 |
-| RF06          | Gerar Relatórios de Desempenho     | O sistema deve gerar relatórios detalhados de desempenho, incluindo notas individuais, acertos, erros e estatísticas por questão.         |
-| RF07          | Comparar Desempenho entre Alunos   | O sistema deve permitir a comparação de desempenho entre alunos individuais.                                                              |
-| RF08          | Comparar Desempenho entre Grupos   | O sistema deve permitir a comparação de desempenho entre grupos de alunos (ex: turmas).                                                   |
-| RF09          | Salvar Relatórios na Conta         | O sistema deve salvar os relatórios gerados na conta do USUÁRIO.                                                                          |
-| RF10          | Gerar Relatório Individual Aluno   | O sistema deve gerar um relatório individual por aluno, formatado para impressão.                                                         |
-| RF11          | Exportar Relatório Individual (PDF)| O USUÁRIO deve poder exportar o relatório individual do aluno em formato .pdf.                                                            |
-| RF12          | Criar Templates de Gabaritos       | O USUÁRIO deve poder criar templates de gabaritos.                                                                                        |
-| RF13          | Personalizar Templates Gabaritos   | O USUÁRIO deve poder personalizar os templates de gabaritos (ex: layout, campos, número de questões) conforme suas necessidades.          |
-| RF14          | Exportar Dados e Relatórios (CSV)  | O USUÁRIO deve poder exportar os dados de correção e os relatórios gerados em formato .csv.                                               |
-| RF15          | Exportar Relatórios Gerais (PDF)   | O USUÁRIO deve poder exportar os relatórios gerados (além dos individuais já cobertos) em formato .pdf.                                   |
-| RF16          | Realizar Cadastro/Login (Google)   | O sistema deve permitir que o USUÁRIO realize cadastro e login utilizando sua conta Google.                                               |
-| RF17          | Associar Usuário/Escola à Conta    | O sistema deve associar o nome do USUÁRIO e sua escola à conta cadastrada.                                                                |
-| RF18          | Processar Pagamentos (Stripe)      | O sistema deve integrar-se com o Stripe para processar pagamentos via Link de Pagamento.                                                  |
-| RF19          | Associar Pagamento à Conta         | O sistema deve associar um pagamento bem-sucedido (via link Stripe) à conta do USUÁRIO correspondente, utilizando o ID do usuário na URL. |
-| RF20          | Gerenciar Sistema de Créditos      | O sistema deve gerenciar um sistema de créditos por USUÁRIO para utilização dos serviços da plataforma.                                   |
-| RF21          | Adicionar Créditos à Conta         | O sistema deve adicionar créditos à conta do USUÁRIO após a confirmação de um pagamento bem-sucedido via Stripe.                          |
-| RF22          | Deduzir Créditos da Conta          | O sistema deve deduzir créditos da conta do USUÁRIO conforme a utilização dos serviços (ex: processamento de gabaritos).                  |
-| RF23          | Visualizar Saldo de Créditos       | O USUÁRIO deve poder visualizar seu saldo de créditos atual na plataforma.                                                                |
+| Identificador | Nome                               | Descrição                                                                                                                                 | Objetivo Específico Relacionado        |
+| :------------ | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------- |
+| RF01          | Processar Imagens de Gabaritos     | O sistema deve poder processar imagens de gabaritos preenchidos por alunos.                                                               | Automatizar a correção de gabaritos    |
+| RF02          | Identificar Respostas Marcadas     | O sistema deve identificar automaticamente as respostas marcadas pelos alunos nas imagens dos gabaritos.                                  | Automatizar a correção de gabaritos    |
+| RF03          | Identificar Matrícula do Aluno     | O sistema deve identificar automaticamente a matrícula do aluno presente na imagem do gabarito.                                           | Automatizar a correção de gabaritos    |
+| RF04          | Enviar Gabarito Correto            | O USUÁRIO deve poder enviar (upload) um arquivo .csv contendo o gabarito correto para cada questão da prova.                              | Automatizar a correção de gabaritos    |
+| RF05          | Comparar Respostas com Gabarito    | O sistema deve comparar as respostas identificadas no gabarito do aluno com o gabarito correto fornecido.                                 | Automatizar a correção de gabaritos    |
+| RF06          | Gerar Relatórios de Desempenho     | O sistema deve gerar relatórios detalhados de desempenho, incluindo notas individuais, acertos, erros e estatísticas por questão.         | Prover informações de desempenho dos alunos |
+| RF07          | Comparar Desempenho entre Alunos   | O sistema deve permitir a comparação de desempenho entre alunos individuais.                                                              | Prover informações de desempenho dos alunos |
+| RF08          | Comparar Desempenho entre Grupos   | O sistema deve permitir a comparação de desempenho entre grupos de alunos (ex: turmas).                                                   | Prover informações de desempenho dos alunos |
+| RF09          | Salvar Relatórios na Conta         | O sistema deve salvar os relatórios gerados na conta do USUÁRIO.                                                                          | Prover informações de desempenho dos alunos |
+| RF10          | Gerar Relatório Individual Aluno   | O sistema deve gerar um relatório individual por aluno, formatado para impressão.                                                         | Prover informações de desempenho dos alunos |
+| RF11          | Exportar Relatório Individual (PDF)| O USUÁRIO deve poder exportar o relatório individual do aluno em formato .pdf.                                                            | Prover informações de desempenho dos alunos |
+| RF12          | Criar Templates de Gabaritos       | O USUÁRIO deve poder criar templates de gabaritos.                                                                                        | Automatizar a correção de gabaritos    |
+| RF13          | Personalizar Templates Gabaritos   | O USUÁRIO deve poder personalizar os templates de gabaritos (ex: layout, campos, número de questões) conforme suas necessidades.          | Automatizar a correção de gabaritos    |
+| RF14          | Exportar Dados e Relatórios (CSV)  | O USUÁRIO deve poder exportar os dados de correção e os relatórios gerados em formato .csv.                                               | Prover informações de desempenho dos alunos |
+| RF15          | Exportar Relatórios Gerais (PDF)   | O USUÁRIO deve poder exportar os relatórios gerados (além dos individuais já cobertos) em formato .pdf.                                   | Prover informações de desempenho dos alunos |
+| RF16          | Realizar Cadastro/Login (Google)   | O sistema deve permitir que o USUÁRIO realize cadastro e login utilizando sua conta Google.                                               | Automatizar a correção de gabaritos    |
+| RF17          | Associar Usuário/Escola à Conta    | O sistema deve associar o nome do USUÁRIO e sua escola à conta cadastrada.                                                                | Automatizar a correção de gabaritos    |
+| RF18          | Processar Pagamentos (Stripe)      | O sistema deve integrar-se com o Stripe para processar pagamentos via Link de Pagamento.                                                  | Automatizar a correção de gabaritos    |
+| RF19          | Associar Pagamento à Conta         | O sistema deve associar um pagamento bem-sucedido (via link Stripe) à conta do USUÁRIO correspondente, utilizando o ID do usuário na URL. | Automatizar a correção de gabaritos    |
+| RF20          | Gerenciar Sistema de Créditos      | O sistema deve gerenciar um sistema de créditos por USUÁRIO para utilização dos serviços da plataforma.                                   | Automatizar a correção de gabaritos    |
+| RF21          | Adicionar Créditos à Conta         | O sistema deve adicionar créditos à conta do USUÁRIO após a confirmação de um pagamento bem-sucedido via Stripe.                          | Automatizar a correção de gabaritos    |
+| RF22          | Deduzir Créditos da Conta          | O sistema deve deduzir créditos da conta do USUÁRIO conforme a utilização dos serviços (ex: processamento de gabaritos).                  | Automatizar a correção de gabaritos    |
+| RF23          | Visualizar Saldo de Créditos       | O USUÁRIO deve poder visualizar seu saldo de créditos atual na plataforma.                                                                | Automatizar a correção de gabaritos    |
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
