@@ -6,18 +6,19 @@ O objetivo principal do produto é otimizar o processo de correção de gabarito
 
 ### Objetivos Específicos
 
-1. Realizar 100 correções de gabaritos por minuto
+1.  **Realizar 100 correções de gabaritos por minuto**
 
-- Alcançar uma capacidade de processamento de, no mínimo, 100 gabaritos por minuto. Este objetivo tem como objetivo garantir agilidade na entrega dos resultados mesmo para grandes volumes de provas, como em simulados de larga escala ou para múltiplas instituições.
+    Alcançar uma capacidade de processamento de, no mínimo, 100 gabaritos por minuto. Este objetivo tem como objetivo garantir agilidade na entrega dos resultados mesmo para grandes volumes de provas, como em simulados de larga escala ou para múltiplas instituições.
 
-2. Automatizar a correção de gabaritos
+2.  **Automatizar a correção de gabaritos**
 
-- Eliminar a necessidade de intervenção manual no processo de correção de gabaritos, utilizando tecnologia de Visão Computacional (CV) para identificar as respostas dos alunos diretamente das imagens dos gabaritos preenchidos, associando-as automaticamente aos respectivos alunos (via identificação de matrícula) e comparando-as com o gabarito oficial.
+    Eliminar a necessidade de intervenção manual no processo de correção de gabaritos, utilizando tecnologia de Visão Computacional (CV) para identificar as respostas dos alunos diretamente das imagens dos gabaritos preenchidos, associando-as automaticamente aos respectivos alunos (via identificação de matrícula) e comparando-as com o gabarito oficial.
 
-3. Prover informações de desempenho dos alunos
+3.  **Prover informações de desempenho dos alunos**
 
-- Gerar relatórios analíticos detalhados sobre o desempenho dos alunos, tanto individualmente (nota, acertos, erros, posição na turma, nota média da turma) quanto coletivamente (estatísticas por questão, comparação entre turmas). Essas informações devem ser acessíveis para gestores/coordenadores e, potencialmente, para os próprios alunos.
+    Gerar relatórios analíticos detalhados sobre o desempenho dos alunos, tanto individualmente (nota, acertos, erros, posição na turma, nota média da turma) quanto coletivamente (estatísticas por questão, comparação entre turmas). Essas informações devem ser acessíveis para gestores/coordenadores e, potencialmente, para os próprios alunos.
 
+---
 ## Características da Solução
 
 O produto será um aplicativo desktop multiplataforma (Windows, Linux e MacOS) que deve ser capaz de:
