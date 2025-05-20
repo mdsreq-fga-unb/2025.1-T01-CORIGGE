@@ -35,6 +35,7 @@ nav:
     - Engenharia de Requisitos: engenharia-requisitos.md
     - Cronograma: cronograma.md
     - Interação Cliente-Equipe: interacao-cliente.md
+    - DoR e DoD: DoR_DoD.md
     - Backlog do Produto: backlog.md
   - Lições Aprendidas: licoes-aprendidas.md
   - Ata de reuniões: gravacoes.md
