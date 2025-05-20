@@ -32,6 +32,7 @@ nav:
   - Documentação do Projeto:
     - Solução Proposta: solucao-proposta.md
     - Estratégias: estrategias.md
+    - Engenharia de Requisitos: engenharia-requisitos.md
     - Cronograma: cronograma.md
     - Interação Cliente-Equipe: interacao-cliente.md
     - Backlog do Produto: backlog.md
