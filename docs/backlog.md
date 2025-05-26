@@ -4,7 +4,29 @@
 
 ## Backlog Geral
 
-### Processamento de Gabaritos
+### Épicos
+
+1. **Processamento de Gabaritos (EP01)**
+   - Foco no processamento e correção automática de gabaritos
+   - Inclui identificação de respostas, validação e templates
+
+2. **Geração de Relatórios (EP02)**
+   - Foco na análise e geração de relatórios de desempenho
+   - Inclui relatórios individuais, comparativos e estatísticas
+
+3. **Gestão de Usuários e Pagamentos (EP03)**
+   - Foco na gestão de contas, autenticação e sistema de créditos
+   - Inclui integração com Stripe e controle de acesso
+
+4. **Templates de Gabaritos (EP04)**
+   - Foco na personalização e gestão de templates
+   - Inclui criação, edição e definição de campos
+
+5. **Integração e Exportação (EP05)**
+   - Foco na exportação de dados e integração com outros sistemas
+   - Inclui backup e diferentes formatos de exportação
+
+### Processamento de Gabaritos (EP01)
 
 US01 - Como usuário, quero processar imagens de gabaritos preenchidos por alunos, para automatizar a correção das provas.
 
@@ -14,7 +36,7 @@ US03 - Como usuário, quero validar o processamento dos gabaritos, para garantir
 
 US04 - Como usuário, quero identificar automaticamente a matrícula do aluno no gabarito, para associar corretamente as respostas ao aluno.
 
-### Geração de Relatórios
+### Geração de Relatórios (EP02)
 
 US05 - Como usuário, quero gerar e exportar relatórios individuais dos alunos, para acompanhar o desempenho individual.
 
@@ -28,7 +50,7 @@ US09 - Como usuário, quero salvar os relatórios gerados na minha conta, para a
 
 US10 - Como usuário, quero exportar relatórios gerais em PDF, para compartilhar com outros stakeholders.
 
-### Gestão de Usuários e Pagamentos
+### Gestão de Usuários e Pagamentos (EP03)
 
 US11 - Como usuário, quero fazer login com minha conta Google e gerenciar meu perfil, para acessar o sistema de forma segura.
 
@@ -42,7 +64,7 @@ US15 - Como usuário, quero realizar pagamentos via Stripe, para adquirir crédi
 
 US16 - Como usuário, quero visualizar meu saldo de créditos atual, para controlar meu uso do sistema.
 
-### Templates de Gabaritos
+### Templates de Gabaritos (EP04)
 
 US17 - Como usuário, quero criar e personalizar templates de gabaritos, para adaptar o sistema às minhas necessidades.
 
@@ -52,7 +74,7 @@ US19 - Como usuário, quero personalizar o layout dos gabaritos, para adaptá-lo
 
 US20 - Como usuário, quero definir o número de questões e campos no template, para criar gabaritos com diferentes formatos.
 
-### Integração e Exportação
+### Integração e Exportação (EP05)
 
 US21 - Como usuário, quero exportar dados em diferentes formatos, para integrar com outros sistemas.
 
@@ -67,30 +89,30 @@ A priorização foi realizada utilizando a técnica MoSCoW, que organiza as func
 - Could have: Funcionalidades desejáveis, que agregam valor, mas não são prioritárias
 - Won't have: Funcionalidades que não serão implementadas inicialmente
 
-| ID   | Descrição                      | Prioridade  |
-| ---- | ------------------------------ | ----------- |
-| US01 | Processar Imagens de Gabaritos | Must have   |
-| US02 | Correção Automática            | Must have   |
-| US03 | Validação de Processamento     | Must have   |
-| US04 | Identificação de Matrícula     | Must have   |
-| US05 | Relatórios Individuais         | Must have   |
-| US11 | Autenticação e Perfil          | Must have   |
-| US14 | Associação Escola/Conta        | Must have   |
-| US17 | Criação de Templates           | Must have   |
-| US18 | Gerenciamento de Templates     | Must have   |
-| US20 | Definição de Campos            | Must have   |
-| US06 | Análise Comparativa            | Should have |
-| US12 | Sistema de Créditos            | Should have |
-| US15 | Pagamentos Stripe              | Should have |
-| US16 | Visualização de Créditos       | Should have |
-| US09 | Salvamento de Relatórios       | Should have |
-| US19 | Personalização de Layout       | Should have |
-| US21 | Exportação de Dados            | Should have |
-| US22 | Backup de Dados                | Should have |
-| US07 | Estatísticas por Questão       | Could have  |
-| US08 | Histórico de Desempenho        | Could have  |
-| US10 | Exportação PDF Geral           | Could have  |
-| US13 | Gestão de Acesso               | Could have  |
+| ID   | Descrição                      | Prioridade  | Horas estimadas | Requisito Relacionado | Épico |
+| ---- | ------------------------------ | ----------- | --------------- | --------------------- | ----- |
+| US01 | Processar Imagens de Gabaritos | Must have   | 40h             | RF01                  | EP01  |
+| US02 | Correção Automática            | Must have   | 8h              | RF02, RF04, RF05      | EP01  |
+| US03 | Validação de Processamento     | Must have   | 4h              | RF02                  | EP01  |
+| US04 | Identificação de Matrícula     | Must have   | 10h             | RF03                  | EP01  |
+| US05 | Relatórios Individuais         | Must have   | 8h              | RF10                  | EP02  |
+| US11 | Autenticação e Perfil          | Must have   | 4h              | RF16                  | EP03  |
+| US14 | Associação Escola/Conta        | Must have   | 2h              | RF17                  | EP03  |
+| US17 | Criação de Templates           | Must have   | 12h             | RF12                  | EP04  |
+| US18 | Gerenciamento de Templates     | Must have   | 6h              | RF12, RF13            | EP04  |
+| US20 | Definição de Campos            | Must have   | 4h              | RF13                  | EP04  |
+| US06 | Análise Comparativa            | Should have | 12h             | RF07, RF08            | EP02  |
+| US12 | Sistema de Créditos            | Should have | 6h              | RF20                  | EP03  |
+| US15 | Pagamentos Stripe              | Should have | 10h             | RF18                  | EP03  |
+| US16 | Visualização de Créditos       | Should have | 4h              | RF23                  | EP03  |
+| US09 | Salvamento de Relatórios       | Should have | 4h              | RF09                  | EP02  |
+| US19 | Personalização de Layout       | Should have | 12h             | RF13                  | EP04  |
+| US21 | Exportação de Dados            | Should have | 4h              | RF14                  | EP05  |
+| US22 | Backup de Dados                | Should have | 8h              | RF14                  | EP05  |
+| US07 | Estatísticas por Questão       | Could have  | 16h             | RF06                  | EP02  |
+| US08 | Histórico de Desempenho        | Could have  | 12h             | RF06                  | EP02  |
+| US10 | Exportação PDF Geral           | Could have  | 4h              | RF15                  | EP02  |
+| US13 | Gestão de Acesso               | Could have  | 12h             | RF16                  | EP03  |
 
 ## MVP
 

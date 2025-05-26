@@ -20,6 +20,8 @@
 
 ## Definition of Done (DoD)
 
+- A funcionalidade deve ter sido verificada. A funcionalidade deve estar operando conforme especificado nos critérios de aceitação em um ambiente de testes ou staging, e os requisitos não funcionais relevantes (RNF01 - Multiplataforma, RNF08 - Robustez, RNF13 - Segurança) devem ter sido atendidos dentro do escopo do item.
+
 - Um item de backlog é considerado "Feito" quando o código está implementado. Isso significa que todo o código necessário para a funcionalidade foi escrito, está em conformidade com os padrões de codificação da equipe e a implementação segue a arquitetura definida, como especificado na "Definição da Arquitetura" na fase de Elaboração (página 8).
 
 - É imprescindível que testes tenham sido realizados e aprovados. Testes unitários devem ter sido escritos e estar passando; testes de integração (por exemplo, frontend com backend, backend com OpenCV para RF03) devem ter sido escritos e estar passando; e testes de funcionalidade, conforme a fase de Construção, devem ter sido realizados e aprovados pela equipe, cobrindo todos os critérios de aceitação. Testes de performance (como o RNF07 - 100 gabaritos/min) e de usabilidade (RNF09) devem ser executados e aprovados, se aplicáveis.
@@ -28,7 +30,6 @@
 
 - A integração contínua deve ter sido bem-sucedida. O código precisa ter sido integrado à branch principal ou de desenvolvimento do repositório, e o build de integração contínua, caso esteja configurado, deve estar passando sem erros.
 
-- A funcionalidade deve ter sido verificada. A funcionalidade deve estar operando conforme especificado nos critérios de aceitação em um ambiente de testes ou staging, e os requisitos não funcionais relevantes (RNF01 - Multiplataforma, RNF08 - Robustez, RNF13 - Segurança) devem ter sido atendidos dentro do escopo do item.
 
 - A documentação deve estar atualizada. Qualquer documentação técnica relevante, como comentários no código, diagramas ou documentação de API, deve ter sido criada ou atualizada.
 
