@@ -20,6 +20,16 @@
 **Ação de melhoria:** Implementar um sistema de gestão de tempo baseado em calendário compartilhado com horários fixos para reuniões, estabelecer marcos claros para entregas e adotar ferramentas de gestão de tarefas para monitoramento assíncrono do progresso.
 
 ## Unidade 2
+###Comunicação e Organização da Equipe
+**Desafio:** Garantir uma comunicação eficiente entre os membros da equipe, evitando mal-entendidos, retrabalhos e atrasos nas entregas, especialmente em atividades colaborativas e interdependentes.
+**Ação de melhoria:** Estabelecer canais de comunicação claros e centralizados (como Slack ou Discord), definir papéis e responsabilidades desde o início e promover reuniões frequentes de alinhamento com pauta e tempo definidos.
+
+###Uso Eficaz do GitHub e do Backlog para Gerenciamento do Projeto
+**Desafio:** Manter o controle das tarefas, priorizações e histórico de desenvolvimento de forma organizada, garantindo rastreabilidade e visibilidade do progresso para todos os envolvidos.
+**Ação de melhoria:** Padronizar o uso de issues, branches e pull requests no GitHub; manter o backlog atualizado com critérios de prioridade bem definidos; e adotar quadros visuais (como Kanban no GitHub Projects ou Trello) para facilitar a visualização do andamento.
+###Integração entre Teoria e Prática
+**Desafio:** Aplicar corretamente os conceitos aprendidos em sala de aula na execução prática do projeto, enfrentando limitações reais de tempo, recursos e conhecimento técnico.
+**Ação de melhoria:** Realizar revisões periódicas dos conceitos teóricos conforme a etapa do projeto, promover momentos de troca de conhecimento entre os membros da equipe e documentar o processo para fortalecer o aprendizado contínuo.
 
 ## Unidade 3
 
