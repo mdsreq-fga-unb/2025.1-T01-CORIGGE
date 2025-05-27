@@ -18,3 +18,4 @@
 | Data       | Versão | Descrição                       | Autor(es)      | Revisor(es) |
 | ---------- | ------ | ------------------------------- | -------------- | ----------- |
 | 19/04/2025 | 1.0    | Criação inicial da documentação | Marcelo Adrian |             |
+| 27/05/2025 | 1.1    | Adicionando Entrega 2           | Otávio Maya |             |
