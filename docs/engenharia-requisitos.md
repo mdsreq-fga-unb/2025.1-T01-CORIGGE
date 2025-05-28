@@ -85,7 +85,8 @@
 
 ## Histórico de Versão
 
-| Data       | Versão | Descrição                       | Autor(es)   | Revisor(es) |
-| ---------- | ------ | ------------------------------- | ----------- | ----------- |
-| 19/04/2025 | 1.0    | Criação inicial da documentação | Otávio Maya |             |
+| Data       | Versão | Descrição                          | Autor(es)   | Revisor(es) |
+| ---------- | ------ | -----------------------------------| ----------- | ----------- |
+| 19/04/2025 | 1.0    | Criação inicial da documentação    | Otávio Maya | Atyrson Souto            |
+| 28/05/2025 | 1.1    | Revisão e Atualização de atividades | Atyrson Souto|             |
 ``` 
