@@ -27,7 +27,6 @@
 
 - **Reuniões entre os membros da equipe**: Sessões colaborativas para verificar e validar os requisitos.
 - **Revisão dos critérios de aceitação**: Definir critérios objetivos para validar que os requisitos foram corretamente implementados.
-- **Brainstorming**: Sessões para validar ideias, explorar melhorias e alinhar expectativas sobre os requisitos levantados.
 
 #### Organização e Atualização
 
