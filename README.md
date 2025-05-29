@@ -1,4 +1,4 @@
-# Corigge - Correção Automática de Gabaritos
+# Guia do PAS - Correção Automática de Gabaritos
 
 ## Sobre o Projeto
 
