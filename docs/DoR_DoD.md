@@ -33,8 +33,6 @@
 
 - A documentação deve estar atualizada. Qualquer documentação técnica relevante, como comentários no código, diagramas ou documentação de API, deve ter sido criada ou atualizada.
 
-- A validação pelo Product Owner ou Cliente é crucial. A funcionalidade deve ter sido demonstrada ao Product Owner (Gerente de Projeto) e/ou ao cliente (Guia do PAS), e o Product Owner ou Cliente deve ter aceitado formalmente a funcionalidade como "Feita", conforme o "Teste de Aceitação pelo Cliente" (Seção 5.4.3) e a Validação com o Cliente, descrita na seção 5.2 do documento de Visão do Produto.
-
 - O item deve estar livre de débitos técnicos críticos. Nenhum débito técnico crítico ou bug de alta prioridade pode ter sido introduzido ou deixado sem tratamento adequado ao finalizar o item.
 
 - Considerações específicas do projeto Corigge devem ser atendidas. Para funcionalidades de processamento de imagem (RF01, RF02, RF03), a precisão da identificação deve atender aos níveis esperados (referência: >99% de precisão, Seção 2.1). Para funcionalidades de exportação (RF11, RF14, RF15), os arquivos gerados (.csv, .pdf) devem estar corretos e completos. Para funcionalidades de integração (RF18 - Stripe), a comunicação e o processamento devem estar funcionando corretamente.
