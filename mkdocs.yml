@@ -42,6 +42,8 @@ nav:
   - Entregas: entregas.md 
 
 markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.inlinehilite
@@ -54,3 +56,12 @@ markdown_extensions:
   - footnotes
   - attr_list
   - md_in_html
+  
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css
+
