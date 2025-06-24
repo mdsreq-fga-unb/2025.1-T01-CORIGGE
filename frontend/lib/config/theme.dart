@@ -1,65 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// write as kVariables
-/*
-static const Color primary = Color(0xFF6200EE);
-  static const Color primaryVariant = Color(0xFF3700B3);
-  static const Color secondary = Color(0xFF03DAC6);
-  static const Color secondaryVariant = Color(0xFF018786);
-  static const Color background = Color(0xFFFFFFFF);
-  static const Color surface = Color(0xFFF5F5F5);
-  static const Color error = Color(0xFFB00020);
-  static const Color onPrimary = Colors.white;
-  static const Color onSecondary = Colors.black;
-  static const Color onBackground = Colors.black;
-  static const Color onSurface = Colors.black;
-  static const Color onError = Colors.white;
-*/
-
-const kPrimary = Color(0xFF6200EE);
-const kPrimaryVariant = Color(0xFF3700B3);
-const kSecondary = Color(0xFF03DAC6);
-const kSecondaryVariant = Color(0xFF018786);
-const kBackground = Color(0xFFFFFFFF);
-const kSurface = Color(0xFFF5F5F5);
+// Primary Colors
+const kPrimary = Color(0xFF8B4513); // Brown
+const kPrimaryVariant = Color(0xFF654321); // Darker Brown
+const kSecondary = Color(0xFFF0EFEA); // Light Beige
+const kSecondaryVariant = Color(0xFFE5E4DF); // Darker Beige
+const kBackground = Color(0xFFF0EFEA); // Light Beige
+const kSurface = Colors.white;
 const kError = Color(0xFFB00020);
+
+// On Colors (text/icon colors for each surface)
 const kOnPrimary = Colors.white;
-const kOnSecondary = Colors.black;
-const kOnBackground = Colors.black;
-const kOnSurface = Colors.black;
+const kOnSecondary = Color(0xFF4A4A4A); // Dark Grey for text
+const kOnBackground = Color(0xFF4A4A4A);
+const kOnSurface = Color(0xFF4A4A4A);
 const kOnError = Colors.white;
 
-const kPrimaryDark = Color(0xFF3700B3);
-const kSecondaryDark = Color(0xFF018786);
+// Dark Theme Colors
+const kPrimaryDark = Color(0xFF8B4513);
+const kSecondaryDark = Color(0xFF654321);
 const kBackgroundDark = Color(0xFF222222);
-const kSurfaceDark = Color(0xFF222222);
-const kErrorDark = Color(0xFFB00020);
+const kSurfaceDark = Color(0xFF333333);
+const kErrorDark = Color(0xFFCF6679);
 const kOnPrimaryDark = Colors.white;
-const kOnSecondaryDark = Colors.black;
+const kOnSecondaryDark = Colors.white;
 const kOnBackgroundDark = Colors.white;
 const kOnSurfaceDark = Colors.white;
-const kOnErrorDark = Colors.white;
-
+const kOnErrorDark = Colors.black;
 
 ThemeData darkTheme() {
   return ThemeData(
-    scaffoldBackgroundColor: const Color(0xFF222222),
+    scaffoldBackgroundColor: kBackgroundDark,
+    colorScheme: const ColorScheme.dark(
+      primary: kPrimaryDark,
+      secondary: kSecondaryDark,
+      surface: kSurfaceDark,
+      background: kBackgroundDark,
+      error: kErrorDark,
+      onPrimary: kOnPrimaryDark,
+      onSecondary: kOnSecondaryDark,
+      onSurface: kOnSurfaceDark,
+      onBackground: kOnBackgroundDark,
+      onError: kOnErrorDark,
+    ),
     appBarTheme: appBarTheme(true),
     textTheme: textTheme(true),
-    fontFamily: 'Montserrat',
+    fontFamily: 'Roboto',
     inputDecorationTheme: inputDecorationTheme(),
+    elevatedButtonTheme: elevatedButtonTheme(),
+    textButtonTheme: textButtonTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }
 
 ThemeData theme() {
   return ThemeData(
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: kBackground,
+    colorScheme: const ColorScheme.light(
+      primary: kPrimary,
+      secondary: kSecondary,
+      surface: kSurface,
+      background: kBackground,
+      error: kError,
+      onPrimary: kOnPrimary,
+      onSecondary: kOnSecondary,
+      onSurface: kOnSurface,
+      onBackground: kOnBackground,
+      onError: kOnError,
+    ),
     appBarTheme: appBarTheme(false),
     textTheme: textTheme(false),
-    fontFamily: 'Montserrat',
+    fontFamily: 'Roboto',
     inputDecorationTheme: inputDecorationTheme(),
+    elevatedButtonTheme: elevatedButtonTheme(),
+    textButtonTheme: textButtonTheme(),
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }
@@ -71,33 +86,94 @@ InputDecorationTheme inputDecorationTheme() {
     gapPadding: 10,
   );
   return InputDecorationTheme(
-    // If  you are using latest version of flutter then lable text and hint text shown like this
-    // if you r using flutter less then 1.20.* then maybe this is not working properly
-    // if we are define our floatingLabelBehavior in our theme then it's not applayed
     floatingLabelBehavior: FloatingLabelBehavior.always,
     contentPadding: const EdgeInsets.symmetric(horizontal: 42, vertical: 20),
     enabledBorder: outlineInputBorder,
     focusedBorder: outlineInputBorder,
     border: outlineInputBorder,
+    fillColor: kSurface,
+    filled: true,
+  );
+}
+
+ElevatedButtonThemeData elevatedButtonTheme() {
+  return ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: kSurface,
+      foregroundColor: kOnSurface,
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+        side: const BorderSide(color: Color(0xFFDDDDDD), width: 1),
+      ),
+      elevation: 5,
+    ),
+  );
+}
+
+TextButtonThemeData textButtonTheme() {
+  return TextButtonThemeData(
+    style: TextButton.styleFrom(
+      foregroundColor: kPrimary,
+      textStyle: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+    ),
   );
 }
 
 TextTheme textTheme(bool isDark) {
+  Color textColor = isDark ? Colors.white : const Color(0xFF4A4A4A);
   return TextTheme(
-    bodyLarge: TextStyle(
-      color: isDark ? kPrimaryDark : kPrimary,
+    displayLarge: TextStyle(
+      color: textColor,
+      fontSize: 48,
+      fontWeight: FontWeight.bold,
     ),
-    bodyMedium: TextStyle(color: isDark ? kPrimaryDark : kPrimary),
+    displayMedium: TextStyle(
+      color: textColor,
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+    ),
+    displaySmall: TextStyle(
+      color: textColor,
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+    ),
+    headlineMedium: TextStyle(
+      color: textColor,
+      fontSize: 20,
+      fontWeight: FontWeight.w600,
+    ),
+    titleLarge: TextStyle(
+      color: textColor,
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+    ),
+    bodyLarge: TextStyle(
+      color: textColor,
+      fontSize: 16,
+    ),
+    bodyMedium: TextStyle(
+      color: textColor,
+      fontSize: 14,
+    ),
   );
 }
 
 AppBarTheme appBarTheme(bool isDark) {
   return AppBarTheme(
     scrolledUnderElevation: 0,
-    color: Colors.transparent,
+    color: isDark ? kSurfaceDark : kSurface,
     systemOverlayStyle:
         isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
     elevation: 0,
-    iconTheme: IconThemeData(color: isDark ? kPrimaryDark : kPrimary),
+    iconTheme: IconThemeData(color: isDark ? kOnSurfaceDark : kPrimary),
+    titleTextStyle: TextStyle(
+      color: isDark ? kOnSurfaceDark : kPrimary,
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+    ),
   );
 }

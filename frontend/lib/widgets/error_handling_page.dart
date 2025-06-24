@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../cache/shared_preferences_helper.dart';
@@ -10,12 +11,12 @@ class ErrorHandlingPage extends StatelessWidget {
   final Widget? child;
   final String? errorText;
   final bool showHomeButton;
-  final String duckAsset;
+  final String imgAsset;
   final bool shouldHaveChild;
 
   const ErrorHandlingPage(
       {super.key,
-      this.duckAsset = "assets/images/logo_splash.png",
+      this.imgAsset = "assets/images/logo_corigge.svg",
       required this.errorText,
       this.child,
       this.shouldHaveChild = false,
@@ -28,15 +29,22 @@ class ErrorHandlingPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: getProportionateScreenWidth(12)),
-              child: Column(
-                children: [
-                  Image.asset(
-                    duckAsset,
-                    height: getProportionateScreenHeight(300),
-                  ),
-                  if (duckAsset == "assets/images/logo_splash.png") ...[
+                padding: EdgeInsets.symmetric(
+                    horizontal: getProportionateScreenWidth(12)),
+                child: Column(children: [
+                  if (imgAsset.endsWith(".svg"))
+                    SvgPicture.asset(
+                      imgAsset,
+                      height: getProportionateScreenHeight(300),
+                    )
+                  else ...[
+                    Image.asset(
+                      imgAsset,
+                      height: getProportionateScreenHeight(300),
+                    ),
+                  ],
+
+                  /* if (imgAsset == "assets/images/logo_splash.png") ...[
                     const Text(
                       "Olá Patinho!, parece que você não está logado",
                       style:
@@ -52,7 +60,12 @@ class ErrorHandlingPage extends StatelessWidget {
                           horizontal: getProportionateScreenWidth(10)),
                       child: Text(errorText!),
                     ),
-                  ],
+                  ], */
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(10)),
+                    child: Text(errorText!),
+                  ),
                   if (showHomeButton)
                     SizedBox(
                       height: getProportionateScreenHeight(30),
@@ -71,9 +84,7 @@ class ErrorHandlingPage extends StatelessWidget {
                                 fontWeight: FontWeight.bold)),
                       ),
                     ),
-                ],
-              ),
-            ),
+                ])),
           )
         : errorText != null
             ? SizedBox(
@@ -84,11 +95,18 @@ class ErrorHandlingPage extends StatelessWidget {
                       horizontal: getProportionateScreenWidth(12)),
                   child: Column(
                     children: [
-                      Image.asset(
-                        duckAsset,
-                        height: getProportionateScreenHeight(300),
-                      ),
-                      if (duckAsset == "assets/images/logo_splash.png") ...[
+                      if (imgAsset.endsWith(".svg"))
+                        SvgPicture.asset(
+                          imgAsset,
+                          height: getProportionateScreenHeight(300),
+                        )
+                      else ...[
+                        Image.asset(
+                          imgAsset,
+                          height: getProportionateScreenHeight(300),
+                        ),
+                      ],
+                      if (imgAsset == "assets/images/logo_corigge.svg") ...[
                         const Text(
                           "Ops algo deu errado!",
                           style: TextStyle(

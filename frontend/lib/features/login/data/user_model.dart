@@ -1,5 +1,5 @@
 class UserModel {
-  String? id;
+  int? id;
   String? name;
   String email;
 
@@ -11,22 +11,28 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      id: json['id'] as String,
+      id: json['id_user'] as int,
       name: json['name'] as String,
       email: json['email'] as String,
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson({bool includeId = false}) {
+    if (includeId) {
+      return {
+        'id_user': id,
+        'name': name,
+        'email': email,
+      };
+    }
     return {
-      'id': id,
       'name': name,
       'email': email,
     };
   }
 
   UserModel copyWith({
-    String? id,
+    int? id,
     String? name,
     String? email,
     String? phone,

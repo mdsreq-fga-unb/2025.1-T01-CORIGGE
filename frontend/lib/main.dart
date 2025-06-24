@@ -15,6 +15,7 @@ import 'features/login/presentation/page/login_page.dart';
 import 'widgets/router_widget.dart';
 import 'services/local_process_server_service.dart';
 import 'services/opencv_service.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 late SharedPreferences sp;
 
@@ -29,13 +30,14 @@ class AppWindowListener extends WindowListener {
 }
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
       //print('${record.level.name}: ${record.time}: ${record.message}\n Stacktrace-> ${record.stackTrace}');
     }
   });
-  WidgetsFlutterBinding.ensureInitialized();
   sp = await SharedPreferences.getInstance();
 
   if (const String.fromEnvironment("CORIGGE_DEBUG", defaultValue: "") != "") {

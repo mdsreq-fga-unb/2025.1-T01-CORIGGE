@@ -1,4 +1,5 @@
 import 'package:corigge/utils/utils.dart';
+import 'package:corigge/widgets/app_bar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path/path.dart';
@@ -12,56 +13,12 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: AppBarCustom.appBarWithLogo(),
       body: _buildBody(context),
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
-    return AppBar(
-      backgroundColor: Colors.white, // Ou a cor de fundo da sua AppBar
-      elevation: 0, // Sem sombra para a AppBar
-      title: Row(
-        children: [
-          // Ícone ou imagem do logo Corrigge
-          // Para um ícone simples:
-          // Icon(Icons.check_circle_outline, color: Colors.brown[800]),
-          // Ou para uma imagem do logo:
-          // Image.asset('assets/images/corrigge_logo.png', height: 30),
-          const SizedBox(width: 8),
-          Text(
-            'Corigge',
-            style: TextStyle(
-              color: Colors.brown[800],
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            // Ação para o botão Sobre
-          },
-          child: Text(
-            'Sobre',
-            style: TextStyle(color: Colors.brown[800], fontSize: 16),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            // Ação para o botão Contato
-          },
-          child: Text(
-            'Contato',
-            style: TextStyle(color: Colors.brown[800], fontSize: 16),
-          ),
-        ),
-        const SizedBox(width: 16),
-      ],
-    );
-  }
+  
 
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
