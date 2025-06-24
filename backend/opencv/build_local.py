@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Optional, Dict, Any, List
 import shutil
 import tempfile
+import zipfile
 
 
 def find_python_executable() -> str:
@@ -313,8 +314,11 @@ def build_pyinstaller_command(python_lib_path: str, poppler_binaries: List[str],
     cmd = ["pyinstaller"]
     
     # Basic options
-    if config.get('ONE_FILE', 'true').lower() == 'true':
-        cmd.append("--onefile")
+    # Always use --onedir for better debugging and potential performance
+    cmd.append("--onedir")
+    cmd.append("--strip")      # Strip binaries to reduce size
+    cmd.append("--noupx")      # Don't use UPX compression (can cause issues)
+    cmd.append("--log-level=ERROR")  # Only show errors during build
     
     if config.get('CLEAN_BUILD', 'false').lower() == 'true':
         cmd.append("--clean")
@@ -324,7 +328,11 @@ def build_pyinstaller_command(python_lib_path: str, poppler_binaries: List[str],
     cache_dir.mkdir(parents=True, exist_ok=True)
     cmd.extend(["--workpath", str(cache_dir / "build")])
     cmd.extend(["--distpath", str(cache_dir / "dist")])
-    
+    cmd.extend(["--specpath", str(cache_dir)])
+
+    # Set PyInstaller cache directory to be local
+    os.environ['PYINSTALLER_CACHE_DIR'] = str(cache_dir / "cache")
+
     # Icon/Logo
     logo_path = Path("assets/corigge_logo.ico")
     if logo_path.exists():
@@ -343,10 +351,37 @@ def build_pyinstaller_command(python_lib_path: str, poppler_binaries: List[str],
         "psutil",
         "pdf2image",
         "python-dotenv",
-        "uvicorn"
+        "uvicorn",
+        "_struct",  # Required system module
+        "struct",   # Required system module
+        "array",    # Common dependency
+        "binascii", # Common dependency
+        "_socket",  # Common dependency
+        "select",   # Common dependency
+        "unicodedata", # Common dependency
+        "io",      # Required for stream handling
+        "fcntl",   # Required for file descriptor operations on Unix
+        "termios", # Required for terminal operations on Unix
+        "pty",     # Required for pseudo-terminal operations
+        "tty",     # Required for terminal operations
+        "subprocess", # Required for process handling
+        "threading", # Required for async operations
+        "queue",    # Required for stream buffering
+        "asyncio",  # Required for async operations
+        "concurrent.futures", # Required for thread pools
     ]
     for imp in hidden_imports:
-        cmd.extend(["--hidden-import", imp])
+        if imp not in ['fcntl', 'termios', 'pty', 'tty'] or not platform.system().lower() == 'windows':
+            cmd.extend(["--hidden-import", imp])
+    
+    # Add additional Python standard library modules that might be needed
+    cmd.extend([
+        "--collect-submodules", "encodings",
+        "--collect-submodules", "logging",
+        "--collect-data", "certifi",  # For SSL certificates
+        "--collect-submodules", "asyncio",  # Ensure all asyncio modules are included
+        "--collect-submodules", "concurrent",  # Ensure all concurrent modules are included
+    ])
     
     # Add Python library binary
     cmd.extend(["--add-binary", f"{python_lib_path}:."])
@@ -364,10 +399,6 @@ def build_pyinstaller_command(python_lib_path: str, poppler_binaries: List[str],
     for config_file in config_files:
         if Path(config_file).exists():
             cmd.extend(["--add-data", f"{config_file}:."])
-    
-    # Log level
-    log_level = config.get('LOG_LEVEL', 'INFO')
-    cmd.extend(["--log-level", log_level])
     
     # Target script
     cmd.append("main_processing_computer_local.py")
@@ -488,18 +519,36 @@ def main():
         result = subprocess.run(cmd, check=True, capture_output=False)
         print("\n✅ Build completed successfully!")
         
-        # Copy the executable from the cache directory to the local dist directory
-        local_dist = Path("dist")
-        local_dist.mkdir(exist_ok=True)
+        # Copy the executable to the frontend/assets/lib/${platform} directory
+        system = platform.system().lower()
+        target_dir = Path("../../frontend/assets/lib") / system
+        target_dir.mkdir(parents=True, exist_ok=True)
         
         cache_dist = cache_dir / "dist"
         if cache_dist.exists():
-            for exe in cache_dist.glob("*"):
-                target = local_dist / exe.name
-                shutil.copy2(exe, target)
-                size_mb = target.stat().st_size / (1024 * 1024)
-                print(f"\n📦 Built executable: {target.name} ({size_mb:.1f} MB)")
-        
+            # Create a zip file of the entire directory
+            
+            # Clean up any existing files
+            for existing_file in target_dir.glob("*"):
+                if existing_file.is_file():
+                    existing_file.unlink()
+                elif existing_file.is_dir():
+                    shutil.rmtree(existing_file)
+            
+            # Create the zip file
+            zip_path = target_dir / "opencv_executable.zip"
+            with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
+                # Walk through the directory and add all files
+                for root, dirs, files in os.walk(cache_dist):
+                    for file in files:
+                        file_path = Path(root) / file
+                        arc_path = file_path.relative_to(cache_dist)
+                        zipf.write(file_path, arc_path)
+                        
+            size_mb = zip_path.stat().st_size / (1024 * 1024)
+            print(f"\n📦 Created zip archive: {zip_path.name} ({size_mb:.1f} MB)")
+            print(f"   📂 Placed in: {target_dir}")
+
         # Show poppler status
         if poppler_binaries:
             print(f"\n🔧 Poppler integration: ✅ Included {len(poppler_binaries)} binaries")
@@ -510,6 +559,8 @@ def main():
         print(f"🔗 The executable will run a server on localhost:8765")
         print(f"📱 Desktop apps can connect directly to this server")
         print(f"🏠 No internet connection required for operation")
+        if system == 'darwin':
+            print(f"\n⚠️  Note: On macOS, the executable will be signed during the Flutter app build")
         
         # Clean up
         try:
@@ -536,16 +587,6 @@ def main():
             if cache_dir.exists():
                 shutil.rmtree(cache_dir)
                 print(f"\n🧹 Cleaned up build directory after interruption")
-        except Exception as cleanup_error:
-            print(f"\n⚠️  Could not clean up build directory: {cleanup_error}")
-        sys.exit(1)
-    except Exception as e:
-        print(f"\n❌ Build failed with error: {e}")
-        # Clean up on error
-        try:
-            if cache_dir.exists():
-                shutil.rmtree(cache_dir)
-                print(f"\n🧹 Cleaned up build directory after error")
         except Exception as cleanup_error:
             print(f"\n⚠️  Could not clean up build directory: {cleanup_error}")
         sys.exit(1)
