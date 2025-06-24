@@ -29,17 +29,17 @@ nav:
   - Início: index.md
   - Cenário Atual: cenario-atual.md
   - Documentação do Projeto:
-    - Solução Proposta: solucao-proposta.md
-    - Estratégias: estrategias.md
-    - Engenharia de Requisitos: engenharia-requisitos.md
-    - Cronograma: cronograma.md
-    - Interação Cliente-Equipe: interacao-cliente.md
-    - DoR e DoD: DoR_DoD.md
-    - Backlog do Produto: backlog.md
-    - Requisitos: requisitos.md
+      - Solução Proposta: solucao-proposta.md
+      - Estratégias: estrategias.md
+      - Engenharia de Requisitos: engenharia-requisitos.md
+      - Cronograma: cronograma.md
+      - Interação Cliente-Equipe: interacao-cliente.md
+      - DoR e DoD: DoR_DoD.md
+      - Backlog do Produto: backlog.md
+      - Requisitos: requisitos.md
   - Lições Aprendidas: licoes-aprendidas.md
   - Ata de reuniões: gravacoes.md
-  - Entregas: entregas.md 
+  - Entregas: entregas.md
 
 markdown_extensions:
   - pymdownx.arithmatex:
