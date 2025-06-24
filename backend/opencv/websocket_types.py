@@ -1,7 +1,3 @@
-
-
-
-
 class WebsocketMessageCommand:
     READ_TO_IMAGES = "readToImages"
     IDENTIFY_CIRCLES = "identifyCircles"
@@ -21,6 +17,7 @@ class WebsocketMessageStatus:
     SENDING_CHUNK = "sendingChunk"
     FINAL_CHUNK = "finalChunk"
     INTERNAL_CLIENT_REPORT = "internalClientReport"
+    CONNECTED = "connected"
 
 class BoxRectangleType:
     TYPE_B = "Tipo B"

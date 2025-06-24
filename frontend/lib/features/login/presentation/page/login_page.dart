@@ -1,6 +1,10 @@
+import 'package:corigge/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:path/path.dart';
 
-import '../splash/domain/repositories/auth_service.dart';
+import '../../../../config/theme.dart';
+import '../../../splash/domain/repositories/auth_service.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -76,7 +80,7 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 60),
 
             // Botão "Sign in with Google"
-            _buildSignInButton(),
+            _buildSignInButton(context),
             const SizedBox(height: 40),
           ],
         ),
@@ -240,10 +244,17 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSignInButton() {
+  Widget _buildSignInButton(BuildContext context) {
     return ElevatedButton(
       onPressed: () async {
-        await AuthService.signInWithGoogle();
+        var result = await AuthService.signInWithGoogle();
+
+        result.fold((l) {
+          Utils.showTopSnackBar(context, "Erro ao fazer login: $l",
+              color: kError);
+        }, (r) {
+          context.go('/home');
+        });
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Colors.white, // Cor de fundo do botão

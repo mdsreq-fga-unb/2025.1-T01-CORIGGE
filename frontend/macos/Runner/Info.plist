@@ -28,6 +28,14 @@
 					<string>com.googleusercontent.apps.693202468940-aig035i86s2tf6h7ld90511jvnquleiu</string>
 				</array>
 			</dict>
+			<dict>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.corigge.app</string>
+				</array>
+				<key>CFBundleURLName</key>
+				<string>com.corigge.app</string>
+			</dict>
 		</array>
 		<key>LSMinimumSystemVersion</key>
 		<string>$(MACOSX_DEPLOYMENT_TARGET)</string>

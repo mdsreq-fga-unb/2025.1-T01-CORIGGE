@@ -9,11 +9,24 @@ import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:window_manager/window_manager.dart';
 import 'config/theme.dart';
-import 'features/login/login_page.dart';
+import 'features/login/presentation/page/login_page.dart';
 import 'widgets/router_widget.dart';
+import 'services/local_process_server_service.dart';
+import 'services/opencv_service.dart';
 
 late SharedPreferences sp;
+
+class AppWindowListener extends WindowListener {
+  @override
+  void onWindowClose() async {
+    // Clean up processes
+    await OpenCVService.disconnect();
+    await LocalProcessServerService.dispose();
+    await windowManager.destroy();
+  }
+}
 
 void main() async {
   Logger.root.level = Level.ALL;
@@ -29,6 +42,27 @@ void main() async {
     Environment.setEnvironment(EnvironmentType.DEV);
   } else {
     Environment.setEnvironment(EnvironmentType.PROD);
+  }
+
+  // Set minimum window size for desktop
+  if (!kIsWeb) {
+    if (defaultTargetPlatform == TargetPlatform.windows ||
+        defaultTargetPlatform == TargetPlatform.macOS ||
+        defaultTargetPlatform == TargetPlatform.linux) {
+      await windowManager.ensureInitialized();
+      await windowManager.waitUntilReadyToShow();
+
+      // Set window properties
+      await windowManager.setTitle('Corigge');
+      await windowManager.setMinimumSize(const Size(800, 600));
+      await windowManager.setSize(const Size(1280, 720));
+      await windowManager.center();
+
+      // Handle window close event
+      windowManager.addListener(AppWindowListener());
+
+      await windowManager.show();
+    }
   }
 
   await Supabase.initialize(
@@ -121,5 +155,13 @@ class _MyAppState extends State<MyApp> {
       theme: isDark ? darkTheme() : theme(),
       routerConfig: router,
     );
+  }
+
+  @override
+  void reassemble() {
+    // Called on hot reload. Ensure resources are cleaned to avoid duplicates.
+    OpenCVService.disconnect();
+    LocalProcessServerService.dispose();
+    super.reassemble();
   }
 }

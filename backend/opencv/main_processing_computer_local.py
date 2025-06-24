@@ -355,7 +355,7 @@ async def send_progress(websocket, message, task_id):
         'message': message
     }}))
 
-async def handle_client(websocket, path):
+async def handle_client(websocket, path=None):
     """Handle incoming WebSocket connections from desktop clients."""
     client_id = f"client_{id(websocket)}"
     connected_clients[client_id] = websocket
@@ -376,7 +376,13 @@ async def handle_client(websocket, path):
         async for message in websocket:
             try:
                 response = json.loads(message)
-                Utils.log_info(f"📨 Received message from {client_id}: {response.get('command', 'unknown')}")
+
+                if not response.get("command"):
+                    Utils.log_error(f"❌ Invalid JSON from {client_id}: {response}")
+                    continue
+
+                if response.get("command") != WebsocketMessageCommand.PING:
+                    Utils.log_info(f"📨 Received message from {client_id}: {response.get('command', 'unknown')}")
                 
                 # Handle different message types
                 if type(response["data"]) == dict and response["data"].get("task_id"):
@@ -394,7 +400,7 @@ async def handle_client(websocket, path):
                     
                     elif response["command"] == WebsocketMessageCommand.PING:
                         await websocket.send(json.dumps({"status": WebsocketMessageStatus.PONG}))
-                        Utils.log_info(f"🏓 Ping/Pong with {client_id}")
+                        #Utils.log_info(f"🏓 Ping/Pong with {client_id}")
                 
                 else:
                     # Handle chunk messages

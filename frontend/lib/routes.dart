@@ -1,5 +1,5 @@
 import 'package:corigge/features/home/presentation/pages/home_page.dart';
-import 'package:corigge/features/login/login_page.dart';
+import 'package:corigge/features/login/presentation/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
