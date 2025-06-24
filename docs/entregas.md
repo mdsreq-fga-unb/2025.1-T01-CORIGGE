@@ -65,8 +65,7 @@ O produto a ser construído é um Sistema de Gestão Integrado HealthNet, uma pl
 
 - Portal do Paciente
 
-
-<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIm4FXpA=/?embedMode=view_only_without_ui&moveToViewport=-10734,-12401,20834,11984&embedId=979808496947" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+<iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIm4FXpA=/?embedMode=view_only_without_ui&moveToViewport=-10835,-12450,20026,11592&embedId=249665201455" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
 
 Após a construção do Product Backlog Building (PBB) Canvas, obtivemos uma visão estratégica e holística do produto "HealthNet". Mapeámos os problemas, as expectativas, as personas, as funcionalidades essenciais e os Itens do Backlog do Produto (PBIs) que definem o que precisa de ser construído e porquê.
