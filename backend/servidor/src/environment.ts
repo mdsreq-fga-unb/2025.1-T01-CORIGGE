@@ -16,7 +16,6 @@ export const environment = {
     // CORS configuration
     CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:3000',
 
-    // Database configuration (if needed for direct database access)
 } as const;
 
 // Validate required environment variables

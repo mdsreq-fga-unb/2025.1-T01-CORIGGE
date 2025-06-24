@@ -17,11 +17,17 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
+main_processing_computer_local
+main_processing_computer_local.spec
+
 
 # Backend server related
 /backend/servidor/dist/
 /backend/servidor/node_modules/
 /.venv/
+
+# frontend related
+/frontend/build/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
