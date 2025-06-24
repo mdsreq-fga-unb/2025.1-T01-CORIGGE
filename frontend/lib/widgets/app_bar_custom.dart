@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../config/size_config.dart';
 import '../config/theme.dart';
+import '../features/splash/domain/repositories/auth_service.dart';
 
 class AppBarCustom {
   static PreferredSizeWidget createAppBarWithBackButton(BuildContext context,
@@ -55,15 +57,10 @@ class AppBarCustom {
 
   static PreferredSizeWidget appBarWithLogo() {
     return AppBar(
-      backgroundColor: Colors.white, // Ou a cor de fundo da sua AppBar
-      elevation: 0, // Sem sombra para a AppBar
+      backgroundColor: Colors.white,
+      elevation: 0,
       title: Row(
         children: [
-          // Ícone ou imagem do logo Corrigge
-          // Para um ícone simples:
-          // Icon(Icons.check_circle_outline, color: Colors.brown[800]),
-          // Ou para uma imagem do logo:
-          // Image.asset('assets/images/corrigge_logo.png', height: 30),
           const SizedBox(width: 8),
           Text(
             'Corigge',
@@ -94,11 +91,25 @@ class AppBarCustom {
             style: TextStyle(color: Colors.brown[800], fontSize: 16),
           ),
         ),
+        Builder(
+          builder: (context) => TextButton.icon(
+            onPressed: () async {
+              await AuthService.logout();
+              if (context.mounted) {
+                context.go('/login');
+              }
+            },
+            icon: Icon(Icons.logout, color: Colors.brown[800], size: 20),
+            label: Text(
+              'Sair',
+              style: TextStyle(color: Colors.brown[800], fontSize: 16),
+            ),
+          ),
+        ),
         const SizedBox(width: 16),
       ],
     );
   }
-
 
   static Widget topBackButtonWidget({required Function() onPressed}) {
     return SizedBox(

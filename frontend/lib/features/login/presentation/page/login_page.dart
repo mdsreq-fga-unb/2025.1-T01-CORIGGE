@@ -1,6 +1,7 @@
 import 'package:corigge/utils/utils.dart';
 import 'package:corigge/widgets/app_bar_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path/path.dart';
 
@@ -17,8 +18,6 @@ class LoginPage extends StatelessWidget {
       body: _buildBody(context),
     );
   }
-
-  
 
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
@@ -75,16 +74,15 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildFeaturesSection() {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start, // Alinha os itens ao topo
-      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Imagem do gabarito (à esquerda)
+        // Left side image
         Container(
-          width: 250, // Ajuste o tamanho conforme necessário
+          width: 250,
           height: 250,
+          margin: const EdgeInsets.only(right: 40),
           decoration: BoxDecoration(
-            color:
-                const Color(0xFF8B4513), // Cor de fundo da imagem do gabarito
+            color: const Color(0xFF8B4513),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
@@ -96,24 +94,22 @@ class LoginPage extends StatelessWidget {
             ],
           ),
           child: Center(
-            child:
-                // Você precisará de um ícone ou SVG customizado para isso.
-                // Para simplificar, vou usar um Container temporário.
-                Container(
+            child: Container(
               width: 150,
               height: 150,
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Icon(Icons.assignment,
-                  size: 80, color: Color(0xFF8B4513)),
+              child: SvgPicture.asset(
+                'assets/images/logo_corigge.svg',
+                height: 150,
+              ),
             ),
           ),
         ),
-        const SizedBox(width: 40), // Espaço entre a imagem e os cards
 
-        // Cards dos recursos (à direita)
+        // Right side features grid
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,25 +123,37 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildFeatureCard(
-                    icon: Icons.timer,
-                    title: 'Correção Rápida',
-                    description: '100 GABARITOS POR MINUTO',
-                  ),
-                  _buildFeatureCard(
-                    icon: Icons.check_circle_outline,
-                    title: 'Alta Precisão',
-                    description: 'MAIS DE 99% DE PRECISÃO',
-                  ),
-                  _buildFeatureCard(
-                    icon: Icons.bar_chart,
-                    title: 'Relatórios Detalhados',
-                    description: 'ANÁLISE DE DESEMPENHO COMPLETA',
-                  ),
-                ],
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  return GridView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      childAspectRatio: 1.2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                    children: [
+                      _buildFeatureCard(
+                        icon: Icons.timer,
+                        title: 'Correção Rápida',
+                        description: '100 GABARITOS POR MINUTO',
+                      ),
+                      _buildFeatureCard(
+                        icon: Icons.check_circle_outline,
+                        title: 'Alta Precisão',
+                        description: 'MAIS DE 99% DE PRECISÃO',
+                      ),
+                      _buildFeatureCard(
+                        icon: Icons.bar_chart,
+                        title: 'Relatórios Detalhados',
+                        description: 'ANÁLISE DE DESEMPENHO COMPLETA',
+                      ),
+                    ],
+                  );
+                },
               ),
             ],
           ),
@@ -160,7 +168,6 @@ class LoginPage extends StatelessWidget {
     required String description,
   }) {
     return Container(
-      width: 200, // Ajuste o tamanho do card conforme necessário
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -175,6 +182,7 @@ class LoginPage extends StatelessWidget {
         ],
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, size: 40, color: Colors.brown[800]),
           const SizedBox(height: 10),

@@ -64,75 +64,91 @@ class OpenCVService {
   static bool _isConnected = false;
 
   /// Initialize the WebSocket connection
-  static Future<void> connect() async {
+  static Future<void> connect({int maxRetries = 5}) async {
     if (_isConnected) {
       log.info('Already connected to WebSocket server');
       return;
     }
 
-    try {
-      _channel = WebSocketChannel.connect(Uri.parse(_wsUrl));
+    int retryCount = 0;
+    while (retryCount < maxRetries) {
+      try {
+        // Wait a bit before attempting to connect, increasing delay with each retry
+        await Future.delayed(Duration(milliseconds: 500 * (retryCount + 1)));
 
-      // Wait for connection confirmation
-      final completer = Completer<void>();
+        log.info(
+            'Attempting to connect to WebSocket server (attempt ${retryCount + 1}/$maxRetries)');
+        _channel = WebSocketChannel.connect(Uri.parse(_wsUrl));
 
-      // Add timeout for connection
-      Timer(const Duration(seconds: 5), () {
-        if (!completer.isCompleted) {
-          completer.completeError('Connection timeout');
-        }
-      });
+        // Wait for connection confirmation
+        final completer = Completer<void>();
 
-      // Create a broadcast stream to allow multiple listeners
-      final broadcastStream = _channel!.stream.asBroadcastStream();
+        // Add timeout for connection
+        Timer(const Duration(seconds: 5), () {
+          if (!completer.isCompleted) {
+            completer.completeError('Connection timeout');
+          }
+        });
 
-      // Set up the message handler
-      _setupMessageHandler(broadcastStream);
+        // Create a broadcast stream to allow multiple listeners
+        final broadcastStream = _channel!.stream.asBroadcastStream();
 
-      // Listen for the initial connection message
-      broadcastStream.listen(
-        (message) {
-          try {
-            final response = ServerResponse.fromJson(jsonDecode(message));
+        // Set up the message handler
+        _setupMessageHandler(broadcastStream);
 
-            // The server sends a welcome message
-            if (!completer.isCompleted) {
-              if (response.data != null &&
-                  response.data!['message'] != null &&
-                  response.data!['message']
-                      .toString()
-                      .contains('Connected to local processing server')) {
-                _isConnected = true;
-                completer.complete();
+        // Listen for the initial connection message
+        broadcastStream.listen(
+          (message) {
+            try {
+              final response = ServerResponse.fromJson(jsonDecode(message));
+
+              // The server sends a welcome message
+              if (!completer.isCompleted) {
+                if (response.data != null &&
+                    response.data!['message'] != null &&
+                    response.data!['message']
+                        .toString()
+                        .contains('Connected to local processing server')) {
+                  _isConnected = true;
+                  completer.complete();
+                }
+              }
+            } catch (e) {
+              if (!completer.isCompleted) {
+                completer.completeError('Failed to parse server response: $e');
               }
             }
-          } catch (e) {
+          },
+          onError: (error) {
             if (!completer.isCompleted) {
-              completer.completeError('Failed to parse server response: $e');
+              completer.completeError('WebSocket error: $error');
             }
-          }
-        },
-        onError: (error) {
-          if (!completer.isCompleted) {
-            completer.completeError('WebSocket error: $error');
-          }
-          _isConnected = false;
-        },
-        onDone: () {
-          if (!completer.isCompleted) {
-            completer.completeError('WebSocket connection closed');
-          }
-          _isConnected = false;
-        },
-      );
+            _isConnected = false;
+          },
+          onDone: () {
+            if (!completer.isCompleted) {
+              completer.completeError('WebSocket connection closed');
+            }
+            _isConnected = false;
+          },
+        );
 
-      await completer.future;
+        await completer.future;
+        log.info('Successfully connected to WebSocket server');
+        return; // Exit the retry loop on success
+      } catch (e) {
+        _isConnected = false;
+        retryCount++;
 
-      log.info('Connected to WebSocket server');
-    } catch (e) {
-      _isConnected = false;
-      log.severe('Failed to connect to WebSocket server: $e');
-      throw Exception('Failed to connect to WebSocket server: $e');
+        if (retryCount >= maxRetries) {
+          log.severe(
+              'Failed to connect to WebSocket server after $maxRetries attempts: $e');
+          throw Exception(
+              'Failed to connect to WebSocket server after $maxRetries attempts: $e');
+        } else {
+          log.warning('Connection attempt $retryCount failed, retrying...');
+        }
+      }
     }
   }
 

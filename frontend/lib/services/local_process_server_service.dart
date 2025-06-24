@@ -97,7 +97,7 @@ class LocalProcessServerService {
             final outFile = File(filePath);
             await outFile.parent.create(recursive: true);
             await outFile.writeAsBytes(fileData);
-            log.info('Extracted: ${file.name}');
+            //log.info('Extracted: ${file.name}');
             onProgress?.call('Extraindo $index/$totalFiles...');
           }
         }

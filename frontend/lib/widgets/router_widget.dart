@@ -30,68 +30,54 @@ class _RouterWidgetState extends State<RouterWidget> {
   final FocusNode _focusNode = FocusNode();
   String? _loadingStatus;
   bool _isError = false;
+  bool _isInitialized = false;
+  String? _initializationStatus;
+  String? _error;
 
   Future<void> _initializeProcess() async {
-    if (_isReconnecting) return;
-
     try {
-      setState(() {
-        _isReconnecting = true;
-        _loadingStatus = 'Iniciando serviço local...';
-        _isError = false;
-      });
-
-      // First, ensure any existing process is stopped
+      // First, ensure the process is stopped
       await LocalProcessServerService.stopProcess();
-      await OpenCVService.disconnect();
 
-      // Wait a moment before restarting
-      await Future.delayed(const Duration(seconds: 1));
-
-      setState(() {
-        _loadingStatus = 'Inicializando serviço local...';
-      });
-
-      // Start the local process
-      await LocalProcessServerService.initialize(onProgress: (msg) {
-        if (mounted) {
+      // Initialize and start the process
+      await LocalProcessServerService.initialize(
+        onProgress: (message) {
           setState(() {
-            _loadingStatus = msg;
+            _initializationStatus = message;
           });
-        }
-      });
+        },
+      );
+
       await LocalProcessServerService.startProcess();
 
-      // Wait a moment for the process to be fully ready
+      // Wait a bit for the process to fully start
       await Future.delayed(const Duration(seconds: 2));
 
-      setState(() {
-        _loadingStatus = 'Conectando ao serviço local...';
-      });
-
-      // Connect to the WebSocket
-      await OpenCVService.connect();
+      // Try to connect with retries
+      await OpenCVService.connect(maxRetries: 5);
 
       setState(() {
+        _isInitialized = true;
+        _initializationStatus = 'Inicialização concluída';
+        _error = null;
         isProcessRunning = true;
-        _isReconnecting = false;
-        _loadingStatus = null;
       });
     } catch (e) {
       log.severe('Error initializing process: $e');
       setState(() {
-        isProcessRunning = false;
-        _isReconnecting = false;
-        _isError = true;
-        _loadingStatus = 'Erro ao inicializar o serviço:\n${e.toString()}';
+        _error = e.toString();
+        _initializationStatus = 'Erro na inicialização';
       });
 
       // Schedule a retry after a delay
-      Future.delayed(const Duration(seconds: 5), () {
-        if (!isProcessRunning && mounted && !_isError) {
-          _initializeProcess();
-        }
-      });
+      if (!_isInitialized) {
+        Future.delayed(const Duration(seconds: 5), () {
+          if (mounted && !_isInitialized) {
+            log.info('Process is down, attempting to restart...');
+            _initializeProcess();
+          }
+        });
+      }
     }
   }
 
@@ -176,8 +162,8 @@ class _RouterWidgetState extends State<RouterWidget> {
   Widget build(BuildContext context) {
     if (loading) {
       return SplashPage(
-        loadingStatus: _loadingStatus,
-        isError: _isError,
+        loadingStatus: _initializationStatus,
+        isError: _error != null,
       );
     }
 
@@ -219,10 +205,10 @@ class _RouterWidgetState extends State<RouterWidget> {
                               ),
                             ),
                           ],
-                          if (_loadingStatus != null) ...[
+                          if (_initializationStatus != null) ...[
                             const SizedBox(height: 16),
                             Text(
-                              _loadingStatus!,
+                              _initializationStatus!,
                               style: const TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey,
