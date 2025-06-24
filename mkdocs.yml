@@ -29,19 +29,21 @@ nav:
   - Início: index.md
   - Cenário Atual: cenario-atual.md
   - Documentação do Projeto:
-    - Solução Proposta: solucao-proposta.md
-    - Estratégias: estrategias.md
-    - Engenharia de Requisitos: engenharia-requisitos.md
-    - Cronograma: cronograma.md
-    - Interação Cliente-Equipe: interacao-cliente.md
-    - DoR e DoD: DoR_DoD.md
-    - Backlog do Produto: backlog.md
-    - Requisitos: requisitos.md
+      - Solução Proposta: solucao-proposta.md
+      - Estratégias: estrategias.md
+      - Engenharia de Requisitos: engenharia-requisitos.md
+      - Cronograma: cronograma.md
+      - Interação Cliente-Equipe: interacao-cliente.md
+      - DoR e DoD: DoR_DoD.md
+      - Backlog do Produto: backlog.md
+      - Requisitos: requisitos.md
   - Lições Aprendidas: licoes-aprendidas.md
   - Ata de reuniões: gravacoes.md
-  - Entregas: entregas.md 
+  - Entregas: entregas.md
 
 markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.inlinehilite
@@ -51,6 +53,12 @@ markdown_extensions:
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - pymdownx.tabbed
   - admonition
+  - tables
   - footnotes
   - attr_list
   - md_in_html
+  
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML
+
+

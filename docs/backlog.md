@@ -82,37 +82,379 @@ US22 - Como usuário, quero fazer backup dos meus dados, para garantir a seguran
 
 ## Priorização do Backlog Geral
 
-A priorização foi realizada utilizando a técnica MoSCoW, que organiza as funcionalidades em quatro categorias:
+A priorização foi realizada utilizando as técnicas **Weighted Shortest Job First (WSJF)** em conjunto com o método MoSCoW, de modo a definir quais tarefas realizar primeiro dentre as definidas como essenciais no MVP.
+
+A priorização MoSCoW organiza as funcionalidades em quatro categorias:
 
 - Must have: Funcionalidades essenciais para o funcionamento do produto
 - Should have: Funcionalidades importantes, porém que podem ser implementadas após as essenciais
 - Could have: Funcionalidades desejáveis, que agregam valor, mas não são prioritárias
 - Won't have: Funcionalidades que não serão implementadas inicialmente
 
-| ID   | Descrição                      | Prioridade  | Horas estimadas | Requisito Relacionado | Épico |
-| ---- | ------------------------------ | ----------- | --------------- | --------------------- | ----- |
-| US01 | Processar Imagens de Gabaritos | Must have   | 40h             | RF01                  | EP01  |
-| US02 | Correção Automática            | Must have   | 8h              | RF02, RF04, RF05      | EP01  |
-| US03 | Validação de Processamento     | Must have   | 4h              | RF02                  | EP01  |
-| US04 | Identificação de Matrícula     | Must have   | 10h             | RF03                  | EP01  |
-| US05 | Relatórios Individuais         | Must have   | 8h              | RF10                  | EP02  |
-| US11 | Autenticação e Perfil          | Must have   | 4h              | RF16                  | EP03  |
-| US14 | Associação Escola/Conta        | Must have   | 2h              | RF17                  | EP03  |
-| US17 | Criação de Templates           | Must have   | 12h             | RF12                  | EP04  |
-| US18 | Gerenciamento de Templates     | Must have   | 6h              | RF12, RF13            | EP04  |
-| US20 | Definição de Campos            | Must have   | 4h              | RF13                  | EP04  |
-| US06 | Análise Comparativa            | Should have | 12h             | RF07, RF08            | EP02  |
-| US12 | Sistema de Créditos            | Should have | 6h              | RF20                  | EP03  |
-| US15 | Pagamentos Stripe              | Should have | 10h             | RF18                  | EP03  |
-| US16 | Visualização de Créditos       | Should have | 4h              | RF23                  | EP03  |
-| US09 | Salvamento de Relatórios       | Should have | 4h              | RF09                  | EP02  |
-| US19 | Personalização de Layout       | Should have | 12h             | RF13                  | EP04  |
-| US21 | Exportação de Dados            | Should have | 4h              | RF14                  | EP05  |
-| US22 | Backup de Dados                | Should have | 8h              | RF14                  | EP05  |
-| US07 | Estatísticas por Questão       | Could have  | 16h             | RF06                  | EP02  |
-| US08 | Histórico de Desempenho        | Could have  | 12h             | RF06                  | EP02  |
-| US10 | Exportação PDF Geral           | Could have  | 4h              | RF15                  | EP02  |
-| US13 | Gestão de Acesso               | Could have  | 12h             | RF16                  | EP03  |
+O objetivo do WSJF é maximizar o valor econômico entregue em um período de tempo. A premissa é simples: se tivermos duas tarefas de valor igual, devemos fazer a mais curta primeiro para obter o retorno do investimento mais cedo.
+
+A fórmula para calcular o WSJF é dada por:
+
+$$
+WSJF = \frac{\text{Custo do Atraso (Cost of Delay)}}{\text{Tamanho do Trabalho (Job Size)}}
+$$
+
+Detalhando os componentes presentes na fórmula, temos:
+
+1. Custo do Atraso (Cost of Delay):
+    - Representa o dinheiro ou valor perdido, semana após semana que não é entregue uma funcionalidade.
+    - É definido pela soma de 3 fatores:
+        - Valor para o Usuário e Negócio
+        - Criticidade do Tempo
+        - Redução de Risco ou Habilitação de Oportunidade
+2. Tamanho do Trabalho (Job Size)
+    - Esse componente representa o esforço necessário para implementar uma funcionalidade, sendo definido pelas horas estimadas.
+
+Para a aplicação no projeto, será considerada a escala de Fibonacci para o sistema de pontuação na fórmula, uma prática padrão na metodologia SAFe.
+
+Para cada cada História de Usuário (US) serão pontuados “Valor”, “Criticidade” e “RR|OE”, e no final a soma dos 3 irá compor o “CoD” (Cost of Delay).
+
+As horas estimadas podem ser mapeadas para a sequência de Fibonacci da seguinte forma:
+
+- 1-4 horas → **3**
+- 5-8 horas → **5**
+- 9-12 horas → **8**
+- 13-16 horas → **13**
+- 20 horas+ → **20**
+
+Por fim, dividiremos o CoD pelo Tamanho para obter a pontuação WSJF e ranquear as funcionalidades.
+
+Legenda para a tabela:
+
+- U-BV: Valor de Negócio do Usuário (User-Business Value)
+- TC: Criticidade Temporal (Time Criticality)
+- RR|OE: Redução de Risco | Habilitação de Oportunidade (Risk Reduction | Opportunity Enablement)
+- CoD: Custo do Atraso (Cost of Delay)
+- JS: Tamanho do Trabalho (Job Size)
+
+<table style="width:100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">ID</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Prioridade MoSCoW</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Descrição</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">U-BV</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">TC</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">RR|OE</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">CoD</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">JS</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">Pontuação WSJF</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">Rank WSJF</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Horas estimadas</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Requisito Relacionado</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Épico</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US02</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Enviar gabarito correto e comparar</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">53</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">10.6</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">8h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF02, RF04, RF05</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US11</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Fazer login com conta Google e gerenciar perfil</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">29</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">9.67</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF16</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Associar escola à conta</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">26</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8.67</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">2h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF17</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US05</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerar relatórios individuais dos alunos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">41</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8.2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">4</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">8h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF10</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US03</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Validar processamento dos gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">21</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">7</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF02</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US04</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Identificar matrícula do aluno no gabarito</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">46</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5.75</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">6</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">10h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF03</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US20</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Definir número de questões e campos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">4.33</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">7</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US12</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerenciar sistema de créditos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">18</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.6</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">6h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF20</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US21</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Exportar dados em diferentes formatos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">10</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.33</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">9</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP05</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US06</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Comparar desempenho entre alunos e grupos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">26</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.25</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">10</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF07, RF08</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US17</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Criar e personalizar templates de gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">26</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.25</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">11</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF12</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US01</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Processar Imagens de Gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">60</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">12</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">40h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF01</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US10</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Exportar relatórios gerais em PDF</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">9</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF15</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US22</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Fazer backup dos dados</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">15</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">8h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP05</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US18</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerenciar templates de gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2.6</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">15</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">6h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF12, RF13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US15</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Realizar pagamentos via Stripe</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">16</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">16</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">10h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF18</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US08</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Acompanhar evolução do desempenho</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">15</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1.88</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">17</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF06</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US19</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Personalizar layout dos gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1.63</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">18</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US07</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Visualizar estatísticas por questão</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">16</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1.23</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">19</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">16h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF06</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerenciar diferentes níveis de acesso</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">7</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">0.88</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF16</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+  </tbody>
+</table>
+
+Com o rankeamento realizado é possível selecionar as funcionalidades com maior valor de negócio para serem implementadas primeiro no MVP.
 
 ## MVP
 
