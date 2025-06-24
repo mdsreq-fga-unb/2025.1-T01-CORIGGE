@@ -20,6 +20,8 @@ migrate_working_dir/
 main_processing_computer_local
 main_processing_computer_local.spec
 
+.env
+
 
 # Backend server related
 /backend/servidor/dist/
