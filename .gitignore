@@ -28,6 +28,9 @@ main_processing_computer_local.spec
 
 # frontend related
 /frontend/build/
+/frontend/assets/lib/darwin/
+/frontend/assets/lib/linux/
+/frontend/assets/lib/windows/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
