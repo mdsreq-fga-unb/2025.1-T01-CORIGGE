@@ -85,7 +85,7 @@ Estes três componentes formam a base para as Histórias de Usuário. Por sua ve
 
 A seguir, demonstraremos este processo em prática, detalhando as Histórias de Usuário e os cenários BDD para as funcionalidades priorizadas, garantindo assim que a visão estratégica do PBB se transforme em funcionalidades precisas e de alto valor.
 
-https://docs.google.com/document/d/19XinDfzDs0-kPgJbNHZBzaNBkR8u4V5YjolIq0tVLD0/edit?usp=sharing
+[Documento BDD](https://docs.google.com/document/d/19XinDfzDs0-kPgJbNHZBzaNBkR8u4V5YjolIq0tVLD0/edit?usp=sharing) 
 
 
 ### User Story Mapping (USM)
