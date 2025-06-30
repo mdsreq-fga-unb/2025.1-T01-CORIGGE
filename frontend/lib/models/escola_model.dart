@@ -1,8 +1,5 @@
-
-
-
 class EscolaModel {
-  final String id;
+  final int id;
   final String nome;
 
   EscolaModel({required this.id, required this.nome});

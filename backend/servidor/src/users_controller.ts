@@ -50,8 +50,7 @@ async function createUser(req: Request, res: Response): Promise<Response | void>
 
     const user = await SupabaseWrapper.get().from('users').insert({
         email: req.body.email,
-        name: req.body.name,
-        phone_number: req.body.phone_number,
+        nome_completo: req.body.name,
     }).select().single();
 
     if (user.error) {

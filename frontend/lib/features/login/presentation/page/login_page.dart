@@ -215,6 +215,10 @@ class LoginPage extends StatelessWidget {
         var result = await AuthService.signInWithGoogle();
 
         result.fold((l) {
+          if (l == 'User not found') {
+            context.go('/registro');
+            return;
+          }
           Utils.showTopSnackBar(context, "Erro ao fazer login: $l",
               color: kError);
         }, (r) {

@@ -13,6 +13,7 @@ import { UsersController } from './users_controller';
 import logger from './logger';
 import { environment, SUPABASE_URL } from './environment';
 import { EndpointController, RequestType } from './interfaces';
+import { EscolasController } from './escolas_controller';
 
 
 dotenv.config();
@@ -22,7 +23,8 @@ SupabaseWrapper.init();
 const router = express.Router();
 
 const controllers: EndpointController[] = [
-    UsersController
+    UsersController,
+    EscolasController
 ];
 
 controllers.forEach(controller => {

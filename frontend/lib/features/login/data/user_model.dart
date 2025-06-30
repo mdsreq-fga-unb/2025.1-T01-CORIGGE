@@ -3,14 +3,14 @@ class UserModel {
   String? name;
   String email;
   String? phoneNumber;
-  String? schoolId;
+  int? idEscola;
 
   UserModel({
     this.id,
     this.name,
     required this.email,
     this.phoneNumber,
-    this.schoolId,
+    this.idEscola,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -19,7 +19,7 @@ class UserModel {
       name: json['name'] as String,
       email: json['email'] as String,
       phoneNumber: json['phone_number'] as String?,
-      schoolId: json['id_escola'] as String?,
+      idEscola: json['id_escola'] as int?,
     );
   }
 
@@ -30,14 +30,14 @@ class UserModel {
         'name': name,
         'email': email,
         if (phoneNumber != null) 'phone_number': phoneNumber,
-        if (schoolId != null) 'id_escola': schoolId,
+        if (idEscola != null) 'id_escola': idEscola,
       };
     }
     return {
       'name': name,
       'email': email,
       if (phoneNumber != null) 'phone_number': phoneNumber,
-      if (schoolId != null) 'id_escola': schoolId,
+      if (idEscola != null) 'id_escola': idEscola,
     };
   }
 
@@ -46,14 +46,14 @@ class UserModel {
     String? name,
     String? email,
     String? phone,
-    String? schoolId,
+    int? idEscola,
   }) {
     return UserModel(
       id: id ?? this.id,
       name: name ?? this.name,
       email: email ?? this.email,
       phoneNumber: phone ?? this.phoneNumber,
-      schoolId: schoolId ?? this.schoolId,
+      idEscola: idEscola ?? this.idEscola,
     );
   }
 }

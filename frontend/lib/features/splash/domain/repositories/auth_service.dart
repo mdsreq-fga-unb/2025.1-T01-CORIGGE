@@ -10,6 +10,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:path/path.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:logging/logging.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -221,17 +222,14 @@ class AuthService {
 
       return await userResult.fold(
         (error) async {
-// insert user in database
 
-          await databaseInsertUser(UserModel(
-            name: response.user!.id,
-            email: response.user!.email!,
-          ));
+          // send to register page
+          if (error.contains("not found")) {
+            // send to register page
+            return Left('User not found');
+          }
 
-          return Right(UserModel(
-            name: response.user!.id,
-            email: response.user!.email!,
-          ));
+          return Left('Error signing in: $error');
         },
         (user) {
           return Right(user);
