@@ -9,9 +9,9 @@ enum EnvironmentType { DEV, PROD }
 final log = Logger("Routes");
 
 class Environment {
-  static String supabaseUrl = 'https://qbdqyvgfhsjvpuslkdgh.supabase.co';
+  static String supabaseUrl = 'https://ryhkypmurkztpzlwkmaq.supabase.co';
   static String supabaseAnonKey =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFiZHF5dmdmaHNqdnB1c2xrZGdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA1MzU1ODIsImV4cCI6MjA2NjExMTU4Mn0.IQmGZDpEokX_1qqpOl3OUAvBD3-N2JQIdLwT2_6Xatk';
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5aGt5cG11cmt6dHB6bHdrbWFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5NDQ5MzIsImV4cCI6MjA2NjUyMDkzMn0.lXz6ZHn7ehdBdGsF0LzeyjSEx9vlH5LWN7-PhzvQdOk';
   static String backendAPIUrl = 'http://localhost:4512';
   static EnvironmentType currentEnvironmentType = EnvironmentType.PROD;
   static bool shouldHandleLocalServer = true;
