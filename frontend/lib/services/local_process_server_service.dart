@@ -9,6 +9,7 @@ import 'package:async/async.dart';
 import 'package:archive/archive.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
+import 'package:corigge/environment.dart';
 
 var log = Logger('LocalProcessServerService');
 
@@ -54,6 +55,12 @@ class LocalProcessServerService {
 
   /// Initialize the service by unpacking the binary
   static Future<void> initialize({void Function(String)? onProgress}) async {
+    if (!Environment.shouldHandleLocalServer) {
+      log.info(
+          'Skipping OpenCV service initialization as shouldHandleLocalServer is false');
+      return;
+    }
+
     _ensureShutdownHandler();
     log.info('Initializing OpenCV service...');
     if (_executablePath != null) {
@@ -135,6 +142,12 @@ class LocalProcessServerService {
 
   /// Start the OpenCV process
   static Future<void> startProcess() async {
+    if (!Environment.shouldHandleLocalServer) {
+      log.info(
+          'Skipping OpenCV process start as shouldHandleLocalServer is false');
+      return;
+    }
+
     _ensureShutdownHandler();
     log.info('Starting OpenCV process...');
 

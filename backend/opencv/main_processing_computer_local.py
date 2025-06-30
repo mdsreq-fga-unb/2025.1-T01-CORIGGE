@@ -20,6 +20,11 @@ import psutil
 import os
 import sys
 import logging
+import time
+from dotenv import load_dotenv
+
+# Load environment variables from .env file if it exists
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -53,8 +58,12 @@ CHUNK_SIZE = 1024 * 200
 # Local server configuration
 LOCAL_CONFIG = {
     'host': 'localhost',
-    'port': 8765
+    'port': 8765,
+    'inactivity_timeout': 30  # 30 seconds timeout
 }
+
+# Track last connection time
+last_connection_time = time.time()
 
 class InternalClientMessageType:
     FILE_RECEIVED = "fileReceived"
@@ -355,10 +364,30 @@ async def send_progress(websocket, message, task_id):
         'message': message
     }}))
 
+async def check_inactivity():
+    """
+    Checks for server inactivity and shuts down if no connections for specified timeout.
+    Only runs timeout check if not in debug mode.
+    """
+    Utils.log_info(f"🔍 Checking for inactivity every {CHECK_INTERVAL} seconds")
+    debug_mode = os.getenv('DEBUG_MODE', '').lower() in ('true', '1', 'yes')
+    
+    if debug_mode:
+        Utils.log_info("🔧 Debug mode enabled - inactivity timeout disabled")
+        return
+        
+    while True:
+        await asyncio.sleep(5)  # Check every 5 seconds
+        if not connected_clients and time.time() - last_connection_time > LOCAL_CONFIG['inactivity_timeout']:
+            Utils.log_info(f"⚠️ No connections for {LOCAL_CONFIG['inactivity_timeout']} seconds. Shutting down server...")
+            os._exit(0)
+
 async def handle_client(websocket, path=None):
     """Handle incoming WebSocket connections from desktop clients."""
+    global last_connection_time
     client_id = f"client_{id(websocket)}"
     connected_clients[client_id] = websocket
+    last_connection_time = time.time()
     
     Utils.log_info(f"🔗 Client connected: {client_id} from {websocket.remote_address}")
     
@@ -500,9 +529,13 @@ async def main():
     # Start memory monitoring task
     asyncio.create_task(monitor_memory())
     
+    # Start inactivity check task
+    asyncio.create_task(check_inactivity())
+    
     Utils.log_info(f"🚀 Starting Local Processing Server")
     Utils.log_info(f"🏠 Host: {LOCAL_CONFIG['host']}")
     Utils.log_info(f"🔌 Port: {LOCAL_CONFIG['port']}")
+    Utils.log_info(f"⏰ Inactivity Timeout: {LOCAL_CONFIG['inactivity_timeout']} seconds")
     Utils.log_info(f"📖 Version: {Utils.get_version()}")
     Utils.log_info(f"🔧 Debug Mode: {'Enabled' if Utils.is_debug() else 'Disabled'}")
     

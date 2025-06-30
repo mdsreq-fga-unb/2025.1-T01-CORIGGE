@@ -28,6 +28,7 @@ const kOnSecondaryDark = Colors.white;
 const kOnBackgroundDark = Colors.white;
 const kOnSurfaceDark = Colors.white;
 const kOnErrorDark = Colors.black;
+const kSuccess = Color(0xFF00FF00);
 
 ThemeData darkTheme() {
   return ThemeData(

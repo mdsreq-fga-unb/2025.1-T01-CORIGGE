@@ -5,6 +5,7 @@ import 'package:corigge/widgets/error_handling_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -15,7 +16,6 @@ import 'features/login/presentation/page/login_page.dart';
 import 'widgets/router_widget.dart';
 import 'services/local_process_server_service.dart';
 import 'services/opencv_service.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 late SharedPreferences sp;
 
@@ -30,8 +30,8 @@ class AppWindowListener extends WindowListener {
 }
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+  WidgetsFlutterBinding.ensureInitialized();
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
@@ -95,11 +95,12 @@ void main() async {
       backgroundColor: kBackground,
       body: SafeArea(
         child: Center(
-            child: ErrorHandlingPage(
-          errorText: errorStr,
-          showHomeButton: true,
-          child: Container(),
-        )),
+          child: ErrorHandlingPage(
+            errorText: errorStr,
+            showHomeButton: true,
+            child: Container(),
+          ),
+        ),
       ),
     );
   };
@@ -116,34 +117,38 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   GoRouter router = GoRouter(
-      errorPageBuilder: (context, state) => NoTransitionPage(
-              /* transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+    errorPageBuilder: (context, state) => NoTransitionPage(
+      /* transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               FadeTransition(opacity: animation, child: child), */
-              child: Scaffold(
-            backgroundColor: kBackground,
-            body: SafeArea(
-              child: Center(
-                  child: ErrorHandlingPage(
-                errorText: "Url inválida!",
-                child: Container(),
-              )),
+      child: Scaffold(
+        backgroundColor: kBackground,
+        body: SafeArea(
+          child: Center(
+            child: ErrorHandlingPage(
+              errorText: "Url inválida!",
+              child: Container(),
             ),
-          )),
-      routes: Routes.routes.entries.map((e) {
-        return GoRoute(
-          path: e.key,
-          pageBuilder: (context, state) {
-            SystemChrome.setApplicationSwitcherDescription(
-                ApplicationSwitcherDescription(
+          ),
+        ),
+      ),
+    ),
+    routes: Routes.routes.entries.map((e) {
+      return GoRoute(
+        path: e.key,
+        pageBuilder: (context, state) {
+          SystemChrome.setApplicationSwitcherDescription(
+            ApplicationSwitcherDescription(
               label: 'Corigge', //- $routedynamic,
               primaryColor: Theme.of(context).primaryColor.value,
-            ));
-            return NoTransitionPage(
-              child: RouterWidget(route: e.key, state: state),
-            );
-          },
-        );
-      }).toList());
+            ),
+          );
+          return NoTransitionPage(
+            child: RouterWidget(route: e.key, state: state),
+          );
+        },
+      );
+    }).toList(),
+  );
 
   @override
   Widget build(BuildContext context) {

@@ -1,0 +1,53 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Windows (Debug)",
+            "request": "launch",
+            "type": "dart",
+            "program": "frontend/lib/main.dart",
+            "args": [
+                "--dart-define=CORIGGE_DEBUG=true"
+            ]
+        },
+        {
+            "name": "macOS (Debug)",
+            "request": "launch",
+            "type": "dart",
+            "program": "frontend/lib/main.dart",
+            "args": [
+                "--dart-define=CORIGGE_DEBUG=true"
+            ]
+        },
+        {
+            "name": "Linux (Debug)",
+            "request": "launch",
+            "type": "dart",
+            "program": "frontend/lib/main.dart",
+            "args": [
+                "--dart-define=CORIGGE_DEBUG=true"
+            ]
+        },
+        {
+            "name": "Windows (Release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "frontend/lib/main.dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "macOS (Release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "frontend/lib/main.dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Linux (Release)",
+            "request": "launch",
+            "type": "dart",
+            "program": "frontend/lib/main.dart",
+            "flutterMode": "release"
+        }
+    ]
+}

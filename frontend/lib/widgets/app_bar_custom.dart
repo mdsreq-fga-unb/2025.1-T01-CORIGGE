@@ -1,3 +1,4 @@
+import 'package:corigge/cache/shared_preferences_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -91,21 +92,22 @@ class AppBarCustom {
             style: TextStyle(color: Colors.brown[800], fontSize: 16),
           ),
         ),
-        Builder(
-          builder: (context) => TextButton.icon(
-            onPressed: () async {
-              await AuthService.logout();
-              if (context.mounted) {
-                context.go('/login');
-              }
-            },
-            icon: Icon(Icons.logout, color: Colors.brown[800], size: 20),
-            label: Text(
-              'Sair',
-              style: TextStyle(color: Colors.brown[800], fontSize: 16),
+        if (SharedPreferencesHelper.currentUser != null)
+          Builder(
+            builder: (context) => TextButton.icon(
+              onPressed: () async {
+                await AuthService.logout();
+                if (context.mounted) {
+                  context.go('/login');
+                }
+              },
+              icon: Icon(Icons.logout, color: Colors.brown[800], size: 20),
+              label: Text(
+                'Sair',
+                style: TextStyle(color: Colors.brown[800], fontSize: 16),
+              ),
             ),
           ),
-        ),
         const SizedBox(width: 16),
       ],
     );

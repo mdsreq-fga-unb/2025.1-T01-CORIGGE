@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
 
 import 'package:crypto/crypto.dart';
 import 'package:dartz/dartz.dart';
@@ -14,6 +15,7 @@ import 'package:logging/logging.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../../cache/shared_preferences_helper.dart';
+import '../../../../environment.dart';
 import '../../../../services/local_process_server_service.dart';
 import '../../../login/data/user_model.dart';
 
@@ -21,7 +23,10 @@ var log = Logger("AuthService");
 
 class AuthService {
   static const List<String> _scopes = ['openid', 'email', 'profile'];
-  static String get _clientId => dotenv.env['GOOGLE_CLIENT_ID'] ?? '';
+  static String get _clientId {
+    return dotenv.env['GOOGLE_CLIENT_ID'] ?? '';
+  }
+
   static String get _clientSecret => dotenv.env['GOOGLE_CLIENT_SECRET'] ?? '';
   static const String _redirectUri = 'http://localhost:3500';
 
@@ -53,22 +58,31 @@ class AuthService {
   static Future<Either<String, UserModel>> databaseSearchUser(
       String email) async {
     try {
-      final userResponse = await Supabase.instance.client
-          .from('users')
-          .select('*')
-          .eq('email', email)
-          .limit(1);
+      final response =
+          await Environment.dio.get('/users/exists', queryParameters: {
+        'email': email,
+      });
 
-      if (userResponse.isEmpty) {
+      if (response.statusCode == 404) {
         return Left("[$email] not found");
       }
 
-      final userMap = userResponse[0];
+      if (response.statusCode != 200) {
+        throw Exception('Failed to search user: ${response.statusMessage}');
+      }
+
+      final userMap = response.data;
       final user = UserModel.fromJson(userMap);
 
       await SharedPreferencesHelper.saveOrUpdateUserData(user);
 
       return Right(user);
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 404) {
+        return Left("[$email] not found");
+      }
+      log.severe('Error searching user in database', e);
+      return Left('Error searching user: ${e.message}');
     } catch (e, stackTrace) {
       log.severe('Error searching user in database', e, stackTrace);
       return Left('Error searching user: $e');
@@ -76,9 +90,21 @@ class AuthService {
   }
 
   static Future<void> databaseInsertUser(UserModel user) async {
-    await Supabase.instance.client
-        .from('users')
-        .insert(user.toJson(includeId: false));
+    try {
+      final response = await Environment.dio.post('/users/create', data: {
+        'email': user.email,
+        'name': user.name,
+        'phone_number':
+            user.phoneNumber ?? '', // Add phone number as required by backend
+      });
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to create user: ${response.statusMessage}');
+      }
+    } on DioException catch (e) {
+      log.severe('Error creating user in database', e);
+      throw Exception('Failed to create user: ${e.message}');
+    }
   }
 
   static Future<Map<String, dynamic>> _exchangeCodeForTokens(

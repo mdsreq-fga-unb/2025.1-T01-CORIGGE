@@ -6,6 +6,7 @@ import 'package:logging/logging.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'cache/shared_preferences_helper.dart';
+import 'features/register/presentation/pages/register_page.dart';
 import 'features/splash/domain/repositories/auth_service.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
 
@@ -82,6 +83,9 @@ class Routes {
     },
     '/home': (context, state) {
       return const HomePage();
+    },
+    '/registro': (context, state) {
+      return const RegisterPage();
     },
   };
 }

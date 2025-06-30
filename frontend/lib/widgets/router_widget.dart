@@ -10,6 +10,7 @@ import '../features/splash/presentation/pages/splash_page.dart';
 import '../routes.dart';
 import '../services/local_process_server_service.dart';
 import '../services/opencv_service.dart';
+import '../environment.dart';
 
 var log = Logger("RouterWidget");
 
@@ -23,19 +24,47 @@ class RouterWidget extends StatefulWidget {
 }
 
 class _RouterWidgetState extends State<RouterWidget> {
-  bool loading = true;
+  bool loading = false;
   bool isProcessRunning = false;
   Timer? _processCheckTimer;
   bool _isReconnecting = false;
   final FocusNode _focusNode = FocusNode();
-  String? _loadingStatus;
-  bool _isError = false;
   bool _isInitialized = false;
   String? _initializationStatus;
   String? _error;
 
   Future<void> _initializeProcess() async {
+    if (loading) return;
+
+    setState(() {
+      loading = true;
+    });
+
     try {
+      if (!Environment.shouldHandleLocalServer) {
+        // When not handling local server, just try to connect to WebSocket
+        try {
+          await OpenCVService.connect(maxRetries: 1);
+          log.info('Connected to WebSocket server');
+          setState(() {
+            _isInitialized = true;
+            loading = false;
+            _initializationStatus = 'Conectado ao servidor';
+            _error = null;
+            isProcessRunning = true;
+          });
+        } catch (e) {
+          log.warning('Could not connect to WebSocket server: $e');
+          setState(() {
+            _isInitialized = true;
+            _initializationStatus = 'Servidor não disponível';
+            _error = null;
+            isProcessRunning = false;
+          });
+        }
+        return;
+      }
+
       // First, ensure the process is stopped
       await LocalProcessServerService.stopProcess();
 

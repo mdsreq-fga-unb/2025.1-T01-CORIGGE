@@ -1,97 +1,89 @@
-import express, { Request, Response, NextFunction } from 'express';
-import cors from 'cors';
-import { createClient } from '@supabase/supabase-js';
-import { environment, validateEnvironment, PORT, SUPABASE_URL, SUPABASE_ANON_KEY, CORS_ORIGIN } from './environment';
+import { createClient } from '@supabase/supabase-js'
+import { SupabaseWrapper } from './supabase_wrapper'
+import expressws from "express-ws";
+
+import express, { Express, NextFunction, Request, Response } from 'express';
+import fileUpload from 'express-fileupload';
+
+import dotenv from "dotenv";
+import { Utils } from './utils';
+import bodyParser from 'body-parser';
+import cors from "cors";
+import { UsersController } from './users_controller';
 import logger from './logger';
+import { environment, SUPABASE_URL } from './environment';
+import { EndpointController, RequestType } from './interfaces';
 
-// Validate environment variables on startup
-validateEnvironment();
 
-// Initialize Express app
-const app = express();
+dotenv.config();
 
-// Initialize Supabase client
-const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+SupabaseWrapper.init();
 
-// Middleware
-app.use(cors({
-    origin: CORS_ORIGIN,
-    credentials: true
-}));
+const router = express.Router();
 
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true }));
+const controllers: EndpointController[] = [
+    UsersController
+];
 
-// Request logging middleware
-app.use((req: Request, res: Response, next: NextFunction) => {
-    logger.http(`${req.method} ${req.path} - IP: ${req.ip}`);
+controllers.forEach(controller => {
+    Object.keys(controller.routes).forEach(route_name => {
+        const route = controller.routes[route_name];
+        const method = route!.key;
+        const callback = route!.value;
+
+        switch (method) {
+            case RequestType.GET:
+                router.get(`/${controller.name}/${route_name}`, async (req: Request, res: Response) => {
+                    try {
+                        await callback(req, res);
+                    } catch (error) {
+                        res.status(500).json({ error: 'Internal server error' });
+                    }
+                });
+                break;
+            case RequestType.POST:
+                router.post(`/${controller.name}/${route_name}`, async (req: Request, res: Response) => {
+                    try {
+                        await callback(req, res);
+                    } catch (error) {
+                        res.status(500).json({ error: 'Internal server error' });
+                    }
+                });
+                break;
+            case RequestType.PUT:
+                router.put(`/${controller.name}/${route_name}`, async (req: Request, res: Response) => {
+                    try {
+                        await callback(req, res);
+                    } catch (error) {
+                        res.status(500).json({ error: 'Internal server error' });
+                    }
+                });
+                break;
+            default:
+                break;
+        }
+    });
+});
+
+const app: Express = express();
+
+expressws(app);
+
+app.use(fileUpload())
+app.use(bodyParser.json({ limit: 500 * 1024 * 1024, }));
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 });
 
-// Health check endpoint
-app.get('/health', (req: Request, res: Response) => {
-    logger.debug('Health check endpoint called');
-    res.status(200).json({
-        status: 'OK',
-        timestamp: new Date().toISOString(),
-        environment: environment.NODE_ENV,
-        supabaseConnected: !!SUPABASE_URL && !!SUPABASE_ANON_KEY
-    });
-});
 
-// API routes
-app.get('/api', (req: Request, res: Response) => {
-    logger.debug('API root endpoint called');
-    res.json({
-        message: 'Welcome to the API',
-        version: '1.0.0',
-        endpoints: {
-            health: '/health',
-            api: '/api'
-        }
-    });
-});
+app.use(router);
 
-// Example Supabase endpoint - you can modify this as needed
-app.get('/api/test-supabase', async (req: Request, res: Response): Promise<void> => {
-    try {
-        logger.info('Testing Supabase connection');
-        // This is just a test to verify Supabase connection
-        // You can replace this with actual database operations
-        const { data, error } = await supabase.auth.getSession();
 
-        if (error) {
-            logger.error('Supabase test error:', { error: error.message });
-            res.status(500).json({
-                error: 'Supabase connection test failed',
-                details: error.message
-            });
-            return;
-        }
 
-        logger.info('Supabase connection test successful');
-        res.json({
-            message: 'Supabase connection successful',
-            connected: true
-        });
-    } catch (error) {
-        logger.error('Supabase test error:', { error });
-        res.status(500).json({
-            error: 'Failed to test Supabase connection',
-            details: error instanceof Error ? error.message : 'Unknown error'
-        });
-    }
-});
 
-// 404 handler
-app.use('*', (req: Request, res: Response) => {
-    logger.warn(`Route not found: ${req.method} ${req.originalUrl}`);
-    res.status(404).json({
-        error: 'Route not found',
-        path: req.originalUrl,
-        method: req.method
-    });
-});
+
 
 // Global error handler
 app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
@@ -108,6 +100,8 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
         ...(environment.NODE_ENV === 'development' && { stack: error.stack })
     });
 });
+
+const PORT = process.env.PORT ?? 5423;
 
 // Start server
 const server = app.listen(PORT, () => {
@@ -135,4 +129,4 @@ process.on('SIGINT', () => {
     });
 });
 
-export { app, supabase }; 
+export { app }; 

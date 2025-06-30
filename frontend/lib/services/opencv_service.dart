@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:logging/logging.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:corigge/environment.dart';
 
 final log = Logger('OpenCVService');
 
@@ -68,6 +69,76 @@ class OpenCVService {
     if (_isConnected) {
       log.info('Already connected to WebSocket server');
       return;
+    }
+
+    if (!Environment.shouldHandleLocalServer) {
+      // When not handling local server, just try to connect once without retries
+      try {
+        log.info('Attempting to connect to WebSocket server (no retries)');
+        _channel = WebSocketChannel.connect(Uri.parse(_wsUrl));
+
+        // Wait for connection confirmation
+        final completer = Completer<void>();
+
+        // Add timeout for connection
+        Timer(const Duration(seconds: 5), () {
+          if (!completer.isCompleted) {
+            completer.completeError('Connection timeout');
+          }
+        });
+
+        // Create a broadcast stream to allow multiple listeners
+        final broadcastStream = _channel!.stream.asBroadcastStream();
+
+        // Set up the message handler
+        _setupMessageHandler(broadcastStream);
+
+        // Listen for the initial connection message
+        broadcastStream.listen(
+          (message) {
+            try {
+              final response = ServerResponse.fromJson(jsonDecode(message));
+
+              // The server sends a welcome message
+              if (!completer.isCompleted) {
+                if (response.data != null &&
+                    response.data!['message'] != null &&
+                    response.data!['message']
+                        .toString()
+                        .contains('Connected to local processing server')) {
+                  _isConnected = true;
+                  completer.complete();
+                }
+              }
+            } catch (e) {
+              if (!completer.isCompleted) {
+                completer.completeError('Failed to parse server response: $e');
+              }
+            }
+          },
+          onError: (error) {
+            if (!completer.isCompleted) {
+              completer.completeError('WebSocket error: $error');
+            }
+            _isConnected = false;
+          },
+          onDone: () {
+            if (!completer.isCompleted) {
+              completer.completeError('WebSocket connection closed');
+            }
+            _isConnected = false;
+          },
+        );
+
+        await completer.future;
+        log.info('Successfully connected to WebSocket server');
+        return;
+      } catch (e) {
+        _isConnected = false;
+        log.warning('Failed to connect to WebSocket server: $e');
+        // Don't throw when not handling local server, just log the error
+        return;
+      }
     }
 
     int retryCount = 0;
