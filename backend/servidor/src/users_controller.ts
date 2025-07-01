@@ -21,9 +21,14 @@ export const UsersController: EndpointController = {
 }
 
 async function checkUserExists(req: Request, res: Response): Promise<Response | void> {
-    logInfo("Checking user exists");
+    logInfo(`Checking user exists ${req.query.email}`);
 
-    const user = await SupabaseWrapper.get().from('users').select('*').eq('email', req.body.email);
+    if (!req.query.email) {
+        logError("Missing email");
+        return res.status(400).json({ error: "Missing email" });
+    }
+
+    const user = await SupabaseWrapper.get().from('users').select('*').eq('email', req.query.email);
 
     if (user.error) {
         logError("Error checking user exists", user.error);
@@ -31,8 +36,11 @@ async function checkUserExists(req: Request, res: Response): Promise<Response | 
     }
 
     if (user.data.length === 0) {
+        logInfo("User not found");
         return res.status(404).json({ error: "User not found" });
     }
+
+    logInfo("User found", user.data[0]);
 
     return res.status(200).json(user.data[0]);
 }
@@ -43,14 +51,16 @@ async function checkUserExists(req: Request, res: Response): Promise<Response | 
 async function createUser(req: Request, res: Response): Promise<Response | void> {
     logInfo("Creating user");
 
-    if (!req.body.email || !req.body.name || !req.body.phone_number) {
+    if (!req.body.email || !req.body.name || !req.body.phone_number || !req.body.id_escola) {
         logError("Missing required fields");
         return res.status(400).json({ error: "Missing required fields" });
     }
 
     const user = await SupabaseWrapper.get().from('users').insert({
         email: req.body.email,
-        nome_completo: req.body.name,
+        nome_completo: req.body.nome_completo,
+        phone_number: req.body.phone_number,
+        id_escola: req.body.id_escola,
     }).select().single();
 
     if (user.error) {

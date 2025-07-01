@@ -16,7 +16,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id_user'] as int,
-      name: json['name'] as String,
+      name: json['nome_completo'] as String,
       email: json['email'] as String,
       phoneNumber: json['phone_number'] as String?,
       idEscola: json['id_escola'] as int?,
@@ -27,14 +27,14 @@ class UserModel {
     if (includeId) {
       return {
         'id_user': id,
-        'name': name,
+        'nome_completo': name,
         'email': email,
         if (phoneNumber != null) 'phone_number': phoneNumber,
         if (idEscola != null) 'id_escola': idEscola,
       };
     }
     return {
-      'name': name,
+      'nome_completo': name,
       'email': email,
       if (phoneNumber != null) 'phone_number': phoneNumber,
       if (idEscola != null) 'id_escola': idEscola,

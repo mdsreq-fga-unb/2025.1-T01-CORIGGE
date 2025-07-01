@@ -131,6 +131,11 @@ class Utils {
     Color? color,
     Duration? duration,
   }) {
+    if (!context.mounted) {
+      print("Context not mounted, skipping snackbar");
+      return;
+    }
+
     final backgroundColor = kPrimary;
 
     Flushbar(

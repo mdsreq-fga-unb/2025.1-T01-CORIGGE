@@ -28,6 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isLoading = false;
   bool _isEmailValid = false;
   bool _isPhoneValid = false;
+  bool _isNameValid = false;
   List<EscolaModel> _escolas = [];
   bool _isLoadingEscolas = false;
   String? _errorMessageEscolas;
@@ -55,6 +56,13 @@ class _RegisterPageState extends State<RegisterPage> {
     super.initState();
     _emailController.addListener(_validateEmail);
     _phoneController.addListener(_validatePhone);
+    _nameController.addListener(_validateName);
+  }
+
+  void _validateName() {
+    setState(() {
+      _isNameValid = _nameController.text.trim().isNotEmpty;
+    });
   }
 
   void _validateEmail() {
@@ -70,6 +78,19 @@ class _RegisterPageState extends State<RegisterPage> {
       final phone = _phoneController.text;
       _isPhoneValid = phone.isNotEmpty && phone.length >= 14; // (99) 99999-9999
     });
+  }
+
+  String _getMissingFieldsText() {
+    List<String> missingFields = [];
+
+    if (!_isNameValid) missingFields.add('nome');
+    if (!_isEmailValid) missingFields.add('e-mail válido');
+    if (!_isPhoneValid) missingFields.add('telefone');
+    if (_selectedSchool == null) missingFields.add('escola');
+
+    if (missingFields.isEmpty) return '';
+
+    return 'Falta preencher: ${missingFields.join(', ')}';
   }
 
   @override
@@ -206,6 +227,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         children: [
                           TextFormField(
                             controller: _nameController,
+                            textCapitalization: TextCapitalization.words,
                             decoration: InputDecoration(
                               labelText: 'Nome Completo',
                               prefixIcon:
@@ -229,8 +251,8 @@ class _RegisterPageState extends State<RegisterPage> {
                               fillColor: Colors.grey[50],
                             ),
                             validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Por favor, insira seu nome';
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Por favor, insira seu nome completo';
                               }
                               return null;
                             },
@@ -320,10 +342,31 @@ class _RegisterPageState extends State<RegisterPage> {
                             items: _escolas,
                             selectedItem: _selectedSchool,
                             itemAsString: (escola) => escola.nome,
-                            onChanged: (escola) => _selectedSchool = escola,
+                            onChanged: (escola) {
+                              _selectedSchool = escola;
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
+                                setState(() {});
+                              });
+                            },
                             compareFn: (a, b) => a.id == b.id,
                           ),
-                          if (_isEmailValid && _isPhoneValid) ...[
+                          const SizedBox(height: 20),
+                          if (_getMissingFieldsText().isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: Text(
+                                _getMissingFieldsText(),
+                                style: TextStyle(
+                                  color: Colors.brown[800],
+                                  fontSize: 14,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          if (_isEmailValid &&
+                              _isPhoneValid &&
+                              _isNameValid &&
+                              _selectedSchool != null) ...[
                             const SizedBox(height: 30),
                             ElevatedButton(
                               onPressed: _isLoading ? null : _handleRegister,

@@ -94,9 +94,9 @@ class AuthService {
     try {
       final response = await Environment.dio.post('/users/create', data: {
         'email': user.email,
-        'name': user.name,
-        'phone_number':
-            user.phoneNumber ?? '', // Add phone number as required by backend
+        'nome_completo': user.name,
+        'phone_number': user.phoneNumber ?? '',
+        'id_escola': user.idEscola,
       });
 
       if (response.statusCode != 200) {
@@ -222,7 +222,6 @@ class AuthService {
 
       return await userResult.fold(
         (error) async {
-
           // send to register page
           if (error.contains("not found")) {
             // send to register page
