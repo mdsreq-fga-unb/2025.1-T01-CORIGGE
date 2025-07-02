@@ -285,16 +285,9 @@ class LocalProcessServerService {
       if (Platform.isMacOS &&
           e.toString().contains('Operation not permitted')) {
         log.severe(
-            '''Failed to start OpenCV process due to macOS security restrictions.
-Please ensure the app is properly signed with your development team ID.
-
-Technical details:
-$e
-$stackTrace''');
+            '''Failed to start OpenCV process due to macOS security restrictions.\nPlease ensure the app is properly signed with your development team ID.\n\nTechnical details:\n$e\n$stackTrace''');
         throw Exception(
-            '''Failed to start OpenCV process due to macOS security restrictions.
-Please ensure the app is properly signed with your development team ID.
-Error: $e''');
+            '''Failed to start OpenCV process due to macOS security restrictions.\nPlease ensure the app is properly signed with your development team ID.\nError: $e''');
       } else {
         log.severe('Failed to start OpenCV process: $e\n$stackTrace');
         throw Exception('Failed to start OpenCV process: $e');
@@ -322,7 +315,8 @@ Error: $e''');
         _isShuttingDown = false;
         log.info('Process reference cleared');
       }
-    } else {
+    }
+    else {
       log.info('No process to stop');
     }
   }
@@ -377,17 +371,70 @@ Error: $e''');
         log.info('Received callback with params: $params');
 
         // Send a response to close the browser window
+        final image = await rootBundle.load('assets/images/check_autenticacao.png');
+        final buffer = image.buffer;
+        var list = buffer.asUint8List(image.offsetInBytes, image.lengthInBytes);
+        final base64Image = base64Encode(list);
+
         request.response.headers.set('Content-Type', 'text/html');
+
+        // Auth confirmation screen
         request.response.write('''
           <!DOCTYPE html>
           <html>
+            <head>
+              <link rel="preconnect" href="https://fonts.googleapis.com">
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+              <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+              <style>
+                html, body {
+                  height: 100%;
+                  margin: 0;   
+                  padding: 0;  
+                  font-family: 'Roboto', sans-serif;
+                }
+                body{
+                  background-color: #FFF0EFEA;
+                  display: flex;
+                  justify-content: center; 
+                  align-items: center;
+                }
+                .container{
+                  background-color: white;
+                  width: 25%;
+                  height: 550px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  border-radius: 20px;
+                  text-align: center;
+                }
+                 .icone-sucesso{
+                  margin-top: 20px;
+                  max-width: 100px;
+                  margin-bottom: 20px;
+                }
+                h1 {
+                  font-weight: 700;
+                }
+                p {
+                  font-weight: 400;
+                }
+              </style>
+            </head>
+
             <body>
-              <h1>Authentication successful!</h1>
-              <p>You can close this window now.</p>
-              <script>window.close();</script>
+              <div class="container">
+                  <img class="icone-sucesso" src="data:image/png;base64,$base64Image" alt="Icone de Concluido com Sucesso">
+                  <h1>Autenticação Bem Sucedida!</h1>
+                  <p>Você pode fechar a página agora.</p>
+                  <script>window.close();</script>
+              </div>
             </body>
           </html>
         ''');
+
         await request.response.close();
 
         if (!_authCompleter!.isCompleted) {
