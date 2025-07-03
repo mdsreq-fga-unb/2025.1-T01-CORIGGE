@@ -39,8 +39,12 @@ nav:
       - Requisitos: requisitos.md
   - Lições Aprendidas: licoes-aprendidas.md
   - Ata de reuniões: gravacoes.md
-  - Entregas: entregas.md
-
+  - Entregas:
+      - Unidade 01: entregas/entrega01.md
+      - Unidade 02: entregas/entrega02.md
+      - Unidade 3:
+          - PBB: entregas/unidade03/pbb.md
+          - USM: entregas/unidade03/usm.md
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
