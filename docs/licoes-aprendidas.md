@@ -40,3 +40,4 @@
 | Data       | Versão | Descrição                       | Autor(es)      | Revisor(es) |
 | ---------- | ------ | ------------------------------- | -------------- | ----------- |
 | 19/04/2025 | 1.0    | Criação inicial da documentação | Nathan Abreu | Marcelo Adrian |
+| 04/06/2025 | 1.0    | Adição das lições aprendidas na unidade 2 | Pedro Victor |  |
