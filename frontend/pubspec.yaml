@@ -11,7 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   archive: ^3.4.10  # For zip file handling
-  
+  file_picker: ^6.1.1
   provider: ^6.1.1
   dio: ^5.4.1  # HTTP client for making API requests
   go_router: ^12.1.3
@@ -37,6 +37,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   dropdown_search: ^6.0.2
   brasil_fields: ^1.18.0
+  stack_trace: ^1.11.1
 
 dev_dependencies:
   flutter_test:

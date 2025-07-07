@@ -449,12 +449,52 @@ def create_poppler_setup_instructions():
         print("   │       └── *.so files")
 
 
+def ensure_poppler_installed() -> bool:
+    """Ensure poppler is installed via Homebrew on macOS."""
+    if platform.system().lower() != 'darwin':
+        return True
+
+    print("🔍 Checking poppler installation on macOS...")
+    
+    try:
+        # Check if Homebrew is installed
+        subprocess.run(["brew", "--version"], check=True, capture_output=True)
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        print("❌ Homebrew is not installed. Please install Homebrew first:")
+        print("   /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"")
+        return False
+
+    try:
+        # Check if poppler is installed
+        result = subprocess.run(["brew", "list", "poppler"], capture_output=True, text=True)
+        if result.returncode == 0:
+            print("✅ Poppler is already installed via Homebrew")
+            return True
+    except subprocess.CalledProcessError:
+        pass
+
+    print("📦 Installing poppler via Homebrew...")
+    try:
+        subprocess.run(["brew", "install", "poppler"], check=True)
+        print("✅ Poppler installed successfully")
+        return True
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Failed to install poppler: {e}")
+        return False
+
+
 def main():
     """Main build function."""
     print("🚀 Starting cross-platform PyInstaller build for LOCAL WebSocket Server...")
     print(f"🎯 Target: main_processing_computer_local.py (Local WebSocket Server)")
     print(f"Platform: {platform.system()} {platform.release()}")
     print(f"Python: {sys.version}")
+    
+    # Ensure poppler is installed on macOS
+    if platform.system().lower() == 'darwin':
+        if not ensure_poppler_installed():
+            print("❌ Build failed: Could not ensure poppler installation")
+            sys.exit(1)
     
     # Find appropriate Python executable
     python_cmd = find_python_executable()

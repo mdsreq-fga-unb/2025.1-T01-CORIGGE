@@ -56,8 +56,16 @@ class AppBarCustom {
     );
   }
 
-  static PreferredSizeWidget appBarWithLogo() {
+  static PreferredSizeWidget appBarWithLogo({
+    void Function()? onWantsToGoBack,
+  }) {
     return AppBar(
+      leading: onWantsToGoBack != null
+          ? Align(
+              alignment: Alignment.center,
+              child: topBackButtonWidget(onPressed: onWantsToGoBack))
+          : Container(),
+      leadingWidth: onWantsToGoBack != null ? null : 0,
       backgroundColor: Colors.white,
       elevation: 0,
       title: Row(
@@ -114,25 +122,20 @@ class AppBarCustom {
   }
 
   static Widget topBackButtonWidget({required Function() onPressed}) {
-    return SizedBox(
-      width: getProportionateScreenWidth(42),
-      child: MaterialButton(
-        highlightElevation: 0,
-        height: getProportionateScreenWidth(41),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-          side: const BorderSide(color: kPrimary),
-        ),
-        splashColor: Colors.transparent,
-        color: Colors.transparent,
-        elevation: 0,
-        onPressed: onPressed,
-        child: SvgPicture.asset(
-          "assets/icons/arrow_back_icon.svg",
-          fit: BoxFit.cover,
-          // ignore: deprecated_member_use
-          color: kPrimary,
-        ),
+    return MaterialButton(
+      highlightElevation: 0,
+      minWidth: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5),
+        side: const BorderSide(color: kPrimary),
+      ),
+      splashColor: Colors.transparent,
+      color: Colors.transparent,
+      elevation: 0,
+      onPressed: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.all(2),
+        child: Icon(Icons.arrow_back_ios_new_rounded, color: kPrimary),
       ),
     );
   }

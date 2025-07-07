@@ -12,6 +12,15 @@ import '../config/size_config.dart';
 import '../config/theme.dart';
 import '../widgets/default_button_widget.dart';
 import '../widgets/selectable_button_widget.dart';
+import '../features/templates/data/answer_sheet_identifiable_box.dart';
+import 'image_bounding_box/data/box_details.dart';
+
+class MinMaxPair<T extends num> {
+  final T min;
+  final T max;
+
+  MinMaxPair(this.min, this.max);
+}
 
 class Pair<T, U> {
   final T first;
@@ -529,11 +538,30 @@ class Utils {
   }
 
   static String generateRandomHexString(int length) {
-    Random random = Random();
-    String hexChars = '0123456789ABCDEF';
+    var random = Random();
+    var values = List<int>.generate(length, (i) => random.nextInt(16));
+    return values.map((e) => e.toRadixString(16)).join();
+  }
 
-    return List.generate(length, (index) => hexChars[random.nextInt(16)])
-        .join('');
+  static String getBoxNameByLabel(AnswerSheetIdentifiableBox box) {
+    switch (box.box.label) {
+      case BoxDetailsType.matricula:
+        return "Matrícula";
+      case BoxDetailsType.exemploCirculo:
+        return "Exemplo de Círculo";
+      case BoxDetailsType.colunaDeQuestoes:
+        return "Coluna de Questões";
+      case BoxDetailsType.outro:
+        return "Outro";
+      default:
+        return "Desconhecido";
+    }
+  }
+
+  static List<String> getEncodedLabels(AnswerSheetIdentifiableBox box) {
+    final name = box.name;
+    if (!name.contains('|')) return [];
+    return name.split('|').skip(1).toList();
   }
 
   static void showGeneralAlertDialog(

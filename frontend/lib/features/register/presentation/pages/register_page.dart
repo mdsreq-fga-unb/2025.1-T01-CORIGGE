@@ -130,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
           "Registro realizado com sucesso!",
           color: kSuccess,
         );
-        context.go('/login');
+        context.push('/login');
       }
     } catch (e) {
       if (mounted) {
@@ -415,7 +415,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () => context.go('/login'),
+                        onPressed: () => context.push('/login'),
                         child: Text(
                           'Faça login',
                           style: TextStyle(

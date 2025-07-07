@@ -1,47 +1,121 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:logging/logging.dart';
+import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dartz/dartz.dart';
+import 'package:corigge/environment.dart';
 
 import '../features/login/data/user_model.dart';
+import '../features/templates/data/answer_sheet_template_model.dart';
 
-
-final log = Logger("SharedPreferencesHelper");
+final log = Environment.getLogger('[shared_preferences]');
 
 class SharedPreferencesHelper {
   static final String _keyUserData = 'user_data';
 
   static UserModel? currentUser;
 
-  // controle de missão
+  static SharedPreferences? _prefs;
 
+  static Future<void> init() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  static Future<Either<String, List<AnswerSheetTemplateModel>>>
+      loadTemplates() async {
+    try {
+      final templatesJson = _prefs?.getString('templates') ?? '[]';
+      final List<dynamic> templatesData = json.decode(templatesJson);
+      return Right(templatesData
+          .map((e) => AnswerSheetTemplateModel.fromJson(e))
+          .toList());
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  static Future<void> saveTemplates(
+      List<AnswerSheetTemplateModel> templates) async {
+    final templatesJson =
+        json.encode(templates.map((e) => e.toJson()).toList());
+    await _prefs?.setString('templates', templatesJson);
+  }
+
+  static Future<void> saveImage(dynamic bytes, String key) async {
+    log.info("[saveImage] Saving image $key");
+    final directory = Directory.current;
+    final imagesDir = Directory(path.join(directory.path, 'images'));
+    if (!await imagesDir.exists()) {
+      await imagesDir.create();
+    }
+    final file = File(path.join(imagesDir.path, key));
+    if (bytes is Uint8List) {
+      await file.writeAsBytes(bytes);
+    } else {
+      await file.writeAsBytes(Uint8List.fromList(List<int>.from(bytes)));
+    }
+  }
+
+  static Future<Uint8List?> getImage(String key) async {
+    log.info("[getImage] Getting image $key");
+    final directory = Directory.current;
+    final file = File(path.join(directory.path, 'images', key));
+    if (!await file.exists()) return null;
+    return await file.readAsBytes();
+  }
+
+  static Future<bool> imageExists(String key) async {
+    log.info("[imageExists] Checking if image $key exists");
+    final directory = Directory.current;
+    final file = File(path.join(directory.path, 'images', key));
+    return await file.exists();
+  }
 
   static Future<void> saveOrUpdateUserData(UserModel user) async {
-    final sharedPreference = await SharedPreferences.getInstance();
     currentUser = user;
-
-    await sharedPreference.setString(_keyUserData, json.encode(user.toJson()));
+    final userJson = json.encode(user.toJson());
+    await _prefs?.setString('user_data', userJson);
   }
 
-
-  static Future<UserModel?> loadUserData() async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    final userData = sharedPreference.getString(_keyUserData);
-
-    if (userData != null) {
-      Map<String, dynamic> userMap = Map.from(json.decode(userData));
-
-      currentUser = UserModel.fromJson(userMap);
-      return currentUser;
-    }
-
-    return null;
+  static Future<UserModel?> getUserData() async {
+    final userJson = _prefs?.getString('user_data');
+    if (userJson == null) return null;
+    final userData = json.decode(userJson);
+    return UserModel.fromJson(userData);
   }
-
 
   static Future<void> clearUserData() async {
-    final sharedPreference = await SharedPreferences.getInstance();
-    await sharedPreference.remove(_keyUserData);
     currentUser = null;
+    await _prefs?.remove('user_data');
+  }
+
+  static Future<void> saveSelectedTemplate(
+      AnswerSheetTemplateModel? template) async {
+    if (template == null) {
+      await _prefs?.remove('selected_template');
+    } else {
+      final templateJson = json.encode(template.toJson());
+      await _prefs?.setString('selected_template', templateJson);
+    }
+  }
+
+  static Future<AnswerSheetTemplateModel?> getSelectedTemplate() async {
+    final templateJson = _prefs?.getString('selected_template');
+    if (templateJson == null) return null;
+    final templateData = json.decode(templateJson);
+    return AnswerSheetTemplateModel.fromJson(templateData);
+  }
+
+  static Future<String> getFilePath(String fileName) async {
+    final directory = Directory.current;
+    final filePath = path.join(directory.path, fileName);
+    return filePath;
+  }
+
+  static Future<Uint8List> readFileAsBytes(String filePath) async {
+    return File(filePath).readAsBytes();
   }
 }

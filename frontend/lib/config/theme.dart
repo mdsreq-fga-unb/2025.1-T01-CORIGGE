@@ -9,6 +9,7 @@ const kSecondaryVariant = Color(0xFFE5E4DF); // Darker Beige
 const kBackground = Color(0xFFF0EFEA); // Light Beige
 const kSurface = Colors.white;
 const kError = Color(0xFFB00020);
+const kWarning = Color(0xFFFFA500);
 
 // On Colors (text/icon colors for each surface)
 const kOnPrimary = Colors.white;

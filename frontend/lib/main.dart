@@ -11,11 +11,13 @@ import 'package:logging/logging.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:window_manager/window_manager.dart';
+import 'cache/shared_preferences_helper.dart';
 import 'config/theme.dart';
 import 'features/login/presentation/page/login_page.dart';
 import 'widgets/router_widget.dart';
 import 'services/local_process_server_service.dart';
 import 'services/opencv_service.dart';
+import 'dart:async';
 
 late SharedPreferences sp;
 
@@ -31,13 +33,17 @@ class AppWindowListener extends WindowListener {
 
 void main() async {
   await dotenv.load(fileName: ".env");
+
   WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance();
+  await SharedPreferencesHelper.init();
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) {
     if (kDebugMode) {
       //print('${record.level.name}: ${record.time}: ${record.message}\n Stacktrace-> ${record.stackTrace}');
     }
   });
+  Environment.initializeLogging();
   sp = await SharedPreferences.getInstance();
 
   if (const String.fromEnvironment("CORIGGE_DEBUG", defaultValue: "") != "") {
@@ -71,6 +77,39 @@ void main() async {
     url: Environment.supabaseUrl,
     anonKey: Environment.supabaseAnonKey,
   );
+
+  // Initialize OpenCV service
+  if (!Environment.shouldHandleLocalServer) {
+    try {
+      await OpenCVService.connect(maxRetries: 1);
+      Logger.root.info('Connected to WebSocket server');
+    } catch (e) {
+      Logger.root.warning('Could not connect to WebSocket server: $e');
+    }
+  } else {
+    try {
+      // First, ensure the process is stopped
+      await LocalProcessServerService.stopProcess();
+
+      // Initialize and start the process
+      await LocalProcessServerService.initialize(
+        onProgress: (message) {
+          Logger.root.info('OpenCV initialization: $message');
+        },
+      );
+
+      await LocalProcessServerService.startProcess();
+
+      // Wait a bit for the process to fully start
+      await Future.delayed(const Duration(seconds: 2));
+
+      // Try to connect with retries
+      await OpenCVService.connect(maxRetries: 5);
+      Logger.root.info('OpenCV service initialized successfully');
+    } catch (e) {
+      Logger.root.severe('Error initializing OpenCV service: $e');
+    }
+  }
 
   ErrorWidget.builder = (FlutterErrorDetails details) {
     var errorStr = "Erro inesperado: ${details.exceptionAsString()}";
@@ -116,17 +155,181 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  GoRouter router = GoRouter(
+  bool isProcessRunning = false;
+  String? _error;
+  Timer? _processCheckTimer;
+  bool _isReconnecting = false;
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
+  Widget _buildReconnectionOverlay(Widget child) {
+    return Stack(
+      children: [
+        child,
+        if (!isProcessRunning)
+          Material(
+            color: Colors.transparent,
+            child: Container(
+              color: Colors.black54,
+              child: Center(
+                child: Card(
+                  margin: const EdgeInsets.all(32),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text(
+                          'Reconectando ao serviço...',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        const CircularProgressIndicator(),
+                        if (_error != null) ...[
+                          const SizedBox(height: 16),
+                          Text(
+                            _error!,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.red,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
+  Future<void> _initializeOpenCV() async {
+    if (!Environment.shouldHandleLocalServer) {
+      try {
+        await OpenCVService.connect(maxRetries: 1);
+        Logger.root.info('Connected to WebSocket server');
+        setState(() {
+          isProcessRunning = true;
+        });
+      } catch (e) {
+        Logger.root.warning('Could not connect to WebSocket server: $e');
+        setState(() {
+          isProcessRunning = false;
+          _error = e.toString();
+        });
+      }
+    } else {
+      try {
+        // First, ensure the process is stopped
+        await LocalProcessServerService.stopProcess();
+
+        // Initialize and start the process
+        await LocalProcessServerService.initialize(
+          onProgress: (message) {
+            Logger.root.info('OpenCV initialization: $message');
+          },
+        );
+
+        await LocalProcessServerService.startProcess();
+
+        // Wait a bit for the process to fully start
+        await Future.delayed(const Duration(seconds: 2));
+
+        // Try to connect with retries
+        await OpenCVService.connect(maxRetries: 5);
+        Logger.root.info('OpenCV service initialized successfully');
+        setState(() {
+          isProcessRunning = true;
+        });
+      } catch (e) {
+        Logger.root.severe('Error initializing OpenCV service: $e');
+        setState(() {
+          isProcessRunning = false;
+          _error = e.toString();
+        });
+      }
+    }
+  }
+
+  Future<void> _checkProcessStatus() async {
+    if (_isReconnecting || !mounted) return;
+
+    try {
+      final isAlive = await OpenCVService.ping();
+      if (!isAlive && !_isReconnecting) {
+        setState(() {
+          isProcessRunning = false;
+        });
+
+        // Try to reconnect
+        try {
+          await OpenCVService.connect(maxRetries: 1);
+          if (mounted) {
+            setState(() {
+              isProcessRunning = true;
+              _error = null;
+            });
+          }
+        } catch (e) {
+          Logger.root.warning('Could not reconnect to WebSocket server: $e');
+          if (mounted) {
+            setState(() {
+              _error = e.toString();
+            });
+          }
+        }
+      } else if (isAlive && !isProcessRunning) {
+        setState(() {
+          isProcessRunning = true;
+          _error = null;
+        });
+      }
+    } catch (e) {
+      Logger.root.warning('Error checking process status: $e');
+      if (mounted) {
+        setState(() {
+          isProcessRunning = false;
+        });
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeOpenCV();
+
+    // Start periodic process check
+    _processCheckTimer = Timer.periodic(
+      const Duration(seconds: 5),
+      (_) => _checkProcessStatus(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _processCheckTimer?.cancel();
+    super.dispose();
+  }
+
+  late final GoRouter router = GoRouter(
+    navigatorKey: _navigatorKey,
     errorPageBuilder: (context, state) => NoTransitionPage(
-      /* transitionsBuilder: (context, animation, secondaryAnimation, child) =>
-              FadeTransition(opacity: animation, child: child), */
-      child: Scaffold(
-        backgroundColor: kBackground,
-        body: SafeArea(
-          child: Center(
-            child: ErrorHandlingPage(
-              errorText: "Url inválida!",
-              child: Container(),
+      child: _buildReconnectionOverlay(
+        Scaffold(
+          backgroundColor: kBackground,
+          body: SafeArea(
+            child: Center(
+              child: ErrorHandlingPage(
+                errorText: "Url inválida!",
+                child: Container(),
+              ),
             ),
           ),
         ),
@@ -138,12 +341,14 @@ class _MyAppState extends State<MyApp> {
         pageBuilder: (context, state) {
           SystemChrome.setApplicationSwitcherDescription(
             ApplicationSwitcherDescription(
-              label: 'Corigge', //- $routedynamic,
+              label: 'Corigge',
               primaryColor: Theme.of(context).primaryColor.value,
             ),
           );
           return NoTransitionPage(
-            child: RouterWidget(route: e.key, state: state),
+            child: _buildReconnectionOverlay(
+              RouterWidget(route: e.key, state: state),
+            ),
           );
         },
       );
@@ -154,8 +359,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final themeSP = sp.getBool("theme");
-    var isDark = themeSP ??
-        false; // Se não houver um tema salvo, usa o tema claro por padrão
+    var isDark = themeSP ?? false;
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

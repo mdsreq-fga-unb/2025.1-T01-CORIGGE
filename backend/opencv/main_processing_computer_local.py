@@ -406,13 +406,8 @@ async def handle_client(websocket, path=None):
             try:
                 response = json.loads(message)
 
-                if not response.get("command"):
-                    Utils.log_error(f"❌ Invalid JSON from {client_id}: {response}")
-                    continue
-
-                if response.get("command") != WebsocketMessageCommand.PING:
-                    Utils.log_info(f"📨 Received message from {client_id}: {response.get('command', 'unknown')}")
                 
+
                 # Handle different message types
                 if type(response["data"]) == dict and response["data"].get("task_id"):
                     task_id = response["data"]["task_id"]
@@ -420,6 +415,9 @@ async def handle_client(websocket, path=None):
                         messages_per_task_id[task_id] = SimpleQueue()
                 
                 if "command" in response:
+                    if response.get("command") != WebsocketMessageCommand.PING:
+                        Utils.log_info(f"📨 Received message from {client_id}: {response.get('command', 'unknown')}")
+
                     if response["command"] == WebsocketMessageCommand.READ_TO_IMAGES or response["command"] == WebsocketMessageCommand.FIND_CIRCLES:
                         Utils.log_info(f"🎯 Processing {response['command']} command")
                         asyncio.create_task(handle_job_received({
@@ -498,8 +496,8 @@ async def monitor_memory():
         system_memory = psutil.virtual_memory()
         used_memory_percent = system_memory.percent
         
-        # Print memory stats every 5 minutes (60 iterations with 5-second sleep)
-        if print_counter >= 60:
+        # Print memory stats every 10 minutes (120 iterations with 5-second sleep)
+        if print_counter >= 120:
             print("\n💾 Memory Usage Stats:")
             print(f"Process RSS (Physical RAM Used): {mem_info.rss / 1024 / 1024:.2f} MB")
             print(f"Process VMS (Total Virtual Memory): {mem_info.vms / 1024 / 1024:.2f} MB")

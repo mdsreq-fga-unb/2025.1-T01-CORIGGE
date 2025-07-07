@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
 import 'package:corigge/environment.dart';
 
-var log = Logger('LocalProcessServerService');
+var log = Environment.getLogger('[local_process_server]');
 
 class LocalProcessServerService {
   static const String _assetBasePath = 'assets/lib';
@@ -315,8 +315,7 @@ class LocalProcessServerService {
         _isShuttingDown = false;
         log.info('Process reference cleared');
       }
-    }
-    else {
+    } else {
       log.info('No process to stop');
     }
   }
@@ -371,7 +370,8 @@ class LocalProcessServerService {
         log.info('Received callback with params: $params');
 
         // Send a response to close the browser window
-        final image = await rootBundle.load('assets/images/check_autenticacao.png');
+        final image =
+            await rootBundle.load('assets/images/check_autenticacao.png');
         final buffer = image.buffer;
         var list = buffer.asUint8List(image.offsetInBytes, image.lengthInBytes);
         final base64Image = base64Encode(list);
