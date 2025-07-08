@@ -3,6 +3,7 @@ import 'package:corigge/widgets/app_bar_custom.dart';
 import 'package:corigge/widgets/dropdown_search_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 
@@ -11,6 +12,7 @@ import '../../../../models/escola_model.dart';
 import '../../../../services/escolas_service.dart';
 import '../../../login/data/user_model.dart';
 import '../../../splash/domain/repositories/auth_service.dart';
+import 'package:corigge/widgets/default_button_widget.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -178,7 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
           return SingleChildScrollView(
             child: Container(
-              color: const Color(0xFFF0EFEA),
+              color: kBackground,
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -188,7 +190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
-                      color: Colors.brown[800],
+                      color: kOnBackground,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -199,7 +201,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 22,
-                        color: Colors.grey[700],
+                        color: kOnBackground.withOpacity(0.7),
                         height: 1.5,
                       ),
                     ),
@@ -209,7 +211,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     constraints: const BoxConstraints(maxWidth: 500),
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: kSurface,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -230,25 +232,23 @@ class _RegisterPageState extends State<RegisterPage> {
                             textCapitalization: TextCapitalization.words,
                             decoration: InputDecoration(
                               labelText: 'Nome Completo',
-                              prefixIcon:
-                                  Icon(Icons.person, color: Colors.brown[800]),
+                              prefixIcon: Icon(Icons.person, color: kPrimary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: kSecondaryVariant.withOpacity(0.3)),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: kSecondaryVariant.withOpacity(0.3)),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.brown[800]!),
+                                borderSide: BorderSide(color: kPrimary),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: kBackground.withOpacity(0.05),
                             ),
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
@@ -263,25 +263,23 @@ class _RegisterPageState extends State<RegisterPage> {
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               labelText: 'E-mail',
-                              prefixIcon:
-                                  Icon(Icons.email, color: Colors.brown[800]),
+                              prefixIcon: Icon(Icons.email, color: kPrimary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: kSecondaryVariant.withOpacity(0.3)),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: kSecondaryVariant.withOpacity(0.3)),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.brown[800]!),
+                                borderSide: BorderSide(color: kPrimary),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: kBackground.withOpacity(0.05),
                             ),
                             validator: (value) {
                               if (value == null || value.isEmpty) {
@@ -304,25 +302,23 @@ class _RegisterPageState extends State<RegisterPage> {
                             ],
                             decoration: InputDecoration(
                               labelText: 'Telefone',
-                              prefixIcon:
-                                  Icon(Icons.phone, color: Colors.brown[800]),
+                              prefixIcon: Icon(Icons.phone, color: kPrimary),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: kSecondaryVariant.withOpacity(0.3)),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.grey[300]!),
+                                borderSide: BorderSide(
+                                    color: kSecondaryVariant.withOpacity(0.3)),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    BorderSide(color: Colors.brown[800]!),
+                                borderSide: BorderSide(color: kPrimary),
                               ),
                               filled: true,
-                              fillColor: Colors.grey[50],
+                              fillColor: kBackground.withOpacity(0.05),
                               hintText: '(99) 99999-9999',
                             ),
                             validator: (value) {
@@ -357,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               child: Text(
                                 _getMissingFieldsText(),
                                 style: TextStyle(
-                                  color: Colors.brown[800],
+                                  color: kOnBackground,
                                   fontSize: 14,
                                 ),
                                 textAlign: TextAlign.center,
@@ -368,16 +364,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               _isNameValid &&
                               _selectedSchool != null) ...[
                             const SizedBox(height: 30),
-                            ElevatedButton(
+                            DefaultButtonWidget(
                               onPressed: _isLoading ? null : _handleRegister,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.brown[800],
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                              ),
+                              disabled: _isLoading,
                               child: _isLoading
                                   ? const SizedBox(
                                       height: 20,
@@ -410,16 +399,17 @@ class _RegisterPageState extends State<RegisterPage> {
                       Text(
                         'Já tem uma conta?',
                         style: TextStyle(
-                          color: Colors.grey[700],
+                          color: kOnBackground.withOpacity(0.7),
                           fontSize: 16,
                         ),
                       ),
-                      TextButton(
+                      DefaultButtonWidget(
                         onPressed: () => context.push('/login'),
+                        color: Colors.transparent,
                         child: Text(
                           'Faça login',
                           style: TextStyle(
-                            color: Colors.brown[800],
+                            color: kPrimary,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),

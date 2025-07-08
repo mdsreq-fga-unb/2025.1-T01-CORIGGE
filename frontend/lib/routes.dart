@@ -7,6 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:corigge/environment.dart';
 
 import 'cache/shared_preferences_helper.dart';
+import 'features/analyze_cards/presentation/pages/analyze_cards_page.dart';
 import 'features/register/presentation/pages/register_page.dart';
 import 'features/splash/domain/repositories/auth_service.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
@@ -90,6 +91,9 @@ class Routes {
     },
     '/templates': (context, state) {
       return TemplateSelectionPage();
+    },
+    '/analyze-cards': (context, state) {
+      return AnalyzeCardsPage();
     },
   };
 }

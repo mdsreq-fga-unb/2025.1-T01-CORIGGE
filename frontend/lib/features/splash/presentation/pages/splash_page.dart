@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../config/theme.dart';
 import '../../../../widgets/app_bar_custom.dart';
+import '../../../../widgets/default_button_widget.dart';
 
 class SplashPage extends StatefulWidget {
   final String? loadingStatus;
@@ -30,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBarCustom.invisibleAppBarWidget(),
-      backgroundColor: kPrimary,
+      backgroundColor: kSurface,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,28 +39,31 @@ class _SplashPageState extends State<SplashPage> {
             if (widget.loadingStatus != null) ...[
               if (!widget.isError)
                 const CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  valueColor: AlwaysStoppedAnimation<Color>(kSurface),
                 ),
               if (!widget.isError) const SizedBox(height: 16),
               Text(
                 widget.loadingStatus!,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: kSurface,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               if (widget.isError) ...[
                 const SizedBox(height: 16),
-                ElevatedButton(
+                DefaultButtonWidget(
                   onPressed: () {
-                    context.go('/');
+                    context.go('/login');
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: kPrimary,
+                  color: kSurface,
+                  child: Text(
+                    'Tentar Novamente',
+                    style: TextStyle(
+                      color: kPrimary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  child: const Text('Tentar Novamente'),
                 ),
               ],
             ],

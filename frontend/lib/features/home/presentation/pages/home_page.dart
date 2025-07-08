@@ -3,6 +3,8 @@ import 'package:corigge/widgets/app_bar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:corigge/config/theme.dart';
+import 'package:corigge/widgets/default_button_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -83,22 +85,16 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
+                    DefaultButtonWidget(
                       onPressed: () {
                         context.go('/templates');
                       },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: const Color(0xFF9C8E83),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: const Text(
-                        'ESCOLHER TEMPLATE',
+                      color: kSecondaryVariant,
+                      child: Text(
+                        'CRIAR GABARITO',
                         style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: kSurface,
                         ),
                       ),
                     ),
@@ -112,22 +108,16 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 20),
-                    ElevatedButton(
+                    DefaultButtonWidget(
                       onPressed: () {
-                        // TODO: Implement view cards
+                        context.go('/analyze-cards');
                       },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: const Color(0xFF9C8E83),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: const Text(
-                        'VER CARTÕES',
+                      color: kSecondaryVariant,
+                      child: Text(
+                        'CORRIGIR CARTÕES',
                         style: TextStyle(
                           fontSize: 18,
-                          color: Colors.white,
+                          color: kSurface,
                         ),
                       ),
                     ),

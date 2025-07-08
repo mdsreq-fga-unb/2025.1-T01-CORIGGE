@@ -2,34 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Primary Colors
-const kPrimary = Color(0xFF8B4513); // Brown
-const kPrimaryVariant = Color(0xFF654321); // Darker Brown
-const kSecondary = Color(0xFFF0EFEA); // Light Beige
-const kSecondaryVariant = Color(0xFFE5E4DF); // Darker Beige
-const kBackground = Color(0xFFF0EFEA); // Light Beige
+const kPrimary = Color(0xFF2D3250); // Deep Navy Blue
+const kPrimaryVariant = Color(0xFF1A1F3D); // Darker Navy
+const kSecondary = Color(0xFF7077A1); // Muted Blue
+const kSecondaryVariant = Color(0xFF424769); // Dark Muted Blue
+const kBackground = Color(0xFFF6F8FA); // Light Gray with slight blue tint
 const kSurface = Colors.white;
-const kError = Color(0xFFB00020);
-const kWarning = Color(0xFFFFA500);
+const kError = Color(0xFFDC3545); // Modern Red
+const kWarning = Color(0xFFFFC107); // Vibrant Amber
+const kSuccess = Color(0xFF28A745); // Fresh Green
 
 // On Colors (text/icon colors for each surface)
 const kOnPrimary = Colors.white;
-const kOnSecondary = Color(0xFF4A4A4A); // Dark Grey for text
-const kOnBackground = Color(0xFF4A4A4A);
-const kOnSurface = Color(0xFF4A4A4A);
+const kOnSecondary = Colors.white;
+const kOnBackground = Color(0xFF2D3250); // Using primary as text color
+const kOnSurface = Color(0xFF2D3250);
 const kOnError = Colors.white;
 
 // Dark Theme Colors
-const kPrimaryDark = Color(0xFF8B4513);
-const kSecondaryDark = Color(0xFF654321);
-const kBackgroundDark = Color(0xFF222222);
-const kSurfaceDark = Color(0xFF333333);
-const kErrorDark = Color(0xFFCF6679);
+const kPrimaryDark = Color(0xFF424769);
+const kSecondaryDark = Color(0xFF7077A1);
+const kBackgroundDark = Color(0xFF121212); // Material Dark theme background
+const kSurfaceDark = Color(0xFF1E1E1E); // Slightly lighter than background
+const kErrorDark = Color(0xFFEF5350); // Lighter Red for dark theme
 const kOnPrimaryDark = Colors.white;
 const kOnSecondaryDark = Colors.white;
 const kOnBackgroundDark = Colors.white;
 const kOnSurfaceDark = Colors.white;
 const kOnErrorDark = Colors.black;
-const kSuccess = Color(0xFF00FF00);
 
 ThemeData darkTheme() {
   return ThemeData(

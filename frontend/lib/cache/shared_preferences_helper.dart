@@ -10,6 +10,7 @@ import 'package:corigge/environment.dart';
 
 import '../features/login/data/user_model.dart';
 import '../features/templates/data/answer_sheet_template_model.dart';
+import '../features/templates/data/answer_sheet_card_model.dart';
 
 final log = Environment.getLogger('[shared_preferences]');
 
@@ -46,12 +47,13 @@ class SharedPreferencesHelper {
 
   static Future<void> saveImage(dynamic bytes, String key) async {
     log.info("[saveImage] Saving image $key");
-    final directory = Directory.current;
-    final imagesDir = Directory(path.join(directory.path, 'images'));
+    final executablePath = Platform.resolvedExecutable;
+    final executableDir = Directory(path.dirname(executablePath));
+    final imagesDir = Directory(path.join(executableDir.path, 'images'));
     if (!await imagesDir.exists()) {
       await imagesDir.create();
     }
-    final file = File(path.join(imagesDir.path, key));
+    final file = File("${imagesDir.path}/$key");
     if (bytes is Uint8List) {
       await file.writeAsBytes(bytes);
     } else {
@@ -61,16 +63,18 @@ class SharedPreferencesHelper {
 
   static Future<Uint8List?> getImage(String key) async {
     log.info("[getImage] Getting image $key");
-    final directory = Directory.current;
-    final file = File(path.join(directory.path, 'images', key));
+    final executablePath = Platform.resolvedExecutable;
+    final executableDir = Directory(path.dirname(executablePath));
+    final file = File(path.join(executableDir.path, 'images', key));
     if (!await file.exists()) return null;
     return await file.readAsBytes();
   }
 
   static Future<bool> imageExists(String key) async {
     log.info("[imageExists] Checking if image $key exists");
-    final directory = Directory.current;
-    final file = File(path.join(directory.path, 'images', key));
+    final executablePath = Platform.resolvedExecutable;
+    final executableDir = Directory(path.dirname(executablePath));
+    final file = File(path.join(executableDir.path, 'images', key));
     return await file.exists();
   }
 
@@ -110,12 +114,33 @@ class SharedPreferencesHelper {
   }
 
   static Future<String> getFilePath(String fileName) async {
-    final directory = Directory.current;
-    final filePath = path.join(directory.path, fileName);
+    final executablePath = Platform.resolvedExecutable;
+    final executableDir = Directory(path.dirname(executablePath));
+    final filePath = path.join(executableDir.path, fileName);
     return filePath;
   }
 
   static Future<Uint8List> readFileAsBytes(String filePath) async {
     return File(filePath).readAsBytes();
+  }
+
+  static Future<Either<String, List<AnswerSheetCardModel>>> loadCards() async {
+    try {
+      final cardsJson = _prefs?.getString('answer_sheet_cards') ?? '[]';
+      final List<dynamic> cardsData = json.decode(cardsJson);
+      return Right(
+          cardsData.map((e) => AnswerSheetCardModel.fromJson(e)).toList());
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  static Future<void> saveCards(List<AnswerSheetCardModel> cards) async {
+    final cardsJson = json.encode(cards.map((e) => e.toJson()).toList());
+    await _prefs?.setString('answer_sheet_cards', cardsJson);
+  }
+
+  static Future<void> clearCards() async {
+    await _prefs?.remove('answer_sheet_cards');
   }
 }

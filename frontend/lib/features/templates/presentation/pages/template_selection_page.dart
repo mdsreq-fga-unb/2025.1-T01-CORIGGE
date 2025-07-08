@@ -22,6 +22,7 @@ import '../../data/answer_sheet_template_model.dart';
 import '../../data/answer_sheet_identifiable_box.dart';
 import '../../widgets/answer_sheet_template_box_creation_dialog_widget.dart';
 import '../../widgets/circle_params_editor.dart';
+import 'package:corigge/widgets/default_button_widget.dart';
 
 class TemplateSelectionPage extends StatefulWidget {
   const TemplateSelectionPage({
@@ -282,40 +283,46 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
           return AlertDialog(
             title: const Text("O que você deseja fazer?"),
             actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Cancelar")),
-              TextButton(
-                  onPressed: () {
-                    setState(() {
-                      selectedTemplate!.boxes
-                          .firstWhere((b) => b.name == box.name)
-                          .circles
-                          .firstWhere((e) => e.id == circle.id)
-                          .filled = !circle.filled;
-                    });
+              DefaultButtonWidget(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                color: Colors.transparent,
+                child: const Text("Cancelar"),
+              ),
+              DefaultButtonWidget(
+                onPressed: () {
+                  setState(() {
+                    selectedTemplate!.boxes
+                        .firstWhere((b) => b.name == box.name)
+                        .circles
+                        .firstWhere((e) => e.id == circle.id)
+                        .filled = !circle.filled;
+                  });
 
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Alterar Preenchimento")),
-              TextButton(
-                  onPressed: () async {
-                    setState(() {
-                      selectedTemplate!.boxes
-                          .firstWhere((b) => b.name == box.name)
-                          .circles
-                          .removeWhere((e) => e.id == circle.id);
-                    });
+                  Navigator.of(context).pop();
+                },
+                color: Colors.transparent,
+                child: const Text("Alterar Preenchimento"),
+              ),
+              DefaultButtonWidget(
+                onPressed: () async {
+                  setState(() {
+                    selectedTemplate!.boxes
+                        .firstWhere((b) => b.name == box.name)
+                        .circles
+                        .removeWhere((e) => e.id == circle.id);
+                  });
 
-                    //widget.onTemplatesChanged();
+                  //widget.onTemplatesChanged();
 
-                    await SharedPreferencesHelper.saveTemplates(templates);
+                  await SharedPreferencesHelper.saveTemplates(templates);
 
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text("Deletar"))
+                  Navigator.of(context).pop();
+                },
+                color: Colors.transparent,
+                child: const Text("Deletar"),
+              )
             ],
           );
         });
@@ -620,7 +627,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                       ] else if (selectedTemplate != null) ...[
                         Expanded(
                           child: Center(
-                            child: ElevatedButton(
+                            child: DefaultButtonWidget(
                               onPressed: () async {
                                 await handleSelectTemplatePdf();
                               },
@@ -707,77 +714,73 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                               templates[index].id
                                           ? kSecondary
                                           : null),
-                                  title: Container(
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          templates[index].name,
-                                          style: TextStyle(
-                                              color: selectedTemplate?.id ==
-                                                          templates[index].id ||
-                                                      templateErrors != null
-                                                  ? Colors.white
-                                                  : null),
-                                        ),
-                                        Spacer(),
-                                        IconButton(
+                                  title: Row(
+                                    children: [
+                                      Text(
+                                        templates[index].name,
+                                        style: TextStyle(
                                             color: selectedTemplate?.id ==
                                                         templates[index].id ||
                                                     templateErrors != null
-                                                ? Colors.white
-                                                : null,
-                                            onPressed: () async {
-                                              var locationOfFile =
-                                                  "${templates[index].id}.png";
+                                                ? kOnSurface
+                                                : null),
+                                      ),
+                                      const Spacer(),
+                                      IconButton(
+                                          color: selectedTemplate?.id ==
+                                                      templates[index].id ||
+                                                  templateErrors != null
+                                              ? kOnSurface
+                                              : null,
+                                          onPressed: () async {
+                                            var locationOfFile =
+                                                "${templates[index].id}.png";
 
-                                              if (await SharedPreferencesHelper
-                                                  .imageExists(
-                                                      locationOfFile)) {
-                                                image = locationOfFile;
-                                              }
+                                            if (await SharedPreferencesHelper
+                                                .imageExists(locationOfFile)) {
+                                              image = locationOfFile;
+                                            }
 
-                                              setState(() {
-                                                selectedTemplate =
-                                                    templates[index];
-                                              });
+                                            setState(() {
+                                              selectedTemplate =
+                                                  templates[index];
+                                            });
 
-                                              recomputeParams =
-                                                  AnswerSheetRecomputeParams(
-                                                reapplyTemplate: true,
-                                                shouldRecomputeAllCards: true,
-                                              );
+                                            recomputeParams =
+                                                AnswerSheetRecomputeParams(
+                                              reapplyTemplate: true,
+                                              shouldRecomputeAllCards: true,
+                                            );
 
-                                              //widget.onRecomputeParamsChanged(
-                                              //    recomputeParams);
-                                            },
-                                            icon: const Icon(Icons.edit)),
-                                        SizedBox(
-                                          width:
-                                              getProportionateScreenWidth(10),
-                                        ),
-                                        IconButton(
-                                            color: selectedTemplate?.id ==
-                                                        templates[index].id ||
-                                                    templateErrors != null
-                                                ? Colors.white
-                                                : null,
-                                            onPressed: () async {
-                                              if (selectedTemplate ==
-                                                  templates[index]) {
-                                                selectedTemplate = null;
-                                              }
+                                            //widget.onRecomputeParamsChanged(
+                                            //    recomputeParams);
+                                          },
+                                          icon: const Icon(Icons.edit)),
+                                      SizedBox(
+                                        width: getProportionateScreenWidth(10),
+                                      ),
+                                      IconButton(
+                                          color: selectedTemplate?.id ==
+                                                      templates[index].id ||
+                                                  templateErrors != null
+                                              ? kOnSurface
+                                              : null,
+                                          onPressed: () async {
+                                            if (selectedTemplate ==
+                                                templates[index]) {
+                                              selectedTemplate = null;
+                                            }
 
-                                              templates.removeAt(index);
+                                            templates.removeAt(index);
 
-                                              await SharedPreferencesHelper
-                                                  .saveTemplates(templates);
-                                              //widget.onTemplatesChanged();
+                                            await SharedPreferencesHelper
+                                                .saveTemplates(templates);
+                                            //widget.onTemplatesChanged();
 
-                                              setState(() {});
-                                            },
-                                            icon: const Icon(Icons.delete))
-                                      ],
-                                    ),
+                                            setState(() {});
+                                          },
+                                          icon: const Icon(Icons.delete))
+                                    ],
                                   ),
                                   onTap: templateErrors != null
                                       ? null
@@ -816,7 +819,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Recalculando círculos...",
                             textAlign: TextAlign.center,
                           ),
@@ -864,7 +867,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
 
                                   Row(
                                     children: [
-                                      Spacer(),
+                                      const Spacer(),
                                       Text(
                                         "Template: ${selectedTemplate!.name}",
                                         style: TextStyle(
@@ -882,10 +885,9 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                 onPressed: () {
                                                   reloadCircles();
                                                 },
-                                                icon: Tooltip(
+                                                icon: const Tooltip(
                                                     message: "Reload circles",
-                                                    child: const Icon(
-                                                        Icons.refresh)),
+                                                    child: Icon(Icons.refresh)),
                                               ),
                                               SizedBox(
                                                 width:
@@ -897,11 +899,10 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                 onPressed: () async {
                                                   await handleSelectTemplatePdf();
                                                 },
-                                                icon: Tooltip(
+                                                icon: const Tooltip(
                                                     message:
                                                         "Select a new PDF to serve as template",
-                                                    child: const Icon(
-                                                        Icons.image))),
+                                                    child: Icon(Icons.image))),
                                             SizedBox(
                                               width:
                                                   getProportionateScreenWidth(
@@ -922,7 +923,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
+                                        const Text(
                                             "Recomputar círculos com base em alterações?"),
                                         Checkbox(
                                           value: recomputeParams
@@ -947,7 +948,8 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text("Reaplicar valores do template?"),
+                                        const Text(
+                                            "Reaplicar valores do template?"),
                                         Checkbox(
                                           value:
                                               recomputeParams.reapplyTemplate,
@@ -1079,14 +1081,16 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                       title: Text(
                                                           "Deseja remover ${Utils.getBoxNameByLabel(selectedTemplate!.boxes[index])}?"),
                                                       actions: [
-                                                        TextButton(
+                                                        DefaultButtonWidget(
                                                             onPressed: () {
                                                               Navigator.of(_)
                                                                   .pop();
                                                             },
+                                                            color: Colors
+                                                                .transparent,
                                                             child: const Text(
                                                                 "Cancel")),
-                                                        TextButton(
+                                                        DefaultButtonWidget(
                                                             onPressed:
                                                                 () async {
                                                               selectedTemplate!
@@ -1106,6 +1110,8 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                                   .pop();
                                                               setState(() {});
                                                             },
+                                                            color: Colors
+                                                                .transparent,
                                                             child: const Text(
                                                                 "Remover"))
                                                       ],

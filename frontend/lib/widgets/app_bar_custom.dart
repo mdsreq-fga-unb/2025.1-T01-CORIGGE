@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../config/size_config.dart';
 import '../config/theme.dart';
 import '../features/splash/domain/repositories/auth_service.dart';
+import 'default_button_widget.dart';
 
 class AppBarCustom {
   static PreferredSizeWidget createAppBarWithBackButton(BuildContext context,
@@ -82,37 +83,49 @@ class AppBarCustom {
         ],
       ),
       actions: [
-        TextButton(
+        DefaultButtonWidget(
+          expanded: false,
           onPressed: () {
             // Ação para o botão Sobre
           },
+          color: Colors.transparent,
           child: Text(
             'Sobre',
-            style: TextStyle(color: Colors.brown[800], fontSize: 16),
+            style: TextStyle(color: kPrimary, fontSize: 16),
           ),
         ),
-        TextButton(
+        DefaultButtonWidget(
+          expanded: false,
           onPressed: () {
             // Ação para o botão Contato
           },
+          color: Colors.transparent,
           child: Text(
             'Contato',
-            style: TextStyle(color: Colors.brown[800], fontSize: 16),
+            style: TextStyle(color: kPrimary, fontSize: 16),
           ),
         ),
         if (SharedPreferencesHelper.currentUser != null)
           Builder(
-            builder: (context) => TextButton.icon(
+            builder: (context) => DefaultButtonWidget(
+              expanded: false,
               onPressed: () async {
                 await AuthService.logout();
                 if (context.mounted) {
                   context.go('/login');
                 }
               },
-              icon: Icon(Icons.logout, color: Colors.brown[800], size: 20),
-              label: Text(
-                'Sair',
-                style: TextStyle(color: Colors.brown[800], fontSize: 16),
+              color: Colors.transparent,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.logout, color: kPrimary, size: 20),
+                  const SizedBox(width: 4),
+                  Text(
+                    'Sair',
+                    style: TextStyle(color: kPrimary, fontSize: 16),
+                  ),
+                ],
               ),
             ),
           ),
@@ -122,21 +135,16 @@ class AppBarCustom {
   }
 
   static Widget topBackButtonWidget({required Function() onPressed}) {
-    return MaterialButton(
-      highlightElevation: 0,
-      minWidth: 0,
+    return DefaultButtonWidget(
+      onPressed: onPressed,
+      color: Colors.transparent,
+      width: 40,
+      height: 40,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
         side: const BorderSide(color: kPrimary),
       ),
-      splashColor: Colors.transparent,
-      color: Colors.transparent,
-      elevation: 0,
-      onPressed: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.all(2),
-        child: Icon(Icons.arrow_back_ios_new_rounded, color: kPrimary),
-      ),
+      child: Icon(Icons.arrow_back_ios_new_rounded, color: kPrimary),
     );
   }
 }

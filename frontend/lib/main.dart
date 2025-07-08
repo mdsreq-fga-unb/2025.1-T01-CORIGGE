@@ -193,7 +193,7 @@ class _MyAppState extends State<MyApp> {
                             _error!,
                             style: const TextStyle(
                               fontSize: 14,
-                              color: Colors.red,
+                              color: kError,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -327,7 +327,7 @@ class _MyAppState extends State<MyApp> {
           body: SafeArea(
             child: Center(
               child: ErrorHandlingPage(
-                errorText: "Url inválida!",
+                errorText: "Erro: ${state.error}",
                 child: Container(),
               ),
             ),

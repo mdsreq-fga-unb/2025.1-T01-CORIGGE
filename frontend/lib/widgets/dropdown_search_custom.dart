@@ -1,5 +1,6 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:corigge/config/theme.dart';
 
 class DropdownSearchCustom<T> extends StatelessWidget {
   final String hintText;
@@ -27,20 +28,20 @@ class DropdownSearchCustom<T> extends StatelessWidget {
       decoratorProps: DropDownDecoratorProps(
         decoration: InputDecoration(
           hintText: hintText,
-          prefixIcon: Icon(prefixIcon, color: Colors.brown[800]),
+          prefixIcon: Icon(prefixIcon, color: kPrimary),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Colors.grey[300]!),
+            borderSide: BorderSide(color: kSecondaryVariant.withOpacity(0.3)),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Colors.brown[800]!),
+            borderSide: BorderSide(color: kPrimary),
           ),
           filled: true,
-          fillColor: Colors.grey[50],
+          fillColor: kBackground.withOpacity(0.05),
         ),
       ),
       popupProps: PopupProps.menu(
@@ -61,21 +62,21 @@ class DropdownSearchCustom<T> extends StatelessWidget {
         searchFieldProps: TextFieldProps(
           decoration: InputDecoration(
             hintText: "Pesquisar $hintText",
-            prefixIcon: Icon(Icons.search, color: Colors.brown[800]),
+            prefixIcon: Icon(Icons.search, color: kPrimary),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.grey[300]!),
+              borderSide: BorderSide(color: kSecondaryVariant.withOpacity(0.3)),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.grey[300]!),
+              borderSide: BorderSide(color: kSecondaryVariant.withOpacity(0.3)),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: Colors.brown[800]!),
+              borderSide: BorderSide(color: kPrimary),
             ),
             filled: true,
-            fillColor: Colors.grey[50],
+            fillColor: kBackground.withOpacity(0.05),
           ),
         ),
       ),

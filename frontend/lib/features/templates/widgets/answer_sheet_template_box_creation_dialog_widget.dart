@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../config/size_config.dart';
-import '../../../utils/utils.dart';
-import '../../../utils/image_bounding_box/data/box_details.dart';
+import 'package:corigge/config/size_config.dart';
+import 'package:corigge/utils/utils.dart';
+import 'package:corigge/utils/image_bounding_box/data/box_details.dart';
+import 'package:corigge/widgets/default_button_widget.dart';
 
 class AnswerSheetTemplateBoxCreationDialogWidget extends StatefulWidget {
   const AnswerSheetTemplateBoxCreationDialogWidget({
@@ -171,7 +172,7 @@ class _AnswerSheetTemplateBoxCreationDialogWidgetState
                   SizedBox(
                     height: getProportionateScreenHeight(10),
                   ),
-                  ElevatedButton(
+                  DefaultButtonWidget(
                     onPressed: () {
                       setState(() {
                         var finalBoxLabels = getEncodedLabels();
@@ -223,7 +224,7 @@ class _AnswerSheetTemplateBoxCreationDialogWidgetState
                 SizedBox(
                   height: getProportionateScreenHeight(20),
                 ),
-                ElevatedButton(
+                DefaultButtonWidget(
                   onPressed: () {
                     widget.onChosen(boxName, boxType);
                   },

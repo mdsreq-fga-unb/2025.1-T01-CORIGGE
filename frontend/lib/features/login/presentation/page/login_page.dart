@@ -7,6 +7,7 @@ import 'package:path/path.dart';
 
 import '../../../../config/theme.dart';
 import '../../../splash/domain/repositories/auth_service.dart';
+import 'package:corigge/widgets/default_button_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -22,7 +23,7 @@ class LoginPage extends StatelessWidget {
   Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        color: const Color(0xFFF0EFEA), // Cor de fundo da página
+        color: kBackground, // Cor de fundo da página
         padding: const EdgeInsets.all(24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,7 +53,7 @@ class LoginPage extends StatelessWidget {
           style: TextStyle(
             fontSize: 48,
             fontWeight: FontWeight.bold,
-            color: Colors.brown[800],
+            color: kOnBackground,
           ),
         ),
         const SizedBox(height: 16),
@@ -63,7 +64,7 @@ class LoginPage extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 22,
-              color: Colors.grey[700],
+              color: kOnBackground.withOpacity(0.7),
               height: 1.5,
             ),
           ),
@@ -82,7 +83,7 @@ class LoginPage extends StatelessWidget {
           height: 250,
           margin: const EdgeInsets.only(right: 40),
           decoration: BoxDecoration(
-            color: const Color(0xFF8B4513),
+            color: kPrimary,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
@@ -98,7 +99,7 @@ class LoginPage extends StatelessWidget {
               width: 150,
               height: 150,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: kSurface,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SvgPicture.asset(
@@ -119,7 +120,7 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.grey[700],
+                  color: kOnBackground.withOpacity(0.7),
                 ),
               ),
               const SizedBox(height: 20),
@@ -170,7 +171,7 @@ class LoginPage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: kSurface,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -184,7 +185,7 @@ class LoginPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, size: 40, color: Colors.brown[800]),
+          Icon(icon, size: 40, color: kPrimary),
           const SizedBox(height: 10),
           Text(
             title,
@@ -192,7 +193,7 @@ class LoginPage extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.brown[800],
+              color: kPrimary,
             ),
           ),
           const SizedBox(height: 5),
@@ -201,7 +202,7 @@ class LoginPage extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 12,
-              color: Colors.grey[600],
+              color: kOnBackground.withOpacity(0.6),
             ),
           ),
         ],
@@ -210,7 +211,7 @@ class LoginPage extends StatelessWidget {
   }
 
   Widget _buildSignInButton(BuildContext context) {
-    return ElevatedButton(
+    return DefaultButtonWidget(
       onPressed: () async {
         var result = await AuthService.signInWithGoogle();
 
@@ -225,43 +226,35 @@ class LoginPage extends StatelessWidget {
           context.go('/home');
         });
       },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white, // Cor de fundo do botão
-        foregroundColor: Colors.black, // Cor do texto e ícone
-        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
-          side: BorderSide(color: Colors.grey[300]!, width: 1),
-        ),
-        elevation: 5,
-      ),
+      color: kSurface,
       child: Row(
-        mainAxisSize:
-            MainAxisSize.min, // Para que o Row não ocupe toda a largura
+        mainAxisSize: MainAxisSize.min,
         children: [
-          // Ícone do Google. Você pode usar uma imagem SVG/PNG ou um ícone de pacote.
-          // Exemplo com um Container e uma cor para simular o G do Google.
           Container(
             width: 24,
             height: 24,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.red, // Cor para simular o G
+              color: kError,
             ),
             child: Center(
               child: Text(
                 'G',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: kSurface,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
           const SizedBox(width: 10),
-          const Text(
+          Text(
             'SIGN IN WITH GOOGLE',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 18, 
+              fontWeight: FontWeight.bold,
+              color: kOnSurface,
+            ),
           ),
         ],
       ),

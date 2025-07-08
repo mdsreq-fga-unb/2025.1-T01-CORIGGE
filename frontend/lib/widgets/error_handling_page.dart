@@ -80,8 +80,7 @@ class ErrorHandlingPage extends StatelessWidget {
                         },
                         child: const Text("Ir para Login",
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold)),
+                                color: kSurface, fontWeight: FontWeight.bold)),
                       ),
                     ),
                 ])),
@@ -145,7 +144,7 @@ class ErrorHandlingPage extends StatelessWidget {
                             },
                             child: const Text("Ir para Home",
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: kSurface,
                                     fontWeight: FontWeight.bold)),
                           ),
                         ),
