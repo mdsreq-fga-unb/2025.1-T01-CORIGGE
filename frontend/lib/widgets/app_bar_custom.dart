@@ -167,6 +167,7 @@ class AppBarCustom {
 
   static Widget topBackButtonWidget({required Function() onPressed}) {
     return DefaultButtonWidget(
+      padding: EdgeInsets.all(getProportionateScreenWidth(10)),
       onPressed: onPressed,
       color: Colors.transparent,
       width: getProportionateScreenWidth(40),
@@ -175,7 +176,7 @@ class AppBarCustom {
         borderRadius: BorderRadius.circular(5),
         side: const BorderSide(color: kPrimary),
       ),
-      child: Icon(Icons.arrow_back_ios_new_rounded, color: kPrimary),
+      child: Icon(Icons.arrow_back_ios, color: kPrimary),
     );
   }
 }
