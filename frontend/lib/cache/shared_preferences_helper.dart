@@ -7,6 +7,7 @@ import 'package:path/path.dart' as path;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dartz/dartz.dart';
 import 'package:corigge/environment.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../features/login/data/user_model.dart';
 import '../features/templates/data/answer_sheet_template_model.dart';
@@ -45,15 +46,37 @@ class SharedPreferencesHelper {
     await _prefs?.setString('templates', templatesJson);
   }
 
+  static Future<Directory> _getImageDirectory() async {
+    if (Platform.isMacOS) {
+      // For macOS, use the app bundle's Resources directory
+      final executablePath = Platform.resolvedExecutable;
+      final appBundle = Directory(path.dirname(path.dirname(executablePath)));
+      final resourcesDir = Directory(
+          path.join(appBundle.path, 'Contents', 'Resources', 'images'));
+
+      if (!await resourcesDir.exists()) {
+        await resourcesDir.create(recursive: true);
+      }
+
+      return resourcesDir;
+    } else {
+      // For other platforms, use the executable directory as before
+      final executablePath = Platform.resolvedExecutable;
+      final executableDir = Directory(path.dirname(executablePath));
+      final imagesDir = Directory(path.join(executableDir.path, 'images'));
+
+      if (!await imagesDir.exists()) {
+        await imagesDir.create(recursive: true);
+      }
+
+      return imagesDir;
+    }
+  }
+
   static Future<void> saveImage(dynamic bytes, String key) async {
     log.info("[saveImage] Saving image $key");
-    final executablePath = Platform.resolvedExecutable;
-    final executableDir = Directory(path.dirname(executablePath));
-    final imagesDir = Directory(path.join(executableDir.path, 'images'));
-    if (!await imagesDir.exists()) {
-      await imagesDir.create();
-    }
-    final file = File("${imagesDir.path}/$key");
+    final imagesDir = await _getImageDirectory();
+    final file = File(path.join(imagesDir.path, key));
     if (bytes is Uint8List) {
       await file.writeAsBytes(bytes);
     } else {
@@ -63,18 +86,16 @@ class SharedPreferencesHelper {
 
   static Future<Uint8List?> getImage(String key) async {
     log.info("[getImage] Getting image $key");
-    final executablePath = Platform.resolvedExecutable;
-    final executableDir = Directory(path.dirname(executablePath));
-    final file = File(path.join(executableDir.path, 'images', key));
+    final imagesDir = await _getImageDirectory();
+    final file = File(path.join(imagesDir.path, key));
     if (!await file.exists()) return null;
     return await file.readAsBytes();
   }
 
   static Future<bool> imageExists(String key) async {
     log.info("[imageExists] Checking if image $key exists");
-    final executablePath = Platform.resolvedExecutable;
-    final executableDir = Directory(path.dirname(executablePath));
-    final file = File(path.join(executableDir.path, 'images', key));
+    final imagesDir = await _getImageDirectory();
+    final file = File(path.join(imagesDir.path, key));
     return await file.exists();
   }
 

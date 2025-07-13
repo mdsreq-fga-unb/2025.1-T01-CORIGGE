@@ -12,7 +12,8 @@
     "type-check": "tsc --noEmit",
     "lint": "echo 'Linting not configured yet'",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-release": "npm run build && npm run start"
+    "start-release": "npm run build && npm run start",
+    "build-and-start": "npm run build && npm run start"
   },
   "keywords": [
     "typescript",

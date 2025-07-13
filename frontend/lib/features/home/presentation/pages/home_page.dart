@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: EdgeInsets.all(getProportionateScreenWidth(32)),
           child: Row(
             children: [
               // Left side with logo
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
                           translation: const Offset(-0.5, 0.25),
                           child: SvgPicture.asset(
                             'assets/images/logo_corigge.svg',
-                            height: 300,
+                            height: getProportionateScreenHeight(300),
                           ),
                         ),
                       ),
@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                           translation: const Offset(-0.5, -0.5),
                           child: SvgPicture.asset(
                             'assets/images/logo_corigge.svg',
-                            height: 200,
+                            height: getProportionateScreenHeight(200),
                           ),
                         ),
                       ),
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                           translation: const Offset(-0.5, -0.5),
                           child: SvgPicture.asset(
                             'assets/images/logo_corigge.svg',
-                            height: 220,
+                            height: getProportionateScreenHeight(220),
                           ),
                         ),
                       ),
@@ -74,17 +74,17 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       'ESCOLHA UM TEMPLATE DE CARTÃO-RESPOSTA',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: getProportionateFontSize(24),
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: getProportionateScreenHeight(20)),
                     DefaultButtonWidget(
                       onPressed: () {
                         context.go('/templates');
@@ -93,21 +93,21 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'CRIAR GABARITO',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: getProportionateFontSize(18),
                           color: kSurface,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 40),
-                    const Text(
+                    SizedBox(height: getProportionateScreenHeight(40)),
+                    Text(
                       'INSIRA OS CARTÕES-RESPOSTA',
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: getProportionateFontSize(24),
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: getProportionateScreenHeight(20)),
                     DefaultButtonWidget(
                       onPressed: () {
                         context.go('/analyze-cards');
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         'CORRIGIR CARTÕES',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: getProportionateFontSize(18),
                           color: kSurface,
                         ),
                       ),

@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:path/path.dart';
 
+import '../../../../config/size_config.dart';
 import '../../../../config/theme.dart';
 import '../../../splash/domain/repositories/auth_service.dart';
 import 'package:corigge/widgets/default_button_widget.dart';
@@ -30,15 +31,15 @@ class LoginPage extends StatelessWidget {
           children: [
             // Seção "Corigge" e slogan
             _buildHeroSection(),
-            const SizedBox(height: 40),
+            SizedBox(height: getProportionateScreenHeight(40)),
 
             // Seção "Principais Recursos"
             _buildFeaturesSection(),
-            const SizedBox(height: 60),
+            SizedBox(height: getProportionateScreenHeight(60)),
 
             // Botão "Sign in with Google"
             _buildSignInButton(context),
-            const SizedBox(height: 40),
+            SizedBox(height: getProportionateScreenHeight(40)),
           ],
         ),
       ),
@@ -51,19 +52,20 @@ class LoginPage extends StatelessWidget {
         Text(
           'CORIGGE',
           style: TextStyle(
-            fontSize: 48,
+            fontSize: getProportionateFontSize(48),
             fontWeight: FontWeight.bold,
             color: kOnBackground,
           ),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: getProportionateScreenHeight(16)),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(
+              horizontal: getProportionateScreenWidth(20.0)),
           child: Text(
             'TRANSFORME A CORREÇÃO DE GABARITOS EM UM PROCESSO RÁPIDO, AUTOMÁTICO E SEM ERROS.',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 22,
+              fontSize: getProportionateFontSize(22),
               color: kOnBackground.withOpacity(0.7),
               height: 1.5,
             ),
@@ -79,9 +81,9 @@ class LoginPage extends StatelessWidget {
       children: [
         // Left side image
         Container(
-          width: 250,
-          height: 250,
-          margin: const EdgeInsets.only(right: 40),
+          width: getProportionateScreenWidth(250),
+          height: getProportionateScreenHeight(250),
+          margin: EdgeInsets.only(right: getProportionateScreenWidth(40)),
           decoration: BoxDecoration(
             color: kPrimary,
             borderRadius: BorderRadius.circular(20),
@@ -96,15 +98,15 @@ class LoginPage extends StatelessWidget {
           ),
           child: Center(
             child: Container(
-              width: 150,
-              height: 150,
+              width: getProportionateScreenWidth(150),
+              height: getProportionateScreenHeight(150),
               decoration: BoxDecoration(
                 color: kSurface,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SvgPicture.asset(
                 'assets/images/logo_corigge.svg',
-                height: 150,
+                height: getProportionateScreenHeight(150),
               ),
             ),
           ),
@@ -118,12 +120,12 @@ class LoginPage extends StatelessWidget {
               Text(
                 'PRINCIPAIS RECURSOS',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: getProportionateFontSize(20),
                   fontWeight: FontWeight.bold,
                   color: kOnBackground.withOpacity(0.7),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: getProportionateScreenHeight(20)),
               LayoutBuilder(
                 builder: (context, constraints) {
                   return GridView(
@@ -186,22 +188,22 @@ class LoginPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, size: 40, color: kPrimary),
-          const SizedBox(height: 10),
+          SizedBox(height: getProportionateScreenHeight(10)),
           Text(
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: getProportionateFontSize(16),
               fontWeight: FontWeight.bold,
               color: kPrimary,
             ),
           ),
-          const SizedBox(height: 5),
+          SizedBox(height: getProportionateScreenHeight(5)),
           Text(
             description,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: getProportionateFontSize(12),
               color: kOnBackground.withOpacity(0.6),
             ),
           ),
@@ -231,8 +233,8 @@ class LoginPage extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            width: 24,
-            height: 24,
+            width: getProportionateScreenWidth(24),
+            height: getProportionateScreenHeight(24),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: kError,
@@ -247,11 +249,11 @@ class LoginPage extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: getProportionateScreenWidth(10)),
           Text(
             'SIGN IN WITH GOOGLE',
             style: TextStyle(
-              fontSize: 18, 
+              fontSize: getProportionateFontSize(18),
               fontWeight: FontWeight.bold,
               color: kOnSurface,
             ),

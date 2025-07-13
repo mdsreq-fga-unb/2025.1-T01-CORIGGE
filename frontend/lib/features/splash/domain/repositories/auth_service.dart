@@ -108,6 +108,35 @@ class AuthService {
     }
   }
 
+  static Future<Either<String, UserModel>> databaseUpdateUser(
+      UserModel user) async {
+    try {
+      final response = await Environment.dio.put('/users/update', data: {
+        'id_user': user.id,
+        'nome_completo': user.name,
+        'phone_number': user.phoneNumber ?? '',
+        'id_escola': user.idEscola,
+      });
+
+      if (response.statusCode != 200) {
+        throw Exception('Failed to update user: ${response.statusMessage}');
+      }
+
+      final userMap = response.data;
+      final updatedUser = UserModel.fromJson(userMap);
+
+      await SharedPreferencesHelper.saveOrUpdateUserData(updatedUser);
+
+      return Right(updatedUser);
+    } on DioException catch (e) {
+      log.severe('Error updating user in database', e);
+      return Left('Error updating user: ${e.message}');
+    } catch (e, stackTrace) {
+      log.severe('Error updating user in database', e, stackTrace);
+      return Left('Error updating user: $e');
+    }
+  }
+
   static Future<Map<String, dynamic>> _exchangeCodeForTokens(
       String code, String codeVerifier) async {
     if (_clientId.isEmpty || _clientSecret.isEmpty) {

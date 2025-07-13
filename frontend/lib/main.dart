@@ -172,27 +172,27 @@ class _MyAppState extends State<MyApp> {
               color: Colors.black54,
               child: Center(
                 child: Card(
-                  margin: const EdgeInsets.all(32),
+                  margin: EdgeInsets.all(getProportionateScreenWidth(32)),
                   child: Padding(
-                    padding: const EdgeInsets.all(16),
+                    padding: EdgeInsets.all(getProportionateScreenWidth(16)),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text(
+                        Text(
                           'Reconectando ao serviço...',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: getProportionateFontSize(18),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        SizedBox(height: getProportionateScreenHeight(16)),
                         const CircularProgressIndicator(),
                         if (_error != null) ...[
-                          const SizedBox(height: 16),
+                          SizedBox(height: getProportionateScreenHeight(16)),
                           Text(
                             _error!,
-                            style: const TextStyle(
-                              fontSize: 14,
+                            style: TextStyle(
+                              fontSize: getProportionateFontSize(14),
                               color: kError,
                             ),
                             textAlign: TextAlign.center,

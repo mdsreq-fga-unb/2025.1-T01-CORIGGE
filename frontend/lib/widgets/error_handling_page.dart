@@ -106,10 +106,11 @@ class ErrorHandlingPage extends StatelessWidget {
                         ),
                       ],
                       if (imgAsset == "assets/images/logo_corigge.svg") ...[
-                        const Text(
+                        Text(
                           "Ops algo deu errado!",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
+                              fontWeight: FontWeight.bold,
+                              fontSize: getProportionateFontSize(20)),
                           textAlign: TextAlign.center,
                         ),
                         SizedBox(
@@ -120,7 +121,7 @@ class ErrorHandlingPage extends StatelessWidget {
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: kError,
-                              fontSize: 15),
+                              fontSize: getProportionateFontSize(15)),
                           textAlign: TextAlign.center,
                         ),
                       ] else ...[

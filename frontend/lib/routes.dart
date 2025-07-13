@@ -1,5 +1,6 @@
 import 'package:corigge/features/home/presentation/pages/home_page.dart';
 import 'package:corigge/features/login/presentation/page/login_page.dart';
+import 'package:corigge/features/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
@@ -85,6 +86,9 @@ class Routes {
     },
     '/home': (context, state) {
       return const HomePage();
+    },
+    '/profile': (context, state) {
+      return const ProfileScreen();
     },
     '/registro': (context, state) {
       return const RegisterPage();

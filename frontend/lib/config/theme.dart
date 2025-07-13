@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'size_config.dart';
 
 // Primary Colors
 const kPrimary = Color(0xFF2D3250); // Deep Navy Blue
@@ -11,6 +12,9 @@ const kSurface = Colors.white;
 const kError = Color(0xFFDC3545); // Modern Red
 const kWarning = Color(0xFFFFC107); // Vibrant Amber
 const kSuccess = Color(0xFF28A745); // Fresh Green
+
+// Border Radius
+const kDefaultBorderRadius = 5.0; // Less round border radius
 
 // On Colors (text/icon colors for each surface)
 const kOnPrimary = Colors.white;
@@ -83,13 +87,15 @@ ThemeData theme() {
 
 InputDecorationTheme inputDecorationTheme() {
   OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-    borderRadius: BorderRadius.circular(28),
+    borderRadius: BorderRadius.circular(kDefaultBorderRadius),
     borderSide: const BorderSide(color: kPrimary),
-    gapPadding: 10,
+    gapPadding: getProportionateScreenWidth(10),
   );
   return InputDecorationTheme(
     floatingLabelBehavior: FloatingLabelBehavior.always,
-    contentPadding: const EdgeInsets.symmetric(horizontal: 42, vertical: 20),
+    contentPadding: EdgeInsets.symmetric(
+        horizontal: getProportionateScreenWidth(42),
+        vertical: getProportionateScreenHeight(20)),
     enabledBorder: outlineInputBorder,
     focusedBorder: outlineInputBorder,
     border: outlineInputBorder,
@@ -103,10 +109,14 @@ ElevatedButtonThemeData elevatedButtonTheme() {
     style: ElevatedButton.styleFrom(
       backgroundColor: kSurface,
       foregroundColor: kOnSurface,
-      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+      padding: EdgeInsets.symmetric(
+          horizontal: getProportionateScreenWidth(40),
+          vertical: getProportionateScreenHeight(15)),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30),
-        side: const BorderSide(color: Color(0xFFDDDDDD), width: 1),
+        borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+        side: BorderSide(
+            color: const Color(0xFFDDDDDD),
+            width: getProportionateScreenWidth(1)),
       ),
       elevation: 5,
     ),
@@ -117,8 +127,8 @@ TextButtonThemeData textButtonTheme() {
   return TextButtonThemeData(
     style: TextButton.styleFrom(
       foregroundColor: kPrimary,
-      textStyle: const TextStyle(
-        fontSize: 16,
+      textStyle: TextStyle(
+        fontSize: getProportionateFontSize(16),
         fontWeight: FontWeight.w500,
       ),
     ),
@@ -130,36 +140,36 @@ TextTheme textTheme(bool isDark) {
   return TextTheme(
     displayLarge: TextStyle(
       color: textColor,
-      fontSize: 48,
+      fontSize: getProportionateFontSize(48),
       fontWeight: FontWeight.bold,
     ),
     displayMedium: TextStyle(
       color: textColor,
-      fontSize: 32,
+      fontSize: getProportionateFontSize(32),
       fontWeight: FontWeight.bold,
     ),
     displaySmall: TextStyle(
       color: textColor,
-      fontSize: 24,
+      fontSize: getProportionateFontSize(24),
       fontWeight: FontWeight.bold,
     ),
     headlineMedium: TextStyle(
       color: textColor,
-      fontSize: 20,
+      fontSize: getProportionateFontSize(20),
       fontWeight: FontWeight.w600,
     ),
     titleLarge: TextStyle(
       color: textColor,
-      fontSize: 18,
+      fontSize: getProportionateFontSize(18),
       fontWeight: FontWeight.w500,
     ),
     bodyLarge: TextStyle(
       color: textColor,
-      fontSize: 16,
+      fontSize: getProportionateFontSize(16),
     ),
     bodyMedium: TextStyle(
       color: textColor,
-      fontSize: 14,
+      fontSize: getProportionateFontSize(14),
     ),
   );
 }
@@ -174,7 +184,7 @@ AppBarTheme appBarTheme(bool isDark) {
     iconTheme: IconThemeData(color: isDark ? kOnSurfaceDark : kPrimary),
     titleTextStyle: TextStyle(
       color: isDark ? kOnSurfaceDark : kPrimary,
-      fontSize: 24,
+      fontSize: getProportionateFontSize(24),
       fontWeight: FontWeight.bold,
     ),
   );

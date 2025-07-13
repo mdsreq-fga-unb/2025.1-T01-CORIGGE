@@ -17,6 +17,7 @@ export const UsersController: EndpointController = {
     routes: {
         'create': new Pair<RequestType, (req: Request, res: Response) => Promise<Response | void>>(RequestType.POST, createUser),
         'exists': new Pair<RequestType, (req: Request, res: Response) => Promise<Response | void>>(RequestType.GET, checkUserExists),
+        'update': new Pair<RequestType, (req: Request, res: Response) => Promise<Response | void>>(RequestType.PUT, updateUser),
     }
 }
 
@@ -69,6 +70,41 @@ async function createUser(req: Request, res: Response): Promise<Response | void>
     }
 
     logInfo("User created", user);
+    return res.status(200).json(user.data);
+}
+
+async function updateUser(req: Request, res: Response): Promise<Response | void> {
+    logInfo("Updating user");
+
+    if (!req.body.id_user) {
+        logError("Missing user ID");
+        return res.status(400).json({ error: "Missing user ID" });
+    }
+
+    const updateData: any = {};
+
+    if (req.body.nome_completo) updateData.nome_completo = req.body.nome_completo;
+    if (req.body.phone_number) updateData.phone_number = req.body.phone_number;
+    if (req.body.id_escola) updateData.id_escola = req.body.id_escola;
+
+    if (Object.keys(updateData).length === 0) {
+        logError("No fields to update");
+        return res.status(400).json({ error: "No fields to update" });
+    }
+
+    const user = await SupabaseWrapper.get()
+        .from('users')
+        .update(updateData)
+        .eq('id_user', req.body.id_user)
+        .select()
+        .single();
+
+    if (user.error) {
+        logError("Error updating user", user.error);
+        return res.status(500).json({ error: "Error updating user" });
+    }
+
+    logInfo("User updated", user.data);
     return res.status(200).json(user.data);
 }
 

@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:brasil_fields/brasil_fields.dart';
 
+import '../../../../config/size_config.dart';
 import '../../../../config/theme.dart';
 import '../../../../models/escola_model.dart';
 import '../../../../services/escolas_service.dart';
@@ -185,210 +186,222 @@ class _RegisterPageState extends State<RegisterPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(height: getProportionateScreenHeight(16)),
                   Text(
-                    'CADASTRO',
+                    'Registrar',
                     style: TextStyle(
-                      fontSize: 48,
+                      fontSize: getProportionateFontSize(48),
                       fontWeight: FontWeight.bold,
                       color: kOnBackground,
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: getProportionateScreenHeight(16)),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getProportionateScreenWidth(20)),
                     child: Text(
-                      'CRIE SUA CONTA PARA COMEÇAR A USAR O CORIGGE',
-                      textAlign: TextAlign.center,
+                      'Crie sua conta para acessar o sistema de correção automática.',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: getProportionateFontSize(22),
                         color: kOnBackground.withOpacity(0.7),
                         height: 1.5,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(height: 40),
-                  Container(
-                    constraints: const BoxConstraints(maxWidth: 500),
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      color: kSurface,
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          TextFormField(
-                            controller: _nameController,
-                            textCapitalization: TextCapitalization.words,
-                            decoration: InputDecoration(
-                              labelText: 'Nome Completo',
-                              prefixIcon: Icon(Icons.person, color: kPrimary),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                    color: kSecondaryVariant.withOpacity(0.3)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                    color: kSecondaryVariant.withOpacity(0.3)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(color: kPrimary),
-                              ),
-                              filled: true,
-                              fillColor: kBackground.withOpacity(0.05),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Por favor, insira seu nome completo';
-                              }
-                              return null;
-                            },
+                  SizedBox(height: getProportionateScreenHeight(40)),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(
+                        maxWidth: getProportionateScreenWidth(500)),
+                    child: Container(
+                      padding: EdgeInsets.all(getProportionateScreenWidth(24)),
+                      decoration: BoxDecoration(
+                        color: kSurface,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 1,
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
                           ),
-                          const SizedBox(height: 20),
-                          TextFormField(
-                            controller: _emailController,
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: InputDecoration(
-                              labelText: 'E-mail',
-                              prefixIcon: Icon(Icons.email, color: kPrimary),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                    color: kSecondaryVariant.withOpacity(0.3)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                    color: kSecondaryVariant.withOpacity(0.3)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(color: kPrimary),
-                              ),
-                              filled: true,
-                              fillColor: kBackground.withOpacity(0.05),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Por favor, insira seu e-mail';
-                              }
-                              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                  .hasMatch(value)) {
-                                return 'Por favor, insira um e-mail válido';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          TextFormField(
-                            controller: _phoneController,
-                            keyboardType: TextInputType.phone,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              TelefoneInputFormatter(),
-                            ],
-                            decoration: InputDecoration(
-                              labelText: 'Telefone',
-                              prefixIcon: Icon(Icons.phone, color: kPrimary),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                    color: kSecondaryVariant.withOpacity(0.3)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(
-                                    color: kSecondaryVariant.withOpacity(0.3)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide: BorderSide(color: kPrimary),
-                              ),
-                              filled: true,
-                              fillColor: kBackground.withOpacity(0.05),
-                              hintText: '(99) 99999-9999',
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Por favor, insira seu telefone';
-                              }
-                              if (value.length < 14) {
-                                return 'Por favor, insira um telefone válido';
-                              }
-                              return null;
-                            },
-                          ),
-                          const SizedBox(height: 20),
-                          DropdownSearchCustom<EscolaModel>(
-                            hintText: 'Escola',
-                            prefixIcon: Icons.school,
-                            items: _escolas,
-                            selectedItem: _selectedSchool,
-                            itemAsString: (escola) => escola.nome,
-                            onChanged: (escola) {
-                              _selectedSchool = escola;
-                              WidgetsBinding.instance.addPostFrameCallback((_) {
-                                setState(() {});
-                              });
-                            },
-                            compareFn: (a, b) => a.id == b.id,
-                          ),
-                          const SizedBox(height: 20),
-                          if (_getMissingFieldsText().isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 10),
-                              child: Text(
-                                _getMissingFieldsText(),
-                                style: TextStyle(
-                                  color: kOnBackground,
-                                  fontSize: 14,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                          if (_isEmailValid &&
-                              _isPhoneValid &&
-                              _isNameValid &&
-                              _selectedSchool != null) ...[
-                            const SizedBox(height: 30),
-                            DefaultButtonWidget(
-                              onPressed: _isLoading ? null : _handleRegister,
-                              disabled: _isLoading,
-                              child: _isLoading
-                                  ? const SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        valueColor:
-                                            AlwaysStoppedAnimation<Color>(
-                                                Colors.white),
-                                      ),
-                                    )
-                                  : const Text(
-                                      'CADASTRAR',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                            ),
-                          ]
                         ],
+                      ),
+                      child: Form(
+                        key: _formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            TextFormField(
+                              controller: _nameController,
+                              textCapitalization: TextCapitalization.words,
+                              decoration: InputDecoration(
+                                labelText: 'Nome Completo',
+                                prefixIcon: Icon(Icons.person, color: kPrimary),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color:
+                                          kSecondaryVariant.withOpacity(0.3)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color:
+                                          kSecondaryVariant.withOpacity(0.3)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(color: kPrimary),
+                                ),
+                                filled: true,
+                                fillColor: kBackground.withOpacity(0.05),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Por favor, insira seu nome completo';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                              controller: _emailController,
+                              keyboardType: TextInputType.emailAddress,
+                              decoration: InputDecoration(
+                                labelText: 'E-mail',
+                                prefixIcon: Icon(Icons.email, color: kPrimary),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color:
+                                          kSecondaryVariant.withOpacity(0.3)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color:
+                                          kSecondaryVariant.withOpacity(0.3)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(color: kPrimary),
+                                ),
+                                filled: true,
+                                fillColor: kBackground.withOpacity(0.05),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Por favor, insira seu e-mail';
+                                }
+                                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                    .hasMatch(value)) {
+                                  return 'Por favor, insira um e-mail válido';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                              controller: _phoneController,
+                              keyboardType: TextInputType.phone,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                TelefoneInputFormatter(),
+                              ],
+                              decoration: InputDecoration(
+                                labelText: 'Telefone',
+                                prefixIcon: Icon(Icons.phone, color: kPrimary),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color:
+                                          kSecondaryVariant.withOpacity(0.3)),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color:
+                                          kSecondaryVariant.withOpacity(0.3)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(color: kPrimary),
+                                ),
+                                filled: true,
+                                fillColor: kBackground.withOpacity(0.05),
+                                hintText: '(99) 99999-9999',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Por favor, insira seu telefone';
+                                }
+                                if (value.length < 14) {
+                                  return 'Por favor, insira um telefone válido';
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            DropdownSearchCustom<EscolaModel>(
+                              hintText: 'Escola',
+                              prefixIcon: Icons.school,
+                              items: _escolas,
+                              selectedItem: _selectedSchool,
+                              itemAsString: (escola) => escola.nome,
+                              onChanged: (escola) {
+                                _selectedSchool = escola;
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  setState(() {});
+                                });
+                              },
+                              compareFn: (a, b) => a.id == b.id,
+                            ),
+                            const SizedBox(height: 20),
+                            if (_getMissingFieldsText().isNotEmpty)
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                  _getMissingFieldsText(),
+                                  style: TextStyle(
+                                    color: kOnBackground,
+                                    fontSize: 14,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            if (_isEmailValid &&
+                                _isPhoneValid &&
+                                _isNameValid &&
+                                _selectedSchool != null) ...[
+                              const SizedBox(height: 30),
+                              DefaultButtonWidget(
+                                onPressed: _isLoading ? null : _handleRegister,
+                                disabled: _isLoading,
+                                child: _isLoading
+                                    ? const SizedBox(
+                                        height: 20,
+                                        width: 20,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                  Colors.white),
+                                        ),
+                                      )
+                                    : const Text(
+                                        'CADASTRAR',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                              ),
+                            ]
+                          ],
+                        ),
                       ),
                     ),
                   ),

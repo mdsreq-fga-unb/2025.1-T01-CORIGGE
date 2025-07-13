@@ -71,12 +71,12 @@ class AppBarCustom {
       elevation: 0,
       title: Row(
         children: [
-          const SizedBox(width: 8),
+          SizedBox(width: getProportionateScreenWidth(8)),
           Text(
             'Corigge',
             style: TextStyle(
               color: Colors.brown[800],
-              fontSize: 24,
+              fontSize: getProportionateFontSize(24),
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -88,10 +88,11 @@ class AppBarCustom {
           onPressed: () {
             // Ação para o botão Sobre
           },
-          color: Colors.transparent,
+          color: kPrimary,
           child: Text(
             'Sobre',
-            style: TextStyle(color: kPrimary, fontSize: 16),
+            style: TextStyle(
+                color: Colors.white, fontSize: getProportionateFontSize(16)),
           ),
         ),
         DefaultButtonWidget(
@@ -99,12 +100,38 @@ class AppBarCustom {
           onPressed: () {
             // Ação para o botão Contato
           },
-          color: Colors.transparent,
+          color: kPrimary,
           child: Text(
             'Contato',
-            style: TextStyle(color: kPrimary, fontSize: 16),
+            style: TextStyle(
+                color: Colors.white, fontSize: getProportionateFontSize(16)),
           ),
         ),
+        if (SharedPreferencesHelper.currentUser != null)
+          Builder(
+            builder: (context) => DefaultButtonWidget(
+              expanded: false,
+              onPressed: () {
+                context.go('/profile');
+              },
+              color: kPrimary,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.person,
+                      color: Colors.white,
+                      size: getProportionateScreenWidth(20)),
+                  SizedBox(width: getProportionateScreenWidth(4)),
+                  Text(
+                    'Perfil',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: getProportionateFontSize(16)),
+                  ),
+                ],
+              ),
+            ),
+          ),
         if (SharedPreferencesHelper.currentUser != null)
           Builder(
             builder: (context) => DefaultButtonWidget(
@@ -115,21 +142,25 @@ class AppBarCustom {
                   context.go('/login');
                 }
               },
-              color: Colors.transparent,
+              color: kPrimary,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.logout, color: kPrimary, size: 20),
-                  const SizedBox(width: 4),
+                  Icon(Icons.logout,
+                      color: Colors.white,
+                      size: getProportionateScreenWidth(20)),
+                  SizedBox(width: getProportionateScreenWidth(4)),
                   Text(
                     'Sair',
-                    style: TextStyle(color: kPrimary, fontSize: 16),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: getProportionateFontSize(16)),
                   ),
                 ],
               ),
             ),
           ),
-        const SizedBox(width: 16),
+        SizedBox(width: getProportionateScreenWidth(16)),
       ],
     );
   }
@@ -138,8 +169,8 @@ class AppBarCustom {
     return DefaultButtonWidget(
       onPressed: onPressed,
       color: Colors.transparent,
-      width: 40,
-      height: 40,
+      width: getProportionateScreenWidth(40),
+      height: getProportionateScreenHeight(40),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
         side: const BorderSide(color: kPrimary),

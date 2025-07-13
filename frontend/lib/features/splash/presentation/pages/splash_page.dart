@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../config/size_config.dart';
 import '../../../../config/theme.dart';
 import '../../../../widgets/app_bar_custom.dart';
 import '../../../../widgets/default_button_widget.dart';
@@ -41,17 +42,14 @@ class _SplashPageState extends State<SplashPage> {
                 const CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(kSurface),
                 ),
-              if (!widget.isError) const SizedBox(height: 16),
+              if (!widget.isError)
+                SizedBox(height: getProportionateScreenHeight(16)),
               Text(
-                widget.loadingStatus!,
-                style: const TextStyle(
-                  color: kSurface,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
+                widget.loadingStatus ?? 'Carregando...',
+                style: TextStyle(fontSize: getProportionateFontSize(16)),
               ),
               if (widget.isError) ...[
-                const SizedBox(height: 16),
+                SizedBox(height: getProportionateScreenHeight(16)),
                 DefaultButtonWidget(
                   onPressed: () {
                     context.go('/login');
@@ -69,7 +67,7 @@ class _SplashPageState extends State<SplashPage> {
             ],
             SvgPicture.asset(
               "assets/images/logo_corigge.svg",
-              height: 300,
+              height: getProportionateScreenHeight(300),
             ),
           ],
         ),

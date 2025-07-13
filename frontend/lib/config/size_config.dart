@@ -68,5 +68,6 @@ double getProportionateScreenWidth(double inputWidth) {
 
 double getProportionateFontSize(double figmaFontSize) {
   return (figmaFontSize / SizeConfig.figmaScreenHeight) *
-      SizeConfig.screenHeight;
+      SizeConfig.screenHeight *
+      1.3;
 }

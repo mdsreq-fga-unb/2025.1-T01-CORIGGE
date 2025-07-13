@@ -152,7 +152,7 @@ class Utils {
         flushbar.dismiss();
       },
       message: message,
-      margin: const EdgeInsets.all(8),
+      margin: EdgeInsets.all(getProportionateScreenWidth(8)),
       borderRadius: BorderRadius.circular(8),
       backgroundColor: color ?? backgroundColor,
       duration: const Duration(seconds: 3),
@@ -363,7 +363,9 @@ class Utils {
             ),
             Text(
               text,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: getProportionateFontSize(20)),
             ),
             const CircularProgressIndicator()
           ]);
@@ -413,7 +415,9 @@ class Utils {
                         decoration: BoxDecoration(
                             color: kBackground,
                             borderRadius: BorderRadius.circular(40),
-                            border: Border.all(color: kPrimary, width: 2)),
+                            border: Border.all(
+                                color: kPrimary,
+                                width: getProportionateScreenWidth(2))),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: getProportionateScreenWidth(20),
@@ -425,7 +429,7 @@ class Utils {
                                 title,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 20,
+                                    fontSize: getProportionateFontSize(20),
                                     color: kSurface),
                                 textAlign: TextAlign.center,
                               ),
@@ -595,7 +599,7 @@ class Utils {
           Text(
             text,
             textAlign: TextAlign.center,
-            style: topTextStyle ?? TextStyle(color: kSurface, fontSize: 16),
+            style: topTextStyle ?? TextStyle(color: kSurface, fontSize: getProportionateFontSize(16)),
           ),
           SizedBox(
             height: getProportionateScreenHeight(20),
@@ -713,7 +717,7 @@ class Utils {
                   : getProportionateScreenHeight(450),
               child: Text(
                 text,
-                style: TextStyle(color: kSurface, fontSize: 16),
+                style: TextStyle(color: kSurface, fontSize: getProportionateFontSize(16)),
               ),
             ),
             SizedBox(
