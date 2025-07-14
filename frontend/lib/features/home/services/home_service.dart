@@ -1,4 +1,6 @@
 import 'package:corigge/features/templates/data/answer_sheet_identifiable_box.dart';
+import 'package:corigge/features/templates/data/answer_sheet_card_model.dart';
+import 'package:corigge/features/templates/data/answer_sheet_template_model.dart';
 import 'package:corigge/utils/image_bounding_box/data/box_details.dart';
 import 'package:corigge/utils/utils.dart';
 import 'dart:math';
@@ -326,6 +328,97 @@ class HomeService {
     }
 
     return uniqueXPositions.length;
+  }
+
+  /// Extracts and compares answers for export
+  /// Returns a list of maps: one per student/card, with their answers and comparison to gabarito
+  static List<Map<String, dynamic>> exportAlunosResults({
+    required List<AnswerSheetCardModel> cards,
+    required AnswerSheetTemplateModel template,
+    required List<Map<String, dynamic>> gabarito,
+  }) {
+    // Find question and answer columns in gabarito
+    if (gabarito.isEmpty) return [];
+    String? questionColumn;
+    String? answerColumn;
+    final gabaritoKeys = gabarito.first.keys.toList();
+    for (final key in gabaritoKeys) {
+      if (key.contains('questao') ||
+          key.contains('question') ||
+          key.contains('numero')) {
+        questionColumn = key;
+      }
+      if (key.contains('resposta') ||
+          key.contains('answer') ||
+          key.contains('gabarito')) {
+        answerColumn = key;
+      }
+    }
+    if (questionColumn == null || answerColumn == null) return [];
+
+    // Build gabarito map: question number -> correct answer (uppercase)
+    final Map<int, String> gabaritoMap = {
+      for (final row in gabarito)
+        if (int.tryParse(row[questionColumn].toString()) != null)
+          int.parse(row[questionColumn].toString()):
+              row[answerColumn].toString().toUpperCase()
+    };
+
+    // Get question boxes from template
+    final questionBoxes = template.boxes
+        .where((box) =>
+            box.box.label == BoxDetailsType.colunaDeQuestoes ||
+            box.box.label == BoxDetailsType.typeB)
+        .toList();
+
+    // For each card, extract answers and compare
+    List<Map<String, dynamic>> results = [];
+    for (final card in cards) {
+      Map<int, String> studentAnswers = {};
+      // For each question box
+      for (final box in questionBoxes) {
+        final startingQuestion = extractStartingQuestionNumber(box.name);
+        final questionCount = calculateQuestionCount(box);
+        final circles = card.circlesPerBox[box.name] ?? [];
+        // For each question in this box
+        for (int i = 0; i < questionCount; i++) {
+          final questionNumber = startingQuestion + i;
+          // Find filled circle for this question (row)
+          // Assume circles are ordered by row (question), then by option
+          final rowCircles = circles
+              .skip(i * (circles.length ~/ questionCount))
+              .take(circles.length ~/ questionCount)
+              .toList();
+          int filledIdx = rowCircles.indexWhere((c) => c.filled);
+          String? answer;
+          if (filledIdx != -1) {
+            // Map index to letter (A, B, C, ...)
+            answer = String.fromCharCode('A'.codeUnitAt(0) + filledIdx);
+          } else {
+            answer = '';
+          }
+          studentAnswers[questionNumber] = answer;
+        }
+      }
+      // Build result row for this card
+      List<Map<String, dynamic>> answers = [];
+      for (final entry in studentAnswers.entries) {
+        final q = entry.key;
+        final studentAnswer = entry.value;
+        final correctAnswer = gabaritoMap[q] ?? '';
+        answers.add({
+          'question': q,
+          'student_answer': studentAnswer,
+          'correct_answer': correctAnswer,
+          'is_correct': studentAnswer == correctAnswer,
+        });
+      }
+      results.add({
+        'student': card.documentOriginalName,
+        'answers': answers,
+      });
+    }
+    return results;
   }
 }
 

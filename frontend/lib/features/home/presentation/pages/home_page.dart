@@ -1073,6 +1073,65 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                       ),
+                      // Export button (at the end)
+                      SizedBox(height: getProportionateScreenHeight(24)),
+                      DefaultButtonWidget(
+                        onPressed: (selectedTemplate != null &&
+                                analyzedCards.isNotEmpty &&
+                                gabaritoData.isNotEmpty)
+                            ? () async {
+                                // Generate results
+                                final results = HomeService.exportAlunosResults(
+                                  cards: analyzedCards,
+                                  template: selectedTemplate!,
+                                  gabarito: gabaritoData,
+                                );
+                                // Convert to CSV
+                                String csv =
+                                    'Aluno,Questão,Resposta,Correta,Acertou\n';
+                                for (final aluno in results) {
+                                  final student = aluno['student'];
+                                  for (final ans in aluno['answers']) {
+                                    csv +=
+                                        '"$student","${ans['question'].toString()}","${ans['student_answer']}","${ans['correct_answer']}","${(ans['is_correct'] ? "1" : "0")}"\n';
+                                  }
+                                }
+                                // Show dialog with CSV (placeholder for real export)
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: Text('Exportar Resultados (CSV)'),
+                                    content: SingleChildScrollView(
+                                      child: SelectableText(csv),
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                        child: Text('Fechar'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }
+                            : null,
+                        color: (selectedTemplate != null &&
+                                analyzedCards.isNotEmpty &&
+                                gabaritoData.isNotEmpty)
+                            ? kSecondaryVariant
+                            : kSecondaryVariant.withOpacity(0.5),
+                        child: Text(
+                          'EXPORTAR RESULTADOS',
+                          style: TextStyle(
+                            fontSize: getProportionateFontSize(16),
+                            color: (selectedTemplate != null &&
+                                    analyzedCards.isNotEmpty &&
+                                    gabaritoData.isNotEmpty)
+                                ? kSurface
+                                : kSurface.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
