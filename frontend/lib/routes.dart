@@ -14,10 +14,22 @@ import 'features/splash/domain/repositories/auth_service.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
 import 'features/templates/presentation/pages/template_selection_page.dart';
 
+// Importar os wrappers
+import 'package:corigge/services/auth_service_wrapper.dart';
+import 'package:corigge/services/escolas_service_wrapper.dart';
+import 'package:corigge/cache/shared_preferences_helper_wrapper.dart';
+import 'package:corigge/utils/utils_wrapper.dart';
+
 final log = Environment.getLogger('routes');
 
 class Routes {
   static List<String> routesThatNeedNoLogin = ["/login", "/registro", "/"];
+
+  // Instâncias dos wrappers
+  static final _authServiceWrapper = AuthServiceWrapper();
+  static final _escolasServiceWrapper = EscolasServiceWrapper();
+  static final _sharedPreferencesHelperWrapper = SharedPreferencesHelperWrapper();
+  static final _utilsWrapper = UtilsWrapper();
 
   static Future<void> checkLoggedIn(
     BuildContext context, {
@@ -82,13 +94,18 @@ class Routes {
       return const SplashPage();
     },
     '/login': (context, state) {
-      return const LoginPage();
+      return LoginPage(authServiceWrapper: _authServiceWrapper);
     },
     '/home': (context, state) {
       return const HomePage();
     },
     '/profile': (context, state) {
-      return const ProfileScreen();
+      return ProfileScreen(
+        authServiceWrapper: _authServiceWrapper,
+        escolasServiceWrapper: _escolasServiceWrapper,
+        sharedPreferencesHelperWrapper: _sharedPreferencesHelperWrapper,
+        utilsWrapper: _utilsWrapper,
+      );
     },
     '/registro': (context, state) {
       return const RegisterPage();

@@ -7,11 +7,13 @@ import 'package:path/path.dart';
 
 import '../../../../config/size_config.dart';
 import '../../../../config/theme.dart';
-import '../../../splash/domain/repositories/auth_service.dart';
+import 'package:corigge/services/auth_service_wrapper.dart'; // Importar o wrapper
 import 'package:corigge/widgets/default_button_widget.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final AuthServiceWrapper authServiceWrapper; // Adicionar como dependência
+
+  const LoginPage({super.key, required this.authServiceWrapper});
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +217,7 @@ class LoginPage extends StatelessWidget {
   Widget _buildSignInButton(BuildContext context) {
     return DefaultButtonWidget(
       onPressed: () async {
-        var result = await AuthService.signInWithGoogle();
+        var result = await authServiceWrapper.signInWithGoogle(); // Usar o wrapper
 
         result.fold((l) {
           if (l == 'User not found') {

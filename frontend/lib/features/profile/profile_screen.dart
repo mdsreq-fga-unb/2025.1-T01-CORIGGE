@@ -1,11 +1,11 @@
-import 'package:corigge/cache/shared_preferences_helper.dart';
+import 'package:corigge/cache/shared_preferences_helper_wrapper.dart';
 import 'package:corigge/config/size_config.dart';
 import 'package:corigge/config/theme.dart';
 import 'package:corigge/features/login/data/user_model.dart';
-import 'package:corigge/features/splash/domain/repositories/auth_service.dart';
+import 'package:corigge/services/auth_service_wrapper.dart';
 import 'package:corigge/models/escola_model.dart';
-import 'package:corigge/services/escolas_service.dart';
-import 'package:corigge/utils/utils.dart';
+import 'package:corigge/services/escolas_service_wrapper.dart';
+import 'package:corigge/utils/utils_wrapper.dart';
 import 'package:corigge/widgets/app_bar_custom.dart';
 import 'package:corigge/widgets/default_button_widget.dart';
 import 'package:corigge/widgets/dropdown_search_custom.dart';
@@ -15,7 +15,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final AuthServiceWrapper authServiceWrapper;
+  final EscolasServiceWrapper escolasServiceWrapper;
+  final SharedPreferencesHelperWrapper sharedPreferencesHelperWrapper;
+  final UtilsWrapper utilsWrapper;
+
+  const ProfileScreen({
+    super.key,
+    required this.authServiceWrapper,
+    required this.escolasServiceWrapper,
+    required this.sharedPreferencesHelperWrapper,
+    required this.utilsWrapper,
+  });
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -41,7 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     _isLoadingEscolas = true;
 
-    final result = await EscolasService.getEscolas();
+    final result = await widget.escolasServiceWrapper.getEscolas();
 
     result.fold((error) {
       _errorMessageEscolas = error;
@@ -70,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _loadCurrentUser() {
-    _currentUser = SharedPreferencesHelper.currentUser;
+    _currentUser = widget.sharedPreferencesHelperWrapper.currentUser;
     if (_currentUser != null) {
       _nameController.text = _currentUser!.name ?? '';
       _phoneController.text = _currentUser!.phoneNumber ?? '';
@@ -96,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     if (_currentUser == null) {
-      Utils.showTopSnackBar(context, "Erro: usuário não encontrado",
+      widget.utilsWrapper.showTopSnackBar(context, "Erro: usuário não encontrado",
           color: kError);
       return;
     }
@@ -110,22 +121,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         idEscola: _selectedSchool?.id,
       );
 
-      final result = await AuthService.databaseUpdateUser(updatedUser);
+      final result = await widget.authServiceWrapper.databaseUpdateUser(updatedUser);
 
       result.fold(
         (error) {
-          Utils.showTopSnackBar(context, "Erro ao atualizar perfil: $error",
+          widget.utilsWrapper.showTopSnackBar(context, "Erro ao atualizar perfil: $error",
               color: kError);
         },
         (user) {
-          SharedPreferencesHelper.currentUser = user;
+          widget.sharedPreferencesHelperWrapper.currentUser = user;
           setState(() => _currentUser = user);
-          Utils.showTopSnackBar(context, "Perfil atualizado com sucesso!",
+          widget.utilsWrapper.showTopSnackBar(context, "Perfil atualizado com sucesso!",
               color: kSuccess);
         },
       );
     } catch (e) {
-      Utils.showTopSnackBar(context, "Erro ao atualizar perfil: $e",
+      widget.utilsWrapper.showTopSnackBar(context, "Erro ao atualizar perfil: $e",
           color: kError);
     } finally {
       setState(() => _isLoading = false);
@@ -133,7 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _handleLogout() async {
-    await AuthService.logout();
+    await widget.authServiceWrapper.logout();
     if (mounted) {
       context.go('/login');
     }

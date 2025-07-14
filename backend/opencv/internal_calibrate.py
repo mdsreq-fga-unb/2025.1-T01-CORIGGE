@@ -1300,7 +1300,8 @@ def detect_contour_angle_legacy(img):
     
     Utils.log_info(f"Angle statistics: mean={weighted_angle:.2f}°, std={angle_std:.2f}°, range={angle_range:.2f}°")
     Utils.log_info(f"Individual angles: {[f'{a:.2f}°' for a in angles]}")
-    Utils.log_info(f"Individual scores: {[f'{r['score']:.3f}' for r in valid_results]}")
+    scores_str = ", ".join([f"{r['score']:.3f}" for r in valid_results])
+    Utils.log_info(f"Individual scores: [[{scores_str}]]")
     
     # Create final result
     final_result = {
