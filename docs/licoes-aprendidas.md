@@ -33,11 +33,27 @@
 
 ## Unidade 3
 
+### Definição e Escrita de User Stories Significativas
+**Desafio:** A equipe teve dificuldades para elaborar User Stories significativas e completas, com critérios de aceitação claros, o que prejudicou o entendimento e alinhamento das entregas.
+
+**Ação de melhoria:** Realizar sessões específicas de planejamento para escrita de User Stories, utilizando técnicas como o método INVEST e exemplos práticos para guiar a equipe.
+
+### Integração entre as Equipes de Front-end e Back-end
+**Desafio:** Houve dificuldades iniciais de comunicação e planejamento entre as equipes de front-end e back-end, causando retrabalho e atrasos no desenvolvimento integrado.
+
+**Ação de melhoria:** Definir interfaces e contratos de maneira clara e detalhada no início de cada sprint, promovendo reuniões de alinhamento para verificar a compatibilidade e integração dos entregáveis.
+
+### Testes e Validação na Plataforma do Cliente
+**Desafio:** Nos testes iniciais realizados diretamente na plataforma do cliente, a equipe encontrou dificuldades para interpretar corretamente o ambiente e realizar as validações esperadas.
+
+**Ação de melhoria:** Contar com o auxílio de um funcionário experiente da empresa para guiar e esclarecer dúvidas específicas, o que garantiu uma adaptação mais rápida e uma execução mais assertiva dos testes.
+
 ## Unidade 4
 
 ## Histórico de Versão
 
-| Data       | Versão | Descrição                       | Autor(es)      | Revisor(es) |
-| ---------- | ------ | ------------------------------- | -------------- | ----------- |
-| 19/04/2025 | 1.0    | Criação inicial da documentação | Nathan Abreu | Marcelo Adrian |
-| 04/06/2025 | 1.1    | Adição das lições aprendidas na unidade 2 | Pedro Victor |Nathan Abreu  |
+| Data       | Versão | Descrição                                 | Autor(es)      | Revisor(es)    |
+| ---------- | ------ | ----------------------------------------- | -------------- | -------------- |
+| 19/04/2025 | 1.0    | Criação inicial da documentação           | Nathan Abreu   | Marcelo Adrian |
+| 04/06/2025 | 1.1    | Adição das lições aprendidas na unidade 2 | Pedro Victor   | Nathan Abreu   |
+| 24/06/2025 | 1.2    | Unidade 3                                 | Marcelo Adrian | Nathan Abreu   |
