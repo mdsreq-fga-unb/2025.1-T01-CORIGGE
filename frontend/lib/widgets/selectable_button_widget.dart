@@ -18,7 +18,6 @@ class SelectableButtonWidget extends StatefulWidget {
       this.borderSide,
       this.elevation,
       this.disabled = false,
-      this.expands = true,
       this.width,
       this.shape,
       this.expanded = false});
@@ -34,7 +33,6 @@ class SelectableButtonWidget extends StatefulWidget {
   final Color? selectedColor;
   final Color? color;
   final bool? selected;
-  final bool expands;
   final Duration? colorChangeDuration;
   final double? width;
   final ShapeBorder? shape;
@@ -265,9 +263,7 @@ class _SelectableButtonWidgetState extends State<SelectableButtonWidget>
 
     if (widget.width == null) {
       button = SizedBox(
-        width: widget.expanded
-            ? double.infinity
-            : (widget.expands ? double.infinity : null),
+        width: widget.expanded ? double.infinity : null,
         height: widget.height,
         child: button,
       );

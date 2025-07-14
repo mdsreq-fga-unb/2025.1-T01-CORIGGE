@@ -164,4 +164,24 @@ class SharedPreferencesHelper {
   static Future<void> clearCards() async {
     await _prefs?.remove('answer_sheet_cards');
   }
+
+  static Future<void> saveGabarito(List<Map<String, dynamic>> gabarito) async {
+    final gabaritoJson = json.encode(gabarito);
+    await _prefs?.setString('gabarito_data', gabaritoJson);
+  }
+
+  static Future<Either<String, List<Map<String, dynamic>>>>
+      loadGabarito() async {
+    try {
+      final gabaritoJson = _prefs?.getString('gabarito_data') ?? '[]';
+      final List<dynamic> gabaritoData = json.decode(gabaritoJson);
+      return Right(gabaritoData.cast<Map<String, dynamic>>());
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  static Future<void> clearGabarito() async {
+    await _prefs?.remove('gabarito_data');
+  }
 }

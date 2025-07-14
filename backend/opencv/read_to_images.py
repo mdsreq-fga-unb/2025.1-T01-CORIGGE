@@ -12,7 +12,7 @@ import cv2
 from pdf2image import convert_from_bytes
 import json
 from find_circles import find_circles, find_circles_cv2
-from legacy_calibrate import (
+from internal_calibrate import (
     apply_calibration_to_image,
 )
 from fastapi import UploadFile
@@ -117,31 +117,64 @@ async def read_to_images(file: UploadFile, needs_calibration=True, on_progress=N
                     poppler_error += "This executable was built without poppler support. Please rebuild with poppler included."
                 else:
                     poppler_error += "Please install poppler-utils for your system."
-                raise Exception(poppler_error) from e
-            raise
-
-        # Convert PIL images to base64
-        result = {"images": {}, "image_sizes": {}}
-        for i, image in enumerate(images):
-            # Generate a unique ID for this image
-            image_id = f"image_{random.randint(0, 1000000)}"
-            result["images"][image_id] = image
-            result["image_sizes"][image_id] = {
-                "width": image.width,
-                "height": image.height
-            }
-
-        return result
+                Utils.log_error(poppler_error)
+                if on_progress:
+                    await on_progress(poppler_error)
+            
+            return None
     else:
-        # Handle non-PDF files
-        image = Image.open(io.BytesIO(bytes_arr))
-        image_id = f"image_{random.randint(0, 1000000)}"
-        return {
-            "images": {image_id: image},
-            "image_sizes": {
-                image_id: {
-                    "width": image.width,
-                    "height": image.height
-                }
+        images = [Image.open(io.BytesIO(bytes_arr))]
+        if on_progress:
+            await on_progress("Read image")
+
+    final_json = {
+        "images": {},
+        "image_calibration_rects": {},
+        "image_sizes": {},
+    }
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        for i, image in enumerate(images):
+            if on_progress:
+                await on_progress(f"Processing image {i}...")
+
+            random_hash = random.randbytes(8).hex()
+            image_path = os.path.join(temp_dir, f"image_{random_hash}.png")
+
+            print(f"Saving image to {image_path}")
+
+            # Resize if width is greater than 800
+            if image.width > 800:
+                width_ratio = 800 / image.width
+                image = image.resize(
+                    (int(image.width * width_ratio), int(image.height * width_ratio))
+                )
+
+            # save to file
+            image.save(image_path)
+
+            if needs_calibration:
+                if on_progress:
+                    await on_progress(f"Applying calibration to image {i}")
+
+                img = apply_calibration_to_image(image)
+                img, _alpha, _beta = Utils.automatic_brightness_and_contrast(img)
+                img = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+
+                if on_progress:
+                    await on_progress(f"Applied calibration to image {i}")
+
+                final_json["image_calibration_rects"][random_hash] = {"x": 0.0, "y": 0.0}
+            else:
+                img = image
+
+            final_json["images"][random_hash] = img
+            final_json["image_sizes"][random_hash] = {
+                "width": float(img.width),
+                "height": float(img.height),
             }
-        }
+
+    if not needs_calibration:
+        return list(final_json["images"].keys())
+
+    return final_json

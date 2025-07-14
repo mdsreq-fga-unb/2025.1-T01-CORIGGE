@@ -14,7 +14,7 @@ class PythonCircleIdentificationParams {
     this.param2 = 22,
     this.inverseRatioAccumulatorResolution = 1.32,
     this.darknessThreshold = 0.66,
-    this.useFallbackMethod = false,
+    this.useFallbackMethod = true,
   });
 
   factory PythonCircleIdentificationParams.fromJson(Map<String, dynamic> json) {
