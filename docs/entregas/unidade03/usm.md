@@ -7,6 +7,12 @@ Adotamos o método de Mapeamento de Histórias de Usuário para estruturar as de
 
 ---
 
+**Prints**
+
+
+![alt text](image.png)
+![alt text](image-1.png)
+
 ## 👥 Personas
 
 | ID    | Persona                |
@@ -15,6 +21,7 @@ Adotamos o método de Mapeamento de Histórias de Usuário para estruturar as de
 | Us02  | Coordenador            |
 | Us03  | Pais / Responsáveis    |
 | Us04  | Aluno                  |
+
 
 ---
 

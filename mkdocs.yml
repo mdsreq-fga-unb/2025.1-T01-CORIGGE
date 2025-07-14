@@ -1,3 +1,5 @@
+# mkdocs.yml
+
 site_name: Corigge
 site_description: Documentação do projeto Corigge
 theme:
@@ -59,7 +61,8 @@ markdown_extensions:
   - footnotes
   - attr_list
   - md_in_html
-  
+  - toc: # <-- Adicione esta linha e as seguintes
+      permalink: true
+      toc_depth: 3 # <-- Isso vai incluir até os cabeçalhos de nível 3 (###) na TOC
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML
-

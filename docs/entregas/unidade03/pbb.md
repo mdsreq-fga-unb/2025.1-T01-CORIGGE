@@ -36,40 +36,40 @@ O produto a ser construído é um Sistema de Gestão Integrado HealthNet, uma pl
 **Prints do Projeto**
 
 
-![alt text](image.png)
+![alt text](../assets/imagemcompleta.png)
 
 **Personas**
 
 <div style="overflow-x: auto; white-space: nowrap; margin-bottom: 20px;">
-  <img src="/docs/assets/Joao.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/Maria.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/Lívia.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets//Rafael.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/Sra.Clara.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/Sr.Roberto.png" width="250px" style="display: inline-block;" />
+  <img src="../assets/Joao.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/Maria.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/Lívia.png" width="450px" style="display: inline-block;" />
+  <img src="../assets//Rafael.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/Sra.Clara.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/Sr.Roberto.png" width="450px" style="display: inline-block;" />
 </div>
 
 **Funcionalidades**
 
 <div style="overflow-x: auto; white-space: nowrap;">
-  <img src="/docs/assets/func1.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/func2.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/func3.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/func4.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/func05.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/func06.png" width="250px" style="display: inline-block;" />
+  <img src="../assets/func1.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/func2.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/func3.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/func4.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/func05.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/func06.png" width="450px" style="display: inline-block;" />
 </div>
 
 
 **Product Backlog Item - PBI**
 
 <div style="overflow-x: auto; white-space: nowrap;">
-  <img src="/docs/assets/pbi1.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/pbi2.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/pbi3.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/pbi4.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/pbi5.png" width="250px" style="display: inline-block;" />
-  <img src="/docs/assets/pbi6.png" width="250px" style="display: inline-block;" />
+  <img src="../assets/pbi1.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/pbi2.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/pbi3.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/pbi4.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/pbi5.png" width="450px" style="display: inline-block;" />
+  <img src="../assets/pbi6.png" width="450px" style="display: inline-block;" />
 </div>
 
 
