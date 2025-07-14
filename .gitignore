@@ -31,6 +31,7 @@ main_processing_computer_local.spec
 # frontend related
 /frontend/build/
 **/*.zip
+/.venv/
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
@@ -57,3 +58,16 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+.Python
+env/
+ENV/

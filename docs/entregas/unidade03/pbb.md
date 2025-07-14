@@ -33,6 +33,48 @@ O produto a ser construído é um Sistema de Gestão Integrado HealthNet, uma pl
 
 <iframe width="768" height="432" src="https://miro.com/app/live-embed/uXjVIm4FXpA=/?embedMode=view_only_without_ui&moveToViewport=-10835,-12450,20026,11592&embedId=249665201455" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
 
+**Prints do Projeto**
+
+
+![alt text](image.png)
+
+**Personas**
+
+<div style="overflow-x: auto; white-space: nowrap; margin-bottom: 20px;">
+  <img src="/docs/assets/Joao.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/Maria.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/Lívia.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets//Rafael.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/Sra.Clara.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/Sr.Roberto.png" width="250px" style="display: inline-block;" />
+</div>
+
+**Funcionalidades**
+
+<div style="overflow-x: auto; white-space: nowrap;">
+  <img src="/docs/assets/func1.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/func2.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/func3.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/func4.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/func05.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/func06.png" width="250px" style="display: inline-block;" />
+</div>
+
+
+**Product Backlog Item - PBI**
+
+<div style="overflow-x: auto; white-space: nowrap;">
+  <img src="/docs/assets/pbi1.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/pbi2.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/pbi3.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/pbi4.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/pbi5.png" width="250px" style="display: inline-block;" />
+  <img src="/docs/assets/pbi6.png" width="250px" style="display: inline-block;" />
+</div>
+
+
+
+
 ### 1. Persona: Dr. João (Médico Clínico Geral)
 
 -   ***Funcionalidade:*** *Gestão de Prontuário Eletrônico do Paciente (PEP)*

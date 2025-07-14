@@ -42,9 +42,9 @@ nav:
   - Entregas:
       - Unidade 01: entregas/entrega01.md
       - Unidade 02: entregas/entrega02.md
-      - Unidade 3:
-          - PBB: entregas/unidade03/pbb.md
-          - USM: entregas/unidade03/usm.md
+      - Unidade 03: entregas/entrega03.md
+      - PBB: entregas/unidade03/pbb.md
+      - USM: entregas/unidade03/usm.md
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
@@ -52,9 +52,7 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.emoji
   - pymdownx.tabbed
   - admonition
   - tables
@@ -64,5 +62,4 @@ markdown_extensions:
   
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML
-
 
