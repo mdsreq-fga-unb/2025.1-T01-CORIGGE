@@ -52,8 +52,8 @@ async function checkUserExists(req: Request, res: Response): Promise<Response | 
 async function createUser(req: Request, res: Response): Promise<Response | void> {
     logInfo("Creating user");
 
-    if (!req.body.email || !req.body.name || !req.body.phone_number || !req.body.id_escola) {
-        logError("Missing required fields");
+    if (!req.body.email || !req.body.nome_completo || !req.body.phone_number || !req.body.id_escola) {
+        logError("Missing required fields: " + JSON.stringify(req.body));
         return res.status(400).json({ error: "Missing required fields" });
     }
 

@@ -83,7 +83,7 @@ class AppBarCustom {
         ],
       ),
       actions: [
-        DefaultButtonWidget(
+        /* DefaultButtonWidget(
           expanded: false,
           onPressed: () {
             // Ação para o botão Sobre
@@ -106,7 +106,7 @@ class AppBarCustom {
             style: TextStyle(
                 color: Colors.white, fontSize: getProportionateFontSize(16)),
           ),
-        ),
+        ), */
         if (SharedPreferencesHelper.currentUser != null)
           Builder(
             builder: (context) => DefaultButtonWidget(

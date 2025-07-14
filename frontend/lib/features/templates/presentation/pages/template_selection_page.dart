@@ -457,9 +457,9 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                       .add(AnswerSheetIdentifiableBox(
                                           box: BoxDetails(
                                             box: Rect.fromLTWH(0, 0, 20, 20),
-                                            label: "calibration",
+                                            label: "calibração",
                                           ),
-                                          name: "Calibration Point"));
+                                          name: "Ponto de Calibração"));
 
                                   await MainMenuService.saveTemplates(
                                       templates);
@@ -634,7 +634,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                               },
                               child: Text(pdfLocation != null
                                   ? "PDF: ${pdfLocation!}"
-                                  : "Select PDF file to serve as template"),
+                                  : "Selecione um arquivo PDF para servir como exemplo"),
                             ),
                           ),
                         ),
@@ -660,7 +660,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              "Select a template to edit",
+                              "Selecione um exemplo de cartão-resposta para editar",
                               style: TextStyle(
                                   fontSize: getProportionateFontSize(25)),
                             ),
@@ -670,10 +670,11 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          title: const Text("Add new template"),
+                                          title: const Text(
+                                              "Adicionar novo exemplo de cartão-resposta"),
                                           content: TextField(
                                             decoration: const InputDecoration(
-                                              hintText: "Template name",
+                                              hintText: "Nome do exemplo",
                                             ),
                                             onSubmitted: (value) async {
                                               templates.add(
@@ -835,7 +836,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                "Loading PDF...\n${processingText ?? ""}",
+                                "Carregando PDF...\n${processingText ?? ""}",
                                 textAlign: TextAlign.center,
                               ),
                               SizedBox(
@@ -887,7 +888,8 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                   reloadCircles();
                                                 },
                                                 icon: const Tooltip(
-                                                    message: "Reload circles",
+                                                    message:
+                                                        "Recarregar círculos",
                                                     child: Icon(Icons.refresh)),
                                               ),
                                               SizedBox(
@@ -902,7 +904,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                 },
                                                 icon: const Tooltip(
                                                     message:
-                                                        "Select a new PDF to serve as template",
+                                                        "Selecione um novo PDF para servir como template",
                                                     child: Icon(Icons.image))),
                                             SizedBox(
                                               width:
@@ -1106,7 +1108,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                             },
                                                             color: kSuccess,
                                                             child: const Text(
-                                                                "Cancel")),
+                                                                "Cancelar")),
                                                         DefaultButtonWidget(
                                                             onPressed:
                                                                 () async {

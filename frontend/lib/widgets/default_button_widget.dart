@@ -144,10 +144,10 @@ class _DefaultButtonWidgetState extends State<DefaultButtonWidget>
           animation: Listenable.merge([_underlineAnimation, _colorAnimation]),
           builder: (context, child) {
             return Stack(
+              fit: StackFit.passthrough,
               clipBehavior: Clip.none,
               children: [
                 MaterialButton(
-                  
                   key: _buttonKey,
                   disabledColor: (widget.color ?? kPrimary).withOpacity(0.5),
                   splashColor: Colors.transparent,
@@ -156,7 +156,7 @@ class _DefaultButtonWidgetState extends State<DefaultButtonWidget>
                       widget.disabled ? null : (widget.onPressed ?? () {}),
                   height: widget.height,
                   color: widget.color ?? kPrimary,
-                  minWidth: widget.width,
+                  minWidth: widget.width ?? 0,
                   elevation: widget.color != Colors.transparent ? null : 0,
                   focusElevation: widget.color != Colors.transparent ? null : 0,
                   hoverElevation: widget.color != Colors.transparent ? null : 0,
@@ -227,6 +227,4 @@ class _DefaultButtonWidgetState extends State<DefaultButtonWidget>
 
     return button;
   }
-
-  
 }

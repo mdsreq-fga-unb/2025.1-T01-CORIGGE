@@ -13,6 +13,7 @@ import 'features/register/presentation/pages/register_page.dart';
 import 'features/splash/domain/repositories/auth_service.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
 import 'features/templates/presentation/pages/template_selection_page.dart';
+import 'features/relatorios_individuais/presentation/pages/relatorios_individuais_page.dart';
 
 // Importar os wrappers
 import 'package:corigge/services/auth_service_wrapper.dart';
@@ -28,7 +29,8 @@ class Routes {
   // Instâncias dos wrappers
   static final _authServiceWrapper = AuthServiceWrapper();
   static final _escolasServiceWrapper = EscolasServiceWrapper();
-  static final _sharedPreferencesHelperWrapper = SharedPreferencesHelperWrapper();
+  static final _sharedPreferencesHelperWrapper =
+      SharedPreferencesHelperWrapper();
   static final _utilsWrapper = UtilsWrapper();
 
   static Future<void> checkLoggedIn(
@@ -115,6 +117,9 @@ class Routes {
     },
     '/analyze-cards': (context, state) {
       return AnalyzeCardsPage();
+    },
+    '/relatorios-individuais': (context, state) {
+      return const RelatoriosIndividuaisPage();
     },
   };
 }

@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../../cache/shared_preferences_helper.dart';
 import '../../../../config/size_config.dart';
 import '../../../../config/theme.dart';
 import '../../../../models/escola_model.dart';
@@ -57,9 +59,17 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   void initState() {
     super.initState();
-    _emailController.addListener(_validateEmail);
+    _initializeEmailFromAuth();
     _phoneController.addListener(_validatePhone);
     _nameController.addListener(_validateName);
+  }
+
+  void _initializeEmailFromAuth() {
+    final currentUser = Supabase.instance.client.auth.currentUser;
+    if (currentUser?.email != null) {
+      _emailController.text = currentUser!.email!;
+      _validateEmail();
+    }
   }
 
   void _validateName() {
@@ -133,7 +143,8 @@ class _RegisterPageState extends State<RegisterPage> {
           "Registro realizado com sucesso!",
           color: kSuccess,
         );
-        context.push('/login');
+        SharedPreferencesHelper.currentUser = user;
+        context.push('/home');
       }
     } catch (e) {
       if (mounted) {
@@ -267,6 +278,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             const SizedBox(height: 20),
                             TextFormField(
                               controller: _emailController,
+                              enabled: false, // Make email field uneditable
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 labelText: 'E-mail',
@@ -283,12 +295,20 @@ class _RegisterPageState extends State<RegisterPage> {
                                       color:
                                           kSecondaryVariant.withOpacity(0.3)),
                                 ),
+                                disabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide(
+                                      color:
+                                          kSecondaryVariant.withOpacity(0.3)),
+                                ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(15),
                                   borderSide: BorderSide(color: kPrimary),
                                 ),
                                 filled: true,
-                                fillColor: kBackground.withOpacity(0.05),
+                                fillColor: kBackground.withOpacity(
+                                    0.1), // Slightly darker when disabled
+                                hintText: 'E-mail obtido do Google',
                               ),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {

@@ -12,11 +12,19 @@ import 'package:path_provider/path_provider.dart';
 import '../features/login/data/user_model.dart';
 import '../features/templates/data/answer_sheet_template_model.dart';
 import '../features/templates/data/answer_sheet_card_model.dart';
+import '../features/templates/data/generated_template_model.dart';
 
 final log = Environment.getLogger('[shared_preferences]');
 
 class SharedPreferencesHelper {
-  static final String _keyUserData = 'user_data';
+  static const String _keyUserData = 'user_data';
+  static const String _keyTemplates = 'templates';
+  static const String _keySelectedTemplate = 'selected_template';
+  static const String _keyAnswerSheetCards = 'answer_sheet_cards';
+  static const String _keyGabaritoData = 'gabarito_data';
+  static const String _keyRelatorioDefinitions = 'relatorio_definitions';
+  static const String _keySelectedRelatorioDefinition =
+      'selected_relatorio_definition';
 
   static UserModel? currentUser;
 
@@ -29,7 +37,7 @@ class SharedPreferencesHelper {
   static Future<Either<String, List<AnswerSheetTemplateModel>>>
       loadTemplates() async {
     try {
-      final templatesJson = _prefs?.getString('templates') ?? '[]';
+      final templatesJson = _prefs?.getString(_keyTemplates) ?? '[]';
       final List<dynamic> templatesData = json.decode(templatesJson);
       return Right(templatesData
           .map((e) => AnswerSheetTemplateModel.fromJson(e))
@@ -43,7 +51,7 @@ class SharedPreferencesHelper {
       List<AnswerSheetTemplateModel> templates) async {
     final templatesJson =
         json.encode(templates.map((e) => e.toJson()).toList());
-    await _prefs?.setString('templates', templatesJson);
+    await _prefs?.setString(_keyTemplates, templatesJson);
   }
 
   static Future<Directory> _getImageDirectory() async {
@@ -102,11 +110,11 @@ class SharedPreferencesHelper {
   static Future<void> saveOrUpdateUserData(UserModel user) async {
     currentUser = user;
     final userJson = json.encode(user.toJson());
-    await _prefs?.setString('user_data', userJson);
+    await _prefs?.setString(_keyUserData, userJson);
   }
 
   static Future<UserModel?> getUserData() async {
-    final userJson = _prefs?.getString('user_data');
+    final userJson = _prefs?.getString(_keyUserData);
     if (userJson == null) return null;
     final userData = json.decode(userJson);
     return UserModel.fromJson(userData);
@@ -114,21 +122,21 @@ class SharedPreferencesHelper {
 
   static Future<void> clearUserData() async {
     currentUser = null;
-    await _prefs?.remove('user_data');
+    await _prefs?.remove(_keyUserData);
   }
 
   static Future<void> saveSelectedTemplate(
       AnswerSheetTemplateModel? template) async {
     if (template == null) {
-      await _prefs?.remove('selected_template');
+      await _prefs?.remove(_keySelectedTemplate);
     } else {
       final templateJson = json.encode(template.toJson());
-      await _prefs?.setString('selected_template', templateJson);
+      await _prefs?.setString(_keySelectedTemplate, templateJson);
     }
   }
 
   static Future<AnswerSheetTemplateModel?> getSelectedTemplate() async {
-    final templateJson = _prefs?.getString('selected_template');
+    final templateJson = _prefs?.getString(_keySelectedTemplate);
     if (templateJson == null) return null;
     final templateData = json.decode(templateJson);
     return AnswerSheetTemplateModel.fromJson(templateData);
@@ -147,7 +155,7 @@ class SharedPreferencesHelper {
 
   static Future<Either<String, List<AnswerSheetCardModel>>> loadCards() async {
     try {
-      final cardsJson = _prefs?.getString('answer_sheet_cards') ?? '[]';
+      final cardsJson = _prefs?.getString(_keyAnswerSheetCards) ?? '[]';
       final List<dynamic> cardsData = json.decode(cardsJson);
       return Right(
           cardsData.map((e) => AnswerSheetCardModel.fromJson(e)).toList());
@@ -158,22 +166,22 @@ class SharedPreferencesHelper {
 
   static Future<void> saveCards(List<AnswerSheetCardModel> cards) async {
     final cardsJson = json.encode(cards.map((e) => e.toJson()).toList());
-    await _prefs?.setString('answer_sheet_cards', cardsJson);
+    await _prefs?.setString(_keyAnswerSheetCards, cardsJson);
   }
 
   static Future<void> clearCards() async {
-    await _prefs?.remove('answer_sheet_cards');
+    await _prefs?.remove(_keyAnswerSheetCards);
   }
 
   static Future<void> saveGabarito(List<Map<String, dynamic>> gabarito) async {
     final gabaritoJson = json.encode(gabarito);
-    await _prefs?.setString('gabarito_data', gabaritoJson);
+    await _prefs?.setString(_keyGabaritoData, gabaritoJson);
   }
 
   static Future<Either<String, List<Map<String, dynamic>>>>
       loadGabarito() async {
     try {
-      final gabaritoJson = _prefs?.getString('gabarito_data') ?? '[]';
+      final gabaritoJson = _prefs?.getString(_keyGabaritoData) ?? '[]';
       final List<dynamic> gabaritoData = json.decode(gabaritoJson);
       return Right(gabaritoData.cast<Map<String, dynamic>>());
     } catch (e) {
@@ -182,6 +190,34 @@ class SharedPreferencesHelper {
   }
 
   static Future<void> clearGabarito() async {
-    await _prefs?.remove('gabarito_data');
+    await _prefs?.remove(_keyGabaritoData);
+  }
+
+
+  // GeneratedTemplateModel methods
+  static const String _keyGeneratedTemplates = 'generated_templates';
+
+  static Future<Either<String, List<GeneratedTemplateModel>>>
+      loadGeneratedTemplates() async {
+    try {
+      final templatesJson = _prefs?.getString(_keyGeneratedTemplates) ?? '[]';
+      final List<dynamic> templatesData = json.decode(templatesJson);
+      return Right(templatesData
+          .map((e) => GeneratedTemplateModel.fromJson(e))
+          .toList());
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  static Future<void> saveGeneratedTemplates(
+      List<GeneratedTemplateModel> templates) async {
+    final templatesJson =
+        json.encode(templates.map((e) => e.toJson()).toList());
+    await _prefs?.setString(_keyGeneratedTemplates, templatesJson);
+  }
+
+  static Future<void> clearGeneratedTemplates() async {
+    await _prefs?.remove(_keyGeneratedTemplates);
   }
 }
