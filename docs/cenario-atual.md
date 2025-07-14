@@ -63,4 +63,4 @@ O perfil dos coordenadores das instituições de ensino são profissionais com f
 
 | Data       | Versão | Descrição                       | Autor(es)      | Revisor(es) |
 | ---------- | ------ | ------------------------------- | -------------- | ----------- |
-| 19/04/2025 | 1.0    | Criação inicial da documentação | Marcelo Adrian |             |
+| 19/04/2025 | 1.0    | Criação inicial da documentação | Marcelo Adrian | Nathan Abreu|

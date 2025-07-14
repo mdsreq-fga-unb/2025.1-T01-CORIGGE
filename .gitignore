@@ -17,10 +17,20 @@ migrate_working_dir/
 *.ipr
 *.iws
 .idea/
+main_processing_computer_local
+main_processing_computer_local.spec
+
+.env
+
 
 # Backend server related
 /backend/servidor/dist/
 /backend/servidor/node_modules/
+/.venv/
+
+# frontend related
+/frontend/build/
+**/*.zip
 /.venv/
 
 # The .vscode folder contains launch configuration and tasks you configure in
@@ -48,3 +58,16 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+.Python
+env/
+ENV/

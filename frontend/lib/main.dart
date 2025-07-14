@@ -1,122 +1,378 @@
+import 'package:corigge/config/size_config.dart';
+import 'package:corigge/environment.dart';
+import 'package:corigge/routes.dart';
+import 'package:corigge/widgets/error_handling_page.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:go_router/go_router.dart';
+import 'package:logging/logging.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:window_manager/window_manager.dart';
+import 'cache/shared_preferences_helper.dart';
+import 'config/theme.dart';
+import 'features/login/presentation/page/login_page.dart';
+import 'widgets/router_widget.dart';
+import 'services/local_process_server_service.dart';
+import 'services/opencv_service.dart';
+import 'dart:async';
 
-void main() {
+late SharedPreferences sp;
+
+class AppWindowListener extends WindowListener {
+  @override
+  void onWindowClose() async {
+    // Clean up processes
+    await OpenCVService.disconnect();
+    await LocalProcessServerService.dispose();
+    await windowManager.destroy();
+  }
+}
+
+void main() async {
+  await dotenv.load(fileName: ".env");
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance();
+  await SharedPreferencesHelper.init();
+  Logger.root.level = Level.ALL;
+  Logger.root.onRecord.listen((record) {
+    if (kDebugMode) {
+      //print('${record.level.name}: ${record.time}: ${record.message}\n Stacktrace-> ${record.stackTrace}');
+    }
+  });
+  Environment.initializeLogging();
+  sp = await SharedPreferences.getInstance();
+
+  if (const String.fromEnvironment("CORIGGE_DEBUG", defaultValue: "") != "") {
+    Environment.setEnvironment(EnvironmentType.DEV);
+  } else {
+    Environment.setEnvironment(EnvironmentType.PROD);
+  }
+
+  // Set minimum window size for desktop
+  if (!kIsWeb) {
+    if (defaultTargetPlatform == TargetPlatform.windows ||
+        defaultTargetPlatform == TargetPlatform.macOS ||
+        defaultTargetPlatform == TargetPlatform.linux) {
+      await windowManager.ensureInitialized();
+      await windowManager.waitUntilReadyToShow();
+
+      // Set window properties
+      await windowManager.setTitle('Corigge');
+      await windowManager.setMinimumSize(const Size(800, 600));
+      await windowManager.setSize(const Size(1280, 720));
+      await windowManager.center();
+
+      // Handle window close event
+      windowManager.addListener(AppWindowListener());
+
+      await windowManager.show();
+    }
+  }
+
+  await Supabase.initialize(
+    url: Environment.supabaseUrl,
+    anonKey: Environment.supabaseAnonKey,
+  );
+
+  // Initialize OpenCV service
+  if (!Environment.shouldHandleLocalServer) {
+    try {
+      await OpenCVService.connect(maxRetries: 1);
+      Logger.root.info('Connected to WebSocket server');
+    } catch (e) {
+      Logger.root.warning('Could not connect to WebSocket server: $e');
+    }
+  } else {
+    try {
+      // First, ensure the process is stopped
+      await LocalProcessServerService.stopProcess();
+
+      // Initialize and start the process
+      await LocalProcessServerService.initialize(
+        onProgress: (message) {
+          Logger.root.info('OpenCV initialization: $message');
+        },
+      );
+
+      await LocalProcessServerService.startProcess();
+
+      // Wait a bit for the process to fully start
+      await Future.delayed(const Duration(seconds: 2));
+
+      // Try to connect with retries
+      await OpenCVService.connect(maxRetries: 5);
+      Logger.root.info('OpenCV service initialized successfully');
+    } catch (e) {
+      Logger.root.severe('Error initializing OpenCV service: $e');
+    }
+  }
+
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    var errorStr = "Erro inesperado: ${details.exceptionAsString()}";
+
+    if (details.context != null) {
+      errorStr += "\nNo context: ${details.context!.toDescription()}";
+      errorStr += details.context!.showName
+          ? "\nEncontrado em: ${details.context!.name} com prefixo '${details.context!.linePrefix}'"
+          : "";
+      if (details.context!.value != null) {
+        errorStr += "\nValor: ${details.context!.value}";
+      }
+    }
+
+    if (details.informationCollector != null) {
+      errorStr += "\nInformações adicionais:\n";
+      errorStr +=
+          details.informationCollector!().map((e) => '- "$e"').join("\n");
+    }
+
+    return Scaffold(
+      backgroundColor: kBackground,
+      body: SafeArea(
+        child: Center(
+          child: ErrorHandlingPage(
+            errorText: errorStr,
+            showHomeButton: true,
+            child: Container(),
+          ),
+        ),
+      ),
+    );
+  };
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isProcessRunning = false;
+  String? _error;
+  Timer? _processCheckTimer;
+  bool _isReconnecting = false;
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+
+  Widget _buildReconnectionOverlay(Widget child) {
+    return Stack(
+      children: [
+        child,
+        if (!isProcessRunning)
+          Material(
+            color: Colors.transparent,
+            child: Container(
+              color: Colors.black54,
+              child: Center(
+                child: Card(
+                  margin: EdgeInsets.all(getProportionateScreenWidth(32)),
+                  child: Padding(
+                    padding: EdgeInsets.all(getProportionateScreenWidth(16)),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Reconectando ao serviço...',
+                          style: TextStyle(
+                            fontSize: getProportionateFontSize(18),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: getProportionateScreenHeight(16)),
+                        const CircularProgressIndicator(),
+                        if (_error != null) ...[
+                          SizedBox(height: getProportionateScreenHeight(16)),
+                          Text(
+                            _error!,
+                            style: TextStyle(
+                              fontSize: getProportionateFontSize(14),
+                              color: kError,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
     );
   }
-}
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  Future<void> _initializeOpenCV() async {
+    if (!Environment.shouldHandleLocalServer) {
+      try {
+        await OpenCVService.connect(maxRetries: 1);
+        Logger.root.info('Connected to WebSocket server');
+        setState(() {
+          isProcessRunning = true;
+        });
+      } catch (e) {
+        Logger.root.warning('Could not connect to WebSocket server: $e');
+        setState(() {
+          isProcessRunning = false;
+          _error = e.toString();
+        });
+      }
+    } else {
+      try {
+        // First, ensure the process is stopped
+        await LocalProcessServerService.stopProcess();
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
+        // Initialize and start the process
+        await LocalProcessServerService.initialize(
+          onProgress: (message) {
+            Logger.root.info('OpenCV initialization: $message');
+          },
+        );
 
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
+        await LocalProcessServerService.startProcess();
 
-  final String title;
+        // Wait a bit for the process to fully start
+        await Future.delayed(const Duration(seconds: 2));
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+        // Try to connect with retries
+        await OpenCVService.connect(maxRetries: 5);
+        Logger.root.info('OpenCV service initialized successfully');
+        setState(() {
+          isProcessRunning = true;
+        });
+      } catch (e) {
+        Logger.root.severe('Error initializing OpenCV service: $e');
+        setState(() {
+          isProcessRunning = false;
+          _error = e.toString();
+        });
+      }
+    }
+  }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  Future<void> _checkProcessStatus() async {
+    if (_isReconnecting || !mounted) return;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+    try {
+      final isAlive = await OpenCVService.ping();
+      if (!isAlive && !_isReconnecting) {
+        setState(() {
+          isProcessRunning = false;
+        });
+
+        // Try to reconnect
+        try {
+          await OpenCVService.connect(maxRetries: 1);
+          if (mounted) {
+            setState(() {
+              isProcessRunning = true;
+              _error = null;
+            });
+          }
+        } catch (e) {
+          Logger.root.warning('Could not reconnect to WebSocket server: $e');
+          if (mounted) {
+            setState(() {
+              _error = e.toString();
+            });
+          }
+        }
+      } else if (isAlive && !isProcessRunning) {
+        setState(() {
+          isProcessRunning = true;
+          _error = null;
+        });
+      }
+    } catch (e) {
+      Logger.root.warning('Error checking process status: $e');
+      if (mounted) {
+        setState(() {
+          isProcessRunning = false;
+        });
+      }
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+  void initState() {
+    super.initState();
+    _initializeOpenCV();
+
+    // Start periodic process check
+    _processCheckTimer = Timer.periodic(
+      const Duration(seconds: 5),
+      (_) => _checkProcessStatus(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _processCheckTimer?.cancel();
+    super.dispose();
+  }
+
+  late final GoRouter router = GoRouter(
+    navigatorKey: _navigatorKey,
+    errorPageBuilder: (context, state) => NoTransitionPage(
+      child: _buildReconnectionOverlay(
+        Scaffold(
+          backgroundColor: kBackground,
+          body: SafeArea(
+            child: Center(
+              child: ErrorHandlingPage(
+                errorText: "Erro: ${state.error}",
+                child: Container(),
+              ),
             ),
-          ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+    ),
+    routes: Routes.routes.entries.map((e) {
+      return GoRoute(
+        path: e.key,
+        pageBuilder: (context, state) {
+          SystemChrome.setApplicationSwitcherDescription(
+            ApplicationSwitcherDescription(
+              label: 'Corigge',
+              primaryColor: Theme.of(context).primaryColor.value,
+            ),
+          );
+          return NoTransitionPage(
+            child: _buildReconnectionOverlay(
+              RouterWidget(route: e.key, state: state),
+            ),
+          );
+        },
+      );
+    }).toList(),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    final themeSP = sp.getBool("theme");
+    var isDark = themeSP ?? false;
+
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      theme: isDark ? darkTheme() : theme(),
+      routerConfig: router,
     );
+  }
+
+  @override
+  void reassemble() {
+    // Called on hot reload. Ensure resources are cleaned to avoid duplicates.
+    OpenCVService.disconnect();
+    LocalProcessServerService.dispose();
+    super.reassemble();
   }
 }

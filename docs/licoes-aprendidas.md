@@ -52,7 +52,8 @@
 
 ## Histórico de Versão
 
-| Data       | Versão | Descrição                       | Autor(es)      | Revisor(es) |
-| ---------- | ------ | ------------------------------- | -------------- | ----------- |
-| 19/04/2025 | 1.0    | Criação inicial da documentação | Nathan Abreu   | Marcelo Adrian |
-| 24/06/2025 | 1.1    | Unidade 3                       | Marcelo Adrian | Nathan Abreu  |
+| Data       | Versão | Descrição                                 | Autor(es)      | Revisor(es)    |
+| ---------- | ------ | ----------------------------------------- | -------------- | -------------- |
+| 19/04/2025 | 1.0    | Criação inicial da documentação           | Nathan Abreu   | Marcelo Adrian |
+| 04/06/2025 | 1.1    | Adição das lições aprendidas na unidade 2 | Pedro Victor   | Nathan Abreu   |
+| 24/06/2025 | 1.2    | Unidade 3                                 | Marcelo Adrian | Nathan Abreu   |

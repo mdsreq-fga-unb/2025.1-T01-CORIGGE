@@ -16,6 +16,109 @@ Este projeto visa desenvolver uma aplicação multiplataforma para realizar corr
 
 ## Como executar o projeto
 
+### Pré-requisitos
+
+Antes de começar, você precisará ter instalado em sua máquina:
+
+- [Flutter](https://docs.flutter.dev/get-started/install) - Framework para desenvolvimento multiplataforma
+- [Node.js e npm](https://nodejs.org/en/download/) - Para o servidor backend
+- [Python](https://www.python.org/downloads/) - Para o processamento OpenCV
+
+### Executando em Modo Debug
+
+1. **Backend Server**
+   ```bash
+   cd backend/servidor
+   npm install
+   npm run dev
+   ```
+
+2. **OpenCV Server**
+   ```bash
+   cd backend/opencv
+   python -m pip install -r requirements.txt
+   # Crie um arquivo .env com o conteúdo:
+   # DEBUG_MODE=True
+   python main_processing_computer.py
+   ```
+
+3. **Frontend**
+   - Abra o projeto no VS Code
+   - Pressione `Ctrl+Shift+D` (Windows/Linux) ou `Cmd+Shift+D` (macOS)
+   - Selecione a configuração de debug para seu sistema operacional (Windows/macOS/Linux)
+   - Pressione F5 ou clique no botão de play
+
+### Executando em Modo Release
+
+1. **Backend Server**
+   ```bash
+   cd backend/servidor
+   npm install
+   npm run start-release   # Compila e executa em modo release
+   ```
+
+2. **OpenCV Build**
+   ```bash
+   cd backend/opencv
+   python -m pip install -r requirements.txt
+   python build_local.py
+   ```
+
+3. **Frontend**
+   - Abra o projeto no VS Code
+   - Pressione `Ctrl+Shift+D` (Windows/Linux) ou `Cmd+Shift+D` (macOS)
+   - Selecione a configuração de release para seu sistema operacional (Windows/macOS/Linux)
+   - Pressione F5 ou clique no botão de play
+
+### Executando com Docker
+
+O servidor backend pode ser executado usando Docker para facilitar o deploy:
+
+1. **Criar arquivo .env**
+   ```env
+   # Server Configuration
+   PORT=4512
+   NODE_ENV=development
+
+   # Supabase Configuration
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+
+   # CORS Configuration
+   CORS_ORIGIN=http://localhost:4512
+   ```
+
+2. **Construir a imagem**
+   ```bash
+   cd backend/servidor
+   docker build -t corigge-backend .
+   ```
+
+3. **Executar o container**
+   ```bash
+   docker run -d \
+     -p 4512:4512 \
+     --name corigge-backend \
+     --env-file .env \
+     corigge-backend
+   ```
+
+4. **Verificar logs do container**
+   ```bash
+   docker logs corigge-backend
+   ```
+
+5. **Parar o container**
+   ```bash
+   docker stop corigge-backend
+   ```
+
+### Observações
+- O servidor backend e o servidor OpenCV devem estar rodando antes de iniciar o frontend no modo debug
+- No modo release, o servidor OpenCV é compilado, compactado e adicionado aos assets do frontend, sendo descompactado ao rodar o aplicativo
+- Ao usar Docker, certifique-se de que o arquivo `.env` está presente no diretório antes de executar o container
+- O servidor estará disponível em `http://localhost:4512` após a inicialização
+
 ## Documentação
 
 - [Notion](https://www.notion.so/team/1db12b03-3960-81cf-8d13-00422b7d20cb/join)
