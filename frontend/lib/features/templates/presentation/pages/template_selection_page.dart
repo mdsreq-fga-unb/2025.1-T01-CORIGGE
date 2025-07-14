@@ -23,6 +23,7 @@ import '../../data/answer_sheet_identifiable_box.dart';
 import '../../widgets/answer_sheet_template_box_creation_dialog_widget.dart';
 import '../../widgets/circle_params_editor.dart';
 import 'package:corigge/widgets/default_button_widget.dart';
+import 'package:corigge/features/home/services/home_service.dart';
 
 class TemplateSelectionPage extends StatefulWidget {
   const TemplateSelectionPage({
@@ -1056,6 +1057,23 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
 
                                                   var finalText =
                                                       "$nome - ${selectedTemplate!.boxes[index].hasCalculatedCircles == false ? 'carregando ' : "${selectedTemplate!.boxes[index].circles.length} "}círculos";
+
+                                                  // Add question count for question boxes
+                                                  if (caixa.box.label ==
+                                                          BoxDetailsType
+                                                              .colunaDeQuestoes ||
+                                                      caixa.box.label ==
+                                                          BoxDetailsType
+                                                              .typeB) {
+                                                    final questionCount =
+                                                        HomeService
+                                                            .calculateQuestionCount(
+                                                                caixa);
+                                                    if (questionCount > 0) {
+                                                      finalText +=
+                                                          " (${questionCount} questões)";
+                                                    }
+                                                  }
 
                                                   if (caixa.box.label ==
                                                       BoxDetailsType.outro) {

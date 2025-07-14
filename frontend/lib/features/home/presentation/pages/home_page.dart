@@ -318,21 +318,94 @@ class _HomePageState extends State<HomePage> {
       return 'Questões no gabarito não encontradas no template: ${extraQuestions.join(', ')}';
     }
 
-    // Validate answers are valid (A, B, C, D, E)
-    final validAnswers = {'A', 'B', 'C', 'D', 'E', 'a', 'b', 'c', 'd', 'e'};
+    // Validate answers against question types
+    final validationResult = _validateAnswersAgainstQuestionTypes(
+        data, questionColumn, answerColumn);
+    if (validationResult != null) {
+      return validationResult;
+    }
+
+    return null; // Validation passed
+  }
+
+  String? _validateAnswersAgainstQuestionTypes(List<Map<String, dynamic>> data,
+      String questionColumn, String answerColumn) {
+    if (selectedTemplate == null) return null;
+
+    // Get question boxes from template
+    final questionBoxes = selectedTemplate!.boxes
+        .where((box) =>
+            box.box.label == BoxDetailsType.colunaDeQuestoes ||
+            box.box.label == BoxDetailsType.typeB)
+        .toList();
+
+    if (questionBoxes.isEmpty) {
+      return 'Template não possui caixas de questões';
+    }
+
+    // Create a map of question number to expected answer options
+    final questionToOptions = <int, Set<String>>{};
+
+    for (final box in questionBoxes) {
+      final startingQuestion =
+          HomeService.extractStartingQuestionNumber(box.name);
+      final questionCount = HomeService.calculateQuestionCount(box);
+
+      if (questionCount > 0) {
+        // Determine valid answers for this box based on question type
+        final questionType = HomeService.getQuestionType(box);
+        Set<String> validAnswers;
+
+        if (questionType.contains('Type A') ||
+            questionType.contains('2 opções')) {
+          validAnswers = {'A', 'B', 'a', 'b'};
+        } else if (questionType.contains('Type C') ||
+            questionType.contains('4 opções')) {
+          validAnswers = {'A', 'B', 'C', 'D', 'a', 'b', 'c', 'd'};
+        } else if (questionType.contains('Enem/Type B') ||
+            questionType.contains('5 opções')) {
+          validAnswers = {'A', 'B', 'C', 'D', 'E', 'a', 'b', 'c', 'd', 'e'};
+        } else {
+          // For mixed types, allow all options
+          validAnswers = {'A', 'B', 'C', 'D', 'E', 'a', 'b', 'c', 'd', 'e'};
+        }
+
+        // Add all questions in this box's range
+        for (int i = 0; i < questionCount; i++) {
+          questionToOptions[startingQuestion + i] = validAnswers;
+        }
+      }
+    }
+
+    // Validate each answer against its expected options
     final invalidAnswers = <String>[];
+    final invalidQuestions = <int>[];
 
     for (final row in data) {
-      final answer = row[answerColumn].toString().trim();
-      if (answer.isNotEmpty && !validAnswers.contains(answer)) {
-        if (!invalidAnswers.contains(answer)) {
-          invalidAnswers.add(answer);
+      final questionValue = row[questionColumn];
+      final questionNum = int.tryParse(questionValue.toString());
+      final answer = row[answerColumn].toString().trim().toUpperCase();
+
+      if (questionNum != null && questionToOptions.containsKey(questionNum)) {
+        final expectedOptions = questionToOptions[questionNum]!;
+        if (!expectedOptions.contains(answer)) {
+          if (!invalidAnswers.contains(answer)) {
+            invalidAnswers.add(answer);
+          }
+          invalidQuestions.add(questionNum);
         }
       }
     }
 
     if (invalidAnswers.isNotEmpty) {
-      return 'Respostas inválidas encontradas: ${invalidAnswers.join(', ')}. Use apenas A, B, C, D ou E';
+      final invalidQuestionsStr = invalidQuestions.take(5).join(', ');
+      final moreText = invalidQuestions.length > 5
+          ? ' e mais ${invalidQuestions.length - 5} questões'
+          : '';
+
+      return 'Respostas inválidas encontradas: ${invalidAnswers.join(', ')}. '
+          'Questões com problemas: $invalidQuestionsStr$moreText. '
+          'Verifique se as respostas correspondem ao tipo de questão (Type A: A/B, Type C: A/B/C/D, Enem: A/B/C/D/E)';
     }
 
     return null; // Validation passed
@@ -423,6 +496,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  String _getQuestionTypeInfo(AnswerSheetIdentifiableBox box) {
+    return HomeService.getQuestionType(box);
+  }
+
   Widget _buildBoxTypesList() {
     if (selectedTemplate == null) return const SizedBox.shrink();
 
@@ -461,7 +538,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Text(
-                      '1 coluna',
+                      _getQuestionTypeInfo(box),
                       style: TextStyle(
                         fontSize: getProportionateFontSize(14),
                         color: kOnSurface.withOpacity(0.7),
@@ -469,6 +546,18 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(height: getProportionateScreenHeight(2)),
+                Padding(
+                  padding:
+                      EdgeInsets.only(left: getProportionateScreenWidth(8)),
+                  child: Text(
+                    'Tipos: ${_getQuestionTypeInfo(box)}',
+                    style: TextStyle(
+                      fontSize: getProportionateFontSize(11),
+                      color: kOnSurface.withOpacity(0.6),
+                    ),
+                  ),
                 ),
                 SizedBox(height: getProportionateScreenHeight(2)),
                 Padding(

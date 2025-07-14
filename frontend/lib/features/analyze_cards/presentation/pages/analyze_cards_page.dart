@@ -23,6 +23,7 @@ import '../../../templates/data/answer_sheet_template_model.dart';
 import '../../../templates/widgets/circle_params_editor.dart';
 import '../../../templates/data/answer_sheet_identifiable_box.dart';
 import 'package:corigge/widgets/default_button_widget.dart';
+import 'package:corigge/features/home/services/home_service.dart';
 
 class AnalyzeCardsPage extends StatefulWidget {
   const AnalyzeCardsPage({super.key});
@@ -867,6 +868,20 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
                                             fontSize:
                                                 getProportionateFontSize(20)),
                                       ),
+                                      // Add question count for question boxes
+                                      if (box.box.label ==
+                                              BoxDetailsType.colunaDeQuestoes ||
+                                          box.box.label ==
+                                              BoxDetailsType.typeB) ...[
+                                        Text(
+                                          " | ${HomeService.calculateQuestionCount(box)} questões",
+                                          style: TextStyle(
+                                              fontSize:
+                                                  getProportionateFontSize(16),
+                                              color:
+                                                  kOnSurface.withOpacity(0.7)),
+                                        ),
+                                      ],
                                       Icon(
                                         circles.length == box.circles.length
                                             ? Icons.check

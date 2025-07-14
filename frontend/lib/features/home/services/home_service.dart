@@ -21,15 +21,143 @@ class HomeService {
 
   /// Calculates the number of questions in a question box based on circles
   static int calculateQuestionCount(AnswerSheetIdentifiableBox box) {
-    // Each question typically has 5 answer options (A, B, C, D, E)
-    // So the number of questions = total circles / 5
     if (box.circles.isEmpty) {
       return 0;
     }
 
-    // Assuming 5 answer options per question
-    const int answersPerQuestion = 5;
-    return (box.circles.length / answersPerQuestion).floor();
+    // Sort circles by position to determine rows and columns
+    final sortedCircles = List.from(box.circles)
+      ..sort((a, b) {
+        // Sort by Y position first (rows), then X position (columns)
+        final yDiff = a.center.dy.compareTo(b.center.dy);
+        if (yDiff != 0) return yDiff;
+        return a.center.dx.compareTo(b.center.dx);
+      });
+
+    // Calculate number of rows and columns
+    final rows = _calculateRows(sortedCircles);
+    final columns = _calculateColumns(sortedCircles);
+
+    if (rows == 0 || columns == 0) {
+      return 0;
+    }
+
+    return rows;
+  }
+
+  /// Determines the question types in a column based on circle analysis
+  static String getQuestionType(AnswerSheetIdentifiableBox box) {
+    if (box.circles.isEmpty) {
+      return 'Sem círculos';
+    }
+
+    // Sort circles by position to determine rows and columns
+    final sortedCircles = List.from(box.circles)
+      ..sort((a, b) {
+        // Sort by Y position first (rows), then X position (columns)
+        final yDiff = a.center.dy.compareTo(b.center.dy);
+        if (yDiff != 0) return yDiff;
+        return a.center.dx.compareTo(b.center.dx);
+      });
+
+    final rows = _calculateRows(sortedCircles);
+    final columns = _calculateColumns(sortedCircles);
+
+    if (rows == 0 || columns == 0) {
+      return 'Sem círculos';
+    }
+
+    // Analyze each row to determine question types
+    final questionTypes = <int, int>{}; // number of options -> count
+
+    // Group circles by row (Y position)
+    final circlesByRow = <double, List<dynamic>>{};
+    const double tolerance = 0.002;
+
+    for (final circle in sortedCircles) {
+      final y = circle.center.dy;
+      bool foundRow = false;
+
+      for (final rowY in circlesByRow.keys) {
+        if ((y - rowY).abs() < tolerance) {
+          circlesByRow[rowY]!.add(circle);
+          foundRow = true;
+          break;
+        }
+      }
+
+      if (!foundRow) {
+        circlesByRow[y] = [circle];
+      }
+    }
+
+    // Analyze each row to count options
+    for (final rowCircles in circlesByRow.values) {
+      // Sort circles in this row by X position
+      rowCircles.sort((a, b) => a.center.dx.compareTo(b.center.dx));
+
+      // Count unique X positions in this row (number of options)
+      final uniqueXPositions = <double>[];
+      for (final circle in rowCircles) {
+        final x = circle.center.dx;
+        bool foundSimilar = false;
+
+        for (final existingX in uniqueXPositions) {
+          if ((x - existingX).abs() < tolerance) {
+            foundSimilar = true;
+            break;
+          }
+        }
+
+        if (!foundSimilar) {
+          uniqueXPositions.add(x);
+        }
+      }
+
+      final optionsCount = uniqueXPositions.length;
+      questionTypes[optionsCount] = (questionTypes[optionsCount] ?? 0) + 1;
+    }
+
+    // Build description of mixed question types
+    if (questionTypes.length == 1) {
+      // All questions have the same number of options
+      final options = questionTypes.keys.first;
+      switch (options) {
+        case 2:
+          return 'Tipo A (2 opções)';
+        case 4:
+          return 'Tipo C (4 opções)';
+        case 5:
+          return 'Enem/Type B (5 opções)';
+        default:
+          return 'Tipo ${options} (${options} opções)';
+      }
+    } else {
+      // Mixed question types
+      final descriptions = <String>[];
+      for (final entry in questionTypes.entries) {
+        final options = entry.key;
+        final count = entry.value;
+        String typeName;
+
+        switch (options) {
+          case 2:
+            typeName = 'Tipo A';
+            break;
+          case 4:
+            typeName = 'Tipo C';
+            break;
+          case 5:
+            typeName = 'Enem/Type B';
+            break;
+          default:
+            typeName = 'Tipo $options';
+        }
+
+        descriptions.add('$typeName: $count');
+      }
+      return 'Misto (${descriptions.join(', ')})';
+    }
   }
 
   /// Calculates the number of rows and columns for a matricula box
@@ -152,14 +280,15 @@ class HomeService {
     if (sortedCircles.isEmpty) return 0;
 
     final uniqueYPositions = <double>[];
-    const double tolerance = 0.02; // 2% tolerance for alignment
+    const double tolerance = 0.002; // 0.5% tolerance for normalized coordinates
 
     for (final circle in sortedCircles) {
       final y = circle.center.dy;
       bool foundSimilar = false;
 
       for (final existingY in uniqueYPositions) {
-        if ((y - existingY).abs() < tolerance) {
+        var diff = (y - existingY).abs();
+        if (diff < tolerance) {
           foundSimilar = true;
           break;
         }
@@ -178,7 +307,7 @@ class HomeService {
     if (sortedCircles.isEmpty) return 0;
 
     final uniqueXPositions = <double>[];
-    const double tolerance = 0.02; // 2% tolerance for alignment
+    const double tolerance = 0.005; // 0.5% tolerance for normalized coordinates
 
     for (final circle in sortedCircles) {
       final x = circle.center.dx;
