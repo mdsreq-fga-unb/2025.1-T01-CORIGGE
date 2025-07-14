@@ -9,6 +9,7 @@ import 'package:corigge/utils/utils.dart';
 import 'package:corigge/widgets/app_bar_custom.dart';
 import 'package:corigge/widgets/default_button_widget.dart';
 import 'package:corigge/widgets/dropdown_search_custom.dart';
+import 'package:corigge/widgets/logo_background_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -183,48 +184,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 children: [
                   // Left side with logo
-                  Expanded(
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          left: MediaQuery.of(context).size.width * 0.25,
-                          top: MediaQuery.of(context).size.height * 0,
-                          child: FractionalTranslation(
-                            translation: const Offset(-0.5, 0.25),
-                            child: SvgPicture.asset(
-                              'assets/images/logo_corigge.svg',
-                              height: getProportionateScreenHeight(300),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: MediaQuery.of(context).size.width * 0.25 -
-                              getProportionateScreenWidth(150),
-                          top: MediaQuery.of(context).size.height * 0.5 +
-                              getProportionateScreenHeight(50),
-                          child: FractionalTranslation(
-                            translation: const Offset(-0.5, -0.5),
-                            child: SvgPicture.asset(
-                              'assets/images/logo_corigge.svg',
-                              height: getProportionateScreenHeight(200),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: MediaQuery.of(context).size.width * 0.25 +
-                              getProportionateScreenWidth(120),
-                          top: MediaQuery.of(context).size.height * 0.5 +
-                              getProportionateScreenHeight(80),
-                          child: FractionalTranslation(
-                            translation: const Offset(-0.5, -0.5),
-                            child: SvgPicture.asset(
-                              'assets/images/logo_corigge.svg',
-                              height: getProportionateScreenHeight(220),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  const Expanded(
+                    child: LogoBackgroundWidget(),
                   ),
                   // Right side with profile form
                   Expanded(

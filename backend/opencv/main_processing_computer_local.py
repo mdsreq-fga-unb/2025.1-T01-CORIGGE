@@ -15,7 +15,7 @@ from find_circles import find_circles_cv2, find_circles_fallback
 from read_to_images import read_to_images
 from websocket_types import BoxRectangleType, WebsocketMessageCommand, WebsocketMessageStatus
 from copy import deepcopy
-from utils import Utils
+from utils import FlagNames, Utils
 import psutil
 import os
 import sys
@@ -295,7 +295,9 @@ async def handle_find_circles(job, websocket):
                             circle_precision_percentage=job.get("circle_precision_percentage", 1),
                             param2=job.get("param2", 30),
                             on_progress=lambda x: send_progress(websocket, f"{page_info}{x}", job["task_id"]),
-                            rectangle_info=rectangle_info
+                            rectangle_info=rectangle_info,
+                            use_parallel=job.get("use_parallel_processing", False),
+                            max_workers=job.get("max_parallel_workers", None)
                         )
 
                     # Process circles
@@ -552,6 +554,7 @@ if __name__ == "__main__":
         config.print_config_summary()
     
     Utils.set_debug(config.is_debug_mode())
+    #Utils.set_image_show_flag(FlagNames.CornerDetection,True)
     
     try:
         asyncio.run(main())

@@ -287,7 +287,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                color: Colors.transparent,
+                color: kSuccess,
                 child: const Text("Cancelar"),
               ),
               DefaultButtonWidget(
@@ -302,7 +302,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
 
                   Navigator.of(context).pop();
                 },
-                color: Colors.transparent,
+                color: kSuccess,
                 child: const Text("Alterar Preenchimento"),
               ),
               DefaultButtonWidget(
@@ -320,7 +320,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
 
                   Navigator.of(context).pop();
                 },
-                color: Colors.transparent,
+                color: kError,
                 child: const Text("Deletar"),
               )
             ],
@@ -1086,8 +1086,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                               Navigator.of(_)
                                                                   .pop();
                                                             },
-                                                            color: Colors
-                                                                .transparent,
+                                                            color: kSuccess,
                                                             child: const Text(
                                                                 "Cancel")),
                                                         DefaultButtonWidget(
@@ -1110,8 +1109,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
                                                                   .pop();
                                                               setState(() {});
                                                             },
-                                                            color: Colors
-                                                                .transparent,
+                                                            color: kError,
                                                             child: const Text(
                                                                 "Remover"))
                                                       ],

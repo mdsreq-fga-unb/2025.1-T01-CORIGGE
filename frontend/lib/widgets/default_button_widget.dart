@@ -98,7 +98,6 @@ class _DefaultButtonWidgetState extends State<DefaultButtonWidget>
   }
 
   bool _isLightColor(Color color) {
-    // Calculate luminance to determine if color is light or dark
     return color.computeLuminance() > 0.5;
   }
 
@@ -148,6 +147,7 @@ class _DefaultButtonWidgetState extends State<DefaultButtonWidget>
               clipBehavior: Clip.none,
               children: [
                 MaterialButton(
+                  
                   key: _buttonKey,
                   disabledColor: (widget.color ?? kPrimary).withOpacity(0.5),
                   splashColor: Colors.transparent,
@@ -228,15 +228,5 @@ class _DefaultButtonWidgetState extends State<DefaultButtonWidget>
     return button;
   }
 
-  double _getTextWidth(BuildContext context, Text textWidget) {
-    final TextPainter textPainter = TextPainter(
-      text: TextSpan(
-        text: textWidget.data,
-        style: textWidget.style ?? Theme.of(context).textTheme.bodyMedium,
-      ),
-      maxLines: 1,
-      textDirection: TextDirection.ltr,
-    )..layout();
-    return textPainter.size.width;
-  }
+  
 }

@@ -64,7 +64,7 @@ class ImageCirclesPainter extends CustomPainter {
       // Draw the boxes adjusted to the image's scale and position
       for (var box in boxes) {
         Paint circlesPaint = Paint()
-          ..color = kSecondary
+          ..color = kError
           ..style = PaintingStyle.fill;
 
         for (var circle in box.circles) {
@@ -72,9 +72,9 @@ class ImageCirclesPainter extends CustomPainter {
             circlesPaint.color = Colors.blue;
           } else {
             if (circle.filled) {
-              circlesPaint.color = kWarning;
+              circlesPaint.color = kSuccess;
             } else {
-              circlesPaint.color = kSecondary;
+              circlesPaint.color = kWarning;
             }
           }
 

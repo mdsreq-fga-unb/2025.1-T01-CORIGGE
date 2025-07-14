@@ -31,7 +31,7 @@ class _CircleParamsEditorState extends State<CircleParamsEditor> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        /* Row(
           children: [
             Text("Estilo de Identificação"),
             SizedBox(
@@ -82,7 +82,7 @@ class _CircleParamsEditorState extends State<CircleParamsEditor> {
         ),
         SizedBox(
           height: getProportionateScreenHeight(10),
-        ),
+        ), */
         for (var entry in circleParams.toJson().entries.toList()
           ..removeWhere((e) =>
               e.key == "circle_size" ||

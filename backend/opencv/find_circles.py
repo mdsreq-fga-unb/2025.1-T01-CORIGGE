@@ -1214,7 +1214,7 @@ def remove_white_content_circles(circles, crop_img, max_white_percentage=0.99, w
     
     return filtered_circles
 
-async def find_circles_cv2(image_path, rectangle, rectangle_type, param2, dp, darkness_threshold=180/255, img=None, on_progress=None, circle_size=None, circle_precision_percentage=1, rectangle_info=None):
+async def find_circles_cv2(image_path, rectangle, rectangle_type, param2, dp, darkness_threshold=180/255, img=None, on_progress=None, circle_size=None, circle_precision_percentage=1, rectangle_info=None, use_parallel=False, max_workers=None):
     # Load the image
     Utils.log_info(f"Got circle size: {circle_size}")
 
@@ -1288,7 +1288,8 @@ async def find_circles_cv2(image_path, rectangle, rectangle_type, param2, dp, da
         }
 
     if on_progress is not None:
-        await on_progress(f"{rectangle_info['page_info']}[{rectangle_info['name']} {rectangle_info['index']}/{rectangle_info['total']}]\nStarting circle detection optimization...")
+        processing_mode = "parallel" if use_parallel else "sequential"
+        await on_progress(f"{rectangle_info['page_info']}[{rectangle_info['name']} {rectangle_info['index']}/{rectangle_info['total']}]\nStarting circle detection optimization ({processing_mode})...")
 
     # Estimate expected number of circles based on rectangle type
     expected_count = None
@@ -1297,15 +1298,37 @@ async def find_circles_cv2(image_path, rectangle, rectangle_type, param2, dp, da
         area_ratio = (width * height) / (img.shape[0] * img.shape[1])
         expected_count = int(area_ratio * 200)  # Rough estimate
     
-    # Pass original grayscale image (before thresholding) to iterative function
-    circles, best_params, best_score, param_stats = await find_circles_hough_iterative(
-        gray, dp, min_dist, min_radius, max_radius,
-        expected_count=expected_count,
-        circle_precision_percentage=circle_precision_percentage,
-        on_progress=on_progress,
-        rectangle_info=rectangle_info,
-        crop_img=crop_img
-    )
+    # Choose between parallel and sequential processing
+    if use_parallel:
+        try:
+            from find_circles_parallel import find_circles_hough_parallel
+            circles, best_params, best_score, param_stats = await find_circles_hough_parallel(
+                gray, dp, min_dist, min_radius, max_radius,
+                expected_count=expected_count,
+                circle_precision_percentage=circle_precision_percentage,
+                on_progress=on_progress,
+                rectangle_info=rectangle_info,
+                crop_img=crop_img,
+                max_workers=max_workers
+            )
+            Utils.log_info(f"✅ Parallel processing completed successfully")
+        except ImportError as e:
+            Utils.log_error(f"❌ Parallel processing not available, falling back to sequential: {e}")
+            use_parallel = False
+        except Exception as e:
+            Utils.log_error(f"❌ Parallel processing failed, falling back to sequential: {e}")
+            use_parallel = False
+    
+    if not use_parallel:
+        # Fall back to original sequential processing
+        circles, best_params, best_score, param_stats = await find_circles_hough_iterative(
+            gray, dp, min_dist, min_radius, max_radius,
+            expected_count=expected_count,
+            circle_precision_percentage=circle_precision_percentage,
+            on_progress=on_progress,
+            rectangle_info=rectangle_info,
+            crop_img=crop_img
+        )
     
     Utils.log_info(f"Iterative Hough circles result - Score: {best_score:.3f}, Circles found: {len(circles[0]) if circles is not None else 0}")
 

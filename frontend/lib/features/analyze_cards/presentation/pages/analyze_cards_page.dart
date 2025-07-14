@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'dart:async';
 import 'package:corigge/cache/shared_preferences_helper.dart';
 import 'package:corigge/widgets/app_bar_custom.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,10 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
   int totalProcessing = 0;
   String processingMessage = "";
   bool processing = false;
+  Timer? processingTimer;
+  DateTime? processingStartTime;
+  String processingDuration = "";
+  String processingSpeed = "";
 
   String? errorFound;
 
@@ -59,6 +64,12 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
   void initState() {
     super.initState();
     _loadInitialData();
+  }
+
+  @override
+  void dispose() {
+    processingTimer?.cancel();
+    super.dispose();
   }
 
   Future<void> _loadInitialData() async {
@@ -99,7 +110,7 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                color: Colors.transparent,
+                color: kSuccess,
                 child: const Text("Cancelar"),
               ),
               DefaultButtonWidget(
@@ -112,7 +123,7 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
                   _saveCards();
                   Navigator.of(context).pop();
                 },
-                color: Colors.transparent,
+                color: kSuccess,
                 child: const Text("Alterar Preenchimento"),
               ),
               DefaultButtonWidget(
@@ -124,7 +135,7 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
                   _saveCards();
                   Navigator.of(context).pop();
                 },
-                color: Colors.transparent,
+                color: kError,
                 child: const Text("Deletar"),
               )
             ],
@@ -151,6 +162,34 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
         totalProcessing = model.circlesPerBox.length;
         processingNumber = 1;
         processingMessage = "Iniciando processamento...";
+        processingStartTime = DateTime.now();
+        processingDuration = "";
+        processingSpeed = "";
+      });
+
+      // Start timer
+      processingTimer?.cancel();
+      processingTimer =
+          Timer.periodic(const Duration(milliseconds: 50), (timer) {
+        if (mounted && processingStartTime != null) {
+          final elapsed = DateTime.now().difference(processingStartTime!);
+          final seconds = elapsed.inSeconds;
+          final milliseconds = elapsed.inMilliseconds % 1000;
+          final elapsedMinutes = elapsed.inMilliseconds / 60000.0;
+
+          setState(() {
+            processingDuration =
+                "${seconds.toString().padLeft(2, '0')}.${milliseconds.toString().padLeft(3, '0')}s";
+
+            // Calculate processing speed (gabaritos/min)
+            if (elapsedMinutes > 0) {
+              final speed = processingNumber / elapsedMinutes;
+              processingSpeed = "${speed.toStringAsFixed(1)} gabaritos/min";
+            } else {
+              processingSpeed = "";
+            }
+          });
+        }
       });
     }
 
@@ -239,7 +278,10 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
         processingNumber = 0;
         totalProcessing = 0;
         processingMessage = "";
+        processingDuration = "";
+        processingSpeed = "";
       });
+      processingTimer?.cancel();
     }
 
     await _saveCards();
@@ -412,6 +454,26 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
                         style: TextStyle(
                             fontSize: getProportionateFontSize(20),
                             color: kOnSurface)),
+                    if (processingDuration.isNotEmpty) ...[
+                      SizedBox(height: getProportionateScreenHeight(5)),
+                      Text(
+                        processingDuration,
+                        style: TextStyle(
+                            fontSize: getProportionateFontSize(16),
+                            color: kOnSurface,
+                            fontFamily: 'monospace'),
+                      ),
+                      if (processingSpeed.isNotEmpty) ...[
+                        SizedBox(height: getProportionateScreenHeight(3)),
+                        Text(
+                          processingSpeed,
+                          style: TextStyle(
+                              fontSize: getProportionateFontSize(14),
+                              color: kOnSurface,
+                              fontFamily: 'monospace'),
+                        ),
+                      ],
+                    ],
                     SizedBox(height: getProportionateScreenHeight(10)),
                     Text(
                       processingMessage,
@@ -452,6 +514,39 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
                                   processing = true;
                                   processingNumber = 1;
                                   totalProcessing = value.files.length;
+                                  processingStartTime = DateTime.now();
+                                  processingDuration = "";
+                                  processingSpeed = "";
+                                });
+
+                                // Start timer for file processing
+                                processingTimer?.cancel();
+                                processingTimer = Timer.periodic(
+                                    const Duration(milliseconds: 50), (timer) {
+                                  if (mounted && processingStartTime != null) {
+                                    final elapsed = DateTime.now()
+                                        .difference(processingStartTime!);
+                                    final seconds = elapsed.inSeconds;
+                                    final milliseconds =
+                                        elapsed.inMilliseconds % 1000;
+                                    final elapsedMinutes =
+                                        elapsed.inMilliseconds / 60000.0;
+
+                                    setState(() {
+                                      processingDuration =
+                                          "${seconds.toString().padLeft(2, '0')}.${milliseconds.toString().padLeft(3, '0')}s";
+
+                                      // Calculate processing speed (gabaritos/min)
+                                      if (elapsedMinutes > 0) {
+                                        final speed =
+                                            processingNumber / elapsedMinutes;
+                                        processingSpeed =
+                                            "${speed.toStringAsFixed(1)} gabaritos/min";
+                                      } else {
+                                        processingSpeed = "";
+                                      }
+                                    });
+                                  }
                                 });
 
                                 for (var file in value.files) {
@@ -522,7 +617,10 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
                                   processing = false;
                                   totalProcessing = 0;
                                   processingNumber = 0;
+                                  processingDuration = "";
+                                  processingSpeed = "";
                                 });
+                                processingTimer?.cancel();
                               }
                             });
                           },
