@@ -1,0 +1,1300 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do projeto Corigge">
+      
+      
+      
+      
+        <link rel="prev" href="../cenario-atual/">
+      
+      
+        <link rel="next" href="../estrategias/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Solução Proposta - Corigge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#solucao-proposta" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Corigge" class="md-header__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corigge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Solução Proposta
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4m0-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cenario-atual/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cenário Atual
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Documentação do Projeto
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../licoes-aprendidas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Lições Aprendidas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../gravacoes/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ata de reuniões
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../entregas/entrega01/" class="md-tabs__link">
+          
+  
+  
+  Entregas
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Corigge" class="md-nav__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corigge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario-atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cenário Atual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentação do Projeto
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Documentação do Projeto
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Solução Proposta
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solução Proposta
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos-do-produto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivos do Produto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Objetivos do Produto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objetivos-especificos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objetivos Específicos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caracteristicas-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Características da Solução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tecnologias-a-serem-utilizadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tecnologias a Serem Utilizadas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pesquisa-de-mercado-e-analise-competitiva" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pesquisa de Mercado e Análise Competitiva
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pesquisa de Mercado e Análise Competitiva">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remarkoffice" class="md-nav__link">
+    <span class="md-ellipsis">
+      RemarkOffice
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gradepen" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gradepen
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prova-facil" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prova Fácil
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-de-viabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Análise de Viabilidade
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Análise de Viabilidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viabilidade-tecnica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viabilidade Técnica
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viabilidade-financeira" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viabilidade Financeira
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viabilidade-de-mercado" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viabilidade de Mercado
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#impacto-da-solucao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impacto da Solução
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#historico-de-versao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Histórico de Versão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estratégias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../engenharia-requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Engenharia de Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronograma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacao-cliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interação Cliente-Equipe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DoR_DoD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DoR e DoD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog do Produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoes-aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lições Aprendidas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gravacoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata de reuniões
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entregas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Entregas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade03/pbb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade03/usm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade04/uml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade04/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BUILD Aplicativo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="solucao-proposta">Solução Proposta<a class="headerlink" href="#solucao-proposta" title="Permanent link">&para;</a></h1>
+<h2 id="objetivos-do-produto">Objetivos do Produto<a class="headerlink" href="#objetivos-do-produto" title="Permanent link">&para;</a></h2>
+<p>O objetivo principal do produto é otimizar o processo de correção de gabaritos da Guia do PAS, reduzindo o tempo de processamento de 1 mês para menos de 24 horas, diminuindo o custo por correção de 5,00 reais para menos de 1,00 real, e aumentando a precisão da identificação das respostas para mais de 99%. Além disso, o sistema deve permitir a análise automática do desempenho individual e coletivo dos alunos, gerando relatórios detalhados que incluem estatísticas por questão, comparações entre turmas e identificação de padrões de erro. O produto também visa expandir a base de clientes da empresa, permitindo a oferta do serviço de correção para outras instituições de ensino, com meta de atingir pelo menos 10 novas escolas parceiras no primeiro ano de operação. Por fim, o sistema deve resolver os problemas técnicos encontrados na versão anterior, como instabilidades, necessidade de manutenção constante e limitações operacionais, oferecendo uma solução robusta e multiplataforma que não dependa de servidores dedicados.</p>
+<h3 id="objetivos-especificos">Objetivos Específicos<a class="headerlink" href="#objetivos-especificos" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p><strong>Realizar 100 correções de gabaritos por minuto</strong></p>
+<p>Alcançar uma capacidade de processamento de, no mínimo, 100 gabaritos por minuto. Este objetivo tem como objetivo garantir agilidade na entrega dos resultados mesmo para grandes volumes de provas, como em simulados de larga escala ou para múltiplas instituições.</p>
+</li>
+<li>
+<p><strong>Automatizar a correção de gabaritos</strong></p>
+<p>Eliminar a necessidade de intervenção manual no processo de correção de gabaritos, utilizando tecnologia de Visão Computacional (CV) para identificar as respostas dos alunos diretamente das imagens dos gabaritos preenchidos, associando-as automaticamente aos respectivos alunos (via identificação de matrícula) e comparando-as com o gabarito oficial.</p>
+</li>
+<li>
+<p><strong>Prover informações de desempenho dos alunos</strong></p>
+<p>Gerar relatórios analíticos detalhados sobre o desempenho dos alunos, tanto individualmente (nota, acertos, erros, posição na turma, nota média da turma) quanto coletivamente (estatísticas por questão, comparação entre turmas). Essas informações devem ser acessíveis para gestores/coordenadores e, potencialmente, para os próprios alunos.</p>
+</li>
+</ol>
+<hr />
+<h2 id="caracteristicas-da-solucao">Características da Solução<a class="headerlink" href="#caracteristicas-da-solucao" title="Permanent link">&para;</a></h2>
+<p>O produto será um aplicativo desktop multiplataforma (Windows, Linux e MacOS) que deve ser capaz de:
+- Processar imagens de gabaritos preenchidos pelos alunos
+- Identificar as respostas dadas pelos alunos em cada questão
+- Identificar a matrícula do aluno
+- Comparar as respostas com o gabarito correto
+- Gerar relatórios detalhados com:
+  - Desempenho do aluno (notas, acertos e erros)
+  - Comparações entre alunos
+  - Comparações entre grupos de alunos
+  - Dados estatísticos de cada questão
+- Gerar templates de gabaritos
+- Permitir a personalização dos gabaritos
+- Exportar dados e relatórios para arquivos .csv e .pdf</p>
+<h2 id="tecnologias-a-serem-utilizadas">Tecnologias a Serem Utilizadas<a class="headerlink" href="#tecnologias-a-serem-utilizadas" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Frontend:</strong> Dart + Flutter</li>
+<li><strong>Processamento de Imagem:</strong> Python + OpenCV</li>
+<li><strong>Backend:</strong> Typescript + Express.js</li>
+<li><strong>Banco de Dados:</strong> Supabase (PostgreSQL)</li>
+<li><strong>Hospedagem:</strong> Azure + VM Linux</li>
+</ul>
+<h2 id="pesquisa-de-mercado-e-analise-competitiva">Pesquisa de Mercado e Análise Competitiva<a class="headerlink" href="#pesquisa-de-mercado-e-analise-competitiva" title="Permanent link">&para;</a></h2>
+<h3 id="remarkoffice">RemarkOffice<a class="headerlink" href="#remarkoffice" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Preço muito alto ($1,195.00)</li>
+<li>Não oferece personalização dos gabaritos</li>
+<li>Não possui precificação por gabarito analisado</li>
+</ul>
+<h3 id="gradepen">Gradepen<a class="headerlink" href="#gradepen" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Gratuito mas pouco conhecido</li>
+<li>Uso extremamente limitado</li>
+<li>Não oferece estatísticas de desempenho</li>
+<li>Não oferece personalização dos gabaritos</li>
+</ul>
+<h3 id="prova-facil">Prova Fácil<a class="headerlink" href="#prova-facil" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Custa R$0.84 por correção</li>
+<li>Oferece apenas provas de 20, 50 e 100 questões, sem flexibilidade</li>
+<li>Não oferece estatísticas de desempenho</li>
+<li>Não oferece personalização dos gabaritos</li>
+<li>Apenas questões do tipo C</li>
+</ul>
+<h2 id="analise-de-viabilidade">Análise de Viabilidade<a class="headerlink" href="#analise-de-viabilidade" title="Permanent link">&para;</a></h2>
+<h3 id="viabilidade-tecnica">Viabilidade Técnica<a class="headerlink" href="#viabilidade-tecnica" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Alta viabilidade devido à experiência da equipe</li>
+<li>Familiaridade com as tecnologias propostas</li>
+<li>Prazo de 3 meses é viável</li>
+</ul>
+<h3 id="viabilidade-financeira">Viabilidade Financeira<a class="headerlink" href="#viabilidade-financeira" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Custo estimado: R$1.000,00 para serviços de infraestrutura</li>
+<li>Retorno financeiro inicial: R$1.000,00 por mês</li>
+<li>Estimativa baseada em 2000 correções por mês a R$0,50 por correção</li>
+</ul>
+<h3 id="viabilidade-de-mercado">Viabilidade de Mercado<a class="headerlink" href="#viabilidade-de-mercado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Crescimento atual da empresa no mercado de Brasília</li>
+<li>Possibilidade de expansão para outras instituições</li>
+<li>Demanda existente por soluções de correção automática</li>
+</ul>
+<h2 id="impacto-da-solucao">Impacto da Solução<a class="headerlink" href="#impacto-da-solucao" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Redução do tempo de processamento de 1 mês para algumas horas</li>
+<li>Redução do custo por correção de R<span class="arithmatex">\(5,00 para menos de R\)</span>1,00</li>
+<li>Aumento da receita em pelo menos R$12.000,00 por ano</li>
+<li>Expansão da atuação no mercado educacional</li>
+<li>Expansão para outros processos seletivos além do PAS</li>
+<li>Análise de 100 gabaritos por minuto</li>
+<li>Relatórios detalhados sobre o desempenho dos alunos</li>
+</ul>
+<h2 id="historico-de-versao">Histórico de Versão<a class="headerlink" href="#historico-de-versao" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Versão</th>
+<th>Descrição</th>
+<th>Autor(es)</th>
+<th>Revisor(es)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>19/04/2025</td>
+<td>1.0</td>
+<td>Criação inicial da documentação</td>
+<td>Otavio Maya</td>
+<td>Marcelo Adrian</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

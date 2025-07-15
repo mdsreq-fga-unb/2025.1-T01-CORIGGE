@@ -1,0 +1,1435 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do projeto Corigge">
+      
+      
+      
+      
+        <link rel="prev" href="../pbb/">
+      
+      
+        <link rel="next" href="../../entrega04/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>USM - Corigge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#user-story-mapping-educonnect" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Corigge" class="md-header__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corigge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              USM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4m0-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../cenario-atual/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cenário Atual
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../solucao-proposta/" class="md-tabs__link">
+          
+  
+  
+  Documentação do Projeto
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../licoes-aprendidas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Lições Aprendidas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../gravacoes/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ata de reuniões
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../entrega01/" class="md-tabs__link">
+          
+  
+  
+  Entregas
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Corigge" class="md-nav__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corigge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cenario-atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cenário Atual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentação do Projeto
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Documentação do Projeto
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solucao-proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solução Proposta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../estrategias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estratégias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engenharia-requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Engenharia de Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronograma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../interacao-cliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interação Cliente-Equipe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DoR_DoD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DoR e DoD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog do Produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../licoes-aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lições Aprendidas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gravacoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata de reuniões
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entregas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Entregas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pbb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#personas" class="md-nav__link">
+    <span class="md-ellipsis">
+      👥 Personas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#atividades-e-responsaveis" class="md-nav__link">
+    <span class="md-ellipsis">
+      📌 Atividades e Responsáveis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backbone-e-atividades-associadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧱 Backbone e Atividades Associadas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp-minimo-produto-viavel" class="md-nav__link">
+    <span class="md-ellipsis">
+      MVP - Mínimo Produto Viável
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detalhamento-por-backbone" class="md-nav__link">
+    <span class="md-ellipsis">
+      📋 Detalhamento por Backbone
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📋 Detalhamento por Backbone">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bb01-gerenciar-projetos" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb01 – Gerenciar projetos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bb02-planejamento-detalhado" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb02 – Planejamento Detalhado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bb03-divulgacao-e-alinhamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb03 – Divulgação e Alinhamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bb04-cadastro-e-autorizacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb04 – Cadastro e Autorização
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bb05-execucao-e-acompanhamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb05 – Execução e Acompanhamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bb06-gestao-de-recursos-e-equipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb06 – Gestão de Recursos e Equipe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bb07-avaliacao-e-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb07 – Avaliação e Resultados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bb08-comunicacao-continua" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔹 Bb08 – Comunicação Contínua
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade04/uml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade04/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BUILD Aplicativo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="user-story-mapping-educonnect">User Story Mapping - EduConnect<a class="headerlink" href="#user-story-mapping-educonnect" title="Permanent link">&para;</a></h1>
+<p>Adotamos o método de Mapeamento de Histórias de Usuário para estruturar as demandas da EduConnect, uma solução digital criada para otimizar a criação, o controle e a análise de iniciativas pedagógicas integradas, além de possibilitar o acompanhamento de ações extracurriculares no ambiente escolar.</p>
+<iframe width="100%" height="432" src="https://miro.com/app/live-embed/uXjVImUzcfw=/?embedMode=view_only_without_ui&moveToViewport=100410%2C-156394%2C249263%2C124502&embedId=68920172115" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe>
+
+<hr />
+<p><strong>Prints</strong></p>
+<p><img alt="alt text" src="../image.png" />
+<img alt="alt text" src="../image-1.png" /></p>
+<h2 id="personas">👥 Personas<a class="headerlink" href="#personas" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Persona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Us01</td>
+<td>Professor</td>
+</tr>
+<tr>
+<td>Us02</td>
+<td>Coordenador</td>
+</tr>
+<tr>
+<td>Us03</td>
+<td>Pais / Responsáveis</td>
+</tr>
+<tr>
+<td>Us04</td>
+<td>Aluno</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="atividades-e-responsaveis">📌 Atividades e Responsáveis<a class="headerlink" href="#atividades-e-responsaveis" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Atividade</th>
+<th>ID</th>
+<th>Responsáveis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gerenciar projetos</td>
+<td>At01</td>
+<td>Professor</td>
+</tr>
+<tr>
+<td>Documentar projeto</td>
+<td>At02</td>
+<td>Coordenador, Pais</td>
+</tr>
+<tr>
+<td>Monitorar participação do aluno</td>
+<td>At03</td>
+<td>Pais</td>
+</tr>
+<tr>
+<td>Enviar feedback para perfil</td>
+<td>At04</td>
+<td>Professor</td>
+</tr>
+<tr>
+<td>Adicionar anotação</td>
+<td>At05</td>
+<td>Coordenador</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="backbone-e-atividades-associadas">🧱 Backbone e Atividades Associadas<a class="headerlink" href="#backbone-e-atividades-associadas" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Backbone</th>
+<th>Atividade Associada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bb01</td>
+<td>Gerenciar projetos</td>
+<td>At01</td>
+</tr>
+<tr>
+<td>Bb02</td>
+<td>Documentar projeto</td>
+<td>At02</td>
+</tr>
+<tr>
+<td>Bb03</td>
+<td>Monitorar participação do aluno</td>
+<td>At03</td>
+</tr>
+<tr>
+<td>Bb04</td>
+<td>Enviar feedback para perfil</td>
+<td>At04</td>
+</tr>
+<tr>
+<td>Bb05</td>
+<td>Adicionar anotação</td>
+<td>At05</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mvp-minimo-produto-viavel">MVP - Mínimo Produto Viável<a class="headerlink" href="#mvp-minimo-produto-viavel" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Tarefa</th>
+<th>Descrição</th>
+<th>Backbone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T01</td>
+<td>Criar novo projeto</td>
+<td>Bb01</td>
+</tr>
+<tr>
+<td>T02</td>
+<td>Definir objetivos pedagógicos</td>
+<td>Bb01</td>
+</tr>
+<tr>
+<td>T03</td>
+<td>Estimar recursos necessários</td>
+<td>Bb01</td>
+</tr>
+<tr>
+<td>T04</td>
+<td>Criar cronograma</td>
+<td>Bb02</td>
+</tr>
+<tr>
+<td>T05</td>
+<td>Definir papéis e responsabilidades</td>
+<td>Bb02</td>
+</tr>
+<tr>
+<td>T06</td>
+<td>Cadastrar critérios de avaliação</td>
+<td>Bb02</td>
+</tr>
+<tr>
+<td>T07</td>
+<td>Agendar reuniões de apresentação</td>
+<td>Bb03</td>
+</tr>
+<tr>
+<td>T08</td>
+<td>Enviar comunicados</td>
+<td>Bb03</td>
+</tr>
+<tr>
+<td>T09</td>
+<td>Cadastrar alunos no projeto</td>
+<td>Bb04</td>
+</tr>
+<tr>
+<td>T10</td>
+<td>Armazenar autorizações dos responsáveis</td>
+<td>Bb04</td>
+</tr>
+<tr>
+<td>T11</td>
+<td>Registrar andamento das atividades</td>
+<td>Bb05</td>
+</tr>
+<tr>
+<td>T12</td>
+<td>Marcar tarefas como concluídas</td>
+<td>Bb05</td>
+</tr>
+<tr>
+<td>T13</td>
+<td>Visualizar status do projeto</td>
+<td>Bb05</td>
+</tr>
+<tr>
+<td>T14</td>
+<td>Controlar materiais e recursos</td>
+<td>Bb06</td>
+</tr>
+<tr>
+<td>T15</td>
+<td>Atribuir tarefas aos professores</td>
+<td>Bb06</td>
+</tr>
+<tr>
+<td>T16</td>
+<td>Inserir evidências de aprendizagem</td>
+<td>Bb07</td>
+</tr>
+<tr>
+<td>T17</td>
+<td>Gerar relatórios de progresso</td>
+<td>Bb07</td>
+</tr>
+<tr>
+<td>T18</td>
+<td>Publicar atualizações e avisos</td>
+<td>Bb08</td>
+</tr>
+<tr>
+<td>T19</td>
+<td>Permitir comentários nos projetos</td>
+<td>Bb08</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="detalhamento-por-backbone">📋 Detalhamento por Backbone<a class="headerlink" href="#detalhamento-por-backbone" title="Permanent link">&para;</a></h2>
+<h3 id="bb01-gerenciar-projetos">🔹 Bb01 – Gerenciar projetos<a class="headerlink" href="#bb01-gerenciar-projetos" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Registrar projeto</li>
+<li>Modificar dados de um projeto</li>
+<li>Incluir alunos no projeto</li>
+<li>Fornecer materiais didáticos</li>
+<li>Definir procedimentos de comunicação</li>
+</ul>
+<h3 id="bb02-planejamento-detalhado">🔹 Bb02 – Planejamento Detalhado<a class="headerlink" href="#bb02-planejamento-detalhado" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Criar cronograma: criar cronograma com marcos e datas editáveis.</li>
+<li>Definir papéis e responsabilidades: atribuir papéis à equipe e notificar os membros.</li>
+<li>Cadastrar critérios de avaliação: associar critérios às atividades do projeto.</li>
+</ul>
+<h3 id="bb03-divulgacao-e-alinhamento">🔹 Bb03 – Divulgação e Alinhamento<a class="headerlink" href="#bb03-divulgacao-e-alinhamento" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enviar comunicados: gerar e personalizar comunicados para diferentes públicos.</li>
+<li>Agendar reuniões de apresentação: agendar reuniões informativas e registrar a realização.</li>
+</ul>
+<h3 id="bb04-cadastro-e-autorizacao">🔹 Bb04 – Cadastro e Autorização<a class="headerlink" href="#bb04-cadastro-e-autorizacao" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Cadastrar alunos no projeto: incluir alunos com dados básicos e associá-los ao projeto.</li>
+<li>Armazenar autorizações: anexar digitalmente autorizações dos responsáveis.</li>
+</ul>
+<h3 id="bb05-execucao-e-acompanhamento">🔹 Bb05 – Execução e Acompanhamento<a class="headerlink" href="#bb05-execucao-e-acompanhamento" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Registrar andamento das atividades: marcar progresso das tarefas e atualizar status.</li>
+<li>Marcar tarefas como concluídas: permitir encerramento de atividades e inserção de observações.</li>
+<li>Visualizar status do projeto: visão consolidada do progresso do projeto.</li>
+</ul>
+<h3 id="bb06-gestao-de-recursos-e-equipe">🔹 Bb06 – Gestão de Recursos e Equipe<a class="headerlink" href="#bb06-gestao-de-recursos-e-equipe" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Controlar materiais e recursos: registrar uso por etapa e alertar para limites de estoque.</li>
+<li>Atribuir tarefas aos professores: distribuir atividades e disponibilizar visualização pessoal.</li>
+</ul>
+<h3 id="bb07-avaliacao-e-resultados">🔹 Bb07 – Avaliação e Resultados<a class="headerlink" href="#bb07-avaliacao-e-resultados" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Inserir evidências de aprendizagem: anexar documentos, fotos ou vídeos organizados por aluno e atividade.</li>
+<li>Gerar relatórios de progresso: relatórios por aluno, grupo e projeto com base nas evidências.</li>
+</ul>
+<h3 id="bb08-comunicacao-continua">🔹 Bb08 – Comunicação Contínua<a class="headerlink" href="#bb08-comunicacao-continua" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Publicar atualizações e avisos: coordenadores publicam em mural acessível com anexos e menções.</li>
+<li>Permitir comentários nos projetos: comentários nas atividades com controle de visibilidade e notificações.</li>
+</ul>
+<hr />
+<p><strong>Bibliografia:</strong><br />
+PATTON, Jeff. <em>User Story Mapping: Discover the Whole Story, Build the Right Product</em>. Sebastopol: O'Reilly Media, 2014.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1619 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do projeto Corigge">
+      
+      
+      
+      
+        <link rel="prev" href="../DoR_DoD/">
+      
+      
+        <link rel="next" href="../requisitos/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Backlog do Produto - Corigge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#backlog-do-produto" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Corigge" class="md-header__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corigge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Backlog do Produto
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4m0-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cenario-atual/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cenário Atual
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../solucao-proposta/" class="md-tabs__link">
+          
+  
+  
+  Documentação do Projeto
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../licoes-aprendidas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Lições Aprendidas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../gravacoes/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ata de reuniões
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../entregas/entrega01/" class="md-tabs__link">
+          
+  
+  
+  Entregas
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Corigge" class="md-nav__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corigge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cenario-atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cenário Atual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentação do Projeto
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Documentação do Projeto
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../solucao-proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solução Proposta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../estrategias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estratégias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../engenharia-requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Engenharia de Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronograma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interacao-cliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interação Cliente-Equipe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DoR_DoD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DoR e DoD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Backlog do Produto
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog do Produto
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#backlog-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backlog Geral
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Backlog Geral">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#epicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Épicos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#processamento-de-gabaritos-ep01" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processamento de Gabaritos (EP01)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#geracao-de-relatorios-ep02" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geração de Relatórios (EP02)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gestao-de-usuarios-e-pagamentos-ep03" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gestão de Usuários e Pagamentos (EP03)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#templates-de-gabaritos-ep04" class="md-nav__link">
+    <span class="md-ellipsis">
+      Templates de Gabaritos (EP04)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integracao-e-exportacao-ep05" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integração e Exportação (EP05)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#priorizacao-do-backlog-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      Priorização do Backlog Geral
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mvp" class="md-nav__link">
+    <span class="md-ellipsis">
+      MVP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MVP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#funcionalidades" class="md-nav__link">
+    <span class="md-ellipsis">
+      Funcionalidades
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos Não Funcionais
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licoes-aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lições Aprendidas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gravacoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata de reuniões
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entregas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Entregas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade03/pbb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade03/usm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/entrega04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade04/uml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    UML
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entregas/unidade04/build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BUILD Aplicativo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="backlog-do-produto">Backlog do Produto<a class="headerlink" href="#backlog-do-produto" title="Permanent link">&para;</a></h1>
+<p>É importante ressaltar que todas as histórias de usuário apresentadas a seguir foram elaboradas com base na lista de requisitos funcionais descritos anteriormente neste documento. Trata-se de uma lista inicial, sujeita a ajustes ao longo do desenvolvimento do produto.</p>
+<h2 id="backlog-geral">Backlog Geral<a class="headerlink" href="#backlog-geral" title="Permanent link">&para;</a></h2>
+<h3 id="epicos">Épicos<a class="headerlink" href="#epicos" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Processamento de Gabaritos (EP01)</strong></li>
+<li>Foco no processamento e correção automática de gabaritos</li>
+<li>
+<p>Inclui identificação de respostas, validação e templates</p>
+</li>
+<li>
+<p><strong>Geração de Relatórios (EP02)</strong></p>
+</li>
+<li>Foco na análise e geração de relatórios de desempenho</li>
+<li>
+<p>Inclui relatórios individuais, comparativos e estatísticas</p>
+</li>
+<li>
+<p><strong>Gestão de Usuários e Pagamentos (EP03)</strong></p>
+</li>
+<li>Foco na gestão de contas, autenticação e sistema de créditos</li>
+<li>
+<p>Inclui integração com Stripe e controle de acesso</p>
+</li>
+<li>
+<p><strong>Templates de Gabaritos (EP04)</strong></p>
+</li>
+<li>Foco na personalização e gestão de templates</li>
+<li>
+<p>Inclui criação, edição e definição de campos</p>
+</li>
+<li>
+<p><strong>Integração e Exportação (EP05)</strong></p>
+</li>
+<li>Foco na exportação de dados e integração com outros sistemas</li>
+<li>Inclui backup e diferentes formatos de exportação</li>
+</ol>
+<h3 id="processamento-de-gabaritos-ep01">Processamento de Gabaritos (EP01)<a class="headerlink" href="#processamento-de-gabaritos-ep01" title="Permanent link">&para;</a></h3>
+<p>US01 - Como usuário, quero processar imagens de gabaritos preenchidos por alunos, para automatizar a correção das provas.</p>
+<p>US02 - Como usuário, quero enviar o gabarito correto e comparar com as respostas dos alunos, para obter os resultados automaticamente.</p>
+<p>US03 - Como usuário, quero validar o processamento dos gabaritos, para garantir a precisão da correção.</p>
+<p>US04 - Como usuário, quero identificar automaticamente a matrícula do aluno no gabarito, para associar corretamente as respostas ao aluno.</p>
+<h3 id="geracao-de-relatorios-ep02">Geração de Relatórios (EP02)<a class="headerlink" href="#geracao-de-relatorios-ep02" title="Permanent link">&para;</a></h3>
+<p>US05 - Como usuário, quero gerar e exportar relatórios individuais dos alunos, para acompanhar o desempenho individual.</p>
+<p>US06 - Como usuário, quero comparar desempenho entre alunos e grupos, para identificar padrões e tendências.</p>
+<p>US07 - Como usuário, quero visualizar estatísticas detalhadas por questão, para identificar pontos de melhoria no ensino.</p>
+<p>US08 - Como usuário, quero acompanhar a evolução do desempenho ao longo do tempo, para avaliar o progresso dos alunos.</p>
+<p>US09 - Como usuário, quero salvar os relatórios gerados na minha conta, para acessá-los posteriormente.</p>
+<p>US10 - Como usuário, quero exportar relatórios gerais em PDF, para compartilhar com outros stakeholders.</p>
+<h3 id="gestao-de-usuarios-e-pagamentos-ep03">Gestão de Usuários e Pagamentos (EP03)<a class="headerlink" href="#gestao-de-usuarios-e-pagamentos-ep03" title="Permanent link">&para;</a></h3>
+<p>US11 - Como usuário, quero fazer login com minha conta Google e gerenciar meu perfil, para acessar o sistema de forma segura.</p>
+<p>US12 - Como usuário, quero gerenciar meus créditos para usar o sistema, para controlar meus gastos.</p>
+<p>US13 - Como administrador, quero gerenciar diferentes níveis de acesso, para controlar quem pode acessar quais funcionalidades.</p>
+<p>US14 - Como usuário, quero associar minha escola à minha conta, para organizar melhor os dados e relatórios.</p>
+<p>US15 - Como usuário, quero realizar pagamentos via Stripe, para adquirir créditos no sistema.</p>
+<p>US16 - Como usuário, quero visualizar meu saldo de créditos atual, para controlar meu uso do sistema.</p>
+<h3 id="templates-de-gabaritos-ep04">Templates de Gabaritos (EP04)<a class="headerlink" href="#templates-de-gabaritos-ep04" title="Permanent link">&para;</a></h3>
+<p>US17 - Como usuário, quero criar e personalizar templates de gabaritos, para adaptar o sistema às minhas necessidades.</p>
+<p>US18 - Como usuário, quero gerenciar meus templates de gabaritos, para reutilizá-los e mantê-los atualizados.</p>
+<p>US19 - Como usuário, quero personalizar o layout dos gabaritos, para adaptá-los às necessidades específicas da minha instituição.</p>
+<p>US20 - Como usuário, quero definir o número de questões e campos no template, para criar gabaritos com diferentes formatos.</p>
+<h3 id="integracao-e-exportacao-ep05">Integração e Exportação (EP05)<a class="headerlink" href="#integracao-e-exportacao-ep05" title="Permanent link">&para;</a></h3>
+<p>US21 - Como usuário, quero exportar dados em diferentes formatos, para integrar com outros sistemas.</p>
+<p>US22 - Como usuário, quero fazer backup dos meus dados, para garantir a segurança das informações.</p>
+<h2 id="priorizacao-do-backlog-geral">Priorização do Backlog Geral<a class="headerlink" href="#priorizacao-do-backlog-geral" title="Permanent link">&para;</a></h2>
+<p>A priorização foi realizada utilizando as técnicas <strong>Weighted Shortest Job First (WSJF)</strong> em conjunto com o método MoSCoW, de modo a definir quais tarefas realizar primeiro dentre as definidas como essenciais no MVP.</p>
+<p>A priorização MoSCoW organiza as funcionalidades em quatro categorias:</p>
+<ul>
+<li>Must have: Funcionalidades essenciais para o funcionamento do produto</li>
+<li>Should have: Funcionalidades importantes, porém que podem ser implementadas após as essenciais</li>
+<li>Could have: Funcionalidades desejáveis, que agregam valor, mas não são prioritárias</li>
+<li>Won't have: Funcionalidades que não serão implementadas inicialmente</li>
+</ul>
+<p>O objetivo do WSJF é maximizar o valor econômico entregue em um período de tempo. A premissa é simples: se tivermos duas tarefas de valor igual, devemos fazer a mais curta primeiro para obter o retorno do investimento mais cedo.</p>
+<p>A fórmula para calcular o WSJF é dada por:</p>
+<div class="arithmatex">\[
+WSJF = \frac{\text{Custo do Atraso (Cost of Delay)}}{\text{Tamanho do Trabalho (Job Size)}}
+\]</div>
+<p>Detalhando os componentes presentes na fórmula, temos:</p>
+<ol>
+<li>Custo do Atraso (Cost of Delay):<ul>
+<li>Representa o dinheiro ou valor perdido, semana após semana que não é entregue uma funcionalidade.</li>
+<li>É definido pela soma de 3 fatores:<ul>
+<li>Valor para o Usuário e Negócio</li>
+<li>Criticidade do Tempo</li>
+<li>Redução de Risco ou Habilitação de Oportunidade</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Tamanho do Trabalho (Job Size)<ul>
+<li>Esse componente representa o esforço necessário para implementar uma funcionalidade, sendo definido pelas horas estimadas.</li>
+</ul>
+</li>
+</ol>
+<p>Para a aplicação no projeto, será considerada a escala de Fibonacci para o sistema de pontuação na fórmula, uma prática padrão na metodologia SAFe.</p>
+<p>Para cada cada História de Usuário (US) serão pontuados “Valor”, “Criticidade” e “RR|OE”, e no final a soma dos 3 irá compor o “CoD” (Cost of Delay).</p>
+<p>As horas estimadas podem ser mapeadas para a sequência de Fibonacci da seguinte forma:</p>
+<ul>
+<li>1-4 horas → <strong>3</strong></li>
+<li>5-8 horas → <strong>5</strong></li>
+<li>9-12 horas → <strong>8</strong></li>
+<li>13-16 horas → <strong>13</strong></li>
+<li>20 horas+ → <strong>20</strong></li>
+</ul>
+<p>Por fim, dividiremos o CoD pelo Tamanho para obter a pontuação WSJF e ranquear as funcionalidades.</p>
+<p>Legenda para a tabela:</p>
+<ul>
+<li>U-BV: Valor de Negócio do Usuário (User-Business Value)</li>
+<li>TC: Criticidade Temporal (Time Criticality)</li>
+<li>RR|OE: Redução de Risco | Habilitação de Oportunidade (Risk Reduction | Opportunity Enablement)</li>
+<li>CoD: Custo do Atraso (Cost of Delay)</li>
+<li>JS: Tamanho do Trabalho (Job Size)</li>
+</ul>
+<table style="width:100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">ID</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Prioridade MoSCoW</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Descrição</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">U-BV</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">TC</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">RR|OE</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">CoD</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">JS</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">Pontuação WSJF</th>
+      <th style="text-align: right; padding: 8px; border: 1px solid #ddd;">Rank WSJF</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Horas estimadas</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Requisito Relacionado</th>
+      <th style="text-align: left; padding: 8px; border: 1px solid #ddd;">Épico</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US02</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Enviar gabarito correto e comparar</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">53</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">10.6</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">8h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF02, RF04, RF05</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US11</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Fazer login com conta Google e gerenciar perfil</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">29</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">9.67</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF16</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Associar escola à conta</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">26</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8.67</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">2h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF17</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US05</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerar relatórios individuais dos alunos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">41</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8.2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">4</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">8h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF10</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US03</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Validar processamento dos gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">21</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">7</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF02</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US04</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Identificar matrícula do aluno no gabarito</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">46</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5.75</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">6</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">10h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF03</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US20</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Definir número de questões e campos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">4.33</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">7</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US12</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerenciar sistema de créditos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">18</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.6</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">6h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF20</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US21</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Exportar dados em diferentes formatos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">10</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.33</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">9</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP05</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US06</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Comparar desempenho entre alunos e grupos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">26</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.25</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">10</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF07, RF08</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US17</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Criar e personalizar templates de gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">26</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3.25</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">11</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF12</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US01</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Processar Imagens de Gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">60</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">12</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">40h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF01</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP01</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US10</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Exportar relatórios gerais em PDF</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">9</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">4h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF15</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US22</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Fazer backup dos dados</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">15</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">8h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF14</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP05</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US18</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Must have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerenciar templates de gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2.6</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">15</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">6h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF12, RF13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US15</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Realizar pagamentos via Stripe</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">16</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">16</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">10h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF18</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US08</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Acompanhar evolução do desempenho</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">15</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1.88</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">17</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF06</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US19</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Should have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Personalizar layout dos gabaritos</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">2</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1.63</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">18</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP04</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US07</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Visualizar estatísticas por questão</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">5</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">16</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">13</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1.23</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">19</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">16h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF06</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP02</td>
+    </tr>
+    <tr>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">US13</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Could have</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">Gerenciar diferentes níveis de acesso</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">1</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">3</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">7</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">8</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">0.88</td>
+      <td style="text-align: right; padding: 8px; border: 1px solid #ddd;">20</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">12h</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">RF16</td>
+      <td style="text-align: left; padding: 8px; border: 1px solid #ddd;">EP03</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Com o rankeamento realizado é possível selecionar as funcionalidades com maior valor de negócio para serem implementadas primeiro no MVP.</p>
+<h2 id="mvp">MVP<a class="headerlink" href="#mvp" title="Permanent link">&para;</a></h2>
+<p>O Produto Mínimo Viável (MVP) inclui as seguintes funcionalidades essenciais:</p>
+<h3 id="funcionalidades">Funcionalidades<a class="headerlink" href="#funcionalidades" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Processar Imagens de Gabaritos (US01)</li>
+<li>Correção Automática (US02)</li>
+<li>Validação de Processamento (US03)</li>
+<li>Identificação de Matrícula (US04)</li>
+<li>Relatórios Individuais (US05)</li>
+<li>Autenticação e Perfil (US11)</li>
+<li>Associação Escola/Conta (US14)</li>
+<li>Criação de Templates (US17)</li>
+<li>Gerenciamento de Templates (US18)</li>
+<li>Definição de Campos (US20)</li>
+</ul>
+<h3 id="requisitos-nao-funcionais">Requisitos Não Funcionais<a class="headerlink" href="#requisitos-nao-funcionais" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Frontend: Flutter (Desktop)</li>
+<li>Backend: TypeScript/Express.js</li>
+<li>Processamento de Imagens: Python/OpenCV</li>
+<li>Banco de Dados: Supabase/PostgreSQL</li>
+<li>Hospedagem: Azure VM Linux</li>
+<li>Processamento mínimo de 100 gabaritos por minuto</li>
+<li>Interface intuitiva e fácil de usar</li>
+<li>Segurança e confidencialidade dos dados</li>
+<li>Custo operacional inferior a R$ 1,00 por aluno processado</li>
+</ul>
+<p>As funcionalidades não incluídas no MVP serão implementadas em fases subsequentes, priorizando aquelas classificadas como "Should have" antes das "Could have". </p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

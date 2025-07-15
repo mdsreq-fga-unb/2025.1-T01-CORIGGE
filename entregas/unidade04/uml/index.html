@@ -1,0 +1,2234 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentação do projeto Corigge">
+      
+      
+      
+      
+        <link rel="prev" href="../../entrega04/">
+      
+      
+        <link rel="next" href="../build/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>UML - Corigge</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#uml-verify" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Corigge" class="md-header__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Corigge
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UML
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4m0-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../cenario-atual/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cenário Atual
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../solucao-proposta/" class="md-tabs__link">
+          
+  
+  
+  Documentação do Projeto
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../licoes-aprendidas/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Lições Aprendidas
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../gravacoes/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ata de reuniões
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../entrega01/" class="md-tabs__link">
+          
+  
+  
+  Entregas
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Corigge" class="md-nav__button md-logo" aria-label="Corigge" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Corigge
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cenario-atual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cenário Atual
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentação do Projeto
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Documentação do Projeto
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../solucao-proposta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Solução Proposta
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../estrategias/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estratégias
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../engenharia-requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Engenharia de Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../cronograma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cronograma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../interacao-cliente/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interação Cliente-Equipe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../DoR_DoD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    DoR e DoD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../backlog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Backlog do Produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../licoes-aprendidas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lições Aprendidas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../gravacoes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata de reuniões
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Entregas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Entregas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 03
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade03/pbb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    PBB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../unidade03/usm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    USM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../entrega04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Unidade 04
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    UML
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    UML
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-de-caso-de-uso-enviar-conteudo-suspeito-para-analise" class="md-nav__link">
+    <span class="md-ellipsis">
+      Especificação de Caso de Uso: Enviar Conteúdo Suspeito para Análise
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-de-caso-de-uso-acessar-relatorios-de-auditoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      Especificação de Caso de Uso: Acessar Relatórios de Auditoria
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-de-caso-de-uso-acessar-relatorios-de-auditoria_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Especificação de Caso de Uso: Acessar Relatórios de Auditoria
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-de-caso-de-uso-gerenciar-suporte-multilingue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Especificação de Caso de Uso: Gerenciar Suporte Multilíngue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-de-caso-de-uso-acessar-materiais-educacionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Especificação de Caso de Uso: Acessar Materiais Educacionais
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-de-caso-de-uso-acompanhar-status-de-verificacoes-pendentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Especificação de Caso de Uso: Acompanhar Status de Verificações Pendentes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../build/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    BUILD Aplicativo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="uml-verify">UML Verify<a class="headerlink" href="#uml-verify" title="Permanent link">&para;</a></h1>
+<p>O Verify é uma plataforma digital desenvolvida para combater a crescente onda de desinformação na sociedade. Sua proposta é identificar, analisar e mitigar a propagação de notícias falsas por meio de inteligência artificial e da colaboração entre usuários e especialistas em checagem de fatos.</p>
+<p><strong>Link do UML:</strong> <a href="https://drive.google.com/file/d/1V_MSOjFMGSXvlFJQsrjTP8nV5p0x-Q2u/view">Estudos de caso Verify</a></p>
+<p><strong>Prints do UML</strong></p>
+<p><img alt="alt text" src="../image-1.png" /></p>
+<h3 id="especificacao-de-caso-de-uso-enviar-conteudo-suspeito-para-analise">Especificação de Caso de Uso: Enviar Conteúdo Suspeito para Análise<a class="headerlink" href="#especificacao-de-caso-de-uso-enviar-conteudo-suspeito-para-analise" title="Permanent link">&para;</a></h3>
+<h4 id="1-breve-descricao">1. Breve Descrição<a class="headerlink" href="#1-breve-descricao" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso permite que o Usuário da plataforma "Verify" envie conteúdos que considera suspeitos (como textos, links, imagens ou vídeos) para que o sistema realize uma análise de veracidade. O objetivo é iniciar o processo de verificação, que pode envolver tanto a análise por inteligência artificial quanto a revisão manual por moderadores.</p>
+<h4 id="2-pre-condicoes">2. Pré-Condições<a class="headerlink" href="#2-pre-condicoes" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>PC-1:</strong> O Usuário deve ter acesso à plataforma "Verify", seja pelo aplicativo instalado, web, ou por meio de um dos canais integrados (chatbot, extensão de navegador, etc.).</li>
+</ul>
+<h4 id="3-fluxo-basico-de-eventos-fb">3. Fluxo Básico de Eventos (FB)<a class="headerlink" href="#3-fluxo-basico-de-eventos-fb" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso é iniciado quando o Usuário decide enviar um conteúdo para análise.</p>
+<ol>
+<li>O Usuário aciona a funcionalidade de envio de conteúdo na interface principal do "Verify".</li>
+<li>O sistema apresenta a interface de submissão, solicitando que o Usuário insira o conteúdo suspeito.</li>
+<li>O Usuário insere o conteúdo no formato de texto, cola um link (URL) ou realiza o upload de um arquivo de mídia (imagem ou vídeo).</li>
+<li>O sistema executa uma validação preliminar de formato e integridade no conteúdo inserido. (Tratado em <strong>FE01</strong>, <strong>FE03</strong>).</li>
+<li>O sistema executa uma verificação de duplicidade em tempo real, comparando o conteúdo com o banco de dados. (Tratado em <strong>FE05</strong>).</li>
+<li>O sistema solicita que o Usuário justifique o motivo da suspeita, apresentando uma lista de categorias predefinidas e uma opção para texto livre. (Inclui o caso de uso "Justificar Suspeita"; tratado em <strong>FA05</strong>).</li>
+<li>O Usuário seleciona uma ou mais justificativas ou insere uma descrição textual.</li>
+<li>O Usuário confirma a submissão.</li>
+<li>O sistema executa uma análise preliminar automatizada utilizando seu motor de Inteligência Artificial.</li>
+<li>O sistema registra a solicitação de forma persistente em seu banco de dados, associando-a ao Usuário, conteúdo, justificativa e resultados da IA.</li>
+<li>O sistema gera um número de protocolo único para acompanhamento.</li>
+<li>O sistema exibe uma mensagem de confirmação ao Usuário, informando o recebimento com sucesso e o número do protocolo.</li>
+<li>O sistema oferece opções interativas, como ser notificado sobre o resultado da análise. (Ponto de extensão para <strong>PE-01</strong>).</li>
+<li>O caso de uso é encerrado com sucesso.</li>
+</ol>
+<h4 id="4-fluxos-alternativos-fa">4. Fluxos Alternativos (FA)<a class="headerlink" href="#4-fluxos-alternativos-fa" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FA01] Envio via Integração com Chatbot</strong></p>
+<ul>
+<li><strong>Condição:</strong> O Usuário interage com o chatbot oficial do "Verify" em um aplicativo de mensagens.</li>
+<li>
+<ol>
+<li>No passo 1 do FB, o Usuário encaminha o conteúdo para o contato do chatbot.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O chatbot confirma o recebimento e conduz um diálogo para obter a justificativa da suspeita.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo converge e continua a partir do passo 9 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FA02] Envio via Extensão de Navegador</strong></p>
+<ul>
+<li><strong>Condição:</strong> O Usuário utiliza a extensão do "Verify" em uma página da web.</li>
+<li>
+<ol>
+<li>No passo 1 do FB, o Usuário clica com o botão direito no conteúdo e seleciona "Verificar com Verify".</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>A extensão abre uma interface já preenchida com o conteúdo selecionado.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo converge e continua a partir do passo 6 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FA03] Envio via Integração com Redes Sociais</strong></p>
+<ul>
+<li><strong>Condição:</strong> O Usuário está em uma rede social com integração nativa do "Verify".</li>
+<li>
+<ol>
+<li>No passo 1 do FB, o Usuário clica no botão "Verificar Informações" da postagem.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema captura o conteúdo relevante via API e apresenta uma interface simplificada para justificativa.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo converge e continua a partir do passo 7 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FA04] Envio via Assistente Virtual (Alexa, Google Assistant, etc.)</strong></p>
+<ul>
+<li><strong>Condição:</strong> O Usuário utiliza a skill/ação do "Verify" em um assistente de voz.</li>
+<li>
+<ol>
+<li>No passo 1 do FB, o Usuário profere um comando de voz para enviar o conteúdo.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O assistente de voz confirma o recebimento e pode perguntar a justificativa.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo converge e continua a partir do passo 9 do FB. A confirmação e protocolo são entregues por voz.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FA05] Envio de Conteúdo com Justificativa Aberta</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 6 do FB, o Usuário escolhe descrever a suspeita com suas próprias palavras.</li>
+<li>
+<ol>
+<li>O sistema exibe um campo de texto para a entrada da justificativa.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O Usuário digita o motivo detalhado.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo converge e continua no passo 8 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-fluxos-de-excecao-fe">5. Fluxos de Exceção (FE)<a class="headerlink" href="#5-fluxos-de-excecao-fe" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FE01] Conteúdo Inválido ou Mal Formatado</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 4 do FB, a validação do conteúdo falha (ex: URL quebrado).</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem de erro clara e impede a continuação.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema retorna ao passo 3 do FB, permitindo que o Usuário corrija a entrada.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE02] Falha na Conexão com o Servidor</strong></p>
+<ul>
+<li><strong>Condição:</strong> Em qualquer passo que exija comunicação com o servidor.</li>
+<li>
+<ol>
+<li>Se a funcionalidade offline estiver ativa, o sistema armazena a solicitação em uma fila local no dispositivo e notifica o usuário. O caso de uso termina (para o usuário).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Se a funcionalidade offline não estiver ativa, o sistema informa sobre a falha e sugere tentar novamente mais tarde, sem perder os dados inseridos.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE03] Formato de Arquivo Não Suportado</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 3 do FB, o Usuário tenta fazer upload de um tipo de arquivo não permitido.</li>
+<li>
+<ol>
+<li>O sistema rejeita o upload e exibe uma mensagem de erro com os formatos válidos.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema retorna ao passo 3 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE04] Limite de Submissões Excedido</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 8 do FB, o sistema detecta que o Usuário (ou IP) excedeu a taxa de submissões permitida.</li>
+<li>
+<ol>
+<li>O sistema bloqueia a submissão e exibe uma mensagem explicando a política anti-spam.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O caso de uso é encerrado.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE05] Conteúdo Duplicado</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o sistema identifica que o conteúdo já foi submetido.</li>
+<li>
+<ol>
+<li>O sistema interrompe a submissão e informa que o conteúdo já está no sistema.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema apresenta o status atual da verificação ("Em análise" ou "Verificação concluída") e, se disponível, fornece um link direto para o relatório.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-pos-condicoes">6. Pós-Condições<a class="headerlink" href="#6-pos-condicoes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Sucesso:</strong></p>
+<ul>
+<li>Uma nova solicitação de verificação é registrada no banco de dados com um protocolo único.</li>
+<li>O conteúdo submetido é armazenado de forma segura.</li>
+<li>A solicitação é inserida na fila de processamento da IA e, se necessário, na fila de trabalho dos Moderadores.</li>
+<li>O Usuário recebe uma confirmação com o número do protocolo.</li>
+</ul>
+</li>
+<li>
+<p><strong>Falha:</strong></p>
+<ul>
+<li>O estado do sistema permanece inalterado. Nenhuma solicitação é criada.</li>
+<li>O Usuário é informado sobre o motivo da falha.</li>
+</ul>
+</li>
+<li>
+<p><strong>Submissão em Fila (Offline):</strong></p>
+<ul>
+<li>A solicitação de verificação é armazenada de forma segura em uma fila local no dispositivo do Usuário.</li>
+<li>O estado do servidor permanece inalterado até a sincronização futura.</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-pontos-de-extensao-pe">7. Pontos de Extensão (PE)<a class="headerlink" href="#7-pontos-de-extensao-pe" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[PE-01] Acompanhar Status de Verificação</strong></p>
+<ul>
+<li><strong>Localização:</strong> No passo 13 do FB, após o Usuário receber o protocolo.</li>
+<li><strong>Descrição:</strong> O sistema oferece um link que estende para o caso de uso <code>UC-02 Acompanhar Status de Verificação</code>, permitindo ao Usuário consultar o andamento da análise imediatamente.</li>
+</ul>
+</li>
+<li>
+<p><strong>[PE-02] Acessar Conteúdo Educativo</strong></p>
+<ul>
+<li><strong>Localização:</strong> Após o passo 13 do FB, na tela de confirmação.</li>
+<li><strong>Descrição:</strong> Com base no tipo de conteúdo submetido, o sistema pode estender para o caso de uso <code>UC-03 Visualizar Conteúdo Educativo</code>, sugerindo guias sobre como identificar aquele tipo de desinformação.</li>
+</ul>
+</li>
+<li>
+<p><strong>[PE-03] Receber Recompensa de Gamificação</strong></p>
+<ul>
+<li><strong>Localização:</strong> Após a conclusão bem-sucedida da submissão.</li>
+<li><strong>Descrição:</strong> A submissão pode acionar uma extensão para o caso de uso <code>UC-04 Gerenciar Perfil de Gamificação</code>, onde o Usuário ganha pontos ou badges por sua contribuição.</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-regras-de-negocio-rn">8. Regras de Negócio (RN)<a class="headerlink" href="#8-regras-de-negocio-rn" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RN-1:</strong> Um conteúdo idêntico a outro já verificado ou em análise não deve iniciar um novo processo de verificação; em vez disso, o usuário deve ser direcionado ao status ou relatório existente.</li>
+<li><strong>RN-2:</strong> Deve haver um limite de submissões por usuário/IP em um determinado período para prevenir spam e abuso do sistema.</li>
+<li><strong>RN-3:</strong> Apenas formatos de arquivo predefinidos (ex: JPG, PNG, MP4) são aceitos para upload.</li>
+</ul>
+<h4 id="9-requisitos-especiais-rse">9. Requisitos Especiais (RSE)<a class="headerlink" href="#9-requisitos-especiais-rse" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RSE-1 (Desempenho):</strong> A verificação de duplicidade e a análise preliminar da IA devem ser executadas em tempo real (ou quase real) para não impactar a experiência do usuário.</li>
+<li><strong>RSE-2 (Usabilidade):</strong> O processo de envio deve ser acessível por múltiplos canais (app, web, chatbot, extensão, voz), oferecendo uma experiência consistente e de baixo atrito.</li>
+<li><strong>RSE-3 (Confiabilidade / Offline):</strong> O sistema deve ser capaz de enfileirar submissões em modo offline, garantindo que nenhuma contribuição do usuário seja perdida por falha de conectividade.</li>
+</ul>
+<h4 id="10-informacoes-adicionais">10. Informações Adicionais<a class="headerlink" href="#10-informacoes-adicionais" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Não há informações adicionais necessárias para a compreensão deste caso de uso.</li>
+</ul>
+<h3 id="especificacao-de-caso-de-uso-acessar-relatorios-de-auditoria">Especificação de Caso de Uso: Acessar Relatórios de Auditoria<a class="headerlink" href="#especificacao-de-caso-de-uso-acessar-relatorios-de-auditoria" title="Permanent link">&para;</a></h3>
+<h4 id="1-breve-descricao_1">1. Breve Descrição<a class="headerlink" href="#1-breve-descricao_1" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso permite que a Organização Parceira acesse um módulo avançado do sistema para realizar auditorias independentes em conteúdos sinalizados. O objetivo é revisar as análises automáticas, fornecer dados adicionais e validar informações para aumentar a precisão e a transparência do processo de verificação da plataforma "Verify".</p>
+<h4 id="2-pre-condicoes_1">2. Pré-Condições<a class="headerlink" href="#2-pre-condicoes_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>PC-1:</strong> O representante da Organização Parceira deve estar autenticado no sistema "Verify" com as permissões adequadas para auditoria.</li>
+</ul>
+<h4 id="3-fluxo-basico-de-eventos-fb_1">3. Fluxo Básico de Eventos (FB)<a class="headerlink" href="#3-fluxo-basico-de-eventos-fb_1" title="Permanent link">&para;</a></h4>
+<ol>
+<li>O representante da Organização Parceira, após autenticar-se, seleciona a opção "Acessar Módulo de Auditoria".</li>
+<li>O sistema exibe o painel de auditoria, apresentando uma lista de conteúdos sinalizados disponíveis para revisão.</li>
+<li>A Organização Parceira seleciona um dos conteúdos da lista para iniciar a auditoria.</li>
+<li>O sistema apresenta todos os detalhes associados ao conteúdo, incluindo a análise automatizada da IA e relatórios de moderadores, se houver.</li>
+<li>A Organização Parceira realiza a auditoria. Para isso, pode:<ul>
+<li>a. Revisar todos os dados e análises existentes no sistema.</li>
+<li>b. Conectar-se a bancos de dados externos para validar ou cruzar informações.</li>
+<li>c. Fornecer dados adicionais e insights especializados no relatório.</li>
+</ul>
+</li>
+<li>Após concluir a análise, a Organização Parceira submete seu relatório de auditoria através da interface.</li>
+<li>O sistema processa e salva as informações da auditoria, associando-as permanentemente ao conteúdo verificado.</li>
+<li>O sistema exibe uma mensagem de "Auditoria concluída com sucesso".</li>
+<li>O caso de uso é encerrado.</li>
+</ol>
+<h4 id="4-fluxos-alternativos-fa_1">4. Fluxos Alternativos (FA)<a class="headerlink" href="#4-fluxos-alternativos-fa_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>[FA01] Colaborar com Moderadores</strong><ul>
+<li><strong>Condição:</strong> No passo 5 do FB, a Organização Parceira precisa de mais esclarecimentos sobre um caso.</li>
+<li>
+<ol>
+<li>A Organização Parceira seleciona uma opção para colaborar com os moderadores.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema abre uma interface de comunicação que permite o envio de perguntas ou a solicitação de informações adicionais diretamente aos moderadores envolvidos no caso.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Após o envio da solicitação, o fluxo retorna ao passo 5 do FB, permitindo a continuação da auditoria.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-fluxos-de-excecao-fe_1">5. Fluxos de Exceção (FE)<a class="headerlink" href="#5-fluxos-de-excecao-fe_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FE01] Conteúdo Inacessível ou Removido</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 4 do FB, o sistema detecta que o material original (ex: postagem, vídeo) foi removido da plataforma de origem.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem informando sobre a indisponibilidade do conteúdo original.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema retorna ao passo 3 do FB, permitindo que a Organização Parceira selecione outro item para auditar.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE02] Falha de Conexão com Banco de Dados Externo</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o sistema não consegue estabelecer conexão com um banco de dados externo da Organização Parceira.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem de erro informando sobre a falha de conexão.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo permanece no passo 5, permitindo que a Organização Parceira continue a auditoria com os dados já disponíveis ou tente a conexão novamente mais tarde.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-pos-condicoes_1">6. Pós-Condições<a class="headerlink" href="#6-pos-condicoes_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Sucesso na Auditoria:</strong></p>
+<ul>
+<li>O relatório de auditoria da Organização Parceira é salvo de forma persistente e associado ao respectivo conteúdo no sistema "Verify".</li>
+<li>Um registro da operação de auditoria é criado na trilha de auditoria do sistema para fins de rastreabilidade.</li>
+</ul>
+</li>
+<li>
+<p><strong>Falha na Auditoria:</strong></p>
+<ul>
+<li>Se a auditoria for abandonada antes da submissão, nenhuma alteração ou novo relatório é salvo no sistema. O estado do conteúdo permanece como estava antes do início do caso de uso.</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-pontos-de-extensao-pe_1">7. Pontos de Extensão (PE)<a class="headerlink" href="#7-pontos-de-extensao-pe_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>[PE-01] Sugerir Melhorias à Plataforma</strong><ul>
+<li><strong>Localização:</strong> A qualquer momento durante a execução do fluxo.</li>
+<li><strong>Descrição:</strong> Este caso de uso pode ser estendido pela funcionalidade "Sugerir Melhorias". Isso permite que a Organização Parceira forneça feedback e sugestões para novas funcionalidades, ajudando a adaptar a plataforma.</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-regras-de-negocio-rn_1">8. Regras de Negócio (RN)<a class="headerlink" href="#8-regras-de-negocio-rn_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RN-1:</strong> Apenas conteúdos que atendem a critérios específicos (ex: sinalizados pela IA, de alta repercussão) são disponibilizados no módulo de auditoria.</li>
+<li><strong>RN-2:</strong> Todos os relatórios de auditoria submetidos são imutáveis e permanentemente associados ao conteúdo original para garantir a integridade da trilha de auditoria.</li>
+<li><strong>RN-3:</strong> A comunicação entre Organizações Parceiras e Moderadores deve ser intermediada e registrada pela plataforma.</li>
+</ul>
+<h4 id="9-requisitos-especiais-rse_1">9. Requisitos Especiais (RSE)<a class="headerlink" href="#9-requisitos-especiais-rse_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RSE-1 (Segurança de Dados):</strong> O acesso ao módulo de auditoria e seus dados deve ser restrito a usuários autorizados da Organização Parceira, com autenticação robusta e controle de permissões. O sistema deve garantir a conformidade com regulamentações de proteção de dados.</li>
+<li><strong>RSE-2 (Interoperabilidade):</strong> O sistema deve fornecer APIs ou conectores seguros para permitir a integração com bancos de dados externos</li>
+</ul>
+<h3 id="especificacao-de-caso-de-uso-acessar-relatorios-de-auditoria_1">Especificação de Caso de Uso: Acessar Relatórios de Auditoria<a class="headerlink" href="#especificacao-de-caso-de-uso-acessar-relatorios-de-auditoria_1" title="Permanent link">&para;</a></h3>
+<h4 id="1-breve-descricao_2">1. Breve Descrição<a class="headerlink" href="#1-breve-descricao_2" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso permite que a Organização Parceira acesse um módulo avançado do sistema para realizar auditorias independentes em conteúdos sinalizados. O objetivo é revisar as análises automáticas, fornecer dados adicionais e validar informações para aumentar a precisão e a transparência do processo de verificação da plataforma "Verify".</p>
+<h4 id="2-pre-condicoes_2">2. Pré-Condições<a class="headerlink" href="#2-pre-condicoes_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>PC-1:</strong> O representante da Organização Parceira deve estar autenticado no sistema "Verify" com as permissões adequadas para auditoria.</li>
+</ul>
+<h4 id="3-fluxo-basico-de-eventos-fb_2">3. Fluxo Básico de Eventos (FB)<a class="headerlink" href="#3-fluxo-basico-de-eventos-fb_2" title="Permanent link">&para;</a></h4>
+<ol>
+<li>O representante da Organização Parceira, após autenticar-se, seleciona a opção "Acessar Módulo de Auditoria".</li>
+<li>O sistema exibe o painel de auditoria, apresentando uma lista de conteúdos sinalizados disponíveis para revisão.</li>
+<li>A Organização Parceira seleciona um dos conteúdos da lista para iniciar a auditoria.</li>
+<li>O sistema apresenta todos os detalhes associados ao conteúdo, incluindo a análise automatizada da IA e relatórios de moderadores, se houver.</li>
+<li>A Organização Parceira realiza a auditoria. Para isso, pode:<ul>
+<li>a. Revisar todos os dados e análises existentes no sistema.</li>
+<li>b. Conectar-se a bancos de dados externos para validar ou cruzar informações.</li>
+<li>c. Fornecer dados adicionais e insights especializados no relatório.</li>
+</ul>
+</li>
+<li>Após concluir a análise, a Organização Parceira submete seu relatório de auditoria através da interface.</li>
+<li>O sistema processa e salva as informações da auditoria, associando-as permanentemente ao conteúdo verificado.</li>
+<li>O sistema exibe uma mensagem de "Auditoria concluída com sucesso".</li>
+<li>O caso de uso é encerrado.</li>
+</ol>
+<h4 id="4-fluxos-alternativos-fa_2">4. Fluxos Alternativos (FA)<a class="headerlink" href="#4-fluxos-alternativos-fa_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>[FA01] Colaborar com Moderadores</strong><ul>
+<li><strong>Condição:</strong> No passo 5 do FB, a Organização Parceira precisa de mais esclarecimentos sobre um caso.</li>
+<li>
+<ol>
+<li>A Organização Parceira seleciona uma opção para colaborar com os moderadores.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema abre uma interface de comunicação que permite o envio de perguntas ou a solicitação de informações adicionais diretamente aos moderadores envolvidos no caso.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Após o envio da solicitação, o fluxo retorna ao passo 5 do FB, permitindo a continuação da auditoria.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-fluxos-de-excecao-fe_2">5. Fluxos de Exceção (FE)<a class="headerlink" href="#5-fluxos-de-excecao-fe_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FE01] Conteúdo Inacessível ou Removido</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 4 do FB, o sistema detecta que o material original (ex: postagem, vídeo) foi removido da plataforma de origem.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem informando sobre a indisponibilidade do conteúdo original.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema retorna ao passo 3 do FB, permitindo que a Organização Parceira selecione outro item para auditar.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE02] Falha de Conexão com Banco de Dados Externo</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o sistema não consegue estabelecer conexão com um banco de dados externo da Organização Parceira.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem de erro informando sobre a falha de conexão.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo permanece no passo 5, permitindo que a Organização Parceira continue a auditoria com os dados já disponíveis ou tente a conexão novamente mais tarde.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-pos-condicoes_2">6. Pós-Condições<a class="headerlink" href="#6-pos-condicoes_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Sucesso na Auditoria:</strong></p>
+<ul>
+<li>O relatório de auditoria da Organização Parceira é salvo de forma persistente e associado ao respectivo conteúdo no sistema "Verify".</li>
+<li>Um registro da operação de auditoria é criado na trilha de auditoria do sistema para fins de rastreabilidade.</li>
+</ul>
+</li>
+<li>
+<p><strong>Falha na Auditoria:</strong></p>
+<ul>
+<li>Se a auditoria for abandonada antes da submissão, nenhuma alteração ou novo relatório é salvo no sistema. O estado do conteúdo permanece como estava antes do início do caso de uso.</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-pontos-de-extensao-pe_2">7. Pontos de Extensão (PE)<a class="headerlink" href="#7-pontos-de-extensao-pe_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>[PE-01] Sugerir Melhorias à Plataforma</strong><ul>
+<li><strong>Localização:</strong> A qualquer momento durante a execução do fluxo.</li>
+<li><strong>Descrição:</strong> Este caso de uso pode ser estendido pela funcionalidade "Sugerir Melhorias". Isso permite que a Organização Parceira forneça feedback e sugestões para novas funcionalidades, ajudando a adaptar a plataforma.</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-regras-de-negocio-rn_2">8. Regras de Negócio (RN)<a class="headerlink" href="#8-regras-de-negocio-rn_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RN-1:</strong> Apenas conteúdos que atendem a critérios específicos (ex: sinalizados pela IA, de alta repercussão) são disponibilizados no módulo de auditoria.</li>
+<li><strong>RN-2:</strong> Todos os relatórios de auditoria submetidos são imutáveis e permanentemente associados ao conteúdo original para garantir a integridade da trilha de auditoria.</li>
+<li><strong>RN-3:</strong> A comunicação entre Organizações Parceiras e Moderadores deve ser intermediada e registrada pela plataforma.</li>
+</ul>
+<h4 id="9-requisitos-especiais-rse_2">9. Requisitos Especiais (RSE)<a class="headerlink" href="#9-requisitos-especiais-rse_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RSE-1 (Segurança de Dados):</strong> O acesso ao módulo de auditoria e seus dados deve ser restrito a usuários autorizados da Organização Parceira, com autenticação robusta e controle de permissões. O sistema deve garantir a conformidade com regulamentações de proteção de dados.</li>
+<li><strong>RSE-2 (Interoperabilidade):</strong> O sistema deve fornecer APIs ou conectores seguros para permitir a integração com bancos de dados externos das Organizações Parceiras.</li>
+<li><strong>RSE-3 (Rastreabilidade):</strong> Todas as ações realizadas dentro do módulo de auditoria (visualizações, edições, submissões) devem ser registradas em logs detalhados para compor uma trilha de auditoria completa e confiável.</li>
+</ul>
+<h4 id="10-informacoes-adicionais_1">10. Informações Adicionais<a class="headerlink" href="#10-informacoes-adicionais_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Não há informações adicionais necessárias para a compreensão deste caso de uso.</li>
+</ul>
+<h3 id="especificacao-de-caso-de-uso-gerenciar-suporte-multilingue">Especificação de Caso de Uso: Gerenciar Suporte Multilíngue<a class="headerlink" href="#especificacao-de-caso-de-uso-gerenciar-suporte-multilingue" title="Permanent link">&para;</a></h3>
+<h4 id="1-breve-descricao_3">1. Breve Descrição<a class="headerlink" href="#1-breve-descricao_3" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso permite ao Administrador do Sistema gerenciar de forma abrangente o suporte multilíngue da plataforma "Verify". O administrador pode adicionar novos idiomas, remover idiomas existentes, editar traduções e configurar todas as opções relacionadas à internacionalização da plataforma, utilizando uma interface administrativa intuitiva para garantir a consistência linguística.</p>
+<h4 id="2-pre-condicoes_3">2. Pré-Condições<a class="headerlink" href="#2-pre-condicoes_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>PC-1 (Autenticação e Autorização):</strong> O Administrador do Sistema deve estar autenticado no sistema com privilégios administrativos válidos e ativos.</li>
+<li><strong>PC-2 (Disponibilidade do Sistema):</strong> O sistema deve estar operacional com conectividade estável à base de dados e aos serviços de armazenamento.</li>
+<li><strong>PC-3 (Configuração Inicial):</strong> Deve existir pelo menos um idioma padrão configurado no sistema.</li>
+</ul>
+<h4 id="3-fluxo-basico-de-eventos-fb_3">3. Fluxo Básico de Eventos (FB)<a class="headerlink" href="#3-fluxo-basico-de-eventos-fb_3" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso é iniciado quando o Administrador decide gerenciar os idiomas da plataforma.</p>
+<ol>
+<li>O Administrador do Sistema acessa o painel administrativo da plataforma "Verify".</li>
+<li>O sistema autentica o usuário e verifica seus privilégios administrativos (<strong>RN001</strong>).</li>
+<li>O sistema exibe o menu principal de administração.</li>
+<li>O Administrador seleciona a opção ”Gerenciamento de Idiomas”.</li>
+<li>O sistema apresenta a interface de gerenciamento multilíngue contendo: lista de idiomas, status, percentual de tradução, data de atualização e botões de ação (<strong>RN002</strong>).</li>
+<li>O Administrador seleciona ”Editar” para um idioma específico.</li>
+<li>O sistema exibe a interface de edição de traduções com: lista de chaves, busca, filtros e editor de texto (<strong>RN006, RN007, RN008, RN009</strong>).</li>
+<li>O Administrador realiza as modificações desejadas: edita traduções, marca para revisão, adiciona notas e visualiza o preview (<strong>RN010, RN011</strong>).</li>
+<li>O Administrador salva as alterações.</li>
+<li>O sistema valida o formato das traduções (<strong>RN012, RN013</strong>).</li>
+<li>O sistema atualiza as traduções na base de dados (<strong>RN014</strong>).</li>
+<li>O sistema exibe mensagem de confirmação (<strong>RN015</strong>).</li>
+<li>O Administrador finaliza a edição e sai da interface.</li>
+<li>O caso de uso é encerrado.</li>
+</ol>
+<h4 id="4-fluxos-alternativos-fa_3">4. Fluxos Alternativos (FA)<a class="headerlink" href="#4-fluxos-alternativos-fa_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[A1] Adicionar Novo Idioma</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o Administrador seleciona ”Adicionar Novo Idioma”.</li>
+<li>
+<ol>
+<li>O sistema exibe um formulário de criação de idioma (Nome, Código ISO, Região, Direção do Texto, Status) (<strong>RN016 a RN020</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O Administrador preenche as informações (<strong>RN021</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O Administrador escolhe uma opção: carregar arquivo, iniciar com traduções vazias ou copiar de outro idioma (<strong>RN022, RN023</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema valida as informações fornecidas (<strong>RN024, RN025</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema adiciona o novo idioma à base de dados (<strong>RN026</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo retorna ao passo 5 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[A2] Consultar Status dos Idiomas</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o Administrador deseja apenas consultar as informações.</li>
+<li>
+<ol>
+<li>O Administrador visualiza as informações dos idiomas configurados (<strong>RN027</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O Administrador pode filtrar e ordenar a lista.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O caso de uso é encerrado quando o Administrador sai da interface.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[A3] Remover Idioma</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o Administrador seleciona ”Remover” para um idioma.</li>
+<li>
+<ol>
+<li>O sistema verifica se o idioma pode ser removido (<strong>RN003, RN028</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema exibe uma tela de confirmação com o impacto da remoção e o aviso de irreversibilidade (<strong>RN029, RN030</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O Administrador confirma a operação.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Se confirmado, o sistema remove o idioma, arquiva as traduções e migra os usuários afetados (<strong>RN031, RN032, RN033</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo retorna ao passo 5 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[A4] Ativar/Desativar Idioma</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o Administrador clica no botão de status de um idioma.</li>
+<li>
+<ol>
+<li>O sistema altera o status do idioma (<strong>RN034</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Se desativando, o idioma torna-se indisponível e usuários existentes são migrados (<strong>RN035, RN036</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Se ativando, o idioma torna-se disponível após verificar a completude das traduções (<strong>RN037, RN038</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema atualiza o status na interface (<strong>RN039</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo retorna ao passo 5 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-fluxos-de-excecao-fe_3">5. Fluxos de Exceção (FE)<a class="headerlink" href="#5-fluxos-de-excecao-fe_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FE1] Erro de Validação de Dados</strong></p>
+<ul>
+<li><strong>Condição:</strong> O sistema detecta dados inválidos durante qualquer operação.</li>
+<li>
+<ol>
+<li>O sistema identifica os campos com problemas, exibe mensagens de erro específicas, destaca os campos e mantém os dados válidos preenchidos (<strong>RN040 a RN043</strong>).</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo retorna ao passo onde ocorreu o erro.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE2] Falha de Conectividade com Base de Dados</strong></p>
+<ul>
+<li><strong>Condição:</strong> Ocorre perda de conexão com a base de dados.</li>
+<li>
+<ol>
+<li>O sistema detecta a falha, exibe uma mensagem e preserva o trabalho em andamento no armazenamento local.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema oferece a opção de tentar novamente.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE3] Arquivo de Tradução Inválido</strong></p>
+<ul>
+<li><strong>Condição:</strong> O administrador carrega um arquivo de tradução corrompido ou em formato incorreto.</li>
+<li>
+<ol>
+<li>O sistema analisa o arquivo, detecta problemas e exibe detalhes específicos do erro.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo retorna ao passo de upload para uma nova tentativa.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE4] Tentativa de Remoção do Idioma Padrão</strong></p>
+<ul>
+<li><strong>Condição:</strong> O administrador tenta remover o idioma configurado como padrão.</li>
+<li>
+<ol>
+<li>O sistema identifica a condição, impede a operação e exibe uma mensagem explicativa.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo retorna à lista de idiomas sem alterações.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-pos-condicoes_3">6. Pós-Condições<a class="headerlink" href="#6-pos-condicoes_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Sucesso na Operação:</strong></p>
+<ul>
+<li>As configurações de idiomas são atualizadas permanentemente na base de dados.</li>
+<li>As alterações são aplicadas imediatamente para todos os usuários.</li>
+<li>Um registro detalhado da operação é criado no log de auditoria.</li>
+</ul>
+</li>
+<li>
+<p><strong>Falha na Opera¸c˜ao:</strong></p>
+<ul>
+<li>O sistema mantém o estado anterior à operação.</li>
+<li>Uma entrada de erro é registrada no log para análise.</li>
+<li>O administrador é notificado sobre a falha.</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-pontos-de-extensao-pe_3">7. Pontos de Extensão (PE)<a class="headerlink" href="#7-pontos-de-extensao-pe_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>[PE-01] Integração com Serviços de Tradução:</strong><ul>
+<li><strong>Localização:</strong> No passo 3 do fluxo alternativo A1 (Adicionar Novo Idioma).</li>
+<li><strong>Extensão:</strong> Integração com APIs de tradução automática (ex: Google Translate) para pré-preenchimento de traduções.</li>
+</ul>
+</li>
+<li><strong>[PE-02] Sistema de Workflow de Aprovação:</strong><ul>
+<li><strong>Localização:</strong> Na interface de edição de traduções.</li>
+<li><strong>Extensão:</strong> Implementação de fluxo de aprovação com múltiplos níveis de revisão antes da publicação.</li>
+</ul>
+</li>
+<li><strong>[PE-03] Colaboração com Tradutores Externos:</strong><ul>
+<li><strong>Localização:</strong> Na interface de edição de traduções.</li>
+<li><strong>Extensão:</strong> Criação de um portal dedicado para tradutores externos contribuírem com traduções.</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-regras-de-negocio-rn_3">8. Regras de Negócio (RN)<a class="headerlink" href="#8-regras-de-negocio-rn_3" title="Permanent link">&para;</a></h4>
+<h5 id="autenticacao-e-autorizacao">Autenticação e Autorização<a class="headerlink" href="#autenticacao-e-autorizacao" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>RN001:</strong> Apenas usuários com perfil de Administrador do Sistema podem acessar as funcionalidades de gerenciamento multilíngue.</li>
+</ul>
+<h5 id="gestao-de-idiomas">Gestão de Idiomas<a class="headerlink" href="#gestao-de-idiomas" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>RN002:</strong> Deve sempre existir pelo menos um idioma ativo no sistema.</li>
+<li><strong>RN003:</strong> O idioma padrão não pode ser removido sem definir outro como padrão.</li>
+<li><strong>RN004:</strong> Traduções incompletas devem ser claramente sinalizadas.</li>
+<li><strong>RN005:</strong> Alterações em idiomas ativos são aplicadas imediatamente.</li>
+<li><strong>RN028:</strong> Idiomas com usuários ativos só podem ser removidos após a migração dos usuários.</li>
+<li><strong>RN032:</strong> Traduções removidas devem ser arquivadas por 90 dias para possível recuperação.</li>
+<li><strong>RN033:</strong> A migração de usuários de um idioma removido/desativado deve ser para o idioma padrão do sistema.</li>
+<li><strong>RN035:</strong> A desativação deve ser impedida se for o último idioma ativo.</li>
+<li><strong>RN037:</strong> A ativação de um idioma requer uma completude mínima de 80% das traduções.</li>
+</ul>
+<h5 id="interface-de-edicao">Interface de Edição<a class="headerlink" href="#interface-de-edicao" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>RN006:</strong> Chaves de tradução devem ser organizadas por categorias funcionais.</li>
+<li><strong>RN007:</strong> Campos de tradução devem suportar formatação HTML básica (<code>&lt;b&gt;</code>, <code>&lt;i&gt;</code>, <code>&lt;br/&gt;</code>).</li>
+<li><strong>RN008:</strong> Campos de tradução devem ter limite máximo de 2000 caracteres.</li>
+<li><strong>RN009:</strong> O sistema deve exibir um contador de caracteres em tempo real.</li>
+<li><strong>RN010:</strong> Alterações não salvas devem ser destacadas visualmente.</li>
+<li><strong>RN011:</strong> Notas explicativas não podem exceder 500 caracteres.</li>
+</ul>
+<h5 id="validacao-de-dados">Validação de Dados<a class="headerlink" href="#validacao-de-dados" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>RN012:</strong> Traduções não podem conter scripts maliciosos (XSS).</li>
+<li><strong>RN013:</strong> Variáveis de substituição (ex: <code>{0}</code>) devem ser preservadas.</li>
+<li><strong>RN014:</strong> O sistema deve criar um backup automático antes de salvar alterações em massa.</li>
+<li><strong>RN015:</strong> A mensagem de confirmação deve incluir o número de traduções alteradas.</li>
+</ul>
+<h5 id="adicao-de-novos-idiomas">Adição de Novos Idiomas<a class="headerlink" href="#adicao-de-novos-idiomas" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>RN016:</strong> Nome do idioma deve ter entre 3 e 50 caracteres.</li>
+<li><strong>RN017:</strong> Código ISO 639-1 deve ser único e válido (2 caracteres).</li>
+<li><strong>RN018:</strong> Código de região deve seguir padrão ISO 3166-1.</li>
+<li><strong>RN019:</strong> O sistema deve suportar idiomas com escrita da direita para a esquerda (RTL).</li>
+<li><strong>RN020:</strong> Novos idiomas são criados como inativos por padrão.</li>
+<li><strong>RN022:</strong> Arquivos de tradução devem ter formato válido (.json, .po, .xliff) e tamanho máximo de 10MB.</li>
+<li><strong>RN024:</strong> O código ISO não pode ser duplicado.</li>
+</ul>
+<h5 id="tratamento-de-erros">Tratamento de Erros<a class="headerlink" href="#tratamento-de-erros" title="Permanent link">&para;</a></h5>
+<ul>
+<li><strong>RN040:</strong> O sistema deve validar dados no lado cliente e servidor.</li>
+<li><strong>RN041:</strong> Mensagens de erro devem ser específicas e orientativas.</li>
+<li><strong>RN042:</strong> Dados válidos devem ser preservados em formulários em caso de erro de validação.</li>
+<li><strong>RN043:</strong> Campos com erro devem ser destacados visualmente.</li>
+</ul>
+<h4 id="9-requisitos-especiais-rse_3">9. Requisitos Especiais (RSE)<a class="headerlink" href="#9-requisitos-especiais-rse_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RSE-1 (Performance):</strong><ul>
+<li>Tempo de resposta para operações CRUD (Criar, Ler, Atualizar, Deletar) de no máximo 3 segundos.</li>
+<li>Carregamento da interface em no máximo 2 segundos.</li>
+<li>Suporte para processamento de arquivos de tradução de até 10MB em menos de 30 segundos.</li>
+</ul>
+</li>
+<li><strong>RSE-2 (Segurança):</strong><ul>
+<li>Todas as operações devem ser registradas em log de auditoria com timestamp e ID do usuário.</li>
+<li>Backup automático antes de operações críticas (ex: remoção de idioma).</li>
+<li>Controle de acesso baseado em perfis (RBAC) com princípio do menor privilégio.</li>
+</ul>
+</li>
+<li><strong>RSE-3 (Usabilidade):</strong><ul>
+<li>Interface responsiva compatível com dispositivos móveis e desktop.</li>
+<li>Suporte a atalhos de teclado para operações frequentes.</li>
+<li>Funcionalidade de "desfazer" para operações não cr´ticas.</li>
+</ul>
+</li>
+<li><strong>RSE-4 (Funcionalidade):</strong><ul>
+<li>Suporte para pelo menos 15 idiomas ativos simultaneamente.</li>
+<li>Compatibilidade com formatos de internacionalização padrão (.json, .po, .xliff).</li>
+<li>Suporte a caracteres especiais, emojis e idiomas com escrita da direita para a esquerda (RTL).</li>
+</ul>
+</li>
+</ul>
+<h4 id="10-informacoes-adicionais_2">10. Informações Adicionais<a class="headerlink" href="#10-informacoes-adicionais_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Frequência de Uso:</strong><ul>
+<li>Baixa a média, sendo mais utilizado durante a expansão da plataforma para novos mercados, manutenção de traduções e atualizações de funcionalidades.</li>
+</ul>
+</li>
+<li><strong>Referências:</strong><ul>
+<li>Diagrama de Casos de Uso da Plataforma "Verify".</li>
+<li>Especificação de Requisitos do Sistema.</li>
+<li>Manual de Padrões de Internacionalização.</li>
+</ul>
+</li>
+</ul>
+<h3 id="especificacao-de-caso-de-uso-acessar-materiais-educacionais">Especificação de Caso de Uso: Acessar Materiais Educacionais<a class="headerlink" href="#especificacao-de-caso-de-uso-acessar-materiais-educacionais" title="Permanent link">&para;</a></h3>
+<h4 id="1-breve-descricao_4">1. Breve Descrição<a class="headerlink" href="#1-breve-descricao_4" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso permite que o Usuário acesse e visualize materiais educacionais disponíveis na plataforma (artigos, tutoriais, vídeos, infográficos) para aprimorar seu conhecimento sobre desinformação. A experiência é projetada para ser acessível e intuitiva, ajudando os usuários a desenvolver habilidades de verificação de maneira autônoma.</p>
+<h4 id="2-pre-condicoes_4">2. Pré-Condições<a class="headerlink" href="#2-pre-condicoes_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>PC-1:</strong> O Usuário deve estar autenticado na plataforma.</li>
+<li><strong>PC-2:</strong> A plataforma deve estar funcional, com os materiais educacionais carregados e disponíveis.</li>
+</ul>
+<h4 id="3-fluxo-basico-de-eventos-fb_4">3. Fluxo Básico de Eventos (FB)<a class="headerlink" href="#3-fluxo-basico-de-eventos-fb_4" title="Permanent link">&para;</a></h4>
+<ol>
+<li>O Usuário acessa a plataforma e o sistema exibe a página inicial.</li>
+<li>O Usuário navega até a seção de "Materiais Educacionais".</li>
+<li>O sistema exibe um catálogo dos materiais disponíveis.</li>
+<li>O Usuário seleciona um material para visualizar.</li>
+<li>O sistema exibe o conteúdo do material selecionado (texto, vídeo, etc.).</li>
+<li>O Usuário interage com o material (lê, assiste, clica em links).</li>
+<li>O caso de uso é encerrado.</li>
+</ol>
+<h4 id="4-fluxos-alternativos-fa_4">4. Fluxos Alternativos (FA)<a class="headerlink" href="#4-fluxos-alternativos-fa_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FA01] Usuário sem materiais disponíveis</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 3 do FB, o sistema verifica que não há materiais disponíveis.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem informativa, como "Não há materiais educacionais disponíveis no momento. Verifique novamente mais tarde."</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O caso de uso é encerrado.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FA02] Filtro/Busca de Materiais</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 3 do FB, o Usuário opta por filtrar ou buscar materiais.</li>
+<li>
+<ol>
+<li>O Usuário utiliza as ferramentas de busca ou filtro por categoria, tópico, etc.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema exibe os resultados correspondentes.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo continua a partir do passo 4 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FA03] Acesso direto via notificação</strong></p>
+<ul>
+<li><strong>Condição:</strong> O Usuário recebe uma notificação sobre um novo material.</li>
+<li>
+<ol>
+<li>O Usuário toca na notificação.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema abre diretamente o material educacional referenciado, pulando os passos 2 e 3 do FB.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O fluxo continua a partir do passo 5 do FB.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-fluxos-de-excecao-fe_4">5. Fluxos de Exceção (FE)<a class="headerlink" href="#5-fluxos-de-excecao-fe_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FE01] Falha ao carregar o material</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 5 do FB, o sistema não consegue carregar o material.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem de erro, como "Não foi possível carregar o material. Verifique sua conexão."</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema oferece a opção de tentar novamente ou retornar à lista de materiais.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE02] Usuário não autenticado ou sessão expirada</strong></p>
+<ul>
+<li><strong>Condição:</strong> Em qualquer passo, o sistema detecta que o Usuário não está autenticado.</li>
+<li>
+<ol>
+<li>O sistema redireciona o Usuário para a tela de login/autenticação.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Após a autenticação bem-sucedida, o sistema retorna à tela anterior (lista de materiais ou o próprio material, se possível).</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-pos-condicoes_4">6. Pós-Condições<a class="headerlink" href="#6-pos-condicoes_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Sucesso:</strong> O Usuário visualizou com sucesso o material educacional selecionado.</li>
+<li><strong>Registro (Opcional):</strong> O progresso de interação com o material (ex: vídeo assistido, artigo lido) pode ser registrado no perfil do usuário, se o sistema suportar tal funcionalidade.</li>
+</ul>
+<h4 id="7-pontos-de-extensao-pe_4">7. Pontos de Extensão (PE)<a class="headerlink" href="#7-pontos-de-extensao-pe_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>[PE01] Compartilhar material educacional</strong><ul>
+<li><strong>Localização:</strong> No passo 6 do FB, enquanto o usuário visualiza o material.</li>
+<li><strong>Descrição:</strong> O caso de uso pode ser estendido para permitir que o Usuário compartilhe o conteúdo em redes sociais ou com outros contatos, promovendo o aprendizado coletivo.</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-regras-de-negocio-rn_4">8. Regras de Negócio (RN)<a class="headerlink" href="#8-regras-de-negocio-rn_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RN-1:</strong> O acesso aos materiais educacionais é restrito a usuários autenticados na plataforma.</li>
+<li><strong>RN-2:</strong> Se nenhum material estiver disponível, o sistema deve informar o usuário de forma clara, em vez de exibir uma tela vazia.</li>
+<li><strong>RN-3:</strong> O sistema deve suportar um mecanismo de notificação para engajar os usuários com novos conteúdos.</li>
+</ul>
+<h4 id="9-requisitos-especiais-rse_4">9. Requisitos Especiais (RSE)<a class="headerlink" href="#9-requisitos-especiais-rse_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RSE-1 (Acessibilidade):</strong> Os materiais devem ser acessíveis, incluindo suporte a leitores de tela para texto e legendas para vídeos, para atender usuários com deficiências.</li>
+<li><strong>RSE-2 (Responsividade):</strong> A interface deve ser responsiva, garantindo uma boa experiência de visualização em dispositivos móveis e desktops.</li>
+<li><strong>RSE-3 (Desempenho):</strong> O tempo de carregamento dos materiais deve ser otimizado para evitar atrasos significativos.</li>
+</ul>
+<h4 id="10-informacoes-adicionais_3">10. Informações Adicionais<a class="headerlink" href="#10-informacoes-adicionais_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Este caso de uso é fundamental para promover a educação digital e a alfabetização midiática na plataforma. Através do acesso a estes materiais, os usuários se tornam mais aptos a identificar e combater a desinformação.</li>
+<li><strong>Nota de Revisão (v1.1):</strong> Esta especificação foi aprimorada com fluxos alternativos de busca e acesso via notificação, além de um maior detalhamento nos fluxos de exceção e requisitos de acessibilidade.</li>
+</ul>
+<h3 id="especificacao-de-caso-de-uso-acompanhar-status-de-verificacoes-pendentes">Especificação de Caso de Uso: Acompanhar Status de Verificações Pendentes<a class="headerlink" href="#especificacao-de-caso-de-uso-acompanhar-status-de-verificacoes-pendentes" title="Permanent link">&para;</a></h3>
+<h4 id="1-breve-descricao_5">1. Breve Descrição<a class="headerlink" href="#1-breve-descricao_5" title="Permanent link">&para;</a></h4>
+<p>Este caso de uso permite que o Usuário consulte de forma transparente o andamento e o resultado das análises dos conteúdos que submeteu previamente para verificação na plataforma "Verify". O objetivo é proporcionar clareza sobre o processo de moderação, permitindo visualizar o status atual, como "Em Análise", "Concluído: Falso" ou "Análise Inconclusiva".</p>
+<h4 id="2-pre-condicoes_5">2. Pré-Condições<a class="headerlink" href="#2-pre-condicoes_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>PC-1:</strong> O Usuário deve estar autenticado (logado) na plataforma "Verify".</li>
+<li><strong>PC-2:</strong> A plataforma "Verify" deve estar operacional e com conexão aos seus serviços de backend.</li>
+</ul>
+<h4 id="3-fluxo-basico-de-eventos-fb_5">3. Fluxo Básico de Eventos (FB)<a class="headerlink" href="#3-fluxo-basico-de-eventos-fb_5" title="Permanent link">&para;</a></h4>
+<ol>
+<li>O Usuário seleciona a opção "Minhas Verificações" ou "Histórico" no menu principal do aplicativo.</li>
+<li>O sistema valida a sessão do Usuário e solicita a lista de todas as submissões associadas a ele.</li>
+<li>O sistema exibe a lista de submissões em ordem cronológica inversa (as mais recentes primeiro), com um resumo visual e o status de cada item.</li>
+<li>O Usuário seleciona uma verificação específica na lista para ver os detalhes.</li>
+<li>O sistema exibe a tela de detalhes com o conteúdo original, data, status atualizado e, se concluído, o parecer final dos moderadores.</li>
+<li>O caso de uso é encerrado quando o Usuário sai da área de histórico.</li>
+</ol>
+<h4 id="4-fluxos-alternativos-fa_5">4. Fluxos Alternativos (FA)<a class="headerlink" href="#4-fluxos-alternativos-fa_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FA01] Usuário sem submissões anteriores</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 3 do FB, o sistema verifica que não há submissões para o usuário.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem informativa e convidativa, como "Você ainda não enviou nenhum conteúdo para análise. Que tal começar a usar o Verify agora?".</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema exibe um botão de atalho para "Enviar Conteúdo Suspeito".</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O caso de uso é encerrado.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FA02] Acesso direto via notificação de atualização</strong></p>
+<ul>
+<li><strong>Condição:</strong> O Usuário recebe uma notificação push informando que o status de uma verificação foi atualizado.</li>
+<li>
+<ol>
+<li>O Usuário toca na notificação.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema abre e navega diretamente para a tela de detalhes da verificação correspondente (passo 5 do FB).</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-fluxos-de-excecao-fe_5">5. Fluxos de Exceção (FE)<a class="headerlink" href="#5-fluxos-de-excecao-fe_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>[FE01] Falha de conexão ao carregar histórico ou detalhes</strong></p>
+<ul>
+<li><strong>Condição:</strong> Nos passos 3 ou 5 do FB, o sistema não consegue obter os dados do servidor.</li>
+<li>
+<ol>
+<li>O sistema exibe uma mensagem de erro, como "Não foi possível carregar suas verificações. Verifique sua conexão e tente novamente."</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>O sistema oferece uma opção clara para o Usuário tentar recarregar os dados.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>[FE02] Usuário não autenticado ou sessão expirada</strong></p>
+<ul>
+<li><strong>Condição:</strong> No passo 2 do FB, o sistema detecta que a sessão do Usuário é inválida.</li>
+<li>
+<ol>
+<li>O sistema redireciona o Usuário para a tela de login/autenticação.</li>
+</ol>
+</li>
+<li>
+<ol>
+<li>Após a autenticação bem-sucedida, o sistema automaticamente direciona o Usuário de volta para o histórico de verificações.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-pos-condicoes_5">6. Pós-Condições<a class="headerlink" href="#6-pos-condicoes_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Sucesso:</strong> O Usuário visualiza com sucesso o status atual de uma ou mais de suas solicitações de verificação.</li>
+<li><strong>Inalterado:</strong> Nenhum estado ou informação é alterado no sistema como resultado direto desta consulta.</li>
+</ul>
+<h4 id="7-pontos-de-extensao-pe_5">7. Pontos de Extensão (PE)<a class="headerlink" href="#7-pontos-de-extensao-pe_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>[PE01] Compartilhar resultado da verificação</strong><ul>
+<li><strong>Localização:</strong> No passo 5 do FB, quando o status da verificação é "Concluído".</li>
+<li><strong>Descrição:</strong> O caso de uso pode ser estendido pela funcionalidade "Compartilhar Verificação", permitindo ao Usuário disseminar o resultado da análise em redes sociais ou aplicativos de mensagem.</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-regras-de-negocio-rn_5">8. Regras de Negócio (RN)<a class="headerlink" href="#8-regras-de-negocio-rn_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RN-1:</strong> Apenas o usuário autenticado pode acessar seu próprio histórico de verificações.</li>
+<li><strong>RN-2:</strong> O histórico de verificações deve ser apresentado em ordem cronológica inversa por padrão.</li>
+<li><strong>RN-3:</strong> O sistema deve apresentar um estado de "tela vazia" informativo e com uma ação sugerida caso o usuário não possua submissões.</li>
+<li><strong>RN-4:</strong> O histórico de submissões de um usuário deve ser mantido de forma persistente, de acordo com a política de retenção de dados da plataforma.</li>
+<li><strong>RN-5:</strong> Os status de verificação ("Em Análise", "Concluído: Falso", etc.) devem seguir uma padronização definida para toda a plataforma.</li>
+</ul>
+<h4 id="9-requisitos-especiais-rse_5">9. Requisitos Especiais (RSE)<a class="headerlink" href="#9-requisitos-especiais-rse_5" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>RSE-1 (Sincronização de Status):</strong> O status exibido deve ser um reflexo fiel, preciso e com latência mínima do estágio exato da verificação no backend de moderação.</li>
+<li><strong>RSE-2 (Clareza e Padronização dos Status):</strong> Os nomes dos status devem ser padronizados, intuitivos e de fácil compreensão, evitando jargões técnicos.</li>
+<li><strong>RSE-3 (Persistência do Histórico):</strong> O sistema deve manter o histórico completo das submissões, permitindo que o Usuário possa consultá-las a qualquer momento.</li>
+<li><strong>RSE-4 (Desempenho na Listagem):</strong> A listagem do histórico deve ser otimizada (ex: com paginação) para exibir grandes volumes de dados de forma performática.</li>
+</ul>
+<h4 id="10-informacoes-adicionais_4">10. Informações Adicionais<a class="headerlink" href="#10-informacoes-adicionais_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Contexto:</strong> Este caso de uso é fundamental para a transparência e usabilidade da plataforma, complementando o caso de uso "Enviar Conteúdo Suspeito". Ele reforça a confiança do usuário no processo de verificação.</li>
+<li><strong>Notas de Revisão (Versão 1.1 - 14/07/2025):</strong> Esta versão aprimora a clareza dos fluxos, detalha os requisitos de desempenho e melhora as mensagens de erro e estados vazios para uma melhor experiência do usuário.</li>
+</ul>
+<p>Fonte: Elaboração própria</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
