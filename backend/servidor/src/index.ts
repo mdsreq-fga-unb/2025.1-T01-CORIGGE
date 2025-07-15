@@ -79,6 +79,16 @@ app.use(function (req, res, next) {
     next();
 });
 
+// Health check endpoint
+app.get('/health', (req: Request, res: Response) => {
+    logger.info('[health][get] Health check requested');
+    res.status(200).json({
+        status: 'healthy',
+        timestamp: new Date().toISOString(),
+        environment: environment.NODE_ENV,
+        uptime: process.uptime()
+    });
+});
 
 app.use(router);
 

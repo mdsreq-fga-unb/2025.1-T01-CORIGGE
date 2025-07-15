@@ -80,6 +80,7 @@ class _HomePageState extends State<HomePage> {
       final gabarito = gabaritoResult.fold(
           (error) => <Map<String, dynamic>>[], (gabarito) => gabarito);
 
+
       if (mounted) {
         setState(() {
           selectedTemplate = validTemplate;
@@ -124,7 +125,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _validateGabarito() async {
     if (gabaritoFile == null || selectedTemplate == null) {
       setState(() {
-        gabaritoError = 'Template ou arquivo não selecionado';
+        gabaritoError = 'Exemplo de cartão-resposta ou arquivo não selecionado';
         isValidatingGabarito = false;
       });
       return;
@@ -218,7 +219,8 @@ class _HomePageState extends State<HomePage> {
   }
 
   String? _validateGabaritoAgainstTemplate(List<Map<String, dynamic>> data) {
-    if (selectedTemplate == null) return 'Template não selecionado';
+    if (selectedTemplate == null)
+      return 'Exemplo de cartão-resposta não selecionado';
 
     // Get question boxes from template
     final questionBoxes = selectedTemplate!.boxes
@@ -228,14 +230,14 @@ class _HomePageState extends State<HomePage> {
         .toList();
 
     if (questionBoxes.isEmpty) {
-      return 'Template não possui caixas de questões';
+      return 'Exemplo de cartão-resposta não possui caixas de questões';
     }
 
     // Get template questions using service
     final templateQuestions = HomeService.getTemplateQuestions(questionBoxes);
 
     if (templateQuestions.isEmpty) {
-      return 'Template não possui questões calculadas (verifique se os círculos foram detectados)';
+      return 'Exemplo de cartão-resposta não possui questões calculadas (verifique se os círculos foram detectados)';
     }
 
     // Check if gabarito has required columns
@@ -340,7 +342,7 @@ class _HomePageState extends State<HomePage> {
         .toList();
 
     if (questionBoxes.isEmpty) {
-      return 'Template não possui caixas de questões';
+      return 'Exemplo de cartão-resposta não possui caixas de questões';
     }
 
     // Create a map of question number to expected answer options
@@ -745,94 +747,92 @@ class _HomePageState extends State<HomePage> {
                           top: getProportionateScreenHeight(20),
                           left: getProportionateScreenWidth(16),
                           right: getProportionateScreenWidth(16),
-                          child: Column(
-                            children: [
-                              // Template information section (only show if template is selected)
-                              if (selectedTemplate != null)
-                                OverlayInfoCardWidget(
-                                  title: 'TEMPLATE SELECIONADO',
-                                  child: isLoading
-                                      ? const CircularProgressIndicator()
-                                      : Column(
-                                          children: [
-                                            Text(
-                                              selectedTemplate!.name,
-                                              style: TextStyle(
-                                                fontSize:
-                                                    getProportionateFontSize(
-                                                        14),
-                                                color: kOnSurface,
-                                              ),
-                                              textAlign: TextAlign.center,
+                          child: Column(children: [
+                            // Template information section (only show if template is selected)
+                            if (selectedTemplate != null)
+                              OverlayInfoCardWidget(
+                                title: 'TEMPLATE SELECIONADO',
+                                child: isLoading
+                                    ? const CircularProgressIndicator()
+                                    : Column(
+                                        children: [
+                                          Text(
+                                            selectedTemplate!.name,
+                                            style: TextStyle(
+                                              fontSize:
+                                                  getProportionateFontSize(14),
+                                              color: kOnSurface,
                                             ),
-                                            SizedBox(
-                                                height:
-                                                    getProportionateScreenHeight(
-                                                        4)),
-                                            Text(
-                                              '${selectedTemplate!.boxes.length} caixas de resposta',
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          SizedBox(
+                                              height:
+                                                  getProportionateScreenHeight(
+                                                      4)),
+                                          Text(
+                                            '${selectedTemplate!.boxes.length} caixas de resposta',
+                                            style: TextStyle(
+                                              fontSize:
+                                                  getProportionateFontSize(12),
+                                              color:
+                                                  kOnSurface.withOpacity(0.7),
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          SizedBox(
+                                              height:
+                                                  getProportionateScreenHeight(
+                                                      8)),
+                                          Divider(
+                                              color:
+                                                  kSecondary.withOpacity(0.3)),
+                                          SizedBox(
+                                              height:
+                                                  getProportionateScreenHeight(
+                                                      8)),
+                                          Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text(
+                                              'Tipos de Caixas:',
                                               style: TextStyle(
                                                 fontSize:
                                                     getProportionateFontSize(
                                                         12),
-                                                color:
-                                                    kOnSurface.withOpacity(0.7),
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            SizedBox(
-                                                height:
-                                                    getProportionateScreenHeight(
-                                                        8)),
-                                            Divider(
-                                                color: kSecondary
-                                                    .withOpacity(0.3)),
-                                            SizedBox(
-                                                height:
-                                                    getProportionateScreenHeight(
-                                                        8)),
-                                            Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                'Tipos de Caixas:',
-                                                style: TextStyle(
-                                                  fontSize:
-                                                      getProportionateFontSize(
-                                                          12),
-                                                  fontWeight: FontWeight.bold,
-                                                  color: kOnSurface,
-                                                ),
+                                                fontWeight: FontWeight.bold,
+                                                color: kOnSurface,
                                               ),
                                             ),
-                                            SizedBox(
-                                                height:
-                                                    getProportionateScreenHeight(
-                                                        4)),
-                                            _buildBoxTypesList(),
-                                          ],
-                                        ),
-                                ),
-                              SizedBox(
-                                  height: getProportionateScreenHeight(16)),
-
-                              // Cards analyzed information (only show if there are cards or loading)
-                              if (analyzedCards.isNotEmpty || isLoading)
-                                OverlayInfoCardWidget(
-                                  title: 'CARTÕES ANALISADOS',
-                                  child: isLoading
-                                      ? const CircularProgressIndicator()
-                                      : Text(
-                                          '${analyzedCards.length} ${analyzedCards.length == 1 ? 'cartão' : 'cartões'}',
-                                          style: TextStyle(
-                                            fontSize:
-                                                getProportionateFontSize(14),
-                                            color: kOnSurface,
                                           ),
-                                          textAlign: TextAlign.center,
+                                          SizedBox(
+                                              height:
+                                                  getProportionateScreenHeight(
+                                                      4)),
+                                          _buildBoxTypesList(),
+                                        ],
+                                      ),
+                              ),
+                            SizedBox(height: getProportionateScreenHeight(16)),
+
+                            // Cards analyzed information (only show if there are cards or loading)
+                            if (analyzedCards.isNotEmpty || isLoading)
+                              OverlayInfoCardWidget(
+                                title: 'CARTÕES ANALISADOS',
+                                child: isLoading
+                                    ? const CircularProgressIndicator()
+                                    : Text(
+                                        '${analyzedCards.length} ${analyzedCards.length == 1 ? 'cartão' : 'cartões'}',
+                                        style: TextStyle(
+                                          fontSize:
+                                              getProportionateFontSize(14),
+                                          color: kOnSurface,
                                         ),
-                                ),
-                            ],
-                          ),
+                                        textAlign: TextAlign.center,
+                                      ),
+                              ),
+                            SizedBox(height: getProportionateScreenHeight(16)),
+                          ] // Relatorio Individual Definition information (only show if selected)
+
+                              ),
                         ),
                     ],
                   );
@@ -846,7 +846,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        'ESCOLHA UM TEMPLATE DE CARTÃO-RESPOSTA',
+                        'ESCOLHA UM EXEMPLO DE CARTÃO-RESPOSTA',
                         style: TextStyle(
                           fontSize: getProportionateFontSize(24),
                           fontWeight: FontWeight.bold,
@@ -1132,6 +1132,48 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
+                      SizedBox(height: getProportionateScreenHeight(16)),
+
+                      // Individual Reports Export button
+                      DefaultButtonWidget(
+                        onPressed: (selectedTemplate != null &&
+                                analyzedCards.isNotEmpty)
+                            ? () {
+                                context.go('/relatorios-individuais');
+                              }
+                            : null,
+                        color: (selectedTemplate != null &&
+                                analyzedCards.isNotEmpty)
+                            ? kPrimary
+                            : kPrimary.withOpacity(0.5),
+                        child: Column(
+                          children: [
+                            Text(
+                              'EXPORTAR CARTÕES RESPOSTA INDIVIDUAIS',
+                              style: TextStyle(
+                                fontSize: getProportionateFontSize(16),
+                                color: (selectedTemplate != null &&
+                                        analyzedCards.isNotEmpty)
+                                    ? kSurface
+                                    : kSurface.withOpacity(0.5),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      if (selectedTemplate == null ||
+                          analyzedCards.isEmpty) ...[
+                        SizedBox(height: getProportionateScreenHeight(8)),
+                        Text(
+                          selectedTemplate == null
+                              ? 'Selecione um template primeiro'
+                              : 'Analise os cartões primeiro',
+                          style: TextStyle(
+                            fontSize: getProportionateFontSize(12),
+                            color: kOnSurface.withOpacity(0.7),
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),

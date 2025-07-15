@@ -14,7 +14,7 @@ class Environment {
   static String supabaseUrl = 'https://ryhkypmurkztpzlwkmaq.supabase.co';
   static String supabaseAnonKey =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5aGt5cG11cmt6dHB6bHdrbWFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5NDQ5MzIsImV4cCI6MjA2NjUyMDkzMn0.lXz6ZHn7ehdBdGsF0LzeyjSEx9vlH5LWN7-PhzvQdOk';
-  static String backendAPIUrl = 'http://localhost:4512';
+  static String backendAPIUrl = 'http://localhost:4502';
   static EnvironmentType currentEnvironmentType = EnvironmentType.PROD;
   static bool shouldHandleLocalServer = true;
   static final _routesLogger = getLogger('routes');

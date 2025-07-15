@@ -77,7 +77,7 @@ O servidor backend pode ser executado usando Docker para facilitar o deploy:
 1. **Criar arquivo .env**
    ```env
    # Server Configuration
-   PORT=4512
+   PORT=4502
    NODE_ENV=development
 
    # Supabase Configuration
@@ -85,7 +85,7 @@ O servidor backend pode ser executado usando Docker para facilitar o deploy:
    SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
 
    # CORS Configuration
-   CORS_ORIGIN=http://localhost:4512
+   CORS_ORIGIN=http://localhost:4502
    ```
 
 2. **Construir a imagem**
@@ -97,7 +97,7 @@ O servidor backend pode ser executado usando Docker para facilitar o deploy:
 3. **Executar o container**
    ```bash
    docker run -d \
-     -p 4512:4512 \
+     -p 4502:4502 \
      --name corigge-backend \
      --env-file .env \
      corigge-backend
@@ -117,7 +117,7 @@ O servidor backend pode ser executado usando Docker para facilitar o deploy:
 - O servidor backend e o servidor OpenCV devem estar rodando antes de iniciar o frontend no modo debug
 - No modo release, o servidor OpenCV é compilado, compactado e adicionado aos assets do frontend, sendo descompactado ao rodar o aplicativo
 - Ao usar Docker, certifique-se de que o arquivo `.env` está presente no diretório antes de executar o container
-- O servidor estará disponível em `http://localhost:4512` após a inicialização
+- O servidor estará disponível em `http://localhost:4502` após a inicialização
 
 ## Documentação
 

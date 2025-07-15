@@ -83,7 +83,7 @@ class AppBarCustom {
         ],
       ),
       actions: [
-        DefaultButtonWidget(
+        /* DefaultButtonWidget(
           expanded: false,
           onPressed: () {
             // Ação para o botão Sobre
@@ -106,7 +106,7 @@ class AppBarCustom {
             style: TextStyle(
                 color: Colors.white, fontSize: getProportionateFontSize(16)),
           ),
-        ),
+        ), */
         if (SharedPreferencesHelper.currentUser != null)
           Builder(
             builder: (context) => DefaultButtonWidget(
@@ -124,6 +124,31 @@ class AppBarCustom {
                   SizedBox(width: getProportionateScreenWidth(4)),
                   Text(
                     'Perfil',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: getProportionateFontSize(16)),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        if (SharedPreferencesHelper.currentUser != null)
+          Builder(
+            builder: (context) => DefaultButtonWidget(
+              expanded: false,
+              onPressed: () {
+                context.push('/printable-templates');
+              },
+              color: kPrimary,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.print,
+                      color: Colors.white,
+                      size: getProportionateScreenWidth(20)),
+                  SizedBox(width: getProportionateScreenWidth(4)),
+                  Text(
+                    'Imprimir Cartão Resposta',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: getProportionateFontSize(16)),

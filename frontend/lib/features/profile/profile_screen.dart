@@ -107,7 +107,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     if (_currentUser == null) {
-      widget.utilsWrapper.showTopSnackBar(context, "Erro: usuário não encontrado",
+      widget.utilsWrapper.showTopSnackBar(
+          context, "Erro: usuário não encontrado",
           color: kError);
       return;
     }
@@ -121,22 +122,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
         idEscola: _selectedSchool?.id,
       );
 
-      final result = await widget.authServiceWrapper.databaseUpdateUser(updatedUser);
+      final result =
+          await widget.authServiceWrapper.databaseUpdateUser(updatedUser);
 
       result.fold(
         (error) {
-          widget.utilsWrapper.showTopSnackBar(context, "Erro ao atualizar perfil: $error",
+          widget.utilsWrapper.showTopSnackBar(
+              context, "Erro ao atualizar perfil: $error",
               color: kError);
         },
         (user) {
           widget.sharedPreferencesHelperWrapper.currentUser = user;
           setState(() => _currentUser = user);
-          widget.utilsWrapper.showTopSnackBar(context, "Perfil atualizado com sucesso!",
+          widget.utilsWrapper.showTopSnackBar(
+              context, "Perfil atualizado com sucesso!",
               color: kSuccess);
         },
       );
     } catch (e) {
-      widget.utilsWrapper.showTopSnackBar(context, "Erro ao atualizar perfil: $e",
+      widget.utilsWrapper.showTopSnackBar(
+          context, "Erro ao atualizar perfil: $e",
           color: kError);
     } finally {
       setState(() => _isLoading = false);
@@ -302,7 +307,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             items: _escolas.map((escola) {
                               return DropdownMenuItem<EscolaModel>(
                                 value: escola,
-                                child: Text(escola.nome),
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width * 0.3,
+                                  ),
+                                  child: Text(
+                                    escola.nome,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ),
                               );
                             }).toList(),
                             onChanged: (EscolaModel? value) {

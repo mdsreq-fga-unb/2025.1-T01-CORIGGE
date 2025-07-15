@@ -47,6 +47,8 @@ nav:
       - Unidade 03: entregas/entrega03.md
       - PBB: entregas/unidade03/pbb.md
       - USM: entregas/unidade03/usm.md
+      - Unidade 04: entregas/entrega04.md
+      - UML: entregas/unidade04/uml.md
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
