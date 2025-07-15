@@ -33,9 +33,8 @@ class GeneratedTemplateModel {
       GeneratedTemplateModel(
         name: json['name'],
         nomeAlunoAutomatico: json['nomeAlunoAutomatico'],
-        questions: json['questions']
-            .map((q) => GeneratedTemplateQuestion.fromJson(q))
-            .toList(),
+        questions: List<GeneratedTemplateQuestion>.from(json['questions']
+            .map((q) => GeneratedTemplateQuestion.fromJson(q))),
       );
 }
 
