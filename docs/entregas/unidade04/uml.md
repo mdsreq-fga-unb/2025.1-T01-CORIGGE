@@ -602,3 +602,6 @@ Este caso de uso permite que o Usuário consulte de forma transparente o andamen
 #### 10. Informações Adicionais
 * **Contexto:** Este caso de uso é fundamental para a transparência e usabilidade da plataforma, complementando o caso de uso "Enviar Conteúdo Suspeito". Ele reforça a confiança do usuário no processo de verificação.
 * **Notas de Revisão (Versão 1.1 - 14/07/2025):** Esta versão aprimora a clareza dos fluxos, detalha os requisitos de desempenho e melhora as mensagens de erro e estados vazios para uma melhor experiência do usuário.
+
+Fonte: Elaboração própria
+
