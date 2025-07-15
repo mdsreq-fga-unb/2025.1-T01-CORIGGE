@@ -97,7 +97,6 @@ BEGIN
             VALUE "OriginalFilename", "corigge.exe" "\0"
             VALUE "ProductName", "corigge" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
-            VALUE "Protocol", "com.googleusercontent.apps.693202468940-aig035i86s2tf6h7ld90511jvnquleiu" "\0"
         END
     END
     BLOCK "VarFileInfo"
@@ -109,26 +108,6 @@ END
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// URL Protocol
-//
-
-HKCR
-{
-    "com.googleusercontent.apps.693202468940-aig035i86s2tf6h7ld90511jvnquleiu"
-    {
-        "URL Protocol" = ""
-        DefaultIcon = "corigge.exe,1"
-        shell
-        {
-            open
-            {
-                command = "\"" + PATH_TO_EXE + "\" \"%1\""
-            }
-        }
-    }
-}
 
 #ifndef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

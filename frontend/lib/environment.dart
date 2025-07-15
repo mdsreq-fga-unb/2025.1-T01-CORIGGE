@@ -16,7 +16,7 @@ class Environment {
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJ5aGt5cG11cmt6dHB6bHdrbWFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5NDQ5MzIsImV4cCI6MjA2NjUyMDkzMn0.lXz6ZHn7ehdBdGsF0LzeyjSEx9vlH5LWN7-PhzvQdOk';
   static String backendAPIUrl = 'http://localhost:4502';
   static EnvironmentType currentEnvironmentType = EnvironmentType.PROD;
-  static bool shouldHandleLocalServer = true;
+  static bool shouldHandleLocalServer = false;
   static final _routesLogger = getLogger('routes');
 
   static bool _loggingInitialized = false;
@@ -103,7 +103,7 @@ class Environment {
       case EnvironmentType.DEV:
         _routesLogger.info(
             '****** Environment: DEV, not handling local server, make sure to run the opencv server');
-        Environment.setShouldHandleLocalServer(false);
+        Environment.setShouldHandleLocalServer(true);
         //supabaseUrl = const String.fromEnvironment('SUPABASE_URL');
         //supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY');
         _dio.options.baseUrl = backendAPIUrl;

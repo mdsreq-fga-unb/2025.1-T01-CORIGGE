@@ -28,11 +28,11 @@ void RegisterURLProtocol()
     // Set default value to protocol name
     RegSetValueEx(hKey, NULL, 0, REG_SZ,
                   (BYTE *)L"URL:Corigge Protocol",
-                  (wcslen(L"URL:Corigge Protocol") + 1) * sizeof(wchar_t));
+                  static_cast<DWORD>((wcslen(L"URL:Corigge Protocol") + 1) * sizeof(wchar_t)));
 
     // Add URL Protocol marker
     RegSetValueEx(hKey, L"URL Protocol", 0, REG_SZ,
-                  (BYTE *)L"", sizeof(wchar_t));
+                  (BYTE *)L"", static_cast<DWORD>(sizeof(wchar_t)));
 
     // Create command key
     HKEY hKeyCommand;
@@ -44,7 +44,7 @@ void RegisterURLProtocol()
       std::wstring command = L"\"" + exePath + L"\" \"%1\"";
       RegSetValueEx(hKeyCommand, NULL, 0, REG_SZ,
                     (BYTE *)command.c_str(),
-                    (command.length() + 1) * sizeof(wchar_t));
+                    static_cast<DWORD>((command.length() + 1) * sizeof(wchar_t)));
       RegCloseKey(hKeyCommand);
     }
     RegCloseKey(hKey);

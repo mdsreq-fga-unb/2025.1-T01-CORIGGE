@@ -36,7 +36,7 @@ class LocalProcessServerService {
   /// Returns the platform-specific executable name
   static String get _executableName {
     if (Platform.isWindows) {
-      return 'main_processing_computer_local.exe';
+      return 'main_processing_computer_local/main_processing_computer_local.exe';
     } else {
       return 'main_processing_computer_local/main_processing_computer_local';
     }
@@ -75,10 +75,41 @@ class LocalProcessServerService {
       log.info('Using application directory: ${appDir.path}');
 
       final binDir = Directory(path.join(appDir.path, 'bin'));
-      // Clean up any existing files/directories
+      
+      // Ensure any existing process is stopped before cleanup
+      await stopProcess();
+      
+      // Clean up any existing files/directories with retries
       if (await binDir.exists()) {
-        await binDir.delete(recursive: true);
+        int retryCount = 0;
+        const maxRetries = 3;
+        
+        while (retryCount < maxRetries) {
+          try {
+            await binDir.delete(recursive: true);
+            log.info('Successfully cleaned up existing bin directory');
+            break;
+          } catch (e) {
+            retryCount++;
+            if (retryCount >= maxRetries) {
+              log.warning('Failed to delete bin directory after $maxRetries attempts: $e');
+              // Try to delete individual files if directory deletion fails
+              try {
+                await _forceCleanupDirectory(binDir);
+                log.info('Force cleanup completed');
+                break;
+              } catch (cleanupError) {
+                log.severe('Force cleanup also failed: $cleanupError');
+                throw Exception('Failed to clean up existing installation: $cleanupError');
+              }
+            } else {
+              log.warning('Cleanup attempt $retryCount failed, retrying in 1 second: $e');
+              await Future.delayed(const Duration(seconds: 1));
+            }
+          }
+        }
       }
+      
       await binDir.create(recursive: true);
       log.info('Created bin directory at: ${binDir.path}');
 
@@ -193,9 +224,9 @@ class LocalProcessServerService {
 
       log.info('Process started with PID: ${_process!.pid}');
 
-      // Set up stream listeners with proper error handling
+      // Set up stream listeners with proper error handling and fallback encoding
       _process!.stdout
-          .transform(utf8.decoder)
+          .transform(const Utf8Decoder(allowMalformed: true))
           .transform(const LineSplitter())
           .listen(
         (line) {
@@ -214,7 +245,7 @@ class LocalProcessServerService {
       );
 
       _process!.stderr
-          .transform(utf8.decoder)
+          .transform(const Utf8Decoder(allowMalformed: true))
           .transform(const LineSplitter())
           .listen(
         (line) {
@@ -303,17 +334,41 @@ class LocalProcessServerService {
       log.info('Stopping OpenCV process (PID: $pid)...');
 
       try {
+        // Try graceful shutdown first
         _process!.kill();
         log.info('Kill signal sent to process');
 
-        final exitCode = await _process!.exitCode;
-        log.info('Process exited with code: $exitCode');
+        // Wait for process to exit with timeout
+        try {
+          final exitCode = await _process!.exitCode.timeout(
+            const Duration(seconds: 3),
+            onTimeout: () {
+              log.warning('Process did not exit gracefully, forcing termination');
+              // On Windows, try to force kill the process
+              if (Platform.isWindows) {
+                try {
+                  Process.runSync('taskkill', ['/PID', '$pid', '/F']);
+                  log.info('Force killed process using taskkill');
+                } catch (e) {
+                  log.warning('Failed to force kill process: $e');
+                }
+              }
+              return -1;
+            },
+          );
+          log.info('Process exited with code: $exitCode');
+        } catch (e) {
+          log.warning('Error waiting for process exit: $e');
+        }
       } catch (e) {
         log.severe('Error stopping process: $e');
       } finally {
         _process = null;
         _isShuttingDown = false;
         log.info('Process reference cleared');
+        
+        // Add a small delay to ensure file handles are released
+        await Future.delayed(const Duration(milliseconds: 500));
       }
     } else {
       log.info('No process to stop');
@@ -342,6 +397,39 @@ class LocalProcessServerService {
       }
     } catch (e) {
       log.severe('Failed to get application directory: $e');
+      rethrow;
+    }
+  }
+
+  /// Force cleanup of a directory by deleting individual files
+  static Future<void> _forceCleanupDirectory(Directory dir) async {
+    if (!await dir.exists()) return;
+    
+    try {
+      await for (final entity in dir.list(recursive: false)) {
+        try {
+          if (entity is File) {
+            await entity.delete();
+            log.fine('Deleted file: ${entity.path}');
+          } else if (entity is Directory) {
+            await _forceCleanupDirectory(entity);
+            await entity.delete();
+            log.fine('Deleted directory: ${entity.path}');
+          }
+        } catch (e) {
+          log.warning('Failed to delete ${entity.path}: $e');
+          // Continue with other files
+        }
+      }
+      
+      // Try to delete the main directory after cleaning its contents
+      try {
+        await dir.delete();
+      } catch (e) {
+        log.warning('Failed to delete main directory ${dir.path}: $e');
+      }
+    } catch (e) {
+      log.severe('Error during force cleanup: $e');
       rethrow;
     }
   }
