@@ -2,7 +2,9 @@
 
 O Verify é uma plataforma digital desenvolvida para combater a crescente onda de desinformação na sociedade. Sua proposta é identificar, analisar e mitigar a propagação de notícias falsas por meio de inteligência artificial e da colaboração entre usuários e especialistas em checagem de fatos.
 
-**Prints do Projeto**
+ **Link do UML:** [Estudos de caso Verify](https://drive.google.com/file/d/1V_MSOjFMGSXvlFJQsrjTP8nV5p0x-Q2u/view)
+
+**Prints do UML**
 
 ![alt text](image-1.png)
 
