@@ -1,7 +1,4 @@
 # Lições Aprendidas
-
-> **TODO**: Esta seção será preenchida ao longo do desenvolvimento do projeto, documentando as lições aprendidas em cada unidade.
-
 ## Unidade 1
 
 ### Organização dos Requisitos
@@ -50,6 +47,26 @@
 
 ## Unidade 4
 
+### Organização para Entrega Final
+**Desafio:** Conciliar atividades de finalização como documentação, testes e apresentação, evitando acúmulo de tarefas próximo ao prazo.
+
+**Ação de melhoria:** Antecipar etapas finais do projeto, com distribuição equilibrada de tarefas, incluindo gravação, revisão e preparação de materiais de apresentação.
+
+### Preparação da Apresentação para o Cliente
+**Desafio:** Sintetizar o progresso do projeto de forma objetiva, destacando o funcionamento do sistema sem excesso de foco técnico.
+
+**Ação de melhoria:** Realizar reuniões internas para ensaio da apresentação e validar a clareza da comunicação antes da entrega final.
+
+### Documentação do Projeto
+**Desafio:** Produzir documentação completa e organizada, cobrindo desde requisitos até decisões tomadas durante o desenvolvimento.
+
+**Ação de melhoria:** Definir responsáveis por seções específicas da documentação e realizar revisões em dupla, garantindo consistência.
+
+### Falta de Validação em Aspectos do Projeto
+**Desafio:** A equipe identificou, no final do projeto, pontos que poderiam ter sido melhor validados previamente, como integrações externas e fluxo de uso do sistema pelo cliente.
+
+**Ação de melhoria:** Incluir revisões mais frequentes junto ao cliente ao longo do desenvolvimento, validando não só entregáveis prontos, mas também decisões técnicas e fluxos planejados.
+
 ## Histórico de Versão
 
 | Data       | Versão | Descrição                                 | Autor(es)      | Revisor(es)    |
@@ -57,3 +74,4 @@
 | 19/04/2025 | 1.0    | Criação inicial da documentação           | Nathan Abreu   | Marcelo Adrian |
 | 04/06/2025 | 1.1    | Adição das lições aprendidas na unidade 2 | Pedro Victor   | Nathan Abreu   |
 | 24/06/2025 | 1.2    | Unidade 3                                 | Marcelo Adrian | Nathan Abreu   |
+| 24/06/2025 | 1.3    | Unidade 4                                 | Marcelo Adrian | Nathan Abreu   |
