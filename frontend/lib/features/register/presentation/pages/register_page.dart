@@ -164,7 +164,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarCustom.appBarWithLogo(),
+      appBar: AppBarCustom.appBarWithLogo(context: context),
       body: FutureBuilder<bool>(
         future: loadEscolas(),
         builder: (context, snapshot) {

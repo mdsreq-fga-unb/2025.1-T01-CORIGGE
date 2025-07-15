@@ -59,135 +59,163 @@ class AppBarCustom {
 
   static PreferredSizeWidget appBarWithLogo({
     void Function()? onWantsToGoBack,
+    required BuildContext context,
   }) {
     return AppBar(
-      leading: onWantsToGoBack != null
-          ? Align(
-              alignment: Alignment.center,
-              child: topBackButtonWidget(onPressed: onWantsToGoBack))
-          : Container(),
-      leadingWidth: onWantsToGoBack != null ? null : 0,
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: Row(
-        children: [
-          SizedBox(width: getProportionateScreenWidth(8)),
-          Text(
-            'Corigge',
-            style: TextStyle(
-              color: Colors.brown[800],
-              fontSize: getProportionateFontSize(24),
-              fontWeight: FontWeight.bold,
+        leading: onWantsToGoBack != null
+            ? Align(
+                alignment: Alignment.center,
+                child: topBackButtonWidget(onPressed: onWantsToGoBack))
+            : Container(),
+        leadingWidth: onWantsToGoBack != null ? null : 0,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Row(
+          children: [
+            SizedBox(width: getProportionateScreenWidth(8)),
+            Text(
+              'Corigge',
+              style: TextStyle(
+                color: Colors.brown[800],
+                fontSize: getProportionateFontSize(24),
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ],
-      ),
-      actions: [
-        /* DefaultButtonWidget(
-          expanded: false,
-          onPressed: () {
-            // Ação para o botão Sobre
-          },
-          color: kPrimary,
-          child: Text(
-            'Sobre',
-            style: TextStyle(
-                color: Colors.white, fontSize: getProportionateFontSize(16)),
-          ),
+          ],
         ),
-        DefaultButtonWidget(
-          expanded: false,
-          onPressed: () {
-            // Ação para o botão Contato
-          },
-          color: kPrimary,
-          child: Text(
-            'Contato',
-            style: TextStyle(
-                color: Colors.white, fontSize: getProportionateFontSize(16)),
-          ),
-        ), */
-        if (SharedPreferencesHelper.currentUser != null)
-          Builder(
-            builder: (context) => DefaultButtonWidget(
+        actions: [
+          /* DefaultButtonWidget(
               expanded: false,
               onPressed: () {
-                context.go('/profile');
+                // Ação para o botão Sobre
               },
               color: kPrimary,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.person,
-                      color: Colors.white,
-                      size: getProportionateScreenWidth(20)),
-                  SizedBox(width: getProportionateScreenWidth(4)),
-                  Text(
-                    'Perfil',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getProportionateFontSize(16)),
-                  ),
-                ],
+              child: Text(
+                'Sobre',
+                style: TextStyle(
+                    color: Colors.white, fontSize: getProportionateFontSize(16)),
               ),
             ),
-          ),
-        if (SharedPreferencesHelper.currentUser != null)
-          Builder(
-            builder: (context) => DefaultButtonWidget(
+            DefaultButtonWidget(
               expanded: false,
               onPressed: () {
-                context.push('/printable-templates');
+                // Ação para o botão Contato
               },
               color: kPrimary,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.print,
-                      color: Colors.white,
-                      size: getProportionateScreenWidth(20)),
-                  SizedBox(width: getProportionateScreenWidth(4)),
-                  Text(
-                    'Imprimir Cartão Resposta',
-                    style: TextStyle(
+              child: Text(
+                'Contato',
+                style: TextStyle(
+                    color: Colors.white, fontSize: getProportionateFontSize(16)),
+              ),
+            ), */
+          if (SharedPreferencesHelper.currentUser != null)
+            Builder(
+              builder: (context) => DefaultButtonWidget(
+                expanded: false,
+                onPressed: () {
+                  context.go('/profile');
+                },
+                color: kPrimary,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.person,
                         color: Colors.white,
-                        fontSize: getProportionateFontSize(16)),
-                  ),
-                ],
+                        size: getProportionateScreenWidth(20)),
+                    SizedBox(width: getProportionateScreenWidth(4)),
+                    Text(
+                      'Perfil',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getProportionateFontSize(16)),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        if (SharedPreferencesHelper.currentUser != null)
-          Builder(
-            builder: (context) => DefaultButtonWidget(
-              expanded: false,
-              onPressed: () async {
-                await AuthService.logout();
-                if (context.mounted) {
-                  context.go('/login');
-                }
-              },
-              color: kPrimary,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.logout,
-                      color: Colors.white,
-                      size: getProportionateScreenWidth(20)),
-                  SizedBox(width: getProportionateScreenWidth(4)),
-                  Text(
-                    'Sair',
-                    style: TextStyle(
+          if (SharedPreferencesHelper.currentUser != null &&
+              GoRouterState.of(context).uri.path != '/printable-templates')
+            Builder(
+              builder: (context) => DefaultButtonWidget(
+                expanded: false,
+                onPressed: () {
+                  context.push('/printable-templates');
+                },
+                color: kPrimary,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.print,
                         color: Colors.white,
-                        fontSize: getProportionateFontSize(16)),
-                  ),
-                ],
+                        size: getProportionateScreenWidth(20)),
+                    SizedBox(width: getProportionateScreenWidth(4)),
+                    Text(
+                      'Imprimir Cartão Resposta',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getProportionateFontSize(16)),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        SizedBox(width: getProportionateScreenWidth(16)),
-      ],
-    );
+          if (GoRouterState.of(context).uri.path != '/home')
+            Builder(
+              builder: (context) => DefaultButtonWidget(
+                expanded: false,
+                onPressed: () {
+                  context.go('/home');
+                },
+                color: kPrimary,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.home,
+                        color: Colors.white,
+                        size: getProportionateScreenWidth(20)),
+                    SizedBox(width: getProportionateScreenWidth(4)),
+                    Text(
+                      'Home',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getProportionateFontSize(16)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          if (SharedPreferencesHelper.currentUser != null)
+            Builder(
+              builder: (context) => DefaultButtonWidget(
+                expanded: false,
+                onPressed: () async {
+                  await AuthService.logout();
+                  if (context.mounted) {
+                    context.go('/login');
+                  }
+                },
+                color: kPrimary,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.logout,
+                        color: Colors.white,
+                        size: getProportionateScreenWidth(20)),
+                    SizedBox(width: getProportionateScreenWidth(4)),
+                    Text(
+                      'Sair',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getProportionateFontSize(16)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          SizedBox(width: getProportionateScreenWidth(16)),
+        ],
+      );
+    
   }
 
   static Widget topBackButtonWidget({required Function() onPressed}) {

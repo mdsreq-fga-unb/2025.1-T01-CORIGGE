@@ -201,6 +201,7 @@ class _RelatoriosIndividuaisPageState extends State<RelatoriosIndividuaisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarCustom.appBarWithLogo(
+        context: context,
         onWantsToGoBack: () => context.go('/home'),
       ),
       body: Padding(

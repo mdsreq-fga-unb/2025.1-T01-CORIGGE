@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarCustom.appBarWithLogo(),
+      appBar: AppBarCustom.appBarWithLogo(context: context),
       body: _buildBody(context),
     );
   }

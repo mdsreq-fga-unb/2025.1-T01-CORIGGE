@@ -133,9 +133,11 @@ class _PrintableTemplatesPageState extends State<PrintableTemplatesPage> {
     }
 
     return Scaffold(
-      appBar: AppBarCustom.appBarWithLogo(onWantsToGoBack: () {
-        context.pop();
-      }),
+      appBar: AppBarCustom.appBarWithLogo(
+          context: context,
+          onWantsToGoBack: () {
+            context.go("/home");
+          }),
       body: TemplateListWidget(
         templates: templates,
         onEditTemplate: _editTemplate,

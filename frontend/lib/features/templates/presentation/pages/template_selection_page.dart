@@ -332,7 +332,7 @@ class _TemplateSelectionPageState extends State<TemplateSelectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarCustom.appBarWithLogo(onWantsToGoBack: () {
+      appBar: AppBarCustom.appBarWithLogo(context: context,   onWantsToGoBack: () {
         context.go('/home');
       }),
       body: FutureBuilder(

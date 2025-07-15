@@ -80,7 +80,6 @@ class _HomePageState extends State<HomePage> {
       final gabarito = gabaritoResult.fold(
           (error) => <Map<String, dynamic>>[], (gabarito) => gabarito);
 
-
       if (mounted) {
         setState(() {
           selectedTemplate = validTemplate;
@@ -717,7 +716,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarCustom.appBarWithLogo(),
+      appBar: AppBarCustom.appBarWithLogo(context: context),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: Padding(
@@ -1096,15 +1095,72 @@ class _HomePageState extends State<HomePage> {
                                         '"$student","${ans['question'].toString()}","${ans['student_answer']}","${ans['correct_answer']}","${(ans['is_correct'] ? "1" : "0")}"\n';
                                   }
                                 }
-                                // Show dialog with CSV (placeholder for real export)
+                                // Show dialog with CSV and export option
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
                                     title: Text('Exportar Resultados (CSV)'),
-                                    content: SingleChildScrollView(
-                                      child: SelectableText(csv),
+                                    content: SizedBox(
+                                      width: double.maxFinite,
+                                      height: 400,
+                                      child: SingleChildScrollView(
+                                        child: SelectableText(csv),
+                                      ),
                                     ),
                                     actions: [
+                                      // Export button on the left
+                                      TextButton.icon(
+                                        onPressed: () async {
+                                          try {
+                                            // Pick directory to save file
+                                            String? selectedDirectory =
+                                                await FilePicker.platform
+                                                    .getDirectoryPath();
+
+                                            if (selectedDirectory != null) {
+                                              // Create filename with timestamp
+                                              final now = DateTime.now();
+                                              final timestamp =
+                                                  '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}_${now.hour.toString().padLeft(2, '0')}${now.minute.toString().padLeft(2, '0')}';
+                                              final filename =
+                                                  'resultados_corigge_$timestamp.csv';
+                                              final filePath =
+                                                  '$selectedDirectory/$filename';
+
+                                              // Write CSV to file
+                                              final file = File(filePath);
+                                              await file.writeAsString(csv);
+
+                                              // Show success message
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                      'Arquivo exportado com sucesso: $filename'),
+                                                  backgroundColor: kSuccess,
+                                                ),
+                                              );
+
+                                              Navigator.of(context).pop();
+                                            }
+                                          } catch (e) {
+                                            // Show error message
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              SnackBar(
+                                                content: Text(
+                                                    'Erro ao exportar arquivo: $e'),
+                                                backgroundColor: kError,
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        icon: Icon(Icons.download),
+                                        label: Text('Exportar CSV'),
+                                      ),
+                                      // Spacer to push close button to the right
+                                      Spacer(),
+                                      // Close button on the right
                                       TextButton(
                                         onPressed: () =>
                                             Navigator.of(context).pop(),

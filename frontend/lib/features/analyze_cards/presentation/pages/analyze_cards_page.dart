@@ -292,7 +292,7 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
   Widget build(BuildContext context) {
     if (selectedTemplate == null) {
       return Scaffold(
-        appBar: AppBarCustom.appBarWithLogo(onWantsToGoBack: () {
+        appBar: AppBarCustom.appBarWithLogo(context: context, onWantsToGoBack: () {
           context.go('/home');
         }),
         body: const Center(
@@ -302,7 +302,7 @@ class _AnalyzeCardsPageState extends State<AnalyzeCardsPage> {
     }
 
     return Scaffold(
-      appBar: AppBarCustom.appBarWithLogo(onWantsToGoBack: () {
+      appBar: AppBarCustom.appBarWithLogo(context: context, onWantsToGoBack: () {
         context.go('/home');
       }),
       body: Row(

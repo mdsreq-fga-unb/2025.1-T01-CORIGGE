@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../widgets/app_bar_custom.dart';
 import '../../data/generated_template_model.dart';
 import 'template_canvas_widget.dart';
 import 'template_settings_panel_widget.dart';
@@ -47,17 +48,16 @@ class _TemplateEditorWidgetState extends State<TemplateEditorWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Editando: ${currentTemplate.name}'),
+        leading: Center(
+          child: AppBarCustom.topBackButtonWidget(onPressed: () {
+            widget.onClose();
+          }),
+        ),
         actions: [
           IconButton(
             onPressed: widget.onSave,
             icon: const Icon(Icons.save),
             tooltip: 'Salvar template',
-          ),
-          IconButton(
-            onPressed: widget.onClose,
-            icon: const Icon(Icons.close),
-            tooltip: 'Fechar edição',
           ),
         ],
       ),
