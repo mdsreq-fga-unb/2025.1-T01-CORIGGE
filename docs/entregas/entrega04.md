@@ -2,7 +2,9 @@
 
 **Video de apresentação:**
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RISCvjOrK1Q?si=sPCiyVsMofVWRUO_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
+**Link da gravação:** [Youtube](https://youtu.be/RISCvjOrK1Q?si=3Y3N5fFDdDaSN7g6)
 
 
 **Entrega do projeto ao cliente:**
