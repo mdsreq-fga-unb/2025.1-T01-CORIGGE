@@ -14,6 +14,7 @@ import '../widgets/default_button_widget.dart';
 import '../widgets/selectable_button_widget.dart';
 import '../features/templates/data/answer_sheet_identifiable_box.dart';
 import 'image_bounding_box/data/box_details.dart';
+import 'image_bounding_box/data/image_circle.dart';
 
 class MinMaxPair<T extends num> {
   final T min;
@@ -562,6 +563,166 @@ class Utils {
     }
   }
 
+  static Map<String, String> getAnswerFromCardBox(
+      {required AnswerSheetIdentifiableBox box,
+      required List<ImageCircle> circlesPerBox,
+      required List<Map<String, String>> headersToGetSorted,
+      required double tolerance}) {
+    if (box.box.label == BoxDetailsType.matricula ||
+        box.box.label == BoxDetailsType.typeB ||
+        box.box.label == BoxDetailsType.outro) {
+      int valor = 0;
+      var columns = List<List<ImageCircle>>.from([]);
+
+      var columnsMap = Map<double, List<ImageCircle>>.from({});
+
+      for (var circle in circlesPerBox) {
+        // find the closest column to the circle
+
+        var closestColumn = columnsMap.keys
+            .where((element) => (element - circle.center.dx).abs() < tolerance)
+            .firstOrNull;
+
+        if (closestColumn == null) {
+          columnsMap[circle.center.dx] = [circle];
+        } else {
+          columnsMap[closestColumn]!.add(circle);
+        }
+      }
+
+      var columnMapKeys = columnsMap.keys.toList()..sort();
+
+      for (var key in columnMapKeys) {
+        var column = columnsMap[key]!;
+
+        column.sort((a, b) => a.center.dy.compareTo(b.center.dy));
+
+        columns.add(column);
+      }
+
+      if (box.box.label == BoxDetailsType.matricula) {
+        columns.removeWhere((element) =>
+            element.fold(false,
+                (previousValue, element) => previousValue || element.filled) ==
+            false);
+      } else if (box.box.label == BoxDetailsType.typeB) {
+        var emptyCount = columns.where((element) =>
+            element.fold(false,
+                (previousValue, element) => previousValue || element.filled) ==
+            false);
+        if (emptyCount.isNotEmpty) {
+          if (emptyCount.length > 1 && emptyCount.length != 3) {
+            return {headersToGetSorted.first.keys.first: "INV"};
+          } else {
+            return {headersToGetSorted.first.keys.first: "NP"};
+          }
+        }
+      }
+
+      for (var columnEntry in columns.reversed.indexed) {
+        var column = columnEntry.$2;
+        var index = columnEntry.$1;
+
+        bool foundForColumn = false;
+        for (var line in column.indexed) {
+          if (line.$2.filled) {
+            if (foundForColumn) {
+              if (box.box.label == BoxDetailsType.matricula) {
+                return {"Matricula": List.generate(8, (index) => "0").join("")};
+              } else {
+                return {headersToGetSorted.first.keys.first: "INV"};
+              }
+            }
+
+            if (box.box.label == BoxDetailsType.outro) {
+              return {
+                headersToGetSorted.first.keys.first: Uri.decodeComponent(
+                    headersToGetSorted.first.values.first.split("_")[line.$1])
+              };
+            }
+
+            valor += (line.$1) * (pow(10, index).toInt());
+            foundForColumn = true;
+          }
+        }
+
+        if (!foundForColumn) {
+          if (box.box.label == BoxDetailsType.outro) {
+            return {headersToGetSorted.first.keys.first: "Não preenchido"};
+          }
+        }
+      }
+      if (box.box.label == BoxDetailsType.matricula) {
+        return {"Matricula": valor.toString()};
+      }
+      return {headersToGetSorted.first.keys.first: valor.toString()};
+    } else {
+      var questions = List<String>.from([]);
+
+      var linesMap = Map<double, List<ImageCircle>>.from({});
+
+      for (var circle in circlesPerBox) {
+        // find the closest line to the circle
+
+        var closestLine = linesMap.keys
+            .where((element) => (element - circle.center.dy).abs() < tolerance)
+            .firstOrNull;
+
+        if (closestLine == null) {
+          linesMap[circle.center.dy] = [circle];
+        } else {
+          linesMap[closestLine]!.add(circle);
+        }
+      }
+
+      var linesMapKeys = linesMap.keys.toList()..sort();
+
+      for (var key in linesMapKeys) {
+        var line = linesMap[key]!;
+
+        line.sort((a, b) => a.center.dx.compareTo(b.center.dx));
+
+        if (line.length == 2) {
+          if (line[0].filled && line[1].filled) {
+            questions.add("INV");
+          } else if (line[0].filled) {
+            questions.add("C");
+          } else if (line[1].filled) {
+            questions.add("E");
+          } else {
+            questions.add("NP");
+          }
+        } else if (line.length == 4 || line.length == 5) {
+          var bolinhasPreenchidas = line.fold(
+              0,
+              (previousValue, element) =>
+                  previousValue + (element.filled ? 1 : 0));
+          if (bolinhasPreenchidas != 1) {
+            if (bolinhasPreenchidas == 0) {
+              questions.add("NP");
+            } else {
+              questions.add("INV");
+            }
+          } else {
+            questions.add([
+              "A",
+              "B",
+              "C",
+              "D",
+              if (line.length == 5) "E"
+            ][line.indexWhere((element) => element.filled)]);
+          }
+        } else {
+          questions.add("ERROR");
+        }
+      }
+
+      return Map.fromEntries(questions.indexed.map((e) {
+        return MapEntry(headersToGetSorted[e.$1].keys.first, e.$2);
+      }));
+    }
+  }
+
   static List<String> getEncodedLabels(AnswerSheetIdentifiableBox box) {
     final name = box.name;
     if (!name.contains('|')) return [];
@@ -599,7 +760,9 @@ class Utils {
           Text(
             text,
             textAlign: TextAlign.center,
-            style: topTextStyle ?? TextStyle(color: kSurface, fontSize: getProportionateFontSize(16)),
+            style: topTextStyle ??
+                TextStyle(
+                    color: kSurface, fontSize: getProportionateFontSize(16)),
           ),
           SizedBox(
             height: getProportionateScreenHeight(20),
@@ -717,7 +880,8 @@ class Utils {
                   : getProportionateScreenHeight(450),
               child: Text(
                 text,
-                style: TextStyle(color: kSurface, fontSize: getProportionateFontSize(16)),
+                style: TextStyle(
+                    color: kSurface, fontSize: getProportionateFontSize(16)),
               ),
             ),
             SizedBox(

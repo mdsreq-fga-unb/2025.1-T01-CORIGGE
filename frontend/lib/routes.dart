@@ -12,6 +12,7 @@ import 'features/analyze_cards/presentation/pages/analyze_cards_page.dart';
 import 'features/register/presentation/pages/register_page.dart';
 import 'features/splash/domain/repositories/auth_service.dart';
 import 'features/splash/presentation/pages/splash_page.dart';
+import 'features/templates/presentation/pages/printable_templates_page.dart';
 import 'features/templates/presentation/pages/template_selection_page.dart';
 import 'features/relatorios_individuais/presentation/pages/relatorios_individuais_page.dart';
 
@@ -120,6 +121,9 @@ class Routes {
     },
     '/relatorios-individuais': (context, state) {
       return const RelatoriosIndividuaisPage();
+    },
+    "/printable-templates": (context, state) {
+      return const PrintableTemplatesPage();
     },
   };
 }

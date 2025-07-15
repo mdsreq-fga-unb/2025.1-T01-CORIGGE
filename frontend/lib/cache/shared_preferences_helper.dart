@@ -193,7 +193,6 @@ class SharedPreferencesHelper {
     await _prefs?.remove(_keyGabaritoData);
   }
 
-
   // GeneratedTemplateModel methods
   static const String _keyGeneratedTemplates = 'generated_templates';
 
@@ -202,9 +201,17 @@ class SharedPreferencesHelper {
     try {
       final templatesJson = _prefs?.getString(_keyGeneratedTemplates) ?? '[]';
       final List<dynamic> templatesData = json.decode(templatesJson);
-      return Right(templatesData
-          .map((e) => GeneratedTemplateModel.fromJson(e))
-          .toList());
+      return Right(List<GeneratedTemplateModel>.from(templatesData
+          .map((e) {
+            try {
+              return GeneratedTemplateModel.fromJson(e);
+            } catch (e) {
+              log.severe('[loadGeneratedTemplates] Error loading template: $e');
+              return null;
+            }
+          })
+          .where((e) => e != null)
+          .toList()));
     } catch (e) {
       return Left(e.toString());
     }

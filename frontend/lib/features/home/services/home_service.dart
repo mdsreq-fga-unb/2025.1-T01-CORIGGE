@@ -375,31 +375,38 @@ class HomeService {
     List<Map<String, dynamic>> results = [];
     for (final card in cards) {
       Map<int, String> studentAnswers = {};
+
       // For each question box
       for (final box in questionBoxes) {
         final startingQuestion = extractStartingQuestionNumber(box.name);
         final questionCount = calculateQuestionCount(box);
         final circles = card.circlesPerBox[box.name] ?? [];
-        // For each question in this box
+
+        if (circles.isEmpty) continue;
+
+        // Create headers for this box's questions
+        List<Map<String, String>> headersToGetSorted = [];
         for (int i = 0; i < questionCount; i++) {
           final questionNumber = startingQuestion + i;
-          // Find filled circle for this question (row)
-          // Assume circles are ordered by row (question), then by option
-          final rowCircles = circles
-              .skip(i * (circles.length ~/ questionCount))
-              .take(circles.length ~/ questionCount)
-              .toList();
-          int filledIdx = rowCircles.indexWhere((c) => c.filled);
-          String? answer;
-          if (filledIdx != -1) {
-            // Map index to letter (A, B, C, ...)
-            answer = String.fromCharCode('A'.codeUnitAt(0) + filledIdx);
-          } else {
-            answer = '';
-          }
+          headersToGetSorted.add({'Q$questionNumber': 'Q$questionNumber'});
+        }
+
+        // Use Utils.getAnswerFromCardBox to extract answers properly
+        final boxAnswers = Utils.getAnswerFromCardBox(
+          box: box,
+          circlesPerBox: circles,
+          headersToGetSorted: headersToGetSorted,
+          tolerance: 0.002,
+        );
+
+        // Map the answers to question numbers
+        for (int i = 0; i < questionCount; i++) {
+          final questionNumber = startingQuestion + i;
+          final answer = boxAnswers['Q$questionNumber'] ?? '';
           studentAnswers[questionNumber] = answer;
         }
       }
+
       // Build result row for this card
       List<Map<String, dynamic>> answers = [];
       for (final entry in studentAnswers.entries) {
@@ -410,7 +417,8 @@ class HomeService {
           'question': q,
           'student_answer': studentAnswer,
           'correct_answer': correctAnswer,
-          'is_correct': studentAnswer == correctAnswer,
+          'is_correct':
+              studentAnswer == correctAnswer && studentAnswer.isNotEmpty,
         });
       }
       results.add({
