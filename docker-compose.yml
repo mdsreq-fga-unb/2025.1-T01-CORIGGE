@@ -14,7 +14,7 @@ services:
       - PYTHONIOENCODING=utf-8  # Set proper encoding for Python output
       - GIT_DISCOVERY_ACROSS_FILESYSTEM=1  # Allow git to work across filesystem boundaries
     env_file:
-      - backend/.env
+      - backend/servidor/.env
     volumes:
       # Mount the entire repository for git operations (includes .git automatically)
       - .:/app:rw  # Make the mount read-write
