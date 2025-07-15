@@ -47,6 +47,7 @@ dev_dependencies:
   mockito: ^5.4.4
   json_serializable: ^6.7.1
   build_runner: ^2.4.7
+  msix: ^3.16.9
 
 flutter:
   uses-material-design: true
@@ -64,3 +65,15 @@ flutter:
         - asset: assets/fonts/Roboto-Regular.ttf
         - asset: assets/fonts/Roboto-Bold.ttf
           weight: 700
+
+msix_config:
+  display_name: Corigge
+  publisher_display_name: Corigge Team
+  identity_name: com.corigge.app
+  msix_version: 1.0.0.0
+  description: Sistema de correção automática de cartões resposta
+  publisher: CN=Corigge Team
+  logo_path: assets/images/check_autenticacao.png
+  architecture: x64
+  capabilities: 'internetClient,microphone,webcam,picturesLibrary,removableStorage'
+
