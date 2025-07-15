@@ -24,16 +24,9 @@
 
 - Um item de backlog é considerado "Feito" quando o código está implementado. Isso significa que todo o código necessário para a funcionalidade foi escrito, está em conformidade com os padrões de codificação da equipe e a implementação segue a arquitetura definida, como especificado na "Definição da Arquitetura" na fase de Elaboração (página 8).
 
-- É imprescindível que testes tenham sido realizados e aprovados. Testes unitários devem ter sido escritos e estar passando; testes de integração (por exemplo, frontend com backend, backend com OpenCV para RF03) devem ter sido escritos e estar passando; e testes de funcionalidade, conforme a fase de Construção, devem ter sido realizados e aprovados pela equipe, cobrindo todos os critérios de aceitação. Testes de performance (como o RNF07 - 100 gabaritos/min) e de usabilidade (RNF09) devem ser executados e aprovados, se aplicáveis.
-
-- Uma revisão de código (Peer Review) deve ter sido conduzida. O código deve ter sido revisado por pelo menos um outro membro da equipe de desenvolvimento, e todo o feedback resultante dessa revisão deve ter sido devidamente abordado e incorporado.
-
 - A integração contínua deve ter sido bem-sucedida. O código precisa ter sido integrado à branch principal ou de desenvolvimento do repositório, e o build de integração contínua, caso esteja configurado, deve estar passando sem erros.
 
-
 - A documentação deve estar atualizada. Qualquer documentação técnica relevante, como comentários no código, diagramas ou documentação de API, deve ter sido criada ou atualizada.
-
-- O item deve estar livre de débitos técnicos críticos. Nenhum débito técnico crítico ou bug de alta prioridade pode ter sido introduzido ou deixado sem tratamento adequado ao finalizar o item.
 
 - Considerações específicas do projeto Corigge devem ser atendidas. Para funcionalidades de processamento de imagem (RF01, RF02, RF03), a precisão da identificação deve atender aos níveis esperados (referência: >99% de precisão, Seção 2.1). Para funcionalidades de exportação (RF11, RF14, RF15), os arquivos gerados (.csv, .pdf) devem estar corretos e completos. Para funcionalidades de integração (RF18 - Stripe), a comunicação e o processamento devem estar funcionando corretamente.
 
