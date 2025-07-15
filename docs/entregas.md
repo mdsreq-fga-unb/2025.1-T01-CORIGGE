@@ -13,12 +13,27 @@
 
 ### **Link da gravação:**[Youtube](https://youtu.be/PgooB5Cmnts)
 
+## Unidade 03
+### Video de apresentação:
+
+
+
+## Unidade 04
+### Video de apresentação
+
+
+
+## Unidade 04
+### Entrega final do produto ao cliente
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uwSG9le4OC0?si=JT3tinHjjQOzHEsg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
 ### Histórico de Versão
 
 | Data       | Versão | Descrição                       | Autor(es)      | Revisor(es) |
 | ---------- | ------ | ------------------------------- | -------------- | ----------- |
 | 19/04/2025 | 1.0    | Criação inicial da documentação | Marcelo Adrian |             |
-| 27/05/2025 | 1.1    | Adicionando Entrega 2           | Otávio Maya |             |
+| 27/05/2025 | 1.1    | Adicionando Entrega 2           | Otávio Maya    |             |
 
 ---
 
