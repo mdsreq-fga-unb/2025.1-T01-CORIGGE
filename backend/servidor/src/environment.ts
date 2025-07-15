@@ -5,7 +5,7 @@ dotenv.config();
 
 export const environment = {
     // Server configuration
-    PORT: process.env.PORT || 4512,
+    PORT: process.env.PORT || 4502,
     NODE_ENV: process.env.NODE_ENV || 'development',
 
     // Supabase configuration
@@ -13,7 +13,7 @@ export const environment = {
     SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || '',
 
     // CORS configuration
-    CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:4512',
+    CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:4502',
 
 } as const;
 

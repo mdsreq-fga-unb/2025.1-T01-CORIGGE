@@ -9,7 +9,7 @@ services:
     # No ports exposed - nginx handles external traffic
     environment:
       - NODE_ENV=production
-      - PORT=3325
+      - PORT=4502
       - PYTHONUNBUFFERED=1  # Ensure Python output is not buffered
       - PYTHONIOENCODING=utf-8  # Set proper encoding for Python output
       - GIT_DISCOVERY_ACROSS_FILESYSTEM=1  # Allow git to work across filesystem boundaries
@@ -33,7 +33,7 @@ services:
         max-size: "50m"
         max-file: "3"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3325/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:4502/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -45,9 +45,7 @@ services:
     image: nginx:alpine
     container_name: corigge-nginx
     ports:
-      - "80:80"       # HTTP (for redirects)
-      - "3325:3325"   # Backend HTTPS (main port)
-      - "4652:4652"   # AI Agent HTTPS  
+      - "4502:4502"   # Backend HTTPS (main port)
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
       # Mount your actual Let's Encrypt certificates
