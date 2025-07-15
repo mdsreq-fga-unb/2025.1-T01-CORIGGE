@@ -13,6 +13,9 @@
 
 **Link da gravação:** [Youtube](https://youtu.be/uwSG9le4OC0?si=gbgsIfQTTkWVqPA7)
 
+## 📄 [Visualizar PDF de apresentação/home/adrian/Downloads/Rrequisitos.pdf](../assets/Rrequisitos.pdf)
+
+
 **Histórico de Versão**
 
 | Data       | Versão | Descrição                       | Autor(es)      | Revisor(es)  |
