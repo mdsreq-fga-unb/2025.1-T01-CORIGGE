@@ -110,6 +110,8 @@ class Environment {
         break;
       case EnvironmentType.PROD:
         _routesLogger.info('****** Environment: PROD');
+        backendAPIUrl = 'https://no-fluxo-api.shop:4502/';
+
         //supabaseUrl = const String.fromEnvironment('SUPABASE_URL');
         //supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY');
         _dio.options.baseUrl = backendAPIUrl;
