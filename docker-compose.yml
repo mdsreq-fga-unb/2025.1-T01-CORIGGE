@@ -47,10 +47,8 @@ services:
     ports:
       - "4502:4502"   # Backend HTTPS (main port)
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      # Mount your actual Let's Encrypt certificates
-      - /etc/letsencrypt/live/no-fluxo-api.shop/fullchain.pem:/etc/ssl/certs/cert.pem:ro
-      - /etc/letsencrypt/live/no-fluxo-api.shop/privkey.pem:/etc/ssl/private/key.pem:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     depends_on:
       - backend
     restart: unless-stopped
