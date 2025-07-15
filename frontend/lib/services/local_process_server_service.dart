@@ -79,6 +79,9 @@ class LocalProcessServerService {
       // Ensure any existing process is stopped before cleanup
       await stopProcess();
       
+      // Kill any orphaned processes that might still be running
+      await _killOrphanedProcesses();
+      
       // Clean up any existing files/directories with retries
       if (await binDir.exists()) {
         int retryCount = 0;
@@ -401,36 +404,179 @@ class LocalProcessServerService {
     }
   }
 
+  /// Kill any orphaned OpenCV processes that might be running
+  static Future<void> _killOrphanedProcesses() async {
+    if (!Platform.isWindows) {
+      log.info('Skipping orphaned process cleanup on non-Windows platform');
+      return;
+    }
+    
+    try {
+      log.info('Checking for orphaned OpenCV processes...');
+      
+      // Check for running main_processing_computer_local processes
+      final result = await Process.run('tasklist', [
+        '/fi', 'imagename eq main_processing_computer_local.exe',
+        '/fo', 'csv',
+        '/nh'
+      ]);
+      
+      if (result.exitCode == 0 && result.stdout.toString().trim().isNotEmpty) {
+        final lines = result.stdout.toString().trim().split('\n');
+        
+        for (final line in lines) {
+          if (line.contains('main_processing_computer_local')) {
+            // Parse CSV format: "imagename","pid","sessionname","session#","memusage"
+            final parts = line.split('","');
+            if (parts.length >= 2) {
+              final pidStr = parts[1].replaceAll('"', '');
+              try {
+                final pid = int.parse(pidStr);
+                log.info('Found orphaned OpenCV process with PID: $pid, killing it...');
+                
+                final killResult = await Process.run('taskkill', ['/PID', '$pid', '/F']);
+                if (killResult.exitCode == 0) {
+                  log.info('Successfully killed orphaned process PID: $pid');
+                } else {
+                  log.warning('Failed to kill process PID: $pid - ${killResult.stderr}');
+                }
+              } catch (e) {
+                log.warning('Failed to parse PID from: $pidStr');
+              }
+            }
+          }
+        }
+        
+        // Wait a moment for processes to fully terminate
+        await Future.delayed(const Duration(milliseconds: 1000));
+      } else {
+        log.info('No orphaned OpenCV processes found');
+      }
+    } catch (e) {
+      log.warning('Error checking for orphaned processes: $e');
+    }
+  }
+
   /// Force cleanup of a directory by deleting individual files
   static Future<void> _forceCleanupDirectory(Directory dir) async {
     if (!await dir.exists()) return;
     
     try {
-      await for (final entity in dir.list(recursive: false)) {
+      log.info('Force cleaning directory: ${dir.path}');
+      
+      // First pass: delete all files and collect directories
+      final List<Directory> subdirs = [];
+      
+      await for (final entity in dir.list(recursive: false, followLinks: false)) {
         try {
           if (entity is File) {
+            // Remove read-only attribute on Windows if needed
+            if (Platform.isWindows) {
+              try {
+                await Process.run('attrib', ['-R', entity.path]);
+              } catch (e) {
+                // Ignore attrib errors
+              }
+            }
             await entity.delete();
             log.fine('Deleted file: ${entity.path}');
           } else if (entity is Directory) {
-            await _forceCleanupDirectory(entity);
+            subdirs.add(entity);
+          } else if (entity is Link) {
             await entity.delete();
-            log.fine('Deleted directory: ${entity.path}');
+            log.fine('Deleted link: ${entity.path}');
           }
         } catch (e) {
           log.warning('Failed to delete ${entity.path}: $e');
-          // Continue with other files
+          // Try to force delete on Windows
+          if (Platform.isWindows && entity is File) {
+            try {
+              await Process.run('del', ['/F', '/Q', entity.path], runInShell: true);
+              log.info('Force deleted file using del command: ${entity.path}');
+            } catch (delError) {
+              log.warning('Force delete also failed: $delError');
+            }
+          }
         }
       }
       
-      // Try to delete the main directory after cleaning its contents
+      // Second pass: recursively clean subdirectories
+      for (final subdir in subdirs) {
+        try {
+          await _forceCleanupDirectory(subdir);
+        } catch (e) {
+          log.warning('Failed to clean subdirectory ${subdir.path}: $e');
+          // Try Windows rmdir for stubborn directories
+          if (Platform.isWindows) {
+            try {
+              await Process.run('rmdir', ['/S', '/Q', subdir.path], runInShell: true);
+              log.info('Force deleted directory using rmdir: ${subdir.path}');
+            } catch (rmdirError) {
+              log.warning('rmdir also failed: $rmdirError');
+            }
+          }
+        }
+      }
+      
+      // Final pass: try to delete the main directory
       try {
         await dir.delete();
+        log.info('Successfully deleted directory: ${dir.path}');
       } catch (e) {
         log.warning('Failed to delete main directory ${dir.path}: $e');
+        // Last resort: use Windows rmdir
+        if (Platform.isWindows) {
+          try {
+            await Process.run('rmdir', ['/S', '/Q', dir.path], runInShell: true);
+            log.info('Force deleted main directory using rmdir: ${dir.path}');
+          } catch (rmdirError) {
+            log.warning('Final rmdir attempt failed: $rmdirError');
+          }
+        }
       }
     } catch (e) {
       log.severe('Error during force cleanup: $e');
       rethrow;
+    }
+  }
+
+  /// Check which processes are using OpenCV files (Windows only)
+  static Future<void> debugProcessUsage() async {
+    if (!Platform.isWindows) {
+      log.info('Process usage debugging only available on Windows');
+      return;
+    }
+    
+    try {
+      log.info('=== Debugging OpenCV Process Usage ===');
+      
+      // List all OpenCV processes
+      final result = await Process.run('tasklist', [
+        '/fi', 'imagename eq main_processing_computer_local.exe',
+        '/v'
+      ]);
+      
+      if (result.exitCode == 0) {
+        log.info('OpenCV Processes:\n${result.stdout}');
+      } else {
+        log.info('No OpenCV processes found');
+      }
+      
+      // Check for file handles (requires handle.exe from Sysinternals)
+      try {
+        final handleResult = await Process.run('handle', [
+          'main_processing_computer_local.exe'
+        ]);
+        if (handleResult.exitCode == 0) {
+          log.info('File Handles:\n${handleResult.stdout}');
+        }
+      } catch (e) {
+        log.info('handle.exe not available (install Sysinternals tools for detailed file handle info)');
+      }
+      
+      log.info('=== End Debug Info ===');
+    } catch (e) {
+      log.warning('Error during process debugging: $e');
     }
   }
 

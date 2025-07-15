@@ -109,8 +109,9 @@ class Environment {
         _dio.options.baseUrl = backendAPIUrl;
         break;
       case EnvironmentType.PROD:
-        _routesLogger.info('****** Environment: PROD');
+        _routesLogger.info('****** Environment: PROD, using local OpenCV server');
         backendAPIUrl = 'https://no-fluxo-api.shop:4502/';
+        Environment.setShouldHandleLocalServer(true);
 
         //supabaseUrl = const String.fromEnvironment('SUPABASE_URL');
         //supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY');
