@@ -38,8 +38,7 @@ dependencies:
   dropdown_search: ^6.0.2
   brasil_fields: ^1.18.0
   stack_trace: ^1.11.1
-  pdf: ^3.10.7
-  printing: ^5.12.0
+  flutter_to_pdf: ^0.4.0
 
 dev_dependencies:
   flutter_test:
