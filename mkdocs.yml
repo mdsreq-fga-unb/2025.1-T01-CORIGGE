@@ -49,7 +49,7 @@ nav:
       - USM: entregas/unidade03/usm.md
       - Unidade 04: entregas/entrega04.md
       - UML: entregas/unidade04/uml.md
-      - BUILD Aplicativo: corigge.msix
+      - BUILD Aplicativo: entregas/unidade04/build.md
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
